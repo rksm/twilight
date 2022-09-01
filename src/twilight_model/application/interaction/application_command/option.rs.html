@@ -655,6 +655,37 @@
 <span id="655">655</span>
 <span id="656">656</span>
 <span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     application::command::CommandOptionType,
     id::{
@@ -667,7 +698,7 @@
     ser::SerializeStruct,
     Deserialize, Deserializer, Serialize, Serializer,
 };
-<span class="kw">use </span>std::fmt::{Debug, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult};
+<span class="kw">use </span>std::fmt::{Debug, Display, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult};
 
 <span class="doccomment">/// Data received when a user fills in a command option.
 ///
@@ -765,6 +796,18 @@
             }
         }
 
+        <span class="kw">impl </span>Display <span class="kw">for </span>ValueEnvelope {
+            <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; FmtResult {
+                <span class="kw">match </span><span class="self">self </span>{
+                    <span class="self">Self</span>::Boolean(b) =&gt; Display::fmt(b, f),
+                    <span class="self">Self</span>::Integer(i) =&gt; Display::fmt(i, f),
+                    <span class="self">Self</span>::Number(n) =&gt; Display::fmt(n, f),
+                    <span class="self">Self</span>::Id(i) =&gt; Display::fmt(i, f),
+                    <span class="self">Self</span>::String(s) =&gt; Display::fmt(s, f),
+                }
+            }
+        }
+
         <span class="kw">struct </span>CommandDataOptionVisitor;
 
         <span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>&gt; Visitor&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>CommandDataOptionVisitor {
@@ -779,7 +822,7 @@
                 <span class="kw">let </span><span class="kw-2">mut </span>name_opt = <span class="prelude-val">None</span>;
                 <span class="kw">let </span><span class="kw-2">mut </span>kind_opt = <span class="prelude-val">None</span>;
                 <span class="kw">let </span><span class="kw-2">mut </span>options = Vec::new();
-                <span class="kw">let </span><span class="kw-2">mut </span>value_opt = <span class="prelude-val">None</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>value_opt: <span class="prelude-ty">Option</span>&lt;ValueEnvelope&gt; = <span class="prelude-val">None</span>;
                 <span class="kw">let </span><span class="kw-2">mut </span>focused = <span class="prelude-val">None</span>;
 
                 <span class="kw">loop </span>{
@@ -841,16 +884,7 @@
                 <span class="kw">let </span>value = <span class="kw">if </span>focused {
                     <span class="kw">let </span>val = value_opt.ok_or_else(|| DeError::missing_field(<span class="string">&quot;value&quot;</span>))<span class="question-mark">?</span>;
 
-                    <span class="kw">match </span>val {
-                        ValueEnvelope::Integer(i) =&gt; {
-                            CommandOptionValue::Focused(i.to_string(), kind)
-                        }
-                        ValueEnvelope::Number(f) =&gt; {
-                            CommandOptionValue::Focused(f.to_string(), kind)
-                        }
-                        ValueEnvelope::String(s) =&gt; CommandOptionValue::Focused(s, kind),
-                        <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(DeError::invalid_type(val.as_unexpected(), <span class="kw-2">&amp;</span><span class="string">&quot;focused&quot;</span>)),
-                    }
+                    CommandOptionValue::Focused(val.to_string(), kind)
                 } <span class="kw">else </span>{
                     <span class="kw">match </span>kind {
                         CommandOptionType::Attachment =&gt; {
@@ -1307,6 +1341,34 @@
                 Token::U8(CommandOptionType::Number <span class="kw">as </span>u8),
                 Token::Str(<span class="string">&quot;value&quot;</span>),
                 Token::String(<span class="string">&quot;not a number&quot;</span>),
+                Token::StructEnd,
+            ],
+        );
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>autocomplete_number() {
+        <span class="kw">let </span>value = CommandDataOption {
+            name: <span class="string">&quot;opt&quot;</span>.to_string(),
+            value: CommandOptionValue::Focused(<span class="string">&quot;1&quot;</span>.to_owned(), CommandOptionType::Number),
+        };
+
+        serde_test::assert_de_tokens(
+            <span class="kw-2">&amp;</span>value,
+            <span class="kw-2">&amp;</span>[
+                Token::Struct {
+                    name: <span class="string">&quot;CommandDataOption&quot;</span>,
+                    len: <span class="number">4</span>,
+                },
+                Token::Str(<span class="string">&quot;focused&quot;</span>),
+                Token::Some,
+                Token::Bool(<span class="bool-val">true</span>),
+                Token::Str(<span class="string">&quot;name&quot;</span>),
+                Token::Str(<span class="string">&quot;opt&quot;</span>),
+                Token::Str(<span class="string">&quot;type&quot;</span>),
+                Token::U8(CommandOptionType::Number <span class="kw">as </span>u8),
+                Token::Str(<span class="string">&quot;value&quot;</span>),
+                Token::String(<span class="string">&quot;1&quot;</span>),
                 Token::StructEnd,
             ],
         );
