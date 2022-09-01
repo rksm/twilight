@@ -701,6 +701,7 @@
 <span id="701">701</span>
 <span id="702">702</span>
 <span id="703">703</span>
+<span id="704">704</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Calculate the permissions of a member on a guild-level or a channel-level.
 //!
 //! # Examples
@@ -1170,7 +1171,8 @@
                 }
             }
             <span class="comment">// Unknown, impossible to try and calculate with this
-            </span>PermissionOverwriteType::Unknown(<span class="kw">_</span>) =&gt; {}
+            </span>PermissionOverwriteType::Unknown(<span class="kw">_</span>) =&gt; (),
+            <span class="kw">_ </span>=&gt; <span class="macro">unimplemented!</span>(),
         }
 
         idx += <span class="number">1</span>;
@@ -1405,4 +1407,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_util" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (eaadb8947 2022-08-27)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_util" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (9243168fa 2022-08-31)" ></div></body></html>

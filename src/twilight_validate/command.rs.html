@@ -567,6 +567,10 @@
 <span id="567">567</span>
 <span id="568">568</span>
 <span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Constants, error types, and functions for validating [`Command`]s.
 
 </span><span class="kw">use </span>std::{
@@ -811,16 +815,20 @@
         <span class="kw">for </span>name <span class="kw">in </span>name_localizations.values() {
             <span class="kw">match </span>kind {
                 CommandType::ChatInput =&gt; <span class="self">self</span>::chat_input_name(name)<span class="question-mark">?</span>,
-                CommandType::User | CommandType::Message | CommandType::Unknown(<span class="kw">_</span>) =&gt; {
+                CommandType::User | CommandType::Message =&gt; {
                     <span class="self">self</span>::name(name)<span class="question-mark">?</span>;
                 }
+                CommandType::Unknown(<span class="kw">_</span>) =&gt; (),
+                <span class="kw">_ </span>=&gt; <span class="macro">unimplemented!</span>(),
             }
         }
     }
 
     <span class="kw">match </span>kind {
         CommandType::ChatInput =&gt; <span class="self">self</span>::chat_input_name(name),
-        CommandType::User | CommandType::Message | CommandType::Unknown(<span class="kw">_</span>) =&gt; <span class="self">self</span>::name(name),
+        CommandType::User | CommandType::Message =&gt; <span class="self">self</span>::name(name),
+        CommandType::Unknown(<span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(()),
+        <span class="kw">_ </span>=&gt; <span class="macro">unimplemented!</span>(),
     }
 }
 
@@ -1137,4 +1145,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_validate" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (eaadb8947 2022-08-27)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_validate" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (9243168fa 2022-08-31)" ></div></body></html>

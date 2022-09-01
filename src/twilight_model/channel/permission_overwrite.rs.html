@@ -178,8 +178,8 @@
 <span class="doccomment">/// Type of a permission overwrite target.
 </span><span class="comment">// Keep in sync with `twilight_util::permission_calculator::PermissionCalculator`!
 </span><span class="attribute">#[derive(Clone, Copy, Debug, Serialize, Eq, Hash, PartialEq, Deserialize)]
-#[serde(from = <span class="string">&quot;u8&quot;</span>, into = <span class="string">&quot;u8&quot;</span>)]
-#[serde(rename_all = <span class="string">&quot;snake_case&quot;</span>)]
+#[non_exhaustive]
+#[serde(from = <span class="string">&quot;u8&quot;</span>, into = <span class="string">&quot;u8&quot;</span>, rename_all = <span class="string">&quot;snake_case&quot;</span>)]
 </span><span class="kw">pub enum </span>PermissionOverwriteType {
     <span class="doccomment">/// Permission overwrite targets an individual member.
     </span>Member,
@@ -321,4 +321,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (eaadb8947 2022-08-27)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (9243168fa 2022-08-31)" ></div></body></html>

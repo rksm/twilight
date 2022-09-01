@@ -273,6 +273,9 @@
 <span id="273">273</span>
 <span id="274">274</span>
 <span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Types for interacting with scheduled events.
 
 </span><span class="kw">mod </span>user;
@@ -365,6 +368,7 @@
 
 <span class="doccomment">/// Type of event.
 </span><span class="attribute">#[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+#[non_exhaustive]
 #[serde(from = <span class="string">&quot;u8&quot;</span>, into = <span class="string">&quot;u8&quot;</span>)]
 </span><span class="kw">pub enum </span>EntityType {
     <span class="doccomment">/// Event takes place in a stage instance.
@@ -401,6 +405,7 @@
 
 <span class="doccomment">/// Privacy level of an event.
 </span><span class="attribute">#[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+#[non_exhaustive]
 #[serde(from = <span class="string">&quot;u8&quot;</span>, into = <span class="string">&quot;u8&quot;</span>)]
 </span><span class="kw">pub enum </span>PrivacyLevel {
     <span class="doccomment">/// Event is only accessible to guild members.
@@ -429,6 +434,7 @@
 
 <span class="doccomment">/// Status of an event.
 </span><span class="attribute">#[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+#[non_exhaustive]
 #[serde(from = <span class="string">&quot;u8&quot;</span>, into = <span class="string">&quot;u8&quot;</span>)]
 </span><span class="kw">pub enum </span>Status {
     <span class="doccomment">/// Event is scheduled.
@@ -549,4 +555,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (eaadb8947 2022-08-27)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (9243168fa 2022-08-31)" ></div></body></html>
