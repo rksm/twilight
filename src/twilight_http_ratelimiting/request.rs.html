@@ -514,6 +514,9 @@
 <span id="514">514</span>
 <span id="515">515</span>
 <span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Request parameters for ratelimiting.
 //!
 //! This module contains the type definitions for parameters
@@ -668,6 +671,8 @@
     </span>ChannelsIdRecipients(u64),
     <span class="doccomment">/// Operating on a thread&#39;s members.
     </span>ChannelsIdThreadMembers(u64),
+    <span class="doccomment">/// Operating on a thread&#39;s member.
+    </span>ChannelsIdThreadMembersId(u64),
     <span class="doccomment">/// Operating on a channel&#39;s threads.
     </span>ChannelsIdThreads(u64),
     <span class="doccomment">/// Operating on a channel&#39;s typing indicator.
@@ -880,6 +885,7 @@
                 ChannelsIdRecipients(parse_id(id)<span class="question-mark">?</span>)
             }
             [<span class="string">&quot;channels&quot;</span>, id, <span class="string">&quot;thread-members&quot;</span>] =&gt; ChannelsIdThreadMembers(parse_id(id)<span class="question-mark">?</span>),
+            [<span class="string">&quot;channels&quot;</span>, id, <span class="string">&quot;thread-members&quot;</span>, <span class="kw">_</span>] =&gt; ChannelsIdThreadMembersId(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;channels&quot;</span>, id, <span class="string">&quot;threads&quot;</span>] =&gt; ChannelsIdThreads(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;channels&quot;</span>, id, <span class="string">&quot;typing&quot;</span>] =&gt; ChannelsIdTyping(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;channels&quot;</span>, id, <span class="string">&quot;webhooks&quot;</span>] | [<span class="string">&quot;channels&quot;</span>, id, <span class="string">&quot;webhooks&quot;</span>, <span class="kw">_</span>] =&gt; {
