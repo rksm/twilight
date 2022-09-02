@@ -324,6 +324,7 @@
 <span id="324">324</span>
 <span id="325">325</span>
 <span id="326">326</span>
+<span id="327">327</span>
 </pre><pre class="rust"><code><span class="doccomment">//! [`Bucket`] management used by the [`super::InMemoryRatelimiter`] internally.
 //! Each bucket has an associated [`BucketQueue`] to queue an API request, which is
 //! consumed by the [`BucketQueueTask`] that manages the ratelimit for the bucket
@@ -333,6 +334,7 @@
 <span class="kw">use crate</span>::{headers::RatelimitHeaders, request::Path, ticket::TicketNotifier};
 <span class="kw">use </span>std::{
     collections::HashMap,
+    mem,
     sync::{
         atomic::{AtomicU64, Ordering},
         Arc, Mutex,
@@ -545,7 +547,7 @@
     </span><span class="kw">pub async fn </span>run(<span class="self">self</span>) {
         <span class="kw">while let </span><span class="prelude-val">Some</span>(queue_tx) = <span class="self">self</span>.next().<span class="kw">await </span>{
             <span class="kw">if </span><span class="self">self</span>.global.is_locked() {
-                <span class="self">self</span>.global.<span class="number">0</span>.lock().<span class="kw">await</span>;
+                mem::drop(<span class="self">self</span>.global.<span class="number">0</span>.lock().<span class="kw">await</span>);
             }
 
             <span class="kw">let </span>ticket_headers = <span class="kw">if let </span><span class="prelude-val">Some</span>(ticket_headers) = queue_tx.available() {
@@ -651,4 +653,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_http_ratelimiting" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (9243168fa 2022-08-31)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_http_ratelimiting" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (2e35f954a 2022-09-01)" ></div></body></html>
