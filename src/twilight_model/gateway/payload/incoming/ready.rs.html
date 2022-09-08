@@ -144,6 +144,10 @@
 <span id="144">144</span>
 <span id="145">145</span>
 <span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{guild::UnavailableGuild, oauth::PartialApplication, user::CurrentUser};
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 
@@ -151,6 +155,7 @@
 </span><span class="kw">pub struct </span>Ready {
     <span class="kw">pub </span>application: PartialApplication,
     <span class="kw">pub </span>guilds: Vec&lt;UnavailableGuild&gt;,
+    <span class="kw">pub </span>resume_gateway_url: String,
     <span class="kw">pub </span>session_id: String,
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>shard: <span class="prelude-ty">Option</span>&lt;[u64; <span class="number">2</span>]&gt;,
@@ -209,6 +214,7 @@
                 verified: <span class="prelude-val">None</span>,
             },
             version: <span class="number">8</span>,
+            resume_gateway_url: <span class="string">&quot;wss://gateway.discord.gg/&quot;</span>.to_owned(),
         };
 
         serde_test::assert_tokens(
@@ -216,7 +222,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;Ready&quot;</span>,
-                    len: <span class="number">6</span>,
+                    len: <span class="number">7</span>,
                 },
                 Token::Str(<span class="string">&quot;application&quot;</span>),
                 Token::Struct {
@@ -252,6 +258,8 @@
                 Token::Bool(<span class="bool-val">true</span>),
                 Token::StructEnd,
                 Token::SeqEnd,
+                Token::Str(<span class="string">&quot;resume_gateway_url&quot;</span>),
+                Token::Str(<span class="string">&quot;wss://gateway.discord.gg/&quot;</span>),
                 Token::Str(<span class="string">&quot;session_id&quot;</span>),
                 Token::Str(<span class="string">&quot;foo&quot;</span>),
                 Token::Str(<span class="string">&quot;shard&quot;</span>),
@@ -291,4 +299,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (289279de1 2022-09-04)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (c2804e6ec 2022-09-07)" ></div></body></html>

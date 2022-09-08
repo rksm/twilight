@@ -1139,6 +1139,17 @@
 <span id="1139">1139</span>
 <span id="1140">1140</span>
 <span id="1141">1141</span>
+<span id="1142">1142</span>
+<span id="1143">1143</span>
+<span id="1144">1144</span>
+<span id="1145">1145</span>
+<span id="1146">1146</span>
+<span id="1147">1147</span>
+<span id="1148">1148</span>
+<span id="1149">1149</span>
+<span id="1150">1150</span>
+<span id="1151">1151</span>
+<span id="1152">1152</span>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{
     <span class="kw">super</span>::{
         emitter::{EmitJsonErrorType, Emitter},
@@ -1462,16 +1473,20 @@
         <span class="comment">//if we got resume info we don&#39;t need to wait
         </span><span class="kw">let </span>shard_id = config.shard();
         <span class="kw">let </span>resumable = config.sequence.is_some() &amp;&amp; config.session_id.is_some();
-        <span class="kw">if </span>!resumable {
+        <span class="kw">let </span><span class="kw-2">mut </span>url = <span class="kw">if </span>resumable {
+            config
+                .resume_url
+                .as_ref()
+                .map_or_else(|| config.gateway_url().to_owned(), ToString::to_string)
+        } <span class="kw">else </span>{
             <span class="macro">tracing::debug!</span>(<span class="string">&quot;shard {shard_id:?} is not resumable&quot;</span>);
             <span class="macro">tracing::debug!</span>(<span class="string">&quot;shard {shard_id:?} queued&quot;</span>);
 
             config.queue.request(shard_id).<span class="kw">await</span>;
 
             <span class="macro">tracing::debug!</span>(<span class="string">&quot;shard {:?} finished queue&quot;</span>, config.shard());
-        }
-
-        <span class="kw">let </span><span class="kw-2">mut </span>url = config.gateway_url().to_owned();
+            config.gateway_url().to_owned()
+        };
 
         url.push_str(<span class="string">&quot;?v=&quot;</span>);
         url.push_str(<span class="kw-2">&amp;</span>API_VERSION.to_string());
@@ -1724,6 +1739,8 @@
         <span class="self">self</span>.session.set_stage(Stage::Connected);
         <span class="self">self</span>.session
             .set_id(ready.session_id.clone().into_boxed_str());
+        <span class="self">self</span>.session
+            .set_resume_url(ready.resume_gateway_url.clone().into_boxed_str());
 
         <span class="self">self</span>.emitter.event(Event::ShardConnected(Connected {
             heartbeat_interval: <span class="self">self</span>.session.heartbeat_interval(),
@@ -2228,8 +2245,13 @@
             shard_id: <span class="self">self</span>.config.shard()[<span class="number">0</span>],
         }));
 
+        <span class="kw">let </span>url = <span class="self">self
+            </span>.session
+            .resume_url()
+            .unwrap_or_else(|| <span class="self">self</span>.url.clone());
+
         <span class="kw">let </span>stream = <span class="self">Self</span>::connect(
-            <span class="kw-2">&amp;</span><span class="self">self</span>.url,
+            <span class="kw-2">&amp;</span>url,
             <span class="attribute">#[cfg(any(
                 feature = <span class="string">&quot;native&quot;</span>,
                 feature = <span class="string">&quot;rustls-native-roots&quot;</span>,
@@ -2281,4 +2303,4 @@
     IdentifyProperties::new(<span class="string">&quot;twilight.rs&quot;</span>, <span class="string">&quot;twilight.rs&quot;</span>, OS)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (289279de1 2022-09-04)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (c2804e6ec 2022-09-07)" ></div></body></html>

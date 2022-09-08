@@ -103,6 +103,7 @@
 <span id="103">103</span>
 <span id="104">104</span>
 <span id="105">105</span>
+<span id="106">106</span>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::EventTypeFlags;
 <span class="kw">use </span>std::{borrow::Cow, sync::Arc};
 <span class="kw">use </span>twilight_gateway_queue::Queue;
@@ -134,6 +135,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) presence: <span class="prelude-ty">Option</span>&lt;UpdatePresencePayload&gt;,
     <span class="kw">pub</span>(<span class="kw">super</span>) queue: Arc&lt;<span class="kw">dyn </span>Queue&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) ratelimit_payloads: bool,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) resume_url: <span class="prelude-ty">Option</span>&lt;Box&lt;str&gt;&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) session_id: <span class="prelude-ty">Option</span>&lt;Box&lt;str&gt;&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) sequence: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) shard: [u64; <span class="number">2</span>],
@@ -209,4 +211,4 @@
     <span class="macro">assert_impl_all!</span>(Config: Clone, Debug, Send, Sync);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (289279de1 2022-09-04)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (c2804e6ec 2022-09-07)" ></div></body></html>

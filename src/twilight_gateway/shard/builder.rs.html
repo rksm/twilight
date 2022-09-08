@@ -381,6 +381,7 @@
 <span id="381">381</span>
 <span id="382">382</span>
 <span id="383">383</span>
+<span id="384">384</span>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{Config, Events, Shard};
 <span class="kw">use </span><span class="kw">crate</span>::EventTypeFlags;
 <span class="kw">use </span>std::{
@@ -528,6 +529,7 @@
             large_threshold: <span class="self">self</span>.large_threshold,
             presence: <span class="self">self</span>.presence,
             queue: <span class="self">self</span>.queue,
+            resume_url: <span class="prelude-val">None</span>,
             ratelimit_payloads: <span class="self">self</span>.ratelimit_payloads,
             session_id: <span class="prelude-val">None</span>,
             sequence: <span class="prelude-val">None</span>,
@@ -765,4 +767,4 @@
     <span class="macro">assert_impl_all!</span>(ShardIdError: Error, Send, Sync);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (289279de1 2022-09-04)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (c2804e6ec 2022-09-07)" ></div></body></html>
