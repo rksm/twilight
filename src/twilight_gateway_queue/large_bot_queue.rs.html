@@ -107,6 +107,9 @@
 <span id="107">107</span>
 <span id="108">108</span>
 <span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{day_limiter::DayLimiter, Queue};
 <span class="kw">use </span>std::{fmt::Debug, future::Future, pin::Pin, sync::Arc, time::Duration};
 <span class="kw">use </span>tokio::{
@@ -138,6 +141,9 @@
     ///
     /// You must provide the number of buckets Discord requires your bot to
     /// connect with.
+    ///
+    /// The number of buckets is provided via Discord as `max_concurrency`
+    /// which can be fetched with [`Client::gateway`].
     </span><span class="kw">pub async fn </span>new(buckets: usize, http: Arc&lt;Client&gt;) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>queues = Vec::with_capacity(buckets);
         <span class="kw">for _ in </span><span class="number">0</span>..buckets {
@@ -217,4 +223,4 @@
     <span class="macro">assert_impl_all!</span>(LargeBotQueue: Debug, Queue, Send, Sync);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_gateway_queue" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (c2804e6ec 2022-09-07)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_gateway_queue" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (1d37ed661 2022-09-09)" ></div></body></html>
