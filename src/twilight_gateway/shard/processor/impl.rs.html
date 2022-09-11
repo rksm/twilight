@@ -1150,6 +1150,20 @@
 <span id="1150">1150</span>
 <span id="1151">1151</span>
 <span id="1152">1152</span>
+<span id="1153">1153</span>
+<span id="1154">1154</span>
+<span id="1155">1155</span>
+<span id="1156">1156</span>
+<span id="1157">1157</span>
+<span id="1158">1158</span>
+<span id="1159">1159</span>
+<span id="1160">1160</span>
+<span id="1161">1161</span>
+<span id="1162">1162</span>
+<span id="1163">1163</span>
+<span id="1164">1164</span>
+<span id="1165">1165</span>
+<span id="1166">1166</span>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{
     <span class="kw">super</span>::{
         emitter::{EmitJsonErrorType, Emitter},
@@ -1460,7 +1474,8 @@
     <span class="kw">pub </span>rx: UnboundedReceiver&lt;Message&gt;,
     <span class="kw">pub </span>session: Arc&lt;Session&gt;,
     compression: Compression,
-    url: Box&lt;str&gt;,
+    gateway_endpoint: Box&lt;str&gt;,
+    gateway_params: Box&lt;str&gt;,
     resume: <span class="prelude-ty">Option</span>&lt;(u64, Box&lt;str&gt;)&gt;,
     wtx: WatchSender&lt;Arc&lt;Session&gt;&gt;,
 }
@@ -1473,7 +1488,7 @@
         <span class="comment">//if we got resume info we don&#39;t need to wait
         </span><span class="kw">let </span>shard_id = config.shard();
         <span class="kw">let </span>resumable = config.sequence.is_some() &amp;&amp; config.session_id.is_some();
-        <span class="kw">let </span><span class="kw-2">mut </span>url = <span class="kw">if </span>resumable {
+        <span class="kw">let </span>url = <span class="kw">if </span>resumable {
             config
                 .resume_url
                 .as_ref()
@@ -1488,8 +1503,9 @@
             config.gateway_url().to_owned()
         };
 
-        url.push_str(<span class="string">&quot;?v=&quot;</span>);
-        url.push_str(<span class="kw-2">&amp;</span>API_VERSION.to_string());
+        <span class="kw">let </span><span class="kw-2">mut </span>params = String::from(<span class="string">&quot;v=&quot;</span>);
+
+        params.push_str(<span class="kw-2">&amp;</span>API_VERSION.to_string());
 
         <span class="comment">// Discord&#39;s documentation states:
         //
@@ -1497,9 +1513,9 @@
         // and encoding&quot;.
         //
         // &lt;https://discord.com/developers/docs/topics/gateway#connecting-gateway-url-query-string-params&gt;
-        </span>url.push_str(<span class="string">&quot;&amp;encoding=json&quot;</span>);
+        </span>params.push_str(<span class="string">&quot;&amp;encoding=json&quot;</span>);
 
-        compression::add_url_feature(<span class="kw-2">&amp;mut </span>url);
+        compression::add_url_feature(<span class="kw-2">&amp;mut </span>params);
 
         emitter.event(Event::ShardConnecting(Connecting {
             gateway: url.clone(),
@@ -1507,6 +1523,7 @@
         }));
         <span class="kw">let </span>stream = <span class="self">Self</span>::connect(
             <span class="kw-2">&amp;</span>url,
+            <span class="kw-2">&amp;</span>params,
             <span class="attribute">#[cfg(any(
                 feature = <span class="string">&quot;native&quot;</span>,
                 feature = <span class="string">&quot;rustls-native-roots&quot;</span>,
@@ -1529,13 +1546,15 @@
 
         <span class="kw">let </span>(wtx, wrx) = watch_channel(Arc::clone(<span class="kw-2">&amp;</span>session));
 
+        <span class="kw">let </span>gateway_url = config.gateway_url().to_owned();
         <span class="kw">let </span><span class="kw-2">mut </span>processor = <span class="self">Self </span>{
             compression: Compression::new(shard_id),
             config,
             emitter,
             rx,
             session,
-            url: url.into_boxed_str(),
+            gateway_endpoint: gateway_url.into_boxed_str(),
+            gateway_params: params.into_boxed_str(),
             resume: <span class="prelude-val">None</span>,
             wtx,
         };
@@ -2061,6 +2080,7 @@
 
     <span class="kw">async fn </span>connect(
         url: <span class="kw-2">&amp;</span>str,
+        params: <span class="kw-2">&amp;</span>str,
         <span class="attribute">#[cfg(any(
             feature = <span class="string">&quot;native&quot;</span>,
             feature = <span class="string">&quot;rustls-native-roots&quot;</span>,
@@ -2068,12 +2088,14 @@
         </span>))]
         </span>tls: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>TlsContainer&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;ShardStream, ConnectingError&gt; {
-        <span class="kw">let </span>url = Url::parse(url).map_err(|source| ConnectingError {
+        <span class="kw">let </span><span class="kw-2">mut </span>url = Url::parse(url).map_err(|source| ConnectingError {
             kind: ConnectingErrorType::ParsingUrl {
                 url: url.to_owned(),
             },
             source: <span class="prelude-val">Some</span>(Box::new(source)),
         })<span class="question-mark">?</span>;
+
+        url.set_query(<span class="prelude-val">Some</span>(params));
 
         <span class="comment">// `max_frame_size` and `max_message_queue` limits are disabled because
         // Discord is not a malicious actor.
@@ -2172,7 +2194,8 @@
             }));
 
             <span class="kw">let </span>stream = <span class="kw">match </span><span class="self">Self</span>::connect(
-                <span class="kw-2">&amp;</span><span class="self">self</span>.url,
+                <span class="kw-2">&amp;</span><span class="self">self</span>.gateway_endpoint,
+                <span class="kw-2">&amp;</span><span class="self">self</span>.gateway_params,
                 <span class="attribute">#[cfg(any(
                     feature = <span class="string">&quot;native&quot;</span>,
                     feature = <span class="string">&quot;rustls-native-roots&quot;</span>,
@@ -2199,8 +2222,12 @@
             <span class="kw">break</span>;
         }
 
+        <span class="kw">let </span><span class="kw-2">mut </span>url = <span class="self">self</span>.gateway_endpoint.to_string();
+        url.push(<span class="string">&#39;?&#39;</span>);
+        url.push_str(<span class="kw-2">&amp;</span><span class="self">self</span>.gateway_params);
+
         <span class="self">self</span>.emitter.event(Event::ShardConnecting(Connecting {
-            gateway: <span class="self">self</span>.url.clone().into_string(),
+            gateway: url,
             shard_id: <span class="self">self</span>.config.shard()[<span class="number">0</span>],
         }));
     }
@@ -2248,10 +2275,11 @@
         <span class="kw">let </span>url = <span class="self">self
             </span>.session
             .resume_url()
-            .unwrap_or_else(|| <span class="self">self</span>.url.clone());
+            .unwrap_or_else(|| <span class="self">self</span>.gateway_endpoint.clone());
 
         <span class="kw">let </span>stream = <span class="self">Self</span>::connect(
             <span class="kw-2">&amp;</span>url,
+            <span class="kw-2">&amp;</span><span class="self">self</span>.gateway_params,
             <span class="attribute">#[cfg(any(
                 feature = <span class="string">&quot;native&quot;</span>,
                 feature = <span class="string">&quot;rustls-native-roots&quot;</span>,
@@ -2303,4 +2331,4 @@
     IdentifyProperties::new(<span class="string">&quot;twilight.rs&quot;</span>, <span class="string">&quot;twilight.rs&quot;</span>, OS)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (1d37ed661 2022-09-09)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (228710758 2022-09-10)" ></div></body></html>
