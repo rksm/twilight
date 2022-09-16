@@ -145,6 +145,7 @@
 <span id="145">145</span>
 <span id="146">146</span>
 <span id="147">147</span>
+<span id="148">148</span>
 </pre><pre class="rust"><code><span class="kw">use </span>twilight_validate::request::ValidationError;
 
 <span class="kw">pub trait </span>AuditLogReason&lt;<span class="lifetime">&#39;a</span>&gt;: private::Sealed {
@@ -177,7 +178,7 @@
             member::{AddRoleToMember, RemoveMember, RemoveRoleFromMember, UpdateGuildMember},
             role::{CreateRole, DeleteRole, UpdateRole},
             sticker::{CreateGuildSticker, UpdateGuildSticker},
-            CreateGuildChannel, CreateGuildPrune, UpdateCurrentMember, UpdateGuild,
+            CreateGuildChannel, CreateGuildPrune, UpdateCurrentMember, UpdateGuild, UpdateGuildMfa,
         },
         scheduled_event::{
             CreateGuildExternalScheduledEvent, CreateGuildScheduledEvent,
@@ -225,6 +226,7 @@
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateEmoji&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuild&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildMember&lt;<span class="lifetime">&#39;_</span>&gt; {}
+    <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildMfa&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildScheduledEvent&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildSticker&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateRole&lt;<span class="lifetime">&#39;_</span>&gt; {}
