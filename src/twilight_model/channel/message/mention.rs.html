@@ -165,7 +165,6 @@
 <span id="165">165</span>
 <span id="166">166</span>
 <span id="167">167</span>
-<span id="168">168</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     guild::PartialMember,
     id::{marker::UserMarker, Id},
@@ -194,6 +193,7 @@
     <span class="doccomment">/// Unique ID of the user.
     </span><span class="kw">pub </span>id: Id&lt;UserMarker&gt;,
     <span class="doccomment">/// Member object for the user in the guild, if available.
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>member: <span class="prelude-ty">Option</span>&lt;PartialMember&gt;,
     <span class="attribute">#[serde(rename = <span class="string">&quot;username&quot;</span>)]
     </span><span class="doccomment">/// Username of the user.
@@ -238,7 +238,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;Mention&quot;</span>,
-                    len: <span class="number">7</span>,
+                    len: <span class="number">6</span>,
                 },
                 Token::Str(<span class="string">&quot;avatar&quot;</span>),
                 Token::None,
@@ -249,8 +249,6 @@
                 Token::Str(<span class="string">&quot;id&quot;</span>),
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;1&quot;</span>),
-                Token::Str(<span class="string">&quot;member&quot;</span>),
-                Token::None,
                 Token::Str(<span class="string">&quot;username&quot;</span>),
                 Token::Str(<span class="string">&quot;foo&quot;</span>),
                 Token::Str(<span class="string">&quot;public_flags&quot;</span>),
@@ -335,4 +333,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (228710758 2022-09-10)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>
