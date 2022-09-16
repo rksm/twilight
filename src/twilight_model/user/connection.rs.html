@@ -69,6 +69,11 @@
 <span id="69">69</span>
 <span id="70">70</span>
 <span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{guild::GuildIntegration, user::ConnectionVisibility};
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 
@@ -85,6 +90,8 @@
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>revoked: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     <span class="kw">pub </span>show_activity: bool,
+    <span class="doccomment">/// Whether this connection has a corresponding third party OAuth2 token.
+    </span><span class="kw">pub </span>two_way_link: bool,
     <span class="kw">pub </span>verified: bool,
     <span class="kw">pub </span>visibility: ConnectionVisibility,
 }
@@ -105,6 +112,7 @@
             revoked: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
             show_activity: <span class="bool-val">true</span>,
             verified: <span class="bool-val">true</span>,
+            two_way_link: <span class="bool-val">false</span>,
             visibility: ConnectionVisibility::Everyone,
         };
 
@@ -113,7 +121,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;Connection&quot;</span>,
-                    len: <span class="number">9</span>,
+                    len: <span class="number">10</span>,
                 },
                 Token::Str(<span class="string">&quot;friend_sync&quot;</span>),
                 Token::Bool(<span class="bool-val">true</span>),
@@ -131,6 +139,8 @@
                 Token::Bool(<span class="bool-val">false</span>),
                 Token::Str(<span class="string">&quot;show_activity&quot;</span>),
                 Token::Bool(<span class="bool-val">true</span>),
+                Token::Str(<span class="string">&quot;two_way_link&quot;</span>),
+                Token::Bool(<span class="bool-val">false</span>),
                 Token::Str(<span class="string">&quot;verified&quot;</span>),
                 Token::Bool(<span class="bool-val">true</span>),
                 Token::Str(<span class="string">&quot;visibility&quot;</span>),
