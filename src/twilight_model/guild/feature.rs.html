@@ -183,6 +183,14 @@
 <span id="183">183</span>
 <span id="184">184</span>
 <span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
 </pre><pre class="rust"><code><span class="attribute">#![allow(deprecated)]
 </span><span class="kw">use </span>std::borrow::Cow;
 
@@ -215,6 +223,8 @@
     </span>Discoverable,
     <span class="doccomment">/// Is able to be featured in the directory.
     </span>Featurable,
+    <span class="doccomment">/// Invites have been paused, this prevents new users from joining.
+    </span>InvitesDisabled,
     <span class="doccomment">/// Has access to set an invite splash background.
     </span>InviteSplash,
     <span class="doccomment">/// Has enabled membership screening.
@@ -258,6 +268,7 @@
             GuildFeature::Community =&gt; <span class="string">&quot;COMMUNITY&quot;</span>.into(),
             GuildFeature::Discoverable =&gt; <span class="string">&quot;DISCOVERABLE&quot;</span>.into(),
             GuildFeature::Featurable =&gt; <span class="string">&quot;FEATURABLE&quot;</span>.into(),
+            GuildFeature::InvitesDisabled =&gt; <span class="string">&quot;INVITES_DISABLED&quot;</span>.into(),
             GuildFeature::InviteSplash =&gt; <span class="string">&quot;INVITE_SPLASH&quot;</span>.into(),
             GuildFeature::MemberVerificationGateEnabled =&gt; {
                 <span class="string">&quot;MEMBER_VERIFICATION_GATE_ENABLED&quot;</span>.into()
@@ -290,6 +301,7 @@
             <span class="string">&quot;COMMUNITY&quot; </span>=&gt; <span class="self">Self</span>::Community,
             <span class="string">&quot;DISCOVERABLE&quot; </span>=&gt; <span class="self">Self</span>::Discoverable,
             <span class="string">&quot;FEATURABLE&quot; </span>=&gt; <span class="self">Self</span>::Featurable,
+            <span class="string">&quot;INVITES_DISABLED&quot; </span>=&gt; <span class="self">Self</span>::InvitesDisabled,
             <span class="string">&quot;INVITE_SPLASH&quot; </span>=&gt; <span class="self">Self</span>::InviteSplash,
             <span class="string">&quot;MEMBER_VERIFICATION_GATE_ENABLED&quot; </span>=&gt; <span class="self">Self</span>::MemberVerificationGateEnabled,
             <span class="string">&quot;MONETIZATION_ENABLED&quot; </span>=&gt; <span class="self">Self</span>::MonetizationEnabled,
@@ -330,6 +342,10 @@
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::Community, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;COMMUNITY&quot;</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::Discoverable, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;DISCOVERABLE&quot;</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::Featurable, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;FEATURABLE&quot;</span>)]);
+        serde_test::assert_tokens(
+            <span class="kw-2">&amp;</span>GuildFeature::InvitesDisabled,
+            <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;INVITES_DISABLED&quot;</span>)],
+        );
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::InviteSplash, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;INVITE_SPLASH&quot;</span>)]);
         serde_test::assert_tokens(
             <span class="kw-2">&amp;</span>GuildFeature::MemberVerificationGateEnabled,
