@@ -1005,6 +1005,9 @@
 <span id="1005">1005</span>
 <span id="1006">1006</span>
 <span id="1007">1007</span>
+<span id="1008">1008</span>
+<span id="1009">1009</span>
+<span id="1010">1010</span>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{CategoryFields, GuildChannelFields, RoleFields, TextFields, VoiceFields};
 <span class="kw">use </span>std::{
     error::Error,
@@ -1114,7 +1117,10 @@
 
     <span class="doccomment">/// Set the role color.
     ///
-    /// This must be a valid hexadecimal RGB value.
+    /// This must be a valid hexadecimal RGB value. `0x000000` is ignored
+    /// and doesn&#39;t count towards the final computed color in the user list.
+    /// Refer to [`Self::COLOR_MAXIMUM`] for the maximum
+    /// acceptable value.
     ///
     /// # Errors
     ///

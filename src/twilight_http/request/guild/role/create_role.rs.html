@@ -174,6 +174,12 @@
 <span id="174">174</span>
 <span id="175">175</span>
 <span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -253,7 +259,13 @@
         }
     }
 
-    <span class="doccomment">/// Set the color of the role.
+    <span class="doccomment">/// Set the role color.
+    ///
+    /// This must be a valid hexadecimal RGB value. `0x000000` is ignored and
+    /// doesn&#39;t count towards the final computed color in the user list. Refer
+    /// to [`COLOR_MAXIMUM`] for the maximum acceptable value.
+    ///
+    /// [`COLOR_MAXIMUM`]: twilight_validate::embed::COLOR_MAXIMUM
     </span><span class="kw">pub const fn </span>color(<span class="kw-2">mut </span><span class="self">self</span>, color: u32) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fields.color = <span class="prelude-val">Some</span>(color);
 
