@@ -335,6 +335,17 @@
 <span id="335">335</span>
 <span id="336">336</span>
 <span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -499,10 +510,21 @@
 
     <span class="doccomment">/// Set the enabled features of the guild.
     ///
-    /// Attempting to add or remove the `COMMUNITY` feature requires the
+    /// Attempting to add or remove the [`GuildFeature::Community`] feature requires the
     /// [`Permissions::ADMINISTRATOR`] permission.
     ///
+    /// Attempting to add or remove the [`GuildFeature::Discoverable`] feature requires
+    /// the [`Permissions::ADMINISTRATOR`] permission. Additionally the guild
+    /// must pass all the discovery requirements.
+    ///
+    /// Attempting to add or remove the [`GuildFeature::InvitesDisabled`] feature requires
+    /// the [`Permissions::MANAGE_GUILD`] permission.
+    ///
+    /// [`GuildFeature::Community`]: twilight_model::guild::GuildFeature::Community
+    /// [`GuildFeature::Discoverable`]: twilight_model::guild::GuildFeature::Discoverable
+    /// [`GuildFeature::InvitesDisabled`]: twilight_model::guild::GuildFeature::InvitesDisabled
     /// [`Permissions::ADMINISTRATOR`]: twilight_model::guild::Permissions::ADMINISTRATOR
+    /// [`Permissions::MANAGE_GUILD`]: twilight_model::guild::Permissions::MANAGE_GUILD
     </span><span class="kw">pub const fn </span>features(<span class="kw-2">mut </span><span class="self">self</span>, features: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str]) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fields.features = <span class="prelude-val">Some</span>(features);
 
