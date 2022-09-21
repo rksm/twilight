@@ -359,6 +359,15 @@
 <span id="359">359</span>
 <span id="360">360</span>
 <span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     request::application::{
         command::{
@@ -463,15 +472,23 @@
 
     <span class="doccomment">/// Edit the original message, by its token.
     ///
+    /// The update must include at least one of [`attachments`], [`components`],
+    /// [`content`] or [`embeds`].
+    ///
     /// This endpoint is not bound to the application&#39;s global rate limit.
+    ///
+    /// [`attachments`]: CreateFollowup::attachments
+    /// [`components`]: CreateFollowup::components
+    /// [`content`]: CreateFollowup::content
+    /// [`embeds`]: CreateFollowup::embeds
     </span><span class="kw">pub const fn </span>update_response(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, interaction_token: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str) -&gt; UpdateResponse&lt;<span class="lifetime">&#39;a</span>&gt; {
         UpdateResponse::new(<span class="self">self</span>.client, <span class="self">self</span>.application_id, interaction_token)
     }
 
     <span class="doccomment">/// Create a followup message to an interaction, by its token.
     ///
-    /// The message must include at least one of [`attachments`], [`content`],
-    /// or [`embeds`].
+    /// The message must include at least one of [`attachments`], [`components`]
+    /// [`content`] or [`embeds`].
     ///
     /// This endpoint is not bound to the application&#39;s global rate limit.
     ///
@@ -496,6 +513,7 @@
     /// ```
     ///
     /// [`attachments`]: CreateFollowup::attachments
+    /// [`components`]: CreateFollowup::components
     /// [`content`]: CreateFollowup::content
     /// [`embeds`]: CreateFollowup::embeds
     </span><span class="kw">pub const fn </span>create_followup(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, interaction_token: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str) -&gt; CreateFollowup&lt;<span class="lifetime">&#39;a</span>&gt; {

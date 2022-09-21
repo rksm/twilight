@@ -374,6 +374,7 @@
 <span id="374">374</span>
 <span id="375">375</span>
 <span id="376">376</span>
+<span id="377">377</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -433,7 +434,7 @@
 <span class="doccomment">/// Send a message to a channel.
 ///
 /// The message must include at least one of [`attachments`], [`content`],
-/// [`embeds`], or [`sticker_ids`].
+/// [`components`], [`embeds`], or [`sticker_ids`].
 ///
 /// # Example
 ///
@@ -456,6 +457,7 @@
 ///
 /// [`attachments`]: Self::attachments
 /// [`content`]: Self::content
+/// [`components`]: Self::components
 /// [`embeds`]: Self::embeds
 /// [`sticker_ids`]: Self::sticker_ids
 </span><span class="attribute">#[must_use = <span class="string">&quot;requests must be configured and executed&quot;</span>]

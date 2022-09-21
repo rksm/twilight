@@ -389,6 +389,7 @@
 <span id="389">389</span>
 <span id="390">390</span>
 <span id="391">391</span>
+<span id="392">392</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Update a original response create for a interaction.
 
 </span><span class="kw">use crate</span>::{
@@ -437,8 +438,8 @@
 ///
 /// You can pass [`None`] to any of the methods to remove the associated field.
 /// Pass [`None`] to [`content`] to remove the content. You must ensure that the
-/// message still contains at least one of [`attachments`], [`content`], or
-/// [`embeds`].
+/// message still contains at least one of [`attachments`], [`components`],
+/// [`content`] or [`embeds`].
 ///
 /// This endpoint is not bound to the application&#39;s global rate limit.
 ///
@@ -470,6 +471,7 @@
 /// ```
 ///
 /// [`attachments`]: Self::attachments
+/// [`components`]: Self::components
 /// [`content`]: Self::content
 /// [`embeds`]: Self::embeds
 </span><span class="attribute">#[must_use = <span class="string">&quot;requests must be configured and executed&quot;</span>]

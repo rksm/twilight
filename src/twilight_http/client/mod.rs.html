@@ -2539,6 +2539,10 @@
 <span id="2539">2539</span>
 <span id="2540">2540</span>
 <span id="2541">2541</span>
+<span id="2542">2542</span>
+<span id="2543">2543</span>
+<span id="2544">2544</span>
+<span id="2545">2545</span>
 </pre><pre class="rust"><code><span class="kw">mod </span>builder;
 <span class="kw">mod </span>connector;
 <span class="kw">mod </span>interaction;
@@ -3770,8 +3774,8 @@
 
     <span class="doccomment">/// Send a message to a channel.
     ///
-    /// The message must include at least one of [`attachments`], [`content`],
-    /// [`embeds`], or [`sticker_ids`].
+    /// The message must include at least one of [`attachments`],
+    /// [`components`], [`content`], [`embeds`], or [`sticker_ids`].
     ///
     /// # Example
     ///
@@ -3793,6 +3797,7 @@
     /// ```
     ///
     /// [`attachments`]: CreateMessage::attachments
+    /// [`components`]: CreateMessage::components
     /// [`content`]: CreateMessage::content
     /// [`embeds`]: CreateMessage::embeds
     /// [`sticker_ids`]: CreateMessage::sticker_ids
@@ -3830,7 +3835,7 @@
     /// You can pass [`None`] to any of the methods to remove the associated
     /// field. Pass [`None`] to [`content`] to remove the content. You must
     /// ensure that the message still contains at least one of [`attachments`],
-    /// [`content`], [`embeds`], or stickers.
+    /// [`components`], [`content`], [`embeds`], or stickers.
     ///
     /// # Examples
     ///
@@ -3868,6 +3873,7 @@
     /// ```
     ///
     /// [`attachments`]: UpdateMessage::attachments
+    /// [`components`]: UpdateMessage::components
     /// [`content`]: UpdateMessage::content
     /// [`embeds`]: UpdateMessage::embeds
     </span><span class="kw">pub const fn </span>update_message(
@@ -4477,8 +4483,8 @@
 
     <span class="doccomment">/// Execute a webhook, sending a message to its channel.
     ///
-    /// The message must include at least one of [`attachments`], [`content`],
-    /// or [`embeds`].
+    /// The message must include at least one of [`attachments`], [`components`]
+    /// [`content`], or [`embeds`].
     ///
     /// # Examples
     ///
@@ -4499,6 +4505,7 @@
     /// ```
     ///
     /// [`attachments`]: ExecuteWebhook::attachments
+    /// [`components`]: ExecuteWebhook::components
     /// [`content`]: ExecuteWebhook::content
     /// [`embeds`]: ExecuteWebhook::embeds
     </span><span class="kw">pub const fn </span>execute_webhook&lt;<span class="lifetime">&#39;a</span>&gt;(
@@ -4524,7 +4531,7 @@
     /// You can pass [`None`] to any of the methods to remove the associated
     /// field. Pass [`None`] to [`content`] to remove the content. You must
     /// ensure that the message still contains at least one of [`attachments`],
-    /// [`content`], or [`embeds`].
+    /// [`components`], [`content`], or [`embeds`].
     ///
     /// # Examples
     ///
@@ -4543,6 +4550,7 @@
     /// ```
     ///
     /// [`attachments`]: UpdateWebhookMessage::attachments
+    /// [`components`]: UpdateWebhookMessage::components
     /// [`content`]: UpdateWebhookMessage::content
     /// [`embeds`]: UpdateWebhookMessage::embeds
     </span><span class="kw">pub const fn </span>update_webhook_message&lt;<span class="lifetime">&#39;a</span>&gt;(

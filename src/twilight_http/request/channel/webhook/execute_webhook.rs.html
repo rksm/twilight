@@ -416,6 +416,7 @@
 <span id="416">416</span>
 <span id="417">417</span>
 <span id="418">418</span>
+<span id="419">419</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -477,8 +478,8 @@
 
 <span class="doccomment">/// Execute a webhook, sending a message to its channel.
 ///
-/// The message must include at least one of [`attachments`], [`content`], or
-/// [`embeds`].
+/// The message must include at least one of [`attachments`], [`components`],
+/// [`content`], or [`embeds`].
 ///
 /// # Examples
 ///
@@ -499,6 +500,7 @@
 /// ```
 ///
 /// [`attachments`]: Self::attachments
+/// [`components`]: Self::components
 /// [`content`]: Self::content
 /// [`embeds`]: Self::embeds
 </span><span class="attribute">#[must_use = <span class="string">&quot;requests must be configured and executed&quot;</span>]

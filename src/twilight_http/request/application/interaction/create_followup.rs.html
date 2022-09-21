@@ -330,6 +330,7 @@
 <span id="330">330</span>
 <span id="331">331</span>
 <span id="332">332</span>
+<span id="333">333</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -378,8 +379,8 @@
 
 <span class="doccomment">/// Create a followup message to an interaction, by its token.
 ///
-/// The message must include at least one of [`attachments`], [`content`], or
-/// [`embeds`].
+/// The message must include at least one of [`attachments`], [`components`],
+/// [`content`], or [`embeds`].
 ///
 /// This endpoint is not bound to the application&#39;s global rate limit.
 ///
@@ -404,6 +405,7 @@
 /// ```
 ///
 /// [`attachments`]: Self::attachments
+/// [`components`]: Self::components
 /// [`content`]: Self::content
 /// [`embeds`]: Self::embeds
 </span><span class="attribute">#[must_use = <span class="string">&quot;requests must be configured and executed&quot;</span>]
