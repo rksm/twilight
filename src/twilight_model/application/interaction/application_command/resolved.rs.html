@@ -547,7 +547,7 @@
         Id,
     },
     user::User,
-    util::Timestamp,
+    util::{ImageHash, Timestamp},
 };
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 <span class="kw">use </span>std::collections::hash_map::HashMap;
@@ -613,7 +613,7 @@
 </span><span class="kw">pub struct </span>InteractionMember {
     <span class="doccomment">/// Member&#39;s guild avatar.
     </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
-    </span><span class="kw">pub </span>avatar: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    </span><span class="kw">pub </span>avatar: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     <span class="doccomment">/// If the member is timed out, when the timeout will expire.
     </span><span class="kw">pub </span>communication_disabled_until: <span class="prelude-ty">Option</span>&lt;Timestamp&gt;,
     <span class="doccomment">/// Member guild join date.
@@ -1081,4 +1081,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (432abd86f 2022-09-20)" ></div></body></html>
