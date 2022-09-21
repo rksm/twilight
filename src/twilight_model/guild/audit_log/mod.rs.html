@@ -133,6 +133,11 @@
 <span id="133">133</span>
 <span id="134">134</span>
 <span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Audit Logs, created whenever an administrative action is performed within a
 //! guild.
 //!
@@ -158,6 +163,7 @@
 
 <span class="kw">use </span><span class="kw">super</span>::auto_moderation::AutoModerationRule;
 <span class="kw">use crate</span>::{
+    application::command::Command,
     channel::{Channel, Webhook},
     scheduled_event::GuildScheduledEvent,
     user::User,
@@ -169,8 +175,10 @@
 /// For additional information refer to [Discord Docs/Audit Logs][1].
 ///
 /// [1]: https://discord.com/developers/docs/resources/audit-log#audit-log-object
-</span><span class="attribute">#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+</span><span class="attribute">#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 </span><span class="kw">pub struct </span>AuditLog {
+    <span class="doccomment">/// List of referenced application commands.
+    </span><span class="kw">pub </span>application_commands: Vec&lt;Command&gt;,
     <span class="doccomment">/// List of referenced auto moderation rules.
     </span><span class="kw">pub </span>auto_moderation_rules: Vec&lt;AutoModerationRule&gt;,
     <span class="doccomment">/// Paginated entries in a guild&#39;s audit log.
@@ -197,7 +205,7 @@
     <span class="kw">use </span>serde::{Deserialize, Serialize};
     <span class="kw">use </span>serde_test::Token;
     <span class="kw">use </span>static_assertions::{assert_fields, assert_impl_all};
-    <span class="kw">use </span>std::{fmt::Debug, hash::Hash};
+    <span class="kw">use </span>std::fmt::Debug;
 
     <span class="macro">assert_fields!</span>(
         AuditLog: entries,
@@ -210,8 +218,6 @@
         AuditLog: Clone,
         Debug,
         Deserialize&lt;<span class="lifetime">&#39;static</span>&gt;,
-        Eq,
-        Hash,
         PartialEq,
         Send,
         Serialize,
@@ -226,6 +232,7 @@
     </span><span class="attribute">#[test]
     </span><span class="kw">fn </span>serde() {
         <span class="kw">let </span>value = AuditLog {
+            application_commands: Vec::new(),
             auto_moderation_rules: Vec::new(),
             entries: Vec::new(),
             guild_scheduled_events: Vec::new(),
@@ -240,8 +247,11 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;AuditLog&quot;</span>,
-                    len: <span class="number">7</span>,
+                    len: <span class="number">8</span>,
                 },
+                Token::Str(<span class="string">&quot;application_commands&quot;</span>),
+                Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">0</span>) },
+                Token::SeqEnd,
                 Token::Str(<span class="string">&quot;auto_moderation_rules&quot;</span>),
                 Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">0</span>) },
                 Token::SeqEnd,

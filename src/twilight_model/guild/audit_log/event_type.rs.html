@@ -428,6 +428,22 @@
 <span id="428">428</span>
 <span id="429">429</span>
 <span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
 </pre><pre class="rust"><code><span class="kw">use </span>serde::{Deserialize, Serialize};
 
 <span class="doccomment">/// Action to cause an [`AuditLogEntry`].
@@ -650,8 +666,12 @@
     ///
     /// [`AutoModerationRule`]: crate::guild::auto_moderation::AutoModerationRule
     </span>AutoModerationRuleDelete,
-    <span class="doccomment">/// Message has been blocked by AutoMod according to a rule.
+    <span class="doccomment">/// Message has been blocked by AutoMod.
     </span>AutoModerationBlockMessage,
+    <span class="doccomment">/// Message has been flagged by AutoMod.
+    </span>AutoModerationFlagToChannel,
+    <span class="doccomment">/// A member has been timed out by AutoMod.
+    </span>AutoModerationUserCommunicationDisabled,
     <span class="doccomment">/// Variant value is unknown to the library.
     </span>Unknown(u16),
 }
@@ -711,6 +731,8 @@
             <span class="number">141 </span>=&gt; AuditLogEventType::AutoModerationRuleUpdate,
             <span class="number">142 </span>=&gt; AuditLogEventType::AutoModerationRuleDelete,
             <span class="number">143 </span>=&gt; AuditLogEventType::AutoModerationBlockMessage,
+            <span class="number">144 </span>=&gt; AuditLogEventType::AutoModerationFlagToChannel,
+            <span class="number">145 </span>=&gt; AuditLogEventType::AutoModerationUserCommunicationDisabled,
             unknown =&gt; AuditLogEventType::Unknown(unknown),
         }
     }
@@ -771,6 +793,8 @@
             AuditLogEventType::AutoModerationRuleUpdate =&gt; <span class="number">141</span>,
             AuditLogEventType::AutoModerationRuleDelete =&gt; <span class="number">142</span>,
             AuditLogEventType::AutoModerationBlockMessage =&gt; <span class="number">143</span>,
+            AuditLogEventType::AutoModerationFlagToChannel =&gt; <span class="number">144</span>,
+            AuditLogEventType::AutoModerationUserCommunicationDisabled =&gt; <span class="number">145</span>,
             AuditLogEventType::Unknown(unknown) =&gt; unknown,
         }
     }
@@ -854,6 +878,14 @@
         <span class="macro">assert_eq!</span>(
             <span class="number">143</span>,
             u16::from(AuditLogEventType::AutoModerationBlockMessage)
+        );
+        <span class="macro">assert_eq!</span>(
+            <span class="number">144</span>,
+            u16::from(AuditLogEventType::AutoModerationFlagToChannel)
+        );
+        <span class="macro">assert_eq!</span>(
+            <span class="number">145</span>,
+            u16::from(AuditLogEventType::AutoModerationUserCommunicationDisabled)
         );
         <span class="macro">assert_eq!</span>(<span class="number">250</span>, u16::from(AuditLogEventType::Unknown(<span class="number">250</span>)));
     }

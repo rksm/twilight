@@ -144,6 +144,38 @@
 <span id="144">144</span>
 <span id="145">145</span>
 <span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::id::{
     marker::{ChannelMarker, GenericMarker, MessageMarker},
     Id,
@@ -155,10 +187,39 @@
 /// [`AuditLogEventType`]: super::AuditLogEventType
 </span><span class="attribute">#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 </span><span class="kw">pub struct </span>AuditLogOptionalEntryInfo {
+    <span class="doccomment">/// Name of the Auto Moderation rule that was triggered.
+    ///
+    /// The following events have this option:
+    ///
+    /// - [`AuditLogEventType::AutoModerationBlockMessage`]
+    /// - [`AuditLogEventType::AutoModerationFlagToChannel`]
+    /// - [`AuditLogEventType::AutoModerationUserCommunicationDisabled`]
+    ///
+    /// [`AuditLogEventType::AutoModerationBlockMessage`]: super::AuditLogEventType::AutoModerationBlockMessage
+    /// [`AuditLogEventType::AutoModerationFlagToChannel`]: super::AuditLogEventType::AutoModerationFlagToChannel
+    /// [`AuditLogEventType::AutoModerationUserCommunicationDisabled`]: super::AuditLogEventType::AutoModerationUserCommunicationDisabled
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>auto_moderation_rule_name: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// Trigger type of the Auto Moderation rule that was triggered.
+    ///
+    /// The following events have this option:
+    ///
+    /// - [`AuditLogEventType::AutoModerationBlockMessage`]
+    /// - [`AuditLogEventType::AutoModerationFlagToChannel`]
+    /// - [`AuditLogEventType::AutoModerationUserCommunicationDisabled`]
+    ///
+    /// [`AuditLogEventType::AutoModerationBlockMessage`]: super::AuditLogEventType::AutoModerationBlockMessage
+    /// [`AuditLogEventType::AutoModerationFlagToChannel`]: super::AuditLogEventType::AutoModerationFlagToChannel
+    /// [`AuditLogEventType::AutoModerationUserCommunicationDisabled`]: super::AuditLogEventType::AutoModerationUserCommunicationDisabled
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>auto_moderation_rule_trigger_type: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// Channel in which the entities were targeted.
     ///
     /// The following events have this option:
     ///
+    /// - [`AuditLogEventType::AutoModerationBlockMessage`]
+    /// - [`AuditLogEventType::AutoModerationFlagToChannel`]
+    /// - [`AuditLogEventType::AutoModerationUserCommunicationDisabled`]
     /// - [`AuditLogEventType::MemberMove`]
     /// - [`AuditLogEventType::MessageDelete`]
     /// - [`AuditLogEventType::MessagePin`]
@@ -167,6 +228,9 @@
     /// - [`AuditLogEventType::StageInstanceDelete`]
     /// - [`AuditLogEventType::StageInstanceUpdate`]
     ///
+    /// [`AuditLogEventType::AutoModerationBlockMessage`]: super::AuditLogEventType::AutoModerationBlockMessage
+    /// [`AuditLogEventType::AutoModerationFlagToChannel`]: super::AuditLogEventType::AutoModerationFlagToChannel
+    /// [`AuditLogEventType::AutoModerationUserCommunicationDisabled`]: super::AuditLogEventType::AutoModerationUserCommunicationDisabled
     /// [`AuditLogEventType::MemberMove`]: super::AuditLogEventType::MemberMove
     /// [`AuditLogEventType::MessageDelete`]: super::AuditLogEventType::MessageDelete
     /// [`AuditLogEventType::MessagePin`]: super::AuditLogEventType::MessagePin
