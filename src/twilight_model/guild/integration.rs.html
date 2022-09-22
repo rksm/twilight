@@ -329,6 +329,31 @@
 <span id="329">329</span>
 <span id="330">330</span>
 <span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{IntegrationAccount, IntegrationApplication, IntegrationExpireBehavior};
 <span class="kw">use crate</span>::{
     id::{
@@ -365,6 +390,11 @@
     </span><span class="kw">pub </span>revoked: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>role_id: <span class="prelude-ty">Option</span>&lt;Id&lt;RoleMarker&gt;&gt;,
+    <span class="doccomment">/// An array of [OAuth2 scopes] which the application has been authorized for.
+    ///
+    /// [OAuth2 scopes]: https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>scopes: <span class="prelude-ty">Option</span>&lt;Vec&lt;String&gt;&gt;,
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>subscriber_count: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
@@ -410,6 +440,10 @@
             name: <span class="string">&quot;integration name&quot;</span>.to_owned(),
             revoked: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
             role_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">3</span>)),
+            scopes: <span class="prelude-val">Some</span>(Vec::from([
+                <span class="string">&quot;applications.commands&quot;</span>.to_owned(),
+                <span class="string">&quot;bot&quot;</span>.to_owned(),
+            ])),
             subscriber_count: <span class="prelude-val">Some</span>(<span class="number">1337</span>),
             synced_at: <span class="prelude-val">Some</span>(synced_at),
             syncing: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
@@ -437,7 +471,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;GuildIntegration&quot;</span>,
-                    len: <span class="number">14</span>,
+                    len: <span class="number">15</span>,
                 },
                 Token::Str(<span class="string">&quot;account&quot;</span>),
                 Token::Struct {
@@ -475,6 +509,12 @@
                 Token::Some,
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;3&quot;</span>),
+                Token::Str(<span class="string">&quot;scopes&quot;</span>),
+                Token::Some,
+                Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">2</span>) },
+                Token::Str(<span class="string">&quot;applications.commands&quot;</span>),
+                Token::Str(<span class="string">&quot;bot&quot;</span>),
+                Token::SeqEnd,
                 Token::Str(<span class="string">&quot;subscriber_count&quot;</span>),
                 Token::Some,
                 Token::U64(<span class="number">1337</span>),
@@ -541,6 +581,10 @@
             name: <span class="string">&quot;integration name&quot;</span>.to_owned(),
             revoked: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
             role_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">3</span>)),
+            scopes: <span class="prelude-val">Some</span>(Vec::from([
+                <span class="string">&quot;applications.commands&quot;</span>.to_owned(),
+                <span class="string">&quot;bot&quot;</span>.to_owned(),
+            ])),
             subscriber_count: <span class="prelude-val">Some</span>(<span class="number">1337</span>),
             synced_at: <span class="prelude-val">Some</span>(synced_at),
             syncing: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
@@ -568,7 +612,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;GuildIntegration&quot;</span>,
-                    len: <span class="number">15</span>,
+                    len: <span class="number">16</span>,
                 },
                 Token::Str(<span class="string">&quot;account&quot;</span>),
                 Token::Struct {
@@ -621,6 +665,12 @@
                 Token::Some,
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;3&quot;</span>),
+                Token::Str(<span class="string">&quot;scopes&quot;</span>),
+                Token::Some,
+                Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">2</span>) },
+                Token::Str(<span class="string">&quot;applications.commands&quot;</span>),
+                Token::Str(<span class="string">&quot;bot&quot;</span>),
+                Token::SeqEnd,
                 Token::Str(<span class="string">&quot;subscriber_count&quot;</span>),
                 Token::Some,
                 Token::U64(<span class="number">1337</span>),
