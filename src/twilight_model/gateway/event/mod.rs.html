@@ -494,6 +494,94 @@
 <span id="494">494</span>
 <span id="495">495</span>
 <span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
 </pre><pre class="rust"><code><span class="attribute">#![allow(clippy::wildcard_imports)]
 
 </span><span class="kw">pub mod </span>gateway;
@@ -510,6 +598,7 @@
 
 <span class="kw">use </span><span class="self">self</span>::shard::<span class="kw-2">*</span>;
 <span class="kw">use </span><span class="kw">super</span>::payload::incoming::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::id::{marker::GuildMarker, Id};
 <span class="kw">use </span>std::error::Error;
 <span class="kw">use </span>std::fmt::{Debug, Display, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult};
 
@@ -681,6 +770,93 @@
 }
 
 <span class="kw">impl </span>Event {
+    <span class="doccomment">/// Retrieve the guild ID of an event if it took place in a guild.
+    ///
+    /// While events such as [`MessageDelete`] will never include a guild ID, events
+    /// such as [`BanAdd`] and only some [`Channel`] related events will include
+    /// one. Guild variants will include a guild ID while DM Channels don&#39;t.
+    ///
+    /// [`Channel`]: crate::channel::Channel
+    </span><span class="kw">pub const fn </span>guild_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Id&lt;GuildMarker&gt;&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            Event::AutoModerationActionExecution(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::AutoModerationRuleCreate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::AutoModerationRuleDelete(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::AutoModerationRuleUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::BanAdd(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::BanRemove(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::ChannelCreate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::ChannelDelete(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::ChannelUpdate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::CommandPermissionsUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::GuildCreate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.id),
+            Event::GuildDelete(e) =&gt; <span class="prelude-val">Some</span>(e.id),
+            Event::GuildEmojisUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::GuildIntegrationsUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::GuildScheduledEventCreate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::GuildScheduledEventDelete(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::GuildScheduledEventUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::GuildScheduledEventUserAdd(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::GuildScheduledEventUserRemove(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::GuildStickersUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::GuildUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.id),
+            Event::IntegrationCreate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::IntegrationDelete(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::IntegrationUpdate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::InteractionCreate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::InviteCreate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::InviteDelete(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::MemberAdd(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::MemberChunk(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::MemberRemove(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::MemberUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::MessageCreate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::PresenceUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::ReactionAdd(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::ReactionRemove(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::ReactionRemoveAll(e) =&gt; e.guild_id,
+            Event::ReactionRemoveEmoji(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::RoleCreate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::RoleDelete(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::RoleUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::StageInstanceCreate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::StageInstanceDelete(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::StageInstanceUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::ThreadCreate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::ThreadDelete(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::ThreadListSync(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::ThreadMembersUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::ThreadUpdate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::TypingStart(e) =&gt; e.guild_id,
+            Event::UnavailableGuild(e) =&gt; <span class="prelude-val">Some</span>(e.id),
+            Event::VoiceServerUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::VoiceStateUpdate(e) =&gt; e.<span class="number">0</span>.guild_id,
+            Event::WebhooksUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
+            Event::ChannelPinsUpdate(<span class="kw">_</span>)
+            | Event::GatewayHeartbeat(<span class="kw">_</span>)
+            | Event::GatewayHeartbeatAck
+            | Event::GatewayHello(<span class="kw">_</span>)
+            | Event::GatewayInvalidateSession(<span class="kw">_</span>)
+            | Event::GatewayReconnect
+            | Event::GiftCodeUpdate
+            | Event::MessageDelete(<span class="kw">_</span>)
+            | Event::MessageDeleteBulk(<span class="kw">_</span>)
+            | Event::MessageUpdate(<span class="kw">_</span>)
+            | Event::PresencesReplace
+            | Event::Ready(<span class="kw">_</span>)
+            | Event::Resumed
+            | Event::ShardConnected(<span class="kw">_</span>)
+            | Event::ShardConnecting(<span class="kw">_</span>)
+            | Event::ShardDisconnected(<span class="kw">_</span>)
+            | Event::ShardIdentifying(<span class="kw">_</span>)
+            | Event::ShardPayload(<span class="kw">_</span>)
+            | Event::ShardReconnecting(<span class="kw">_</span>)
+            | Event::ShardResuming(<span class="kw">_</span>)
+            | Event::ThreadMemberUpdate(<span class="kw">_</span>)
+            | Event::UserUpdate(<span class="kw">_</span>) =&gt; <span class="prelude-val">None</span>,
+        }
+    }
+
     <span class="kw">pub const fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; EventType {
         <span class="kw">match </span><span class="self">self </span>{
             <span class="self">Self</span>::AutoModerationActionExecution(<span class="kw">_</span>) =&gt; EventType::AutoModerationActionExecution,
@@ -991,4 +1167,4 @@
     <span class="macro">const_assert!</span>(mem::size_of::&lt;WebhooksUpdate&gt;() &lt;= EVENT_THRESHOLD);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (432abd86f 2022-09-20)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (9062b780b 2022-09-21)" ></div></body></html>

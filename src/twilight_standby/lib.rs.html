@@ -1528,8 +1528,6 @@
 <span id="1528">1528</span>
 <span id="1529">1529</span>
 <span id="1530">1530</span>
-<span id="1531">1531</span>
-<span id="1532">1532</span>
 </pre><pre class="rust"><code><span class="attribute">#![deny(
     clippy::all,
     clippy::missing_const_for_fn,
@@ -1552,8 +1550,6 @@
 #![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
 
 </span><span class="kw">pub mod </span>future;
-
-<span class="kw">mod </span>event;
 
 <span class="kw">use </span><span class="self">self</span>::future::{
     WaitForComponentFuture, WaitForComponentStream, WaitForEventFuture, WaitForEventStream,
@@ -1717,7 +1713,7 @@
             <span class="kw">_ </span>=&gt; {}
         }
 
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(guild_id) = event::guild_id(event) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(guild_id) = event.guild_id() {
             completions.add_with(<span class="kw-2">&amp;</span><span class="self">Self</span>::process_specific_event(<span class="kw-2">&amp;</span><span class="self">self</span>.guilds, guild_id, event));
         }
 
@@ -3063,4 +3059,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_standby" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (432abd86f 2022-09-20)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_standby" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (9062b780b 2022-09-21)" ></div></body></html>
