@@ -291,6 +291,8 @@
 <span id="291">291</span>
 <span id="292">292</span>
 <span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -411,7 +413,8 @@
     ///
     /// [`InviteMaxAge`]: twilight_validate::request::ValidationErrorType::InviteMaxAge
     </span><span class="kw">pub const fn </span>max_age(<span class="kw-2">mut </span><span class="self">self</span>, max_age: u32) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_invite_max_age(max_age) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_invite_max_age(max_age) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 
@@ -454,7 +457,8 @@
     ///
     /// [`InviteMaxUses`]: twilight_validate::request::ValidationErrorType::InviteMaxUses
     </span><span class="kw">pub const fn </span>max_uses(<span class="kw-2">mut </span><span class="self">self</span>, max_uses: u16) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_invite_max_uses(max_uses) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_invite_max_uses(max_uses) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 

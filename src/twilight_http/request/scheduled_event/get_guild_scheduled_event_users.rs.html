@@ -130,6 +130,7 @@
 <span id="130">130</span>
 <span id="131">131</span>
 <span id="132">132</span>
+<span id="133">133</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -221,7 +222,8 @@
     ///
     /// [`ScheduledEventGetUsers`]: twilight_validate::request::ValidationErrorType::ScheduledEventGetUsers
     </span><span class="kw">pub const fn </span>limit(<span class="kw-2">mut </span><span class="self">self</span>, limit: u16) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_scheduled_event_get_users(limit) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_scheduled_event_get_users(limit) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 

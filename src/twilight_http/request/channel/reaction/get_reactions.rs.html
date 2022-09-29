@@ -106,6 +106,7 @@
 <span id="106">106</span>
 <span id="107">107</span>
 <span id="108">108</span>
+<span id="109">109</span>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::RequestReactionType;
 <span class="kw">use crate</span>::{
     client::Client,
@@ -181,7 +182,8 @@
     ///
     /// [`GetReactions`]: twilight_validate::request::ValidationErrorType::GetReactions
     </span><span class="kw">pub const fn </span>limit(<span class="kw-2">mut </span><span class="self">self</span>, limit: u16) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_get_reactions_limit(limit) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_get_reactions_limit(limit) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 

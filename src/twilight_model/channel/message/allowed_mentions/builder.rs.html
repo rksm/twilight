@@ -153,16 +153,6 @@
 <span id="153">153</span>
 <span id="154">154</span>
 <span id="155">155</span>
-<span id="156">156</span>
-<span id="157">157</span>
-<span id="158">158</span>
-<span id="159">159</span>
-<span id="160">160</span>
-<span id="161">161</span>
-<span id="162">162</span>
-<span id="163">163</span>
-<span id="164">164</span>
-<span id="165">165</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     channel::message::allowed_mentions::{AllowedMentions, ParseTypes},
     id::{
@@ -247,21 +237,11 @@
     /// will be built.
     </span><span class="kw">pub fn </span>build(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; AllowedMentions {
         <span class="kw">if </span>!<span class="self">self</span>.<span class="number">0</span>.users.is_empty() {
-            <span class="self">self</span>.<span class="number">0</span>.parse = <span class="self">self
-                </span>.<span class="number">0
-                </span>.parse
-                .into_iter()
-                .filter(|t| <span class="kw-2">*</span>t != ParseTypes::Users)
-                .collect();
+            <span class="self">self</span>.<span class="number">0</span>.parse.retain(|t| <span class="kw-2">*</span>t != ParseTypes::Users);
         }
 
         <span class="kw">if </span>!<span class="self">self</span>.<span class="number">0</span>.roles.is_empty() {
-            <span class="self">self</span>.<span class="number">0</span>.parse = <span class="self">self
-                </span>.<span class="number">0
-                </span>.parse
-                .into_iter()
-                .filter(|t| <span class="kw-2">*</span>t != ParseTypes::Roles)
-                .collect();
+            <span class="self">self</span>.<span class="number">0</span>.parse.retain(|t| <span class="kw-2">*</span>t != ParseTypes::Roles);
         }
 
         <span class="self">self</span>.<span class="number">0

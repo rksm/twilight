@@ -142,6 +142,7 @@
 <span id="142">142</span>
 <span id="143">143</span>
 <span id="144">144</span>
+<span id="145">145</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -254,7 +255,8 @@
     ///
     /// [`GetGuildBans`]: twilight_validate::request::ValidationErrorType::GetGuildBans
     </span><span class="kw">pub const fn </span>limit(<span class="kw-2">mut </span><span class="self">self</span>, limit: u16) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_get_guild_bans_limit(limit) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_get_guild_bans_limit(limit) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 

@@ -283,6 +283,8 @@
 <span id="283">283</span>
 <span id="284">284</span>
 <span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -391,7 +393,8 @@
     ///
     /// [`BitrateInvalid`]: twilight_validate::channel::ChannelValidationErrorType::BitrateInvalid
     </span><span class="kw">pub const fn </span>bitrate(<span class="kw-2">mut </span><span class="self">self</span>, bitrate: u32) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ChannelValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_bitrate(bitrate) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_bitrate(bitrate) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 
@@ -473,7 +476,8 @@
         <span class="kw-2">mut </span><span class="self">self</span>,
         rate_limit_per_user: u16,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ChannelValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_rate_limit_per_user(rate_limit_per_user) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_rate_limit_per_user(rate_limit_per_user) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 

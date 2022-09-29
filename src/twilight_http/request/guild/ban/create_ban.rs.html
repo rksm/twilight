@@ -172,6 +172,7 @@
 <span id="172">172</span>
 <span id="173">173</span>
 <span id="174">174</span>
+<span id="175">175</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -256,7 +257,8 @@
     ///
     /// [`CreateGuildBanDeleteMessageDays`]: twilight_validate::request::ValidationErrorType::CreateGuildBanDeleteMessageDays
     </span><span class="kw">pub const fn </span>delete_message_days(<span class="kw-2">mut </span><span class="self">self</span>, days: u16) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_create_guild_ban_delete_message_days(days) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_create_guild_ban_delete_message_days(days) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 

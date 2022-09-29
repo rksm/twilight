@@ -125,6 +125,7 @@
 <span id="125">125</span>
 <span id="126">126</span>
 <span id="127">127</span>
+<span id="128">128</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -202,7 +203,8 @@
     ///
     /// [`GuildPruneDays`]: twilight_validate::request::ValidationErrorType::GuildPruneDays
     </span><span class="kw">pub const fn </span>days(<span class="kw-2">mut </span><span class="self">self</span>, days: u16) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ValidationError&gt; {
-        <span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_guild_prune_days(days) {
+        <span class="attribute">#[allow(clippy::question_mark)]
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(source) = validate_guild_prune_days(days) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(source);
         }
 
