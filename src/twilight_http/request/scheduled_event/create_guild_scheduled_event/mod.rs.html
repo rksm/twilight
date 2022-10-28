@@ -250,6 +250,10 @@
 <span id="250">250</span>
 <span id="251">251</span>
 <span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
 </pre><pre class="rust"><code><span class="kw">mod </span>external;
 <span class="kw">mod </span>stage_instance;
 <span class="kw">mod </span>voice;
@@ -318,7 +322,7 @@
 ///
 /// ```no_run
 /// # use twilight_http::Client;
-/// use twilight_model::{id::Id, util::Timestamp};
+/// use twilight_model::{id::Id, scheduled_event::PrivacyLevel, util::Timestamp};
 /// # #[tokio::main]
 /// # async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 /// # let client = Client::new(&quot;token&quot;.to_owned());
@@ -327,7 +331,7 @@
 /// let garfield_start_time = Timestamp::parse(&quot;2022-01-01T14:00:00+00:00&quot;)?;
 ///
 /// client
-///     .create_guild_scheduled_event(guild_id)
+///     .create_guild_scheduled_event(guild_id, PrivacyLevel::GuildOnly)
 ///     .stage_instance(
 ///         channel_id,
 ///         &quot;Garfield Appreciation Hour&quot;,
@@ -343,7 +347,7 @@
 ///
 /// ```no_run
 /// # use twilight_http::Client;
-/// use twilight_model::{id::Id, util::Timestamp};
+/// use twilight_model::{id::Id, scheduled_event::PrivacyLevel, util::Timestamp};
 /// # #[tokio::main]
 /// # async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 /// # let client = Client::new(&quot;token&quot;.to_owned());
@@ -352,7 +356,7 @@
 /// let garfield_con_end_time = Timestamp::parse(&quot;2022-01-06T17:00:00+00:00&quot;)?;
 ///
 /// client
-///     .create_guild_scheduled_event(guild_id)
+///     .create_guild_scheduled_event(guild_id, PrivacyLevel::GuildOnly)
 ///     .external(
 ///         &quot;Garfield Con 2022&quot;,
 ///         &quot;Baltimore Convention Center&quot;,
@@ -377,7 +381,11 @@
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; CreateGuildScheduledEvent&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const fn </span>new(http: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Client, guild_id: Id&lt;GuildMarker&gt;) -&gt; <span class="self">Self </span>{
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const fn </span>new(
+        http: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Client,
+        guild_id: Id&lt;GuildMarker&gt;,
+        privacy_level: PrivacyLevel,
+    ) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             guild_id,
             http,
@@ -388,7 +396,7 @@
                 entity_type: <span class="prelude-val">None</span>,
                 image: <span class="prelude-val">None</span>,
                 name: <span class="prelude-val">None</span>,
-                privacy_level: <span class="prelude-val">None</span>,
+                privacy_level: <span class="prelude-val">Some</span>(privacy_level),
                 scheduled_end_time: <span class="prelude-val">None</span>,
                 scheduled_start_time: <span class="prelude-val">None</span>,
             },

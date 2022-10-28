@@ -2642,6 +2642,8 @@
 <span id="2642">2642</span>
 <span id="2643">2643</span>
 <span id="2644">2644</span>
+<span id="2645">2645</span>
+<span id="2646">2646</span>
 </pre><pre class="rust"><code><span class="kw">mod </span>builder;
 <span class="kw">mod </span>connector;
 <span class="kw">mod </span>interaction;
@@ -2753,6 +2755,7 @@
         },
         Id,
     },
+    scheduled_event::PrivacyLevel,
 };
 <span class="kw">use </span>twilight_validate::{
     channel::ChannelValidationError, request::ValidationError, sticker::StickerValidationError,
@@ -4828,7 +4831,7 @@
     ///
     /// ```no_run
     /// # use twilight_http::Client;
-    /// use twilight_model::{id::Id, util::Timestamp};
+    /// use twilight_model::{id::Id, scheduled_event::PrivacyLevel, util::Timestamp};
     /// # #[tokio::main]
     /// # async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     /// # let client = Client::new(&quot;token&quot;.to_owned());
@@ -4837,7 +4840,7 @@
     /// let garfield_start_time = Timestamp::parse(&quot;2022-01-01T14:00:00+00:00&quot;)?;
     ///
     /// client
-    ///     .create_guild_scheduled_event(guild_id)
+    ///     .create_guild_scheduled_event(guild_id, PrivacyLevel::GuildOnly)
     ///     .stage_instance(
     ///         channel_id,
     ///         &quot;Garfield Appreciation Hour&quot;,
@@ -4853,7 +4856,7 @@
     ///
     /// ```no_run
     /// # use twilight_http::Client;
-    /// use twilight_model::{id::Id, util::Timestamp};
+    /// use twilight_model::{id::Id, scheduled_event::PrivacyLevel, util::Timestamp};
     /// # #[tokio::main]
     /// # async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     /// # let client = Client::new(&quot;token&quot;.to_owned());
@@ -4862,7 +4865,7 @@
     /// let garfield_con_end_time = Timestamp::parse(&quot;2022-01-06T17:00:00+00:00&quot;)?;
     ///
     /// client
-    ///     .create_guild_scheduled_event(guild_id)
+    ///     .create_guild_scheduled_event(guild_id, PrivacyLevel::GuildOnly)
     ///     .external(
     ///         &quot;Garfield Con 2022&quot;,
     ///         &quot;Baltimore Convention Center&quot;,
@@ -4882,8 +4885,9 @@
     </span><span class="kw">pub const fn </span>create_guild_scheduled_event(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         guild_id: Id&lt;GuildMarker&gt;,
+        privacy_level: PrivacyLevel,
     ) -&gt; CreateGuildScheduledEvent&lt;<span class="lifetime">&#39;_</span>&gt; {
-        CreateGuildScheduledEvent::new(<span class="self">self</span>, guild_id)
+        CreateGuildScheduledEvent::new(<span class="self">self</span>, guild_id, privacy_level)
     }
 
     <span class="doccomment">/// Get a scheduled event in a guild.
