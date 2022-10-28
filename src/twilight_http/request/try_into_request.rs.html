@@ -355,6 +355,7 @@
 <span id="355">355</span>
 <span id="356">356</span>
 <span id="357">357</span>
+<span id="358">358</span>
 </pre><pre class="rust"><code><span class="kw">mod </span>private {
     <span class="kw">use </span><span class="kw">crate</span>::request::{
         application::{
@@ -389,7 +390,7 @@
                 CreateStageInstance, DeleteStageInstance, GetStageInstance, UpdateStageInstance,
             },
             thread::{
-                AddThreadMember, CreateThread, CreateThreadFromMessage,
+                AddThreadMember, CreateForumThread, CreateThread, CreateThreadFromMessage,
                 GetJoinedPrivateArchivedThreads, GetPrivateArchivedThreads,
                 GetPublicArchivedThreads, GetThreadMember, GetThreadMembers, JoinThread,
                 LeaveThread, RemoveThreadMember, UpdateThread,
@@ -456,6 +457,7 @@
     <span class="kw">impl </span>Sealed <span class="kw">for </span>CreateBan&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>CreateEmoji&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>CreateFollowup&lt;<span class="lifetime">&#39;_</span>&gt; {}
+    <span class="kw">impl </span>Sealed <span class="kw">for </span>CreateForumThread&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>CreateGlobalChatInputCommand&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>CreateGlobalCommand&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>CreateGlobalMessageCommand&lt;<span class="lifetime">&#39;_</span>&gt; {}

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["CreateForumThread","Creates a new thread in a forum channel."],["CreateForumThreadMessage",""],["ForumThread",""]]};

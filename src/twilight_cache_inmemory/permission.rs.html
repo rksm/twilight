@@ -1100,6 +1100,16 @@
 <span id="1100">1100</span>
 <span id="1101">1101</span>
 <span id="1102">1102</span>
+<span id="1103">1103</span>
+<span id="1104">1104</span>
+<span id="1105">1105</span>
+<span id="1106">1106</span>
+<span id="1107">1107</span>
+<span id="1108">1108</span>
+<span id="1109">1109</span>
+<span id="1110">1110</span>
+<span id="1111">1111</span>
+<span id="1112">1112</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Calculate the permissions for members in on a guild- or channel-level with
 //! information from the cache.
 //!
@@ -1868,8 +1878,13 @@
     <span class="kw">fn </span>channel() -&gt; Channel {
         Channel {
             application_id: <span class="prelude-val">None</span>,
+            applied_tags: <span class="prelude-val">None</span>,
+            available_tags: <span class="prelude-val">None</span>,
             bitrate: <span class="prelude-val">None</span>,
             default_auto_archive_duration: <span class="prelude-val">None</span>,
+            default_reaction_emoji: <span class="prelude-val">None</span>,
+            default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
+            flags: <span class="prelude-val">None</span>,
             guild_id: <span class="prelude-val">Some</span>(GUILD_ID),
             icon: <span class="prelude-val">None</span>,
             id: CHANNEL_ID,
@@ -1913,8 +1928,13 @@
     <span class="kw">fn </span>thread() -&gt; Channel {
         Channel {
             application_id: <span class="prelude-val">None</span>,
+            applied_tags: <span class="prelude-val">None</span>,
+            available_tags: <span class="prelude-val">None</span>,
             bitrate: <span class="prelude-val">None</span>,
             default_auto_archive_duration: <span class="prelude-val">None</span>,
+            default_reaction_emoji: <span class="prelude-val">None</span>,
+            default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
+            flags: <span class="prelude-val">None</span>,
             guild_id: <span class="prelude-val">Some</span>(GUILD_ID),
             icon: <span class="prelude-val">None</span>,
             id: THREAD_ID,

@@ -256,6 +256,34 @@
 <span id="256">256</span>
 <span id="257">257</span>
 <span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Constants, error types, and functions for validating channel fields.
 
 </span><span class="kw">use </span>std::{
@@ -266,6 +294,9 @@
 
 <span class="doccomment">/// Minimum bitrate of a voice channel.
 </span><span class="kw">pub const </span>CHANNEL_BITRATE_MIN: u32 = <span class="number">8000</span>;
+
+<span class="doccomment">/// Maximum length of a forum channel&#39;s topic.
+</span><span class="kw">pub const </span>CHANNEL_FORUM_TOPIC_LENGTH_MAX: usize = <span class="number">4096</span>;
 
 <span class="doccomment">/// Maximum length of a channel&#39;s name.
 </span><span class="kw">pub const </span>CHANNEL_NAME_LENGTH_MAX: usize = <span class="number">100</span>;
@@ -319,6 +350,9 @@
                 f.write_str(<span class="string">&quot;bitrate is less than &quot;</span>)<span class="question-mark">?</span>;
                 Display::fmt(<span class="kw-2">&amp;</span>CHANNEL_BITRATE_MIN, f)
             }
+            ChannelValidationErrorType::ForumTopicInvalid =&gt; {
+                f.write_str(<span class="string">&quot;the forum topic is invalid&quot;</span>)
+            }
             ChannelValidationErrorType::NameInvalid =&gt; {
                 f.write_str(<span class="string">&quot;the length of the name is invalid&quot;</span>)
             }
@@ -343,6 +377,8 @@
 </span><span class="kw">pub enum </span>ChannelValidationErrorType {
     <span class="doccomment">/// The bitrate is less than 8000.
     </span>BitrateInvalid,
+    <span class="doccomment">/// The length of the topic is more than 4096 UTF-16 characters.
+    </span>ForumTopicInvalid,
     <span class="doccomment">/// The length of the name is either fewer than 1 UTF-16 characters or
     /// more than 100 UTF-16 characters.
     </span>NameInvalid,
@@ -396,6 +432,26 @@
     } <span class="kw">else </span>{
         <span class="prelude-val">Err</span>(ChannelValidationError {
             kind: ChannelValidationErrorType::TypeInvalid { kind },
+        })
+    }
+}
+
+<span class="doccomment">/// Ensure a forum channel&#39;s topic&#39;s length is correct.
+///
+/// # Errors
+///
+/// Returns an error of type [`TopicInvalid`] if the
+/// topic is invalid.
+///
+/// [`TopicInvalid`]: ChannelValidationErrorType::TopicInvalid
+</span><span class="kw">pub fn </span>forum_topic(value: <span class="kw">impl </span>AsRef&lt;str&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), ChannelValidationError&gt; {
+    <span class="kw">let </span>count = value.as_ref().chars().count();
+
+    <span class="kw">if </span>count &lt;= CHANNEL_FORUM_TOPIC_LENGTH_MAX {
+        <span class="prelude-val">Ok</span>(())
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Err</span>(ChannelValidationError {
+            kind: ChannelValidationErrorType::TopicInvalid,
         })
     }
 }

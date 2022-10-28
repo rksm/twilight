@@ -794,7 +794,7 @@
     ///
     /// [Message Content Intent]: crate::gateway::Intents::MESSAGE_CONTENT
     </span><span class="kw">pub </span>embeds: Vec&lt;Embed&gt;,
-    <span class="doccomment">/// Enabled [`MessageFlags`].
+    <span class="doccomment">/// Flags of the message.
     </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>flags: <span class="prelude-ty">Option</span>&lt;MessageFlags&gt;,
     <span class="doccomment">/// ID of the [`Guild`] the message was sent in.

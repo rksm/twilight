@@ -102,6 +102,9 @@
 <span id="102">102</span>
 <span id="103">103</span>
 <span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -133,11 +136,14 @@
 ///
 /// When called on a [`GuildNews`] channel, this creates a [`GuildNewsThread`].
 ///
+/// This request does not work when called on a [`GuildForum`] channel.
+///
 /// Automatic archive durations are not locked behind the guild&#39;s boost level.
 ///
 /// The thread&#39;s ID will be the same as its parent message. This ensures only
 /// one thread can be created per message.
 ///
+/// [`GuildForum`]: twilight_model::channel::ChannelType::GuildForum
 /// [`GuildNewsThread`]: twilight_model::channel::ChannelType::GuildNewsThread
 /// [`GuildNews`]: twilight_model::channel::ChannelType::GuildNews
 /// [`GuildPublicThread`]: twilight_model::channel::ChannelType::GuildPublicThread

@@ -4594,6 +4594,13 @@
 <span id="4594">4594</span>
 <span id="4595">4595</span>
 <span id="4596">4596</span>
+<span id="4597">4597</span>
+<span id="4598">4598</span>
+<span id="4599">4599</span>
+<span id="4600">4600</span>
+<span id="4601">4601</span>
+<span id="4602">4602</span>
+<span id="4603">4603</span>
 </pre><pre class="rust"><code><span class="kw">use </span>percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 <span class="kw">pub use </span>twilight_http_ratelimiting::request::{Path, PathParseError, PathParseErrorType};
 
@@ -4646,6 +4653,11 @@
     </span>CreateEmoji {
         <span class="doccomment">/// The ID of the guild.
         </span>guild_id: u64,
+    },
+    <span class="doccomment">/// Route information to create a thread in a forum channel.
+    </span>CreateForumThread {
+        <span class="doccomment">/// The ID of the channel.
+        </span>channel_id: u64,
     },
     <span class="doccomment">/// Route information to create a global command.
     </span>CreateGlobalCommand {
@@ -5821,6 +5833,7 @@
             | <span class="self">Self</span>::CreateGlobalCommand { .. }
             | <span class="self">Self</span>::CreateGuildCommand { .. }
             | <span class="self">Self</span>::CreateEmoji { .. }
+            | <span class="self">Self</span>::CreateForumThread { .. }
             | <span class="self">Self</span>::CreateGuild
             | <span class="self">Self</span>::CreateAutoModerationRule { .. }
             | <span class="self">Self</span>::CreateGuildFromTemplate { .. }
@@ -5966,7 +5979,13 @@
             <span class="self">Self</span>::CreateTemplate { guild_id } | <span class="self">Self</span>::GetTemplates { guild_id } =&gt; {
                 Path::GuildsIdTemplates(guild_id)
             }
-            <span class="self">Self</span>::CreateThread { channel_id, .. } =&gt; Path::ChannelsIdThreads(channel_id),
+            <span class="self">Self</span>::CreateForumThread { channel_id }
+            | <span class="self">Self</span>::CreateThread { channel_id, .. }
+            | <span class="self">Self</span>::GetJoinedPrivateArchivedThreads { channel_id, .. }
+            | <span class="self">Self</span>::GetPrivateArchivedThreads { channel_id, .. }
+            | <span class="self">Self</span>::GetPublicArchivedThreads { channel_id, .. } =&gt; {
+                Path::ChannelsIdThreads(channel_id)
+            }
             <span class="self">Self</span>::CreateThreadFromMessage { channel_id, .. } =&gt; {
                 Path::ChannelsIdMessagesIdThreads(channel_id)
             }
@@ -6078,11 +6097,6 @@
             | <span class="self">Self</span>::GetWebhook { webhook_id, .. }
             | <span class="self">Self</span>::UpdateWebhook { webhook_id, .. } =&gt; Path::WebhooksId(webhook_id),
             <span class="self">Self</span>::FollowNewsChannel { channel_id } =&gt; Path::ChannelsIdFollowers(channel_id),
-            <span class="self">Self</span>::GetJoinedPrivateArchivedThreads { channel_id, .. }
-            | <span class="self">Self</span>::GetPrivateArchivedThreads { channel_id, .. }
-            | <span class="self">Self</span>::GetPublicArchivedThreads { channel_id, .. } =&gt; {
-                Path::ChannelsIdThreads(channel_id)
-            }
             <span class="self">Self</span>::GetActiveThreads { guild_id, .. } =&gt; Path::GuildsIdThreads(guild_id),
             <span class="self">Self</span>::GetAuditLogs { guild_id, .. } =&gt; Path::GuildsIdAuditLogs(guild_id),
             <span class="self">Self</span>::GetBan { guild_id, .. } =&gt; Path::GuildsIdBansId(guild_id),
@@ -6479,7 +6493,7 @@
 
                 f.write_str(<span class="string">&quot;/templates&quot;</span>)
             }
-            Route::CreateThread { channel_id } =&gt; {
+            Route::CreateForumThread { channel_id } | Route::CreateThread { channel_id } =&gt; {
                 f.write_str(<span class="string">&quot;channels/&quot;</span>)<span class="question-mark">?</span>;
                 Display::fmt(channel_id, f)<span class="question-mark">?</span>;
 

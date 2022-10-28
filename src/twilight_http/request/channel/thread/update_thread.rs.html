@@ -230,17 +230,34 @@
 <span id="230">230</span>
 <span id="231">231</span>
 <span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
-    request::{<span class="self">self</span>, AuditLogReason, Request, TryIntoRequest},
+    request::{<span class="self">self</span>, AuditLogReason, Nullable, Request, TryIntoRequest},
     response::ResponseFuture,
     routing::Route,
 };
 <span class="kw">use </span>serde::Serialize;
 <span class="kw">use </span>twilight_model::{
     channel::{thread::AutoArchiveDuration, Channel},
-    id::{marker::ChannelMarker, Id},
+    id::{
+        marker::{ChannelMarker, TagMarker},
+        Id,
+    },
 };
 <span class="kw">use </span>twilight_validate::{
     channel::{
@@ -252,6 +269,8 @@
 
 <span class="attribute">#[derive(Serialize)]
 </span><span class="kw">struct </span>UpdateThreadFields&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span>applied_tags: <span class="prelude-ty">Option</span>&lt;Nullable&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Id&lt;TagMarker&gt;]&gt;&gt;,
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>archived: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
@@ -283,6 +302,7 @@
         <span class="self">Self </span>{
             channel_id,
             fields: UpdateThreadFields {
+                applied_tags: <span class="prelude-val">None</span>,
                 archived: <span class="prelude-val">None</span>,
                 auto_archive_duration: <span class="prelude-val">None</span>,
                 invitable: <span class="prelude-val">None</span>,
@@ -294,6 +314,13 @@
             reason: <span class="prelude-val">None</span>,
         }
     }
+
+    <span class="doccomment">/// Set the forum thread&#39;s applied tags.
+    </span><span class="kw">pub const fn </span>applied_tags(<span class="kw-2">mut </span><span class="self">self</span>, applied_tags: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Id&lt;TagMarker&gt;]&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fields.applied_tags = <span class="prelude-val">Some</span>(Nullable(applied_tags));
+
+        <span class="self">self
+    </span>}
 
     <span class="doccomment">/// Set whether the thread is archived.
     ///
@@ -446,6 +473,7 @@
             channel_id: channel_id.get(),
         })
         .json(<span class="kw-2">&amp;</span>UpdateThreadFields {
+            applied_tags: <span class="prelude-val">None</span>,
             archived: <span class="prelude-val">None</span>,
             auto_archive_duration: <span class="prelude-val">None</span>,
             invitable: <span class="prelude-val">None</span>,

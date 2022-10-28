@@ -20,7 +20,11 @@
 <span id="20">20</span>
 <span id="21">21</span>
 <span id="22">22</span>
-</pre><pre class="rust"><code><span class="kw">mod </span>add_thread_member;
+<span id="23">23</span>
+<span id="24">24</span>
+</pre><pre class="rust"><code><span class="kw">pub mod </span>create_forum_thread;
+
+<span class="kw">mod </span>add_thread_member;
 <span class="kw">mod </span>create_thread;
 <span class="kw">mod </span>create_thread_from_message;
 <span class="kw">mod </span>get_joined_private_archived_threads;
@@ -34,8 +38,8 @@
 <span class="kw">mod </span>update_thread;
 
 <span class="kw">pub use </span><span class="self">self</span>::{
-    add_thread_member::AddThreadMember, create_thread::CreateThread,
-    create_thread_from_message::CreateThreadFromMessage,
+    add_thread_member::AddThreadMember, create_forum_thread::CreateForumThread,
+    create_thread::CreateThread, create_thread_from_message::CreateThreadFromMessage,
     get_joined_private_archived_threads::GetJoinedPrivateArchivedThreads,
     get_private_archived_threads::GetPrivateArchivedThreads,
     get_public_archived_threads::GetPublicArchivedThreads, get_thread_member::GetThreadMember,

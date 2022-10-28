@@ -285,6 +285,31 @@
 <span id="285">285</span>
 <span id="286">286</span>
 <span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error <span class="kw">as </span>HttpError,
@@ -295,8 +320,10 @@
 <span class="kw">use </span>serde::Serialize;
 <span class="kw">use </span>twilight_model::{
     channel::{
-        permission_overwrite::PermissionOverwrite, thread::AutoArchiveDuration, Channel,
-        ChannelType, VideoQualityMode,
+        forum::{DefaultReaction, ForumTag},
+        permission_overwrite::PermissionOverwrite,
+        thread::AutoArchiveDuration,
+        Channel, ChannelType, VideoQualityMode,
     },
     id::{
         marker::{ChannelMarker, GuildMarker},
@@ -315,9 +342,13 @@
 <span class="attribute">#[derive(Serialize)]
 </span><span class="kw">struct </span>CreateGuildChannelFields&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span>available_tags: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[ForumTag]&gt;,
+    <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>bitrate: <span class="prelude-ty">Option</span>&lt;u32&gt;,
     <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>default_auto_archive_duration: <span class="prelude-ty">Option</span>&lt;AutoArchiveDuration&gt;,
+    <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span>default_reaction_emoji: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DefaultReaction&gt;,
     <span class="attribute">#[serde(rename = <span class="string">&quot;type&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>kind: <span class="prelude-ty">Option</span>&lt;ChannelType&gt;,
     name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
@@ -363,8 +394,10 @@
 
         <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
             fields: CreateGuildChannelFields {
+                available_tags: <span class="prelude-val">None</span>,
                 bitrate: <span class="prelude-val">None</span>,
                 default_auto_archive_duration: <span class="prelude-val">None</span>,
+                default_reaction_emoji: <span class="prelude-val">None</span>,
                 kind: <span class="prelude-val">None</span>,
                 name,
                 nsfw: <span class="prelude-val">None</span>,
@@ -382,6 +415,13 @@
             reason: <span class="prelude-val">None</span>,
         })
     }
+
+    <span class="doccomment">/// Set the available tags for the forum.
+    </span><span class="kw">pub const fn </span>available_tags(<span class="kw-2">mut </span><span class="self">self</span>, available_tags: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[ForumTag]) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fields.available_tags = <span class="prelude-val">Some</span>(available_tags);
+
+        <span class="self">self
+    </span>}
 
     <span class="doccomment">/// For voice and stage channels, set the bitrate of the channel.
     ///
@@ -413,6 +453,16 @@
         auto_archive_duration: AutoArchiveDuration,
     ) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fields.default_auto_archive_duration = <span class="prelude-val">Some</span>(auto_archive_duration);
+
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Set the default reaction emoji for new forum threads.
+    </span><span class="kw">pub const fn </span>default_reaction_emoji(
+        <span class="kw-2">mut </span><span class="self">self</span>,
+        default_reaction_emoji: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DefaultReaction,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fields.default_reaction_emoji = <span class="prelude-val">Some</span>(default_reaction_emoji);
 
         <span class="self">self
     </span>}

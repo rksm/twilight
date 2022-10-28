@@ -2633,6 +2633,15 @@
 <span id="2633">2633</span>
 <span id="2634">2634</span>
 <span id="2635">2635</span>
+<span id="2636">2636</span>
+<span id="2637">2637</span>
+<span id="2638">2638</span>
+<span id="2639">2639</span>
+<span id="2640">2640</span>
+<span id="2641">2641</span>
+<span id="2642">2642</span>
+<span id="2643">2643</span>
+<span id="2644">2644</span>
 </pre><pre class="rust"><code><span class="kw">mod </span>builder;
 <span class="kw">mod </span>connector;
 <span class="kw">mod </span>interaction;
@@ -2658,7 +2667,7 @@
                 CreateStageInstance, DeleteStageInstance, GetStageInstance, UpdateStageInstance,
             },
             thread::{
-                AddThreadMember, CreateThread, CreateThreadFromMessage,
+                AddThreadMember, CreateForumThread, CreateThread, CreateThreadFromMessage,
                 GetJoinedPrivateArchivedThreads, GetPrivateArchivedThreads,
                 GetPublicArchivedThreads, GetThreadMember, GetThreadMembers, JoinThread,
                 LeaveThread, RemoveThreadMember, UpdateThread,
@@ -4410,6 +4419,15 @@
         user_id: Id&lt;UserMarker&gt;,
     ) -&gt; AddThreadMember&lt;<span class="lifetime">&#39;_</span>&gt; {
         AddThreadMember::new(<span class="self">self</span>, channel_id, user_id)
+    }
+
+    <span class="doccomment">/// Start a thread in a forum channel.
+    </span><span class="kw">pub const fn </span>create_forum_thread&lt;<span class="lifetime">&#39;a</span>&gt;(
+        <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>,
+        channel_id: Id&lt;ChannelMarker&gt;,
+        name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
+    ) -&gt; CreateForumThread&lt;<span class="lifetime">&#39;_</span>&gt; {
+        CreateForumThread::new(<span class="self">self</span>, channel_id, name)
     }
 
     <span class="doccomment">/// Start a thread that is not connected to a message.
