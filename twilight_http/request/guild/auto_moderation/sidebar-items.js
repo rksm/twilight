@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["update_auto_moderation_rule",""]],"struct":[["CreateAutoModerationRule","Create an auto moderation rule within a guild."],["DeleteAutoModerationRule","Delete an auto moderation rule in a guild."],["GetAutoModerationRule","Get an auto moderation rule in a guild."],["GetGuildAutoModerationRules","Get an auto moderation rule in a guild."]]};

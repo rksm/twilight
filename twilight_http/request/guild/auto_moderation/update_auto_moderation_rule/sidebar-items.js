@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["UpdateAutoModerationRule","Update an auto moderation rule in a guild."]]};

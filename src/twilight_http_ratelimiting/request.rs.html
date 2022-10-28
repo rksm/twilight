@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-http-ratelimiting/src/request.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>request.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><a class="sidebar-logo" href="../../twilight_http_ratelimiting/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../twilight_http_ratelimiting/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-http-ratelimiting/src/request.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>request.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../twilight_http_ratelimiting/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -517,6 +517,10 @@
 <span id="517">517</span>
 <span id="518">518</span>
 <span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Request parameters for ratelimiting.
 //!
 //! This module contains the type definitions for parameters
@@ -644,6 +648,8 @@
     </span>ApplicationGuildCommandId(u64),
     <span class="doccomment">/// Operating on a channel.
     </span>ChannelsId(u64),
+    <span class="doccomment">/// Operating on a channel&#39;s followers.
+    </span>ChannelsIdFollowers(u64),
     <span class="doccomment">/// Operating on a channel&#39;s invites.
     </span>ChannelsIdInvites(u64),
     <span class="doccomment">/// Operating on a channel&#39;s messages.
@@ -679,8 +685,6 @@
     </span>ChannelsIdTyping(u64),
     <span class="doccomment">/// Operating on a channel&#39;s webhooks.
     </span>ChannelsIdWebhooks(u64),
-    <span class="doccomment">/// Operating on a channel&#39;s followers.
-    </span>ChannelsIdFollowers(u64),
     <span class="doccomment">/// Operating with the gateway information.
     </span>Gateway,
     <span class="doccomment">/// Operating with the gateway information tailored to the current user.
@@ -689,18 +693,20 @@
     </span>Guilds,
     <span class="doccomment">/// Operating on one of user&#39;s guilds.
     </span>GuildsId(u64),
+    <span class="doccomment">/// Operating on a ban from one of the user&#39;s guilds.
+    </span>GuildsIdAuditLogs(u64),
+    <span class="doccomment">/// Operating on a guild&#39;s auto moderation rules.
+    </span>GuildsIdAutoModerationRules(u64),
+    <span class="doccomment">/// Operating on an auto moderation rule from  one of the user&#39;s guilds.
+    </span>GuildsIdAutoModerationRulesId(u64),
     <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; bans.
     </span>GuildsIdBans(u64),
     <span class="doccomment">/// Operating on a ban from one of the user&#39;s guilds.
     </span>GuildsIdBansId(u64),
-    <span class="doccomment">/// Operating on a ban from one of the user&#39;s guilds.
-    </span>GuildsIdAuditLogs(u64),
     <span class="doccomment">/// Operating on specific member&#39;s ban from one of the user&#39;s guilds.
     </span>GuildsIdBansUserId(u64),
     <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; channels.
     </span>GuildsIdChannels(u64),
-    <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; widget.
-    </span>GuildsIdWidget(u64),
     <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; emojis.
     </span>GuildsIdEmojis(u64),
     <span class="doccomment">/// Operating on an emoji from one of the user&#39;s guilds.
@@ -745,8 +751,6 @@
     </span>GuildsIdStickers(u64),
     <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; templates.
     </span>GuildsIdTemplates(u64),
-    <span class="doccomment">/// Operating on a guild template.
-    </span>GuildsTemplatesCode(String),
     <span class="doccomment">/// Operating on a template from one of the user&#39;s guilds.
     </span>GuildsIdTemplatesCode(u64, String),
     <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; threads.
@@ -755,16 +759,22 @@
     </span>GuildsIdVanityUrl(u64),
     <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; voice states.
     </span>GuildsIdVoiceStates(u64),
-    <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; welcome screen.
-    </span>GuildsIdWelcomeScreen(u64),
     <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; webhooks.
     </span>GuildsIdWebhooks(u64),
-    <span class="doccomment">/// Operating on an invite.
-    </span>InvitesCode,
+    <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; welcome screen.
+    </span>GuildsIdWelcomeScreen(u64),
+    <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; widget.
+    </span>GuildsIdWidget(u64),
+    <span class="doccomment">/// Operating on a guild template.
+    </span>GuildsTemplatesCode(String),
     <span class="doccomment">/// Operating on an interaction&#39;s callback.
     ///
     /// This path is not bound to the application&#39;s global rate limit.
     </span>InteractionCallback(u64),
+    <span class="doccomment">/// Operating on an invite.
+    </span>InvitesCode,
+    <span class="doccomment">/// Operating on the user&#39;s application information.
+    </span>OauthApplicationsMe,
     <span class="doccomment">/// Operating on stage instances.
     </span>StageInstances,
     <span class="doccomment">/// Operating on sticker packs.
@@ -773,12 +783,10 @@
     </span>Stickers,
     <span class="doccomment">/// Operating on a sticker.
     </span>UsersId,
-    <span class="doccomment">/// Operating on the user&#39;s application information.
-    </span>OauthApplicationsMe,
-    <span class="doccomment">/// Operating on the user&#39;s connections.
-    </span>UsersIdConnections,
     <span class="doccomment">/// Operating on the user&#39;s private channels.
     </span>UsersIdChannels,
+    <span class="doccomment">/// Operating on the user&#39;s connections.
+    </span>UsersIdConnections,
     <span class="doccomment">/// Operating on the state of a guild that the user is in.
     </span>UsersIdGuilds,
     <span class="doccomment">/// Operating on the state of a guild that the user is in.
@@ -1037,4 +1045,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_http_ratelimiting" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (4b8f43199 2022-10-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_http_ratelimiting" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (0da281b60 2022-10-27)" ></div></body></html>

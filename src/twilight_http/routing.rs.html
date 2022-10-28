@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-http/src/routing.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>routing.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><a class="sidebar-logo" href="../../twilight_http/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../twilight_http/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-http/src/routing.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>routing.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../twilight_http/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -4466,6 +4466,134 @@
 <span id="4466">4466</span>
 <span id="4467">4467</span>
 <span id="4468">4468</span>
+<span id="4469">4469</span>
+<span id="4470">4470</span>
+<span id="4471">4471</span>
+<span id="4472">4472</span>
+<span id="4473">4473</span>
+<span id="4474">4474</span>
+<span id="4475">4475</span>
+<span id="4476">4476</span>
+<span id="4477">4477</span>
+<span id="4478">4478</span>
+<span id="4479">4479</span>
+<span id="4480">4480</span>
+<span id="4481">4481</span>
+<span id="4482">4482</span>
+<span id="4483">4483</span>
+<span id="4484">4484</span>
+<span id="4485">4485</span>
+<span id="4486">4486</span>
+<span id="4487">4487</span>
+<span id="4488">4488</span>
+<span id="4489">4489</span>
+<span id="4490">4490</span>
+<span id="4491">4491</span>
+<span id="4492">4492</span>
+<span id="4493">4493</span>
+<span id="4494">4494</span>
+<span id="4495">4495</span>
+<span id="4496">4496</span>
+<span id="4497">4497</span>
+<span id="4498">4498</span>
+<span id="4499">4499</span>
+<span id="4500">4500</span>
+<span id="4501">4501</span>
+<span id="4502">4502</span>
+<span id="4503">4503</span>
+<span id="4504">4504</span>
+<span id="4505">4505</span>
+<span id="4506">4506</span>
+<span id="4507">4507</span>
+<span id="4508">4508</span>
+<span id="4509">4509</span>
+<span id="4510">4510</span>
+<span id="4511">4511</span>
+<span id="4512">4512</span>
+<span id="4513">4513</span>
+<span id="4514">4514</span>
+<span id="4515">4515</span>
+<span id="4516">4516</span>
+<span id="4517">4517</span>
+<span id="4518">4518</span>
+<span id="4519">4519</span>
+<span id="4520">4520</span>
+<span id="4521">4521</span>
+<span id="4522">4522</span>
+<span id="4523">4523</span>
+<span id="4524">4524</span>
+<span id="4525">4525</span>
+<span id="4526">4526</span>
+<span id="4527">4527</span>
+<span id="4528">4528</span>
+<span id="4529">4529</span>
+<span id="4530">4530</span>
+<span id="4531">4531</span>
+<span id="4532">4532</span>
+<span id="4533">4533</span>
+<span id="4534">4534</span>
+<span id="4535">4535</span>
+<span id="4536">4536</span>
+<span id="4537">4537</span>
+<span id="4538">4538</span>
+<span id="4539">4539</span>
+<span id="4540">4540</span>
+<span id="4541">4541</span>
+<span id="4542">4542</span>
+<span id="4543">4543</span>
+<span id="4544">4544</span>
+<span id="4545">4545</span>
+<span id="4546">4546</span>
+<span id="4547">4547</span>
+<span id="4548">4548</span>
+<span id="4549">4549</span>
+<span id="4550">4550</span>
+<span id="4551">4551</span>
+<span id="4552">4552</span>
+<span id="4553">4553</span>
+<span id="4554">4554</span>
+<span id="4555">4555</span>
+<span id="4556">4556</span>
+<span id="4557">4557</span>
+<span id="4558">4558</span>
+<span id="4559">4559</span>
+<span id="4560">4560</span>
+<span id="4561">4561</span>
+<span id="4562">4562</span>
+<span id="4563">4563</span>
+<span id="4564">4564</span>
+<span id="4565">4565</span>
+<span id="4566">4566</span>
+<span id="4567">4567</span>
+<span id="4568">4568</span>
+<span id="4569">4569</span>
+<span id="4570">4570</span>
+<span id="4571">4571</span>
+<span id="4572">4572</span>
+<span id="4573">4573</span>
+<span id="4574">4574</span>
+<span id="4575">4575</span>
+<span id="4576">4576</span>
+<span id="4577">4577</span>
+<span id="4578">4578</span>
+<span id="4579">4579</span>
+<span id="4580">4580</span>
+<span id="4581">4581</span>
+<span id="4582">4582</span>
+<span id="4583">4583</span>
+<span id="4584">4584</span>
+<span id="4585">4585</span>
+<span id="4586">4586</span>
+<span id="4587">4587</span>
+<span id="4588">4588</span>
+<span id="4589">4589</span>
+<span id="4590">4590</span>
+<span id="4591">4591</span>
+<span id="4592">4592</span>
+<span id="4593">4593</span>
+<span id="4594">4594</span>
+<span id="4595">4595</span>
+<span id="4596">4596</span>
 </pre><pre class="rust"><code><span class="kw">use </span>percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 <span class="kw">pub use </span>twilight_http_ratelimiting::request::{Path, PathParseError, PathParseErrorType};
 
@@ -4493,6 +4621,11 @@
         </span>channel_id: u64,
         <span class="doccomment">/// ID of the member.
         </span>user_id: u64,
+    },
+    <span class="doccomment">/// Route information to create an auto moderation rule.
+    </span>CreateAutoModerationRule {
+        <span class="doccomment">/// ID of the guild.
+        </span>guild_id: u64,
     },
     <span class="doccomment">/// Route information to create a ban on a user in a guild.
     </span>CreateBan {
@@ -4575,18 +4708,6 @@
     },
     <span class="doccomment">/// Route information to create a private channel.
     </span>CreatePrivateChannel,
-    <span class="doccomment">/// Route information to create a thread in a channel.
-    </span>CreateThread {
-        <span class="doccomment">/// ID of the channel.
-        </span>channel_id: u64,
-    },
-    <span class="doccomment">/// Route information to create a thread from a message.
-    </span>CreateThreadFromMessage {
-        <span class="doccomment">/// ID of the channel.
-        </span>channel_id: u64,
-        <span class="doccomment">/// ID of the message.
-        </span>message_id: u64,
-    },
     <span class="doccomment">/// Route information to create a reaction on a message.
     </span>CreateReaction {
         <span class="doccomment">/// The ID of the channel.
@@ -4608,6 +4729,18 @@
         <span class="doccomment">/// The ID of the guild.
         </span>guild_id: u64,
     },
+    <span class="doccomment">/// Route information to create a thread in a channel.
+    </span>CreateThread {
+        <span class="doccomment">/// ID of the channel.
+        </span>channel_id: u64,
+    },
+    <span class="doccomment">/// Route information to create a thread from a message.
+    </span>CreateThreadFromMessage {
+        <span class="doccomment">/// ID of the channel.
+        </span>channel_id: u64,
+        <span class="doccomment">/// ID of the message.
+        </span>message_id: u64,
+    },
     <span class="doccomment">/// Route information to create a typing trigger in a channel.
     </span>CreateTypingTrigger {
         <span class="doccomment">/// The ID of the channel.
@@ -4624,6 +4757,13 @@
         </span>channel_id: u64,
         <span class="doccomment">/// The ID of the message.
         </span>message_id: u64,
+    },
+    <span class="doccomment">/// Route information to delete an auto moderation rule for a guild.
+    </span>DeleteAutoModerationRule {
+        <span class="doccomment">/// ID of the guild.
+        </span>guild_id: u64,
+        <span class="doccomment">/// ID of the auto moderation rule.
+        </span>auto_moderation_rule_id: u64,
     },
     <span class="doccomment">/// Route information to delete a ban on a user in a guild.
     </span>DeleteBan {
@@ -4686,11 +4826,6 @@
         <span class="doccomment">/// ID of the sticker.
         </span>sticker_id: u64,
     },
-    <span class="doccomment">/// Route information to delete an invite.
-    </span>DeleteInvite {
-        <span class="doccomment">/// The unique invite code.
-        </span>code: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
-    },
     <span class="doccomment">/// Route information to delete the original interaction response.
     </span>DeleteInteractionOriginal {
         <span class="doccomment">/// The ID of the owner application
@@ -4698,17 +4833,17 @@
         <span class="doccomment">/// The token of the interaction.
         </span>interaction_token: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
     },
+    <span class="doccomment">/// Route information to delete an invite.
+    </span>DeleteInvite {
+        <span class="doccomment">/// The unique invite code.
+        </span>code: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
+    },
     <span class="doccomment">/// Route information to delete a channel&#39;s message.
     </span>DeleteMessage {
         <span class="doccomment">/// The ID of the channel.
         </span>channel_id: u64,
         <span class="doccomment">/// The ID of the message.
         </span>message_id: u64,
-    },
-    <span class="doccomment">/// Route information to bulk delete messages in a channel.
-    </span>DeleteMessages {
-        <span class="doccomment">/// The ID of the channel.
-        </span>channel_id: u64,
     },
     <span class="doccomment">/// Route information to delete all of the reactions on a message.
     </span>DeleteMessageReactions {
@@ -4727,6 +4862,11 @@
         <span class="doccomment">/// The ID of the message.
         </span>message_id: u64,
     },
+    <span class="doccomment">/// Route information to bulk delete messages in a channel.
+    </span>DeleteMessages {
+        <span class="doccomment">/// The ID of the channel.
+        </span>channel_id: u64,
+    },
     <span class="doccomment">/// Route information to delete a permission overwrite for a role or user in
     /// a channel.
     </span>DeletePermissionOverwrite {
@@ -4734,15 +4874,6 @@
         </span>channel_id: u64,
         <span class="doccomment">/// The ID of the target role or user.
         </span>target_id: u64,
-    },
-    <span class="doccomment">/// Route information to delete the current user&#39;s reaction on a message.
-    </span>DeleteReactionCurrentUser {
-        <span class="doccomment">/// ID of the channel.
-        </span>channel_id: u64,
-        <span class="doccomment">/// URI encoded custom or unicode emoji.
-        </span>emoji: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RequestReactionType&lt;<span class="lifetime">&#39;a</span>&gt;,
-        <span class="doccomment">/// ID of the message.
-        </span>message_id: u64,
     },
     <span class="doccomment">/// Route information to delete a user&#39;s reaction on a message.
     </span>DeleteReaction {
@@ -4754,6 +4885,15 @@
         </span>message_id: u64,
         <span class="doccomment">/// The ID of the user.
         </span>user_id: u64,
+    },
+    <span class="doccomment">/// Route information to delete the current user&#39;s reaction on a message.
+    </span>DeleteReactionCurrentUser {
+        <span class="doccomment">/// ID of the channel.
+        </span>channel_id: u64,
+        <span class="doccomment">/// URI encoded custom or unicode emoji.
+        </span>emoji: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RequestReactionType&lt;<span class="lifetime">&#39;a</span>&gt;,
+        <span class="doccomment">/// ID of the message.
+        </span>message_id: u64,
     },
     <span class="doccomment">/// Route information to delete a guild&#39;s role.
     </span>DeleteRole {
@@ -4774,6 +4914,13 @@
         <span class="doccomment">/// The target template code.
         </span>template_code: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
     },
+    <span class="doccomment">/// Route information to delete a webhook.
+    </span>DeleteWebhook {
+        <span class="doccomment">/// The token of the webhook.
+        </span>token: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str&gt;,
+        <span class="doccomment">/// The ID of the webhook.
+        </span>webhook_id: u64,
+    },
     <span class="doccomment">/// Route information to delete a message created by a webhook.
     </span>DeleteWebhookMessage {
         message_id: u64,
@@ -4781,13 +4928,6 @@
         </span>thread_id: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         token: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
         webhook_id: u64,
-    },
-    <span class="doccomment">/// Route information to delete a webhook.
-    </span>DeleteWebhook {
-        <span class="doccomment">/// The token of the webhook.
-        </span>token: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str&gt;,
-        <span class="doccomment">/// The ID of the webhook.
-        </span>webhook_id: u64,
     },
     <span class="doccomment">/// Route information to execute a webhook by ID and token.
     </span>ExecuteWebhook {
@@ -4822,6 +4962,13 @@
         </span>limit: <span class="prelude-ty">Option</span>&lt;u16&gt;,
         <span class="doccomment">/// The ID of the user, if specified.
         </span>user_id: <span class="prelude-ty">Option</span>&lt;u64&gt;,
+    },
+    <span class="doccomment">/// Route information to get an auto moderation rule for a guild.
+    </span>GetAutoModerationRule {
+        <span class="doccomment">/// ID of the guild.
+        </span>guild_id: u64,
+        <span class="doccomment">/// ID of the auto moderation rule.
+        </span>auto_moderation_rule_id: u64,
     },
     <span class="doccomment">/// Route information to get information about a single ban in a guild.
     </span>GetBan {
@@ -4875,10 +5022,10 @@
         <span class="doccomment">/// The ID of the guild.
         </span>guild_id: u64,
     },
-    <span class="doccomment">/// Route information to get info about application the current bot user belongs to
-    </span>GetCurrentUserApplicationInfo,
     <span class="doccomment">/// Route information to get the current user.
     </span>GetCurrentUser,
+    <span class="doccomment">/// Route information to get info about application the current bot user belongs to
+    </span>GetCurrentUserApplicationInfo,
     <span class="doccomment">/// Route information to get the current user as a member object within a guild.
     </span>GetCurrentUserGuildMember {
         <span class="doccomment">/// ID of the guild.
@@ -4933,6 +5080,11 @@
         /// guild.
         </span>with_counts: bool,
     },
+    <span class="doccomment">/// Route information to get a list of automation rules for a guild.
+    </span>GetGuildAutoModerationRules {
+        <span class="doccomment">/// ID of the guild.
+        </span>guild_id: u64,
+    },
     <span class="doccomment">/// Route information to get a guild command.
     </span>GetGuildCommand {
         <span class="doccomment">/// ID of the owner application.
@@ -4957,11 +5109,6 @@
         </span>guild_id: u64,
         <span class="doccomment">/// Whether to include full localization dictionaries.
         </span>with_localizations: <span class="prelude-ty">Option</span>&lt;bool&gt;,
-    },
-    <span class="doccomment">/// Route information to get a guild&#39;s widget.
-    </span>GetGuildWidget {
-        <span class="doccomment">/// The ID of the guild.
-        </span>guild_id: u64,
     },
     <span class="doccomment">/// Route information to get a guild&#39;s integrations.
     </span>GetGuildIntegrations {
@@ -5017,13 +5164,6 @@
         <span class="doccomment">/// Whether to include user counts.
         </span>with_user_count: bool,
     },
-    <span class="doccomment">/// Route information to get a guild&#39;s scheduled events.
-    </span>GetGuildScheduledEvents {
-        <span class="doccomment">/// ID of the guild.
-        </span>guild_id: u64,
-        <span class="doccomment">/// Whether to include user counts.
-        </span>with_user_count: bool,
-    },
     <span class="doccomment">/// Route information to get a guild scheduled event&#39;s members.
     </span>GetGuildScheduledEventUsers {
         <span class="doccomment">/// Get members after this ID.
@@ -5038,6 +5178,13 @@
         </span>scheduled_event_id: u64,
         <span class="doccomment">/// Whether to return a member object.
         </span>with_member: bool,
+    },
+    <span class="doccomment">/// Route information to get a guild&#39;s scheduled events.
+    </span>GetGuildScheduledEvents {
+        <span class="doccomment">/// ID of the guild.
+        </span>guild_id: u64,
+        <span class="doccomment">/// Whether to include user counts.
+        </span>with_user_count: bool,
     },
     <span class="doccomment">/// Route information to get a guild&#39;s sticker.
     </span>GetGuildSticker {
@@ -5061,13 +5208,18 @@
         <span class="doccomment">/// The ID of the guild.
         </span>guild_id: u64,
     },
+    <span class="doccomment">/// Route information to get a guild&#39;s webhooks.
+    </span>GetGuildWebhooks {
+        <span class="doccomment">/// The ID of the guild.
+        </span>guild_id: u64,
+    },
     <span class="doccomment">/// Route information to get a guild&#39;s welcome screen.
     </span>GetGuildWelcomeScreen {
         <span class="doccomment">/// ID of the guild.
         </span>guild_id: u64,
     },
-    <span class="doccomment">/// Route information to get a guild&#39;s webhooks.
-    </span>GetGuildWebhooks {
+    <span class="doccomment">/// Route information to get a guild&#39;s widget.
+    </span>GetGuildWidget {
         <span class="doccomment">/// The ID of the guild.
         </span>guild_id: u64,
     },
@@ -5103,6 +5255,15 @@
         <span class="doccomment">/// Whether to retrieve the expiration date of the invite.
         </span>with_expiration: bool,
     },
+    <span class="doccomment">/// Route information to get joined private archived threads in a channel.
+    </span>GetJoinedPrivateArchivedThreads {
+        <span class="doccomment">/// Optional timestamp to return threads before.
+        </span>before: <span class="prelude-ty">Option</span>&lt;u64&gt;,
+        <span class="doccomment">/// ID of the channel.
+        </span>channel_id: u64,
+        <span class="doccomment">/// Optional maximum number of threads to return.
+        </span>limit: <span class="prelude-ty">Option</span>&lt;u64&gt;,
+    },
     <span class="doccomment">/// Route information to get a member.
     </span>GetMember {
         <span class="doccomment">/// The ID of the guild.
@@ -5137,15 +5298,6 @@
     </span>GetPins {
         <span class="doccomment">/// The ID of the channel.
         </span>channel_id: u64,
-    },
-    <span class="doccomment">/// Route information to get joined private archived threads in a channel.
-    </span>GetJoinedPrivateArchivedThreads {
-        <span class="doccomment">/// Optional timestamp to return threads before.
-        </span>before: <span class="prelude-ty">Option</span>&lt;u64&gt;,
-        <span class="doccomment">/// ID of the channel.
-        </span>channel_id: u64,
-        <span class="doccomment">/// Optional maximum number of threads to return.
-        </span>limit: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Route information to get private archived threads in a channel.
     </span>GetPrivateArchivedThreads {
@@ -5335,6 +5487,13 @@
         <span class="doccomment">/// The ID of the message.
         </span>message_id: u64,
     },
+    <span class="doccomment">/// Route information to update an auto moderation rule for a guild.
+    </span>UpdateAutoModerationRule {
+        <span class="doccomment">/// ID of the auto moderation rule.
+        </span>auto_moderation_rule_id: u64,
+        <span class="doccomment">/// ID of the guild.
+        </span>guild_id: u64,
+    },
     <span class="doccomment">/// Route information to update a channel, such as a guild channel or group.
     </span>UpdateChannel {
         <span class="doccomment">/// The ID of the channel.
@@ -5394,11 +5553,6 @@
         <span class="doccomment">/// The ID of the guild.
         </span>guild_id: u64,
     },
-    <span class="doccomment">/// Route information to update a guild&#39;s widget.
-    </span>UpdateGuildWidget {
-        <span class="doccomment">/// The ID of the guild.
-        </span>guild_id: u64,
-    },
     <span class="doccomment">/// Route information to update a guild&#39;s integration.
     </span>UpdateGuildIntegration {
         <span class="doccomment">/// The ID of the guild.
@@ -5428,6 +5582,11 @@
     <span class="doccomment">/// Route information to update a guild&#39;s welcome screen.
     </span>UpdateGuildWelcomeScreen {
         <span class="doccomment">/// ID of the guild.
+        </span>guild_id: u64,
+    },
+    <span class="doccomment">/// Route information to update a guild&#39;s widget.
+    </span>UpdateGuildWidget {
+        <span class="doccomment">/// The ID of the guild.
         </span>guild_id: u64,
     },
     <span class="doccomment">/// Update the original interaction response.
@@ -5495,6 +5654,13 @@
         <span class="doccomment">/// ID of the user.
         </span>user_id: u64,
     },
+    <span class="doccomment">/// Route information to update a webhook.
+    </span>UpdateWebhook {
+        <span class="doccomment">/// The token of the webhook.
+        </span>token: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str&gt;,
+        <span class="doccomment">/// The ID of the webhook.
+        </span>webhook_id: u64,
+    },
     <span class="doccomment">/// Route information to update a message created by a webhook.
     </span>UpdateWebhookMessage {
         message_id: u64,
@@ -5502,13 +5668,6 @@
         </span>thread_id: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         token: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
         webhook_id: u64,
-    },
-    <span class="doccomment">/// Route information to update a webhook.
-    </span>UpdateWebhook {
-        <span class="doccomment">/// The token of the webhook.
-        </span>token: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str&gt;,
-        <span class="doccomment">/// The ID of the webhook.
-        </span>webhook_id: u64,
     },
 }
 
@@ -5534,7 +5693,8 @@
     </span><span class="attribute">#[allow(clippy::too_many_lines)]
     </span><span class="kw">pub const fn </span>method(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Method {
         <span class="kw">match </span><span class="self">self </span>{
-            <span class="self">Self</span>::DeleteBan { .. }
+            <span class="self">Self</span>::DeleteAutoModerationRule { .. }
+            | <span class="self">Self</span>::DeleteBan { .. }
             | <span class="self">Self</span>::DeleteChannel { .. }
             | <span class="self">Self</span>::DeleteEmoji { .. }
             | <span class="self">Self</span>::DeleteGlobalCommand { .. }
@@ -5564,6 +5724,7 @@
             | <span class="self">Self</span>::UnpinMessage { .. } =&gt; Method::Delete,
             <span class="self">Self</span>::GetActiveThreads { .. }
             | <span class="self">Self</span>::GetAuditLogs { .. }
+            | <span class="self">Self</span>::GetAutoModerationRule { .. }
             | <span class="self">Self</span>::GetBan { .. }
             | <span class="self">Self</span>::GetBans { .. }
             | <span class="self">Self</span>::GetBansWithParameters { .. }
@@ -5583,6 +5744,7 @@
             | <span class="self">Self</span>::GetGlobalCommand { .. }
             | <span class="self">Self</span>::GetGlobalCommands { .. }
             | <span class="self">Self</span>::GetGuild { .. }
+            | <span class="self">Self</span>::GetGuildAutoModerationRules { .. }
             | <span class="self">Self</span>::GetGuildCommand { .. }
             | <span class="self">Self</span>::GetGuildCommandPermissions { .. }
             | <span class="self">Self</span>::GetGuildCommands { .. }
@@ -5628,7 +5790,8 @@
             | <span class="self">Self</span>::GetWebhook { .. }
             | <span class="self">Self</span>::GetWebhookMessage { .. }
             | <span class="self">Self</span>::SearchGuildMembers { .. } =&gt; Method::Get,
-            <span class="self">Self</span>::UpdateChannel { .. }
+            <span class="self">Self</span>::UpdateAutoModerationRule { .. }
+            | <span class="self">Self</span>::UpdateChannel { .. }
             | <span class="self">Self</span>::UpdateCurrentMember { .. }
             | <span class="self">Self</span>::UpdateCurrentUser
             | <span class="self">Self</span>::UpdateCurrentUserVoiceState { .. }
@@ -5659,6 +5822,7 @@
             | <span class="self">Self</span>::CreateGuildCommand { .. }
             | <span class="self">Self</span>::CreateEmoji { .. }
             | <span class="self">Self</span>::CreateGuild
+            | <span class="self">Self</span>::CreateAutoModerationRule { .. }
             | <span class="self">Self</span>::CreateGuildFromTemplate { .. }
             | <span class="self">Self</span>::CreateGuildIntegration { .. }
             | <span class="self">Self</span>::CreateGuildPrune { .. }
@@ -5741,6 +5905,10 @@
             | <span class="self">Self</span>::RemoveThreadMember { channel_id, .. } =&gt; {
                 Path::ChannelsIdThreadMembers(channel_id)
             }
+            <span class="self">Self</span>::CreateAutoModerationRule { guild_id, .. }
+            | <span class="self">Self</span>::GetGuildAutoModerationRules { guild_id, .. } =&gt; {
+                Path::GuildsIdAutoModerationRules(guild_id)
+            }
             <span class="self">Self</span>::CreateBan { guild_id, .. } | <span class="self">Self</span>::DeleteBan { guild_id, .. } =&gt; {
                 Path::GuildsIdBansUserId(guild_id)
             }
@@ -5808,6 +5976,11 @@
             }
             <span class="self">Self</span>::CrosspostMessage { channel_id, .. } =&gt; {
                 Path::ChannelsIdMessagesIdCrosspost(channel_id)
+            }
+            <span class="self">Self</span>::DeleteAutoModerationRule { guild_id, .. }
+            | <span class="self">Self</span>::GetAutoModerationRule { guild_id, .. }
+            | <span class="self">Self</span>::UpdateAutoModerationRule { guild_id, .. } =&gt; {
+                Path::GuildsIdAutoModerationRulesId(guild_id)
             }
             <span class="self">Self</span>::DeleteChannel { channel_id } =&gt; Path::ChannelsId(channel_id),
             <span class="self">Self</span>::DeleteEmoji { guild_id, .. } =&gt; Path::GuildsIdEmojisId(guild_id),
@@ -6079,6 +6252,13 @@
 
                 Display::fmt(user_id, f)
             }
+            Route::CreateAutoModerationRule { guild_id, .. }
+            | Route::GetGuildAutoModerationRules { guild_id, .. } =&gt; {
+                f.write_str(<span class="string">&quot;guilds/&quot;</span>)<span class="question-mark">?</span>;
+                Display::fmt(guild_id, f)<span class="question-mark">?</span>;
+
+                f.write_str(<span class="string">&quot;/auto-moderation/rules&quot;</span>)
+            }
             Route::CreateBan {
                 guild_id,
                 delete_message_days,
@@ -6117,6 +6297,27 @@
                 Display::fmt(application_id, f)<span class="question-mark">?</span>;
 
                 f.write_str(<span class="string">&quot;/commands&quot;</span>)
+            }
+            Route::DeleteAutoModerationRule {
+                auto_moderation_rule_id,
+                guild_id,
+                ..
+            }
+            | Route::GetAutoModerationRule {
+                auto_moderation_rule_id,
+                guild_id,
+                ..
+            }
+            | Route::UpdateAutoModerationRule {
+                auto_moderation_rule_id,
+                guild_id,
+                ..
+            } =&gt; {
+                f.write_str(<span class="string">&quot;guilds/&quot;</span>)<span class="question-mark">?</span>;
+                Display::fmt(guild_id, f)<span class="question-mark">?</span>;
+                f.write_str(<span class="string">&quot;/auto-moderation/rules/&quot;</span>)<span class="question-mark">?</span>;
+
+                Display::fmt(auto_moderation_rule_id, f)
             }
             Route::GetGlobalCommands {
                 application_id,
@@ -7302,6 +7503,7 @@
     <span class="kw">const </span>TEMPLATE_CODE: <span class="kw-2">&amp;</span>str = <span class="string">&quot;templatecode&quot;</span>;
     <span class="kw">const </span>USER_ID: u64 = <span class="number">11</span>;
     <span class="kw">const </span>SCHEDULED_EVENT_ID: u64 = <span class="number">12</span>;
+    <span class="kw">const </span>AUTO_MODERATION_RULE_ID: u64 = <span class="number">13</span>;
 
     <span class="kw">const fn </span>emoji() -&gt; RequestReactionType&lt;<span class="lifetime">&#39;static</span>&gt; {
         RequestReactionType::Custom {
@@ -8933,6 +9135,60 @@
         <span class="kw">let </span>route = Route::UpdateGuildMfa { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/mfa&quot;</span>));
     }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>create_auto_moderation_rule() {
+        <span class="kw">let </span>route = Route::CreateAutoModerationRule { guild_id: GUILD_ID };
+        <span class="macro">assert_eq!</span>(
+            route.to_string(),
+            <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/auto-moderation/rules&quot;</span>)
+        );
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>delete_auto_moderation_rule() {
+        <span class="kw">let </span>route = Route::DeleteAutoModerationRule {
+            guild_id: GUILD_ID,
+            auto_moderation_rule_id: AUTO_MODERATION_RULE_ID,
+        };
+        <span class="macro">assert_eq!</span>(
+            route.to_string(),
+            <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/auto-moderation/rules/{AUTO_MODERATION_RULE_ID}&quot;</span>)
+        );
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>get_auto_moderation_rule() {
+        <span class="kw">let </span>route = Route::GetAutoModerationRule {
+            guild_id: GUILD_ID,
+            auto_moderation_rule_id: AUTO_MODERATION_RULE_ID,
+        };
+        <span class="macro">assert_eq!</span>(
+            route.to_string(),
+            <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/auto-moderation/rules/{AUTO_MODERATION_RULE_ID}&quot;</span>)
+        );
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>get_guild_auto_moderation_rules() {
+        <span class="kw">let </span>route = Route::GetGuildAutoModerationRules { guild_id: GUILD_ID };
+        <span class="macro">assert_eq!</span>(
+            route.to_string(),
+            <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/auto-moderation/rules&quot;</span>)
+        );
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>update_auto_moderation_rule() {
+        <span class="kw">let </span>route = Route::UpdateAutoModerationRule {
+            guild_id: GUILD_ID,
+            auto_moderation_rule_id: AUTO_MODERATION_RULE_ID,
+        };
+        <span class="macro">assert_eq!</span>(
+            route.to_string(),
+            <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/auto-moderation/rules/{AUTO_MODERATION_RULE_ID}&quot;</span>)
+        );
+    }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_http" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (4b8f43199 2022-10-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_http" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (0da281b60 2022-10-27)" ></div></body></html>
