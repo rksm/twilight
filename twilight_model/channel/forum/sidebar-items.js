@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["ForumReaction",""]],"struct":[["DefaultReaction",""],["ForumTag",""]]};
+window.SIDEBAR_ITEMS = {"struct":[["DefaultReaction","Emoji to use as the default way to react to a forum post."],["ForumTag","Tag that is able to be applied to a thread in a `GuildForum` `Channel`."]]};
