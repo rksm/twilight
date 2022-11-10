@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-validate/src/request.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>request.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../twilight_validate/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-validate/src/request.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>request.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-71d02aebf3a9cedb.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-c11f492748536797.css"><link rel="stylesheet" disabled href="../../static.files/dark-a78f946771c40031.css"><link rel="stylesheet" disabled href="../../static.files/ayu-70b683d68cb31790.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-74087aa2e88f4475.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-0dede64717b247ca.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-201a7e04dc4c6fce.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../twilight_validate/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1485,7 +1485,7 @@
 </span><span class="kw">const </span>WEBHOOK_INVALID_STRINGS: [<span class="kw-2">&amp;</span>str; <span class="number">1</span>] = [<span class="string">&quot;clyde&quot;</span>];
 
 <span class="doccomment">/// A field is not valid.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>ValidationError {
     <span class="doccomment">/// Type of error that occurred.
     </span>kind: ValidationErrorType,
@@ -1493,27 +1493,27 @@
 
 <span class="kw">impl </span>ValidationError {
     <span class="doccomment">/// Immutable reference to the type of error that occurred.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
     </span><span class="kw">pub const fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ValidationErrorType {
         <span class="kw-2">&amp;</span><span class="self">self</span>.kind
     }
 
     <span class="doccomment">/// Consume the error, returning the source error if there is any.
-    </span><span class="attribute">#[allow(clippy::unused_self)]
+    </span><span class="attr">#[allow(clippy::unused_self)]
     #[must_use = <span class="string">&quot;consuming the error and retrieving the source has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_source(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt; {
         <span class="prelude-val">None
     </span>}
 
     <span class="doccomment">/// Consume the error, returning the owned error type and the source error.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_parts(<span class="self">self</span>) -&gt; (ValidationErrorType, <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt;) {
         (<span class="self">self</span>.kind, <span class="prelude-val">None</span>)
     }
 }
 
 <span class="kw">impl </span>Display <span class="kw">for </span>ValidationError {
-    <span class="attribute">#[allow(clippy::too_many_lines)]
+    <span class="attr">#[allow(clippy::too_many_lines)]
     </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; FmtResult {
         <span class="kw">match </span><span class="kw-2">&amp;</span><span class="self">self</span>.kind {
             ValidationErrorType::AuditReason { len } =&gt; {
@@ -1727,7 +1727,7 @@
 <span class="kw">impl </span>Error <span class="kw">for </span>ValidationError {}
 
 <span class="doccomment">/// Type of [`ValidationError`] that occurred.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub enum </span>ValidationErrorType {
     <span class="doccomment">/// Provided audit reason was too large.
     </span>AuditReason {
@@ -1930,7 +1930,7 @@
 /// The time must not be farther than 28 days in the future.
 ///
 /// # Errors
-</span><span class="attribute">#[allow(clippy::cast_possible_wrap)] </span><span class="comment">// casting of unix timestamp should never wrap
+</span><span class="attr">#[allow(clippy::cast_possible_wrap)] </span><span class="comment">// casting of unix timestamp should never wrap
 </span><span class="kw">pub fn </span>communication_disabled_until(timestamp: Timestamp) -&gt; <span class="prelude-ty">Result</span>&lt;(), ValidationError&gt; {
     <span class="kw">let </span>now = SystemTime::now()
         .duration_since(UNIX_EPOCH)
@@ -2424,11 +2424,11 @@
     }
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>username_variants() {
         <span class="kw">let </span>expected = <span class="macro">format!</span>(
             <span class="string">&quot;provided username length is 200, but it must be at least {USERNAME_LIMIT_MIN} and at \
@@ -2464,7 +2464,7 @@
         <span class="macro">assert_eq!</span>(expected, actual.to_string());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>audit_reason_length() {
         <span class="macro">assert!</span>(audit_reason(<span class="string">&quot;&quot;</span>).is_ok());
         <span class="macro">assert!</span>(audit_reason(<span class="string">&quot;a&quot;</span>).is_ok());
@@ -2474,7 +2474,7 @@
         <span class="macro">assert!</span>(audit_reason(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">513</span>)).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>auto_moderation_metadata_mention_total() {
         <span class="macro">assert!</span>(auto_moderation_metadata_mention_total_limit(<span class="number">0</span>).is_ok());
         <span class="macro">assert!</span>(auto_moderation_metadata_mention_total_limit(<span class="number">1</span>).is_ok());
@@ -2483,7 +2483,7 @@
         <span class="macro">assert!</span>(auto_moderation_metadata_mention_total_limit(<span class="number">51</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_ban_delete_message_days_length() {
         <span class="macro">assert!</span>(create_guild_ban_delete_message_days(<span class="number">0</span>).is_ok());
         <span class="macro">assert!</span>(create_guild_ban_delete_message_days(<span class="number">1</span>).is_ok());
@@ -2492,9 +2492,9 @@
         <span class="macro">assert!</span>(create_guild_ban_delete_message_days(<span class="number">8</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>communication_disabled_until_max() {
-        <span class="attribute">#[allow(clippy::cast_possible_wrap)]
+        <span class="attr">#[allow(clippy::cast_possible_wrap)]
         </span><span class="kw">let </span>now = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
@@ -2509,7 +2509,7 @@
         <span class="macro">assert!</span>(communication_disabled_until(err_timestamp).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_channel_messages_limit_count() {
         <span class="macro">assert!</span>(get_channel_messages_limit(<span class="number">1</span>).is_ok());
         <span class="macro">assert!</span>(get_channel_messages_limit(<span class="number">100</span>).is_ok());
@@ -2518,7 +2518,7 @@
         <span class="macro">assert!</span>(get_channel_messages_limit(<span class="number">101</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_current_user_guilds_limit_count() {
         <span class="macro">assert!</span>(get_current_user_guilds_limit(<span class="number">1</span>).is_ok());
         <span class="macro">assert!</span>(get_current_user_guilds_limit(<span class="number">200</span>).is_ok());
@@ -2527,7 +2527,7 @@
         <span class="macro">assert!</span>(get_current_user_guilds_limit(<span class="number">201</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_log_limit_count() {
         <span class="macro">assert!</span>(get_guild_audit_log_limit(<span class="number">1</span>).is_ok());
         <span class="macro">assert!</span>(get_guild_audit_log_limit(<span class="number">100</span>).is_ok());
@@ -2536,7 +2536,7 @@
         <span class="macro">assert!</span>(get_guild_audit_log_limit(<span class="number">101</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_bans_limit_count() {
         <span class="macro">assert!</span>(get_guild_bans_limit(<span class="number">0</span>).is_ok());
         <span class="macro">assert!</span>(get_guild_bans_limit(<span class="number">1000</span>).is_ok());
@@ -2544,7 +2544,7 @@
         <span class="macro">assert!</span>(get_guild_bans_limit(<span class="number">1001</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_members_limit_count() {
         <span class="macro">assert!</span>(get_guild_members_limit(<span class="number">1</span>).is_ok());
         <span class="macro">assert!</span>(get_guild_members_limit(<span class="number">1000</span>).is_ok());
@@ -2553,7 +2553,7 @@
         <span class="macro">assert!</span>(get_guild_members_limit(<span class="number">1001</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_reactions_limit_count() {
         <span class="macro">assert!</span>(get_reactions_limit(<span class="number">1</span>).is_ok());
         <span class="macro">assert!</span>(get_reactions_limit(<span class="number">100</span>).is_ok());
@@ -2562,7 +2562,7 @@
         <span class="macro">assert!</span>(get_reactions_limit(<span class="number">101</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>guild_name_length() {
         <span class="macro">assert!</span>(guild_name(<span class="string">&quot;aa&quot;</span>).is_ok());
         <span class="macro">assert!</span>(guild_name(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">100</span>)).is_ok());
@@ -2572,7 +2572,7 @@
         <span class="macro">assert!</span>(guild_name(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">101</span>)).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>guild_prune_days_length() {
         <span class="macro">assert!</span>(guild_prune_days(<span class="number">1</span>).is_ok());
         <span class="macro">assert!</span>(guild_prune_days(<span class="number">30</span>).is_ok());
@@ -2582,7 +2582,7 @@
         <span class="macro">assert!</span>(guild_prune_days(<span class="number">100</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>invite_max_age_length() {
         <span class="macro">assert!</span>(invite_max_age(<span class="number">0</span>).is_ok());
         <span class="macro">assert!</span>(invite_max_age(<span class="number">86_400</span>).is_ok());
@@ -2591,7 +2591,7 @@
         <span class="macro">assert!</span>(invite_max_age(<span class="number">604_801</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>invite_max_uses_count() {
         <span class="macro">assert!</span>(invite_max_uses(<span class="number">0</span>).is_ok());
         <span class="macro">assert!</span>(invite_max_uses(<span class="number">100</span>).is_ok());
@@ -2599,7 +2599,7 @@
         <span class="macro">assert!</span>(invite_max_uses(<span class="number">101</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>nickname_length() {
         <span class="macro">assert!</span>(nickname(<span class="string">&quot;a&quot;</span>).is_ok());
         <span class="macro">assert!</span>(nickname(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">32</span>)).is_ok());
@@ -2608,7 +2608,7 @@
         <span class="macro">assert!</span>(nickname(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">33</span>)).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>scheduled_event_description_length() {
         <span class="macro">assert!</span>(scheduled_event_description(<span class="string">&quot;a&quot;</span>).is_ok());
         <span class="macro">assert!</span>(scheduled_event_description(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">1000</span>)).is_ok());
@@ -2617,7 +2617,7 @@
         <span class="macro">assert!</span>(scheduled_event_description(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">1001</span>)).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>scheduled_event_name_length() {
         <span class="macro">assert!</span>(scheduled_event_name(<span class="string">&quot;a&quot;</span>).is_ok());
         <span class="macro">assert!</span>(scheduled_event_name(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">100</span>)).is_ok());
@@ -2626,7 +2626,7 @@
         <span class="macro">assert!</span>(scheduled_event_name(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">101</span>)).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>search_guild_members_limit_count() {
         <span class="macro">assert!</span>(search_guild_members_limit(<span class="number">1</span>).is_ok());
         <span class="macro">assert!</span>(search_guild_members_limit(<span class="number">1000</span>).is_ok());
@@ -2635,7 +2635,7 @@
         <span class="macro">assert!</span>(search_guild_members_limit(<span class="number">1001</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>stage_topic_length() {
         <span class="macro">assert!</span>(stage_topic(<span class="string">&quot;a&quot;</span>).is_ok());
         <span class="macro">assert!</span>(stage_topic(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">120</span>)).is_ok());
@@ -2644,7 +2644,7 @@
         <span class="macro">assert!</span>(stage_topic(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">121</span>)).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>template_description_length() {
         <span class="macro">assert!</span>(template_description(<span class="string">&quot;&quot;</span>).is_ok());
         <span class="macro">assert!</span>(template_description(<span class="string">&quot;a&quot;</span>).is_ok());
@@ -2653,7 +2653,7 @@
         <span class="macro">assert!</span>(template_description(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">121</span>)).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>template_name_length() {
         <span class="macro">assert!</span>(template_name(<span class="string">&quot;a&quot;</span>).is_ok());
         <span class="macro">assert!</span>(template_name(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">100</span>)).is_ok());
@@ -2662,7 +2662,7 @@
         <span class="macro">assert!</span>(template_name(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">101</span>)).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>username_length() {
         <span class="macro">assert!</span>(username(<span class="string">&quot;aa&quot;</span>).is_ok());
         <span class="macro">assert!</span>(username(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">32</span>)).is_ok());
@@ -2679,7 +2679,7 @@
         <span class="macro">assert!</span>(username(<span class="string">&quot;here&quot;</span>).is_err());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>webhook_username_length() {
         <span class="macro">assert!</span>(webhook_username(<span class="string">&quot;aa&quot;</span>).is_ok());
         <span class="macro">assert!</span>(webhook_username(<span class="string">&quot;a&quot;</span>.repeat(<span class="number">80</span>)).is_ok());
@@ -2691,4 +2691,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_validate" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (95a3a7277 2022-10-31)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="twilight_validate" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (e75aab045 2022-11-09)" data-search-js="search-39ee4160c7dc16c9.js" data-settings-js="settings-3a0b9947ba1bd99a.js" data-settings-css="settings-a66f7524084a489a.css" ></div></body></html>

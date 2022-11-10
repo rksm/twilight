@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-http/src/routing.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>routing.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../twilight_http/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-http/src/routing.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>routing.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-71d02aebf3a9cedb.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-c11f492748536797.css"><link rel="stylesheet" disabled href="../../static.files/dark-a78f946771c40031.css"><link rel="stylesheet" disabled href="../../static.files/ayu-70b683d68cb31790.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-74087aa2e88f4475.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-0dede64717b247ca.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-201a7e04dc4c6fce.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../twilight_http/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -4608,7 +4608,7 @@
 <span class="kw">use </span>std::fmt::{Display, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult};
 <span class="kw">use </span>twilight_model::id::{marker::RoleMarker, Id};
 
-<span class="attribute">#[derive(Clone, Debug, Eq, Hash, PartialEq)]
+<span class="attr">#[derive(Clone, Debug, Eq, Hash, PartialEq)]
 #[non_exhaustive]
 </span><span class="kw">pub enum </span>Route&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="doccomment">/// Route information to add a user to a guild.
@@ -5702,7 +5702,7 @@
     /// ```
     ///
     /// [`GetGuild`]: Self::GetGuild
-    </span><span class="attribute">#[allow(clippy::too_many_lines)]
+    </span><span class="attr">#[allow(clippy::too_many_lines)]
     </span><span class="kw">pub const fn </span>method(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Method {
         <span class="kw">match </span><span class="self">self </span>{
             <span class="self">Self</span>::DeleteAutoModerationRule { .. }
@@ -5900,7 +5900,7 @@
     /// ```
     ///
     /// [`Ratelimiter`]: twilight_http_ratelimiting::Ratelimiter
-    </span><span class="attribute">#[allow(clippy::too_many_lines)]
+    </span><span class="attr">#[allow(clippy::too_many_lines)]
     </span><span class="kw">pub fn </span>to_path(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Path {
         <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
             <span class="self">Self</span>::AddGuildMember { guild_id, .. }
@@ -6217,7 +6217,7 @@
     // See:
     // &lt;https://github.com/rust-lang/rust/issues/76490&gt;
     // &lt;https://github.com/rust-lang/rust/issues/10761&gt;
-    </span><span class="attribute">#[allow(clippy::too_many_lines)]
+    </span><span class="attr">#[allow(clippy::too_many_lines)]
     </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; FmtResult {
         <span class="kw">match </span><span class="self">self </span>{
             Route::AddGuildMember { guild_id, user_id }
@@ -7457,14 +7457,14 @@
     }
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span><span class="kw">super</span>::Route;
     <span class="kw">use </span><span class="kw">crate</span>::request::{channel::reaction::RequestReactionType, Method};
     <span class="kw">use </span>twilight_model::id::Id;
 
     <span class="doccomment">/// Test a route for each method.
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>methods() {
         <span class="macro">assert_eq!</span>(
             Method::Delete,
@@ -7526,7 +7526,7 @@
         }
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_public_archived_threads() {
         <span class="kw">let </span>route = Route::GetPublicArchivedThreads {
             channel_id: <span class="number">1</span>,
@@ -7540,7 +7540,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_webhook_message_thread_id() {
         <span class="kw">let </span>route = Route::UpdateWebhookMessage {
             message_id: <span class="number">1</span>,
@@ -7552,7 +7552,7 @@
         <span class="macro">assert_eq!</span>(<span class="string">&quot;webhooks/3/token/messages/1?thread_id=2&quot;</span>, route.to_string());
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>add_guild_member() {
         <span class="kw">let </span>route = Route::AddGuildMember {
             guild_id: GUILD_ID,
@@ -7564,7 +7564,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_member() {
         <span class="kw">let </span>route = Route::GetMember {
             guild_id: GUILD_ID,
@@ -7576,7 +7576,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>remove_member() {
         <span class="kw">let </span>route = Route::RemoveMember {
             guild_id: GUILD_ID,
@@ -7588,7 +7588,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_member() {
         <span class="kw">let </span>route = Route::UpdateMember {
             guild_id: GUILD_ID,
@@ -7600,7 +7600,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>add_member_role() {
         <span class="kw">let </span>route = Route::AddMemberRole {
             guild_id: GUILD_ID,
@@ -7613,7 +7613,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>remove_member_role() {
         <span class="kw">let </span>route = Route::RemoveMemberRole {
             guild_id: GUILD_ID,
@@ -7626,7 +7626,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>add_thread_member() {
         <span class="kw">let </span>route = Route::AddThreadMember {
             channel_id: CHANNEL_ID,
@@ -7638,7 +7638,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_thread_member() {
         <span class="kw">let </span>route = Route::GetThreadMember {
             channel_id: CHANNEL_ID,
@@ -7650,7 +7650,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>remove_thread_member() {
         <span class="kw">let </span>route = Route::RemoveThreadMember {
             channel_id: CHANNEL_ID,
@@ -7662,37 +7662,37 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_channel() {
         <span class="kw">let </span>route = Route::CreateChannel { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/channels&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_channels() {
         <span class="kw">let </span>route = Route::GetChannels { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/channels&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild_channels() {
         <span class="kw">let </span>route = Route::UpdateGuildChannels { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/channels&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_emoji() {
         <span class="kw">let </span>route = Route::CreateEmoji { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/emojis&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_emojis() {
         <span class="kw">let </span>route = Route::GetEmojis { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/emojis&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_global_command() {
         <span class="kw">let </span>route = Route::CreateGlobalCommand {
             application_id: APPLICATION_ID,
@@ -7703,7 +7703,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_global_commands() {
         <span class="kw">let </span>route = Route::GetGlobalCommands {
             application_id: APPLICATION_ID,
@@ -7727,7 +7727,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>set_global_commands() {
         <span class="kw">let </span>route = Route::SetGlobalCommands {
             application_id: APPLICATION_ID,
@@ -7738,13 +7738,13 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild() {
         <span class="kw">let </span>route = Route::CreateGuild;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;guilds&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_command() {
         <span class="kw">let </span>route = Route::CreateGuildCommand {
             application_id: APPLICATION_ID,
@@ -7756,7 +7756,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_commands() {
         <span class="kw">let </span>route = Route::GetGuildCommands {
             application_id: APPLICATION_ID,
@@ -7783,7 +7783,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>set_guild_commands() {
         <span class="kw">let </span>route = Route::SetGuildCommands {
             application_id: APPLICATION_ID,
@@ -7795,7 +7795,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_from_template() {
         <span class="kw">let </span>route = Route::CreateGuildFromTemplate {
             template_code: TEMPLATE_CODE,
@@ -7806,7 +7806,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_template() {
         <span class="kw">let </span>route = Route::GetTemplate {
             template_code: TEMPLATE_CODE,
@@ -7817,31 +7817,31 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_integration() {
         <span class="kw">let </span>route = Route::CreateGuildIntegration { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/integrations&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_integrations() {
         <span class="kw">let </span>route = Route::GetGuildIntegrations { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/integrations&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_sticker() {
         <span class="kw">let </span>route = Route::CreateGuildSticker { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/stickers&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_stickers() {
         <span class="kw">let </span>route = Route::GetGuildStickers { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/stickers&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_invite() {
         <span class="kw">let </span>route = Route::CreateInvite {
             channel_id: CHANNEL_ID,
@@ -7849,7 +7849,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}/invites&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_channel_invites() {
         <span class="kw">let </span>route = Route::GetChannelInvites {
             channel_id: CHANNEL_ID,
@@ -7857,7 +7857,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}/invites&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_message() {
         <span class="kw">let </span>route = Route::CreateMessage {
             channel_id: CHANNEL_ID,
@@ -7865,19 +7865,19 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}/messages&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_private_channel() {
         <span class="kw">let </span>route = Route::CreatePrivateChannel;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;users/@me/channels&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_user_private_channels() {
         <span class="kw">let </span>route = Route::GetUserPrivateChannels;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;users/@me/channels&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_reaction() {
         <span class="kw">let </span>emoji = emoji();
 
@@ -7892,7 +7892,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_reaction_current_user() {
         <span class="kw">let </span>emoji = emoji();
 
@@ -7907,43 +7907,43 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_role() {
         <span class="kw">let </span>route = Route::CreateRole { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/roles&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_roles() {
         <span class="kw">let </span>route = Route::GetGuildRoles { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/roles&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_role_positions() {
         <span class="kw">let </span>route = Route::UpdateRolePositions { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/roles&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_stage_instance() {
         <span class="kw">let </span>route = Route::CreateStageInstance;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;stage-instances&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_template() {
         <span class="kw">let </span>route = Route::CreateTemplate { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/templates&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_templates() {
         <span class="kw">let </span>route = Route::GetTemplates { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/templates&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_thread() {
         <span class="kw">let </span>route = Route::CreateThread {
             channel_id: CHANNEL_ID,
@@ -7951,7 +7951,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}/threads&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_thread_from_message() {
         <span class="kw">let </span>route = Route::CreateThreadFromMessage {
             channel_id: CHANNEL_ID,
@@ -7963,7 +7963,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_typing_trigger() {
         <span class="kw">let </span>route = Route::CreateTypingTrigger {
             channel_id: CHANNEL_ID,
@@ -7971,7 +7971,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}/typing&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_webhook() {
         <span class="kw">let </span>route = Route::CreateWebhook {
             channel_id: CHANNEL_ID,
@@ -7979,7 +7979,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}/webhooks&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_channel_webhooks() {
         <span class="kw">let </span>route = Route::GetChannelWebhooks {
             channel_id: CHANNEL_ID,
@@ -7987,7 +7987,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}/webhooks&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>crosspost_message() {
         <span class="kw">let </span>route = Route::CrosspostMessage {
             channel_id: CHANNEL_ID,
@@ -7999,7 +7999,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_ban() {
         <span class="kw">let </span>route = Route::DeleteBan {
             guild_id: GUILD_ID,
@@ -8011,7 +8011,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_ban() {
         <span class="kw">let </span>route = Route::GetBan {
             guild_id: GUILD_ID,
@@ -8023,7 +8023,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_channel() {
         <span class="kw">let </span>route = Route::DeleteChannel {
             channel_id: CHANNEL_ID,
@@ -8031,7 +8031,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_channel() {
         <span class="kw">let </span>route = Route::GetChannel {
             channel_id: CHANNEL_ID,
@@ -8039,7 +8039,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_channel() {
         <span class="kw">let </span>route = Route::UpdateChannel {
             channel_id: CHANNEL_ID,
@@ -8047,7 +8047,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_emoji() {
         <span class="kw">let </span>route = Route::DeleteEmoji {
             emoji_id: EMOJI_ID,
@@ -8059,7 +8059,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_emoji() {
         <span class="kw">let </span>route = Route::GetEmoji {
             emoji_id: EMOJI_ID,
@@ -8071,7 +8071,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_emoji() {
         <span class="kw">let </span>route = Route::UpdateEmoji {
             emoji_id: EMOJI_ID,
@@ -8083,7 +8083,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_global_command() {
         <span class="kw">let </span>route = Route::DeleteGlobalCommand {
             application_id: APPLICATION_ID,
@@ -8095,7 +8095,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_global_command() {
         <span class="kw">let </span>route = Route::GetGlobalCommand {
             application_id: APPLICATION_ID,
@@ -8107,7 +8107,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_global_command() {
         <span class="kw">let </span>route = Route::UpdateGlobalCommand {
             application_id: APPLICATION_ID,
@@ -8119,19 +8119,19 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_guild() {
         <span class="kw">let </span>route = Route::DeleteGuild { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild() {
         <span class="kw">let </span>route = Route::UpdateGuild { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_guild_command() {
         <span class="kw">let </span>route = Route::DeleteGuildCommand {
             application_id: APPLICATION_ID,
@@ -8144,7 +8144,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_command() {
         <span class="kw">let </span>route = Route::GetGuildCommand {
             application_id: APPLICATION_ID,
@@ -8157,7 +8157,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild_command() {
         <span class="kw">let </span>route = Route::UpdateGuildCommand {
             application_id: APPLICATION_ID,
@@ -8170,7 +8170,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_guild_integration() {
         <span class="kw">let </span>route = Route::DeleteGuildIntegration {
             guild_id: GUILD_ID,
@@ -8182,7 +8182,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild_integration() {
         <span class="kw">let </span>route = Route::UpdateGuildIntegration {
             guild_id: GUILD_ID,
@@ -8194,7 +8194,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_interaction_original() {
         <span class="kw">let </span>route = Route::DeleteInteractionOriginal {
             application_id: APPLICATION_ID,
@@ -8206,7 +8206,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_interaction_original() {
         <span class="kw">let </span>route = Route::GetInteractionOriginal {
             application_id: APPLICATION_ID,
@@ -8218,7 +8218,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_interaction_original() {
         <span class="kw">let </span>route = Route::UpdateInteractionOriginal {
             application_id: APPLICATION_ID,
@@ -8230,13 +8230,13 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_invite() {
         <span class="kw">let </span>route = Route::DeleteInvite { code: CODE };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;invites/{CODE}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_message_reactions() {
         <span class="kw">let </span>route = Route::DeleteMessageReactions {
             channel_id: CHANNEL_ID,
@@ -8248,7 +8248,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_message_specific_reaction() {
         <span class="kw">let </span>emoji = emoji();
 
@@ -8263,7 +8263,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_message() {
         <span class="kw">let </span>route = Route::DeleteMessage {
             channel_id: CHANNEL_ID,
@@ -8275,7 +8275,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_message() {
         <span class="kw">let </span>route = Route::GetMessage {
             channel_id: CHANNEL_ID,
@@ -8287,7 +8287,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_message() {
         <span class="kw">let </span>route = Route::UpdateMessage {
             channel_id: CHANNEL_ID,
@@ -8299,7 +8299,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_messages() {
         <span class="kw">let </span>route = Route::DeleteMessages {
             channel_id: CHANNEL_ID,
@@ -8310,7 +8310,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_permission_overwrite() {
         <span class="kw">let </span>route = Route::DeletePermissionOverwrite {
             channel_id: CHANNEL_ID,
@@ -8322,7 +8322,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_permission_overwrite() {
         <span class="kw">let </span>route = Route::UpdatePermissionOverwrite {
             channel_id: CHANNEL_ID,
@@ -8334,7 +8334,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_reaction() {
         <span class="kw">let </span>emoji = emoji();
 
@@ -8350,7 +8350,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_role() {
         <span class="kw">let </span>route = Route::DeleteRole {
             guild_id: GUILD_ID,
@@ -8362,7 +8362,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_role() {
         <span class="kw">let </span>route = Route::UpdateRole {
             guild_id: GUILD_ID,
@@ -8374,7 +8374,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_stage_instance() {
         <span class="kw">let </span>route = Route::DeleteStageInstance {
             channel_id: CHANNEL_ID,
@@ -8382,7 +8382,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;stage-instances/{CHANNEL_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_stage_instance() {
         <span class="kw">let </span>route = Route::GetStageInstance {
             channel_id: CHANNEL_ID,
@@ -8390,7 +8390,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;stage-instances/{CHANNEL_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_stage_instance() {
         <span class="kw">let </span>route = Route::UpdateStageInstance {
             channel_id: CHANNEL_ID,
@@ -8398,7 +8398,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;stage-instances/{CHANNEL_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_template() {
         <span class="kw">let </span>route = Route::DeleteTemplate {
             guild_id: GUILD_ID,
@@ -8410,7 +8410,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>sync_template() {
         <span class="kw">let </span>route = Route::SyncTemplate {
             guild_id: GUILD_ID,
@@ -8422,7 +8422,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_template() {
         <span class="kw">let </span>route = Route::UpdateTemplate {
             guild_id: GUILD_ID,
@@ -8434,7 +8434,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>follow_news_channel() {
         <span class="kw">let </span>route = Route::FollowNewsChannel {
             channel_id: CHANNEL_ID,
@@ -8445,7 +8445,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_active_threads() {
         <span class="kw">let </span>route = Route::GetActiveThreads { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(
@@ -8454,13 +8454,13 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_bans() {
         <span class="kw">let </span>route = Route::GetBans { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/bans&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_bans_with_parameters() {
         <span class="kw">let </span>route = Route::GetBansWithParameters {
             after: <span class="prelude-val">None</span>,
@@ -8519,13 +8519,13 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_gateway_bot() {
         <span class="kw">let </span>route = Route::GetGatewayBot;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;gateway/bot&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_command_permissions() {
         <span class="kw">let </span>route = Route::GetCommandPermissions {
             application_id: APPLICATION_ID,
@@ -8540,7 +8540,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_command_permissions() {
         <span class="kw">let </span>route = Route::UpdateCommandPermissions {
             application_id: APPLICATION_ID,
@@ -8555,19 +8555,19 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_current_user_application_info() {
         <span class="kw">let </span>route = Route::GetCurrentUserApplicationInfo;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;oauth2/applications/@me&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_current_user() {
         <span class="kw">let </span>route = Route::GetCurrentUser;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;users/@me&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_current_user_guild_member() {
         <span class="kw">let </span>route = Route::GetCurrentUserGuildMember { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(
@@ -8576,19 +8576,19 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_current_user() {
         <span class="kw">let </span>route = Route::UpdateCurrentUser;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;users/@me&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_gateway() {
         <span class="kw">let </span>route = Route::GetGateway;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;gateway&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_command_permissions() {
         <span class="kw">let </span>route = Route::GetGuildCommandPermissions {
             application_id: APPLICATION_ID,
@@ -8600,19 +8600,19 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_invites() {
         <span class="kw">let </span>route = Route::GetGuildInvites { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/invites&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_preview() {
         <span class="kw">let </span>route = Route::GetGuildPreview { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/preview&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_sticker() {
         <span class="kw">let </span>route = Route::GetGuildSticker {
             guild_id: GUILD_ID,
@@ -8624,7 +8624,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_guild_sticker() {
         <span class="kw">let </span>route = Route::DeleteGuildSticker {
             guild_id: GUILD_ID,
@@ -8636,7 +8636,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild_sticker() {
         <span class="kw">let </span>route = Route::UpdateGuildSticker {
             guild_id: GUILD_ID,
@@ -8648,19 +8648,19 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_vanity_url() {
         <span class="kw">let </span>route = Route::GetGuildVanityUrl { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/vanity-url&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_voice_regions() {
         <span class="kw">let </span>route = Route::GetGuildVoiceRegions { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/regions&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_welcome_screen() {
         <span class="kw">let </span>route = Route::GetGuildWelcomeScreen { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(
@@ -8669,7 +8669,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild_welcome_screen() {
         <span class="kw">let </span>route = Route::UpdateGuildWelcomeScreen { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(
@@ -8678,32 +8678,32 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_webhooks() {
         <span class="kw">let </span>route = Route::GetGuildWebhooks { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/webhooks&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_widget() {
         <span class="kw">let </span>route = Route::GetGuildWidget { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/widget&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild_widget() {
         <span class="kw">let </span>route = Route::UpdateGuildWidget { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/widget&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_nitro_sticker_packs() {
         <span class="kw">let </span>route = Route::GetNitroStickerPacks;
 
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;sticker-packs&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_pins() {
         <span class="kw">let </span>route = Route::GetPins {
             channel_id: CHANNEL_ID,
@@ -8711,7 +8711,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;channels/{CHANNEL_ID}/pins&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_sticker() {
         <span class="kw">let </span>route = Route::GetSticker {
             sticker_id: STICKER_ID,
@@ -8719,7 +8719,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;stickers/{STICKER_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_thread_members() {
         <span class="kw">let </span>route = Route::GetThreadMembers {
             channel_id: CHANNEL_ID,
@@ -8730,25 +8730,25 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_user_connections() {
         <span class="kw">let </span>route = Route::GetUserConnections;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;users/@me/connections&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_user() {
         <span class="kw">let </span>route = Route::GetUser { user_id: USER_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;users/{USER_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_voice_regions() {
         <span class="kw">let </span>route = Route::GetVoiceRegions;
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;voice/regions&quot;</span>);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>interaction_callback() {
         <span class="kw">let </span>route = Route::InteractionCallback {
             interaction_id: INTERACTION_ID,
@@ -8760,7 +8760,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>join_thread() {
         <span class="kw">let </span>route = Route::JoinThread {
             channel_id: CHANNEL_ID,
@@ -8771,7 +8771,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>leave_thread() {
         <span class="kw">let </span>route = Route::LeaveThread {
             channel_id: CHANNEL_ID,
@@ -8782,13 +8782,13 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>leave_guild() {
         <span class="kw">let </span>route = Route::LeaveGuild { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;users/@me/guilds/{GUILD_ID}&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>pin_message() {
         <span class="kw">let </span>route = Route::PinMessage {
             channel_id: CHANNEL_ID,
@@ -8800,7 +8800,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>unpin_message() {
         <span class="kw">let </span>route = Route::UnpinMessage {
             channel_id: CHANNEL_ID,
@@ -8812,7 +8812,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>sync_guild_integration() {
         <span class="kw">let </span>route = Route::SyncGuildIntegration {
             guild_id: GUILD_ID,
@@ -8824,13 +8824,13 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_current_member() {
         <span class="kw">let </span>route = Route::UpdateCurrentMember { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/members/@me&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_current_user_voice_state() {
         <span class="kw">let </span>route = Route::UpdateCurrentUserVoiceState { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(
@@ -8839,7 +8839,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_nickname() {
         <span class="kw">let </span>route = Route::UpdateNickname { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(
@@ -8848,7 +8848,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_user_voice_state() {
         <span class="kw">let </span>route = Route::UpdateUserVoiceState {
             guild_id: GUILD_ID,
@@ -8860,7 +8860,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_ban() {
         <span class="kw">let </span><span class="kw-2">mut </span>route = Route::CreateBan {
             guild_id: GUILD_ID,
@@ -8883,7 +8883,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_prune_none() {
         <span class="kw">let </span>route = Route::CreateGuildPrune {
             compute_prune_count: <span class="prelude-val">None</span>,
@@ -8894,7 +8894,7 @@
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/prune?&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_prune_compute_prune_count_true() {
         <span class="kw">let </span>route = Route::CreateGuildPrune {
             compute_prune_count: <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
@@ -8908,7 +8908,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_prune_compute_prune_count_false() {
         <span class="kw">let </span>route = Route::CreateGuildPrune {
             compute_prune_count: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
@@ -8922,7 +8922,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_prune_days() {
         <span class="kw">let </span>route = Route::CreateGuildPrune {
             compute_prune_count: <span class="prelude-val">None</span>,
@@ -8936,7 +8936,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_prune_include_one_role() {
         <span class="kw">let </span>include_roles = [Id::new(<span class="number">1</span>)];
 
@@ -8952,7 +8952,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_prune_include_two_roles() {
         <span class="kw">let </span>include_roles = [Id::new(<span class="number">1</span>), Id::new(<span class="number">2</span>)];
 
@@ -8968,7 +8968,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_prune_all() {
         <span class="kw">let </span>include_roles = [Id::new(<span class="number">1</span>), Id::new(<span class="number">2</span>)];
 
@@ -8984,7 +8984,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_scheduled_events() {
         <span class="kw">let </span>route = Route::GetGuildScheduledEvents {
             guild_id: GUILD_ID,
@@ -9007,7 +9007,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_guild_scheduled_event() {
         <span class="kw">let </span>route = Route::CreateGuildScheduledEvent { guild_id: GUILD_ID };
 
@@ -9017,7 +9017,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_scheduled_event() {
         <span class="kw">let </span>route = Route::GetGuildScheduledEvent {
             guild_id: GUILD_ID,
@@ -9042,7 +9042,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild_scheduled_event() {
         <span class="kw">let </span>route = Route::UpdateGuildScheduledEvent {
             guild_id: GUILD_ID,
@@ -9055,7 +9055,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_guild_scheduled_event() {
         <span class="kw">let </span>route = Route::DeleteGuildScheduledEvent {
             guild_id: GUILD_ID,
@@ -9068,7 +9068,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_scheduled_event_users() {
         <span class="kw">let </span>route = Route::GetGuildScheduledEventUsers {
             after: <span class="prelude-val">None</span>,
@@ -9119,7 +9119,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>search_guild_members() {
         <span class="kw">let </span>route = Route::SearchGuildMembers {
             guild_id: GUILD_ID,
@@ -9144,13 +9144,13 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_guild_mfa() {
         <span class="kw">let </span>route = Route::UpdateGuildMfa { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/mfa&quot;</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>create_auto_moderation_rule() {
         <span class="kw">let </span>route = Route::CreateAutoModerationRule { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(
@@ -9159,7 +9159,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>delete_auto_moderation_rule() {
         <span class="kw">let </span>route = Route::DeleteAutoModerationRule {
             guild_id: GUILD_ID,
@@ -9171,7 +9171,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_auto_moderation_rule() {
         <span class="kw">let </span>route = Route::GetAutoModerationRule {
             guild_id: GUILD_ID,
@@ -9183,7 +9183,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_auto_moderation_rules() {
         <span class="kw">let </span>route = Route::GetGuildAutoModerationRules { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(
@@ -9192,7 +9192,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>update_auto_moderation_rule() {
         <span class="kw">let </span>route = Route::UpdateAutoModerationRule {
             guild_id: GUILD_ID,
@@ -9205,4 +9205,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_http" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (95a3a7277 2022-10-31)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="twilight_http" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (e75aab045 2022-11-09)" data-search-js="search-39ee4160c7dc16c9.js" data-settings-js="settings-3a0b9947ba1bd99a.js" data-settings-css="settings-a66f7524084a489a.css" ></div></body></html>

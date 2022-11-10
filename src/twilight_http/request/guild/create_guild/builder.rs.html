@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-http/src/request/guild/create_guild/builder.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>builder.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../../twilight_http/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-http/src/request/guild/create_guild/builder.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>builder.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-71d02aebf3a9cedb.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../../static.files/light-c11f492748536797.css"><link rel="stylesheet" disabled href="../../../../../static.files/dark-a78f946771c40031.css"><link rel="stylesheet" disabled href="../../../../../static.files/ayu-70b683d68cb31790.css"><script id="default-settings" ></script><script src="../../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../../static.files/source-script-74087aa2e88f4475.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../static.files/main-0dede64717b247ca.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-201a7e04dc4c6fce.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../../twilight_http/index.html"><img class="rust-logo" src="../../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1024,27 +1024,27 @@
 };
 
 <span class="doccomment">/// Error building role fields.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>RoleFieldsError {
     kind: RoleFieldsErrorType,
 }
 
 <span class="kw">impl </span>RoleFieldsError {
     <span class="doccomment">/// Immutable reference to the type of error that occurred.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
     </span><span class="kw">pub const fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>RoleFieldsErrorType {
         <span class="kw-2">&amp;</span><span class="self">self</span>.kind
     }
 
     <span class="doccomment">/// Consume the error, returning the source error if there is any.
-    </span><span class="attribute">#[allow(clippy::unused_self)]
+    </span><span class="attr">#[allow(clippy::unused_self)]
     #[must_use = <span class="string">&quot;consuming the error and retrieving the source has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_source(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt; {
         <span class="prelude-val">None
     </span>}
 
     <span class="doccomment">/// Consume the error, returning the owned error type and the source error.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_parts(<span class="self">self</span>) -&gt; (RoleFieldsErrorType, <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt;) {
         (<span class="self">self</span>.kind, <span class="prelude-val">None</span>)
     }
@@ -1069,7 +1069,7 @@
 <span class="kw">impl </span>Error <span class="kw">for </span>RoleFieldsError {}
 
 <span class="doccomment">/// Type of [`RoleFieldsError`] that occurred.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[non_exhaustive]
 </span><span class="kw">pub enum </span>RoleFieldsErrorType {
     <span class="doccomment">/// Color was larger than a valid RGB hexadecimal value.
@@ -1082,7 +1082,7 @@
 }
 
 <span class="doccomment">/// A builder for role fields.
-</span><span class="attribute">#[derive(Clone, Debug, Eq, PartialEq)]
+</span><span class="attr">#[derive(Clone, Debug, Eq, PartialEq)]
 #[must_use = <span class="string">&quot;must be built into a role&quot;</span>]
 </span><span class="kw">pub struct </span>RoleFieldsBuilder(RoleFields);
 
@@ -1110,7 +1110,7 @@
     }
 
     <span class="doccomment">/// Build the role fields.
-    </span><span class="attribute">#[allow(clippy::missing_const_for_fn)]
+    </span><span class="attr">#[allow(clippy::missing_const_for_fn)]
     </span><span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; RoleFields {
         <span class="self">self</span>.<span class="number">0
     </span>}
@@ -1186,27 +1186,27 @@
 }
 
 <span class="doccomment">/// Error building text fields.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>TextFieldsError {
     kind: TextFieldsErrorType,
 }
 
 <span class="kw">impl </span>TextFieldsError {
     <span class="doccomment">/// Immutable reference to the type of error that occurred.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
     </span><span class="kw">pub const fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>TextFieldsErrorType {
         <span class="kw-2">&amp;</span><span class="self">self</span>.kind
     }
 
     <span class="doccomment">/// Consume the error, returning the source error if there is any.
-    </span><span class="attribute">#[allow(clippy::unused_self)]
+    </span><span class="attr">#[allow(clippy::unused_self)]
     #[must_use = <span class="string">&quot;consuming the error and retrieving the source has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_source(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt; {
         <span class="prelude-val">None
     </span>}
 
     <span class="doccomment">/// Consume the error, returning the owned error type and the source error.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_parts(<span class="self">self</span>) -&gt; (TextFieldsErrorType, <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt;) {
         (<span class="self">self</span>.kind, <span class="prelude-val">None</span>)
     }
@@ -1243,7 +1243,7 @@
 <span class="kw">impl </span>Error <span class="kw">for </span>TextFieldsError {}
 
 <span class="doccomment">/// Type of [`TextFieldsError`] that occurred.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[non_exhaustive]
 </span><span class="kw">pub enum </span>TextFieldsErrorType {
     <span class="doccomment">/// The name is too short.
@@ -1269,7 +1269,7 @@
 }
 
 <span class="doccomment">/// A builder for text fields.
-</span><span class="attribute">#[derive(Clone, Debug, Eq, PartialEq)]
+</span><span class="attr">#[derive(Clone, Debug, Eq, PartialEq)]
 #[must_use = <span class="string">&quot;must be built into a text channel&quot;</span>]
 </span><span class="kw">pub struct </span>TextFieldsBuilder(TextFields);
 
@@ -1337,7 +1337,7 @@
     }
 
     <span class="doccomment">/// Build the text fields.
-    </span><span class="attribute">#[allow(clippy::missing_const_for_fn)]
+    </span><span class="attr">#[allow(clippy::missing_const_for_fn)]
     </span><span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; TextFields {
         <span class="self">self</span>.<span class="number">0
     </span>}
@@ -1394,27 +1394,27 @@
 }
 
 <span class="doccomment">/// Error building voice fields.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>VoiceFieldsError {
     kind: VoiceFieldsErrorType,
 }
 
 <span class="kw">impl </span>VoiceFieldsError {
     <span class="doccomment">/// Immutable reference to the type of error that occurred.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
     </span><span class="kw">pub const fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>VoiceFieldsErrorType {
         <span class="kw-2">&amp;</span><span class="self">self</span>.kind
     }
 
     <span class="doccomment">/// Consume the error, returning the source error if there is any.
-    </span><span class="attribute">#[allow(clippy::unused_self)]
+    </span><span class="attr">#[allow(clippy::unused_self)]
     #[must_use = <span class="string">&quot;consuming the error and retrieving the source has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_source(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt; {
         <span class="prelude-val">None
     </span>}
 
     <span class="doccomment">/// Consume the error, returning the owned error type and the source error.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_parts(<span class="self">self</span>) -&gt; (VoiceFieldsErrorType, <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt;) {
         (<span class="self">self</span>.kind, <span class="prelude-val">None</span>)
     }
@@ -1440,7 +1440,7 @@
 <span class="kw">impl </span>Error <span class="kw">for </span>VoiceFieldsError {}
 
 <span class="doccomment">/// Type of [`VoiceFieldsError`] that occurred.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[non_exhaustive]
 </span><span class="kw">pub enum </span>VoiceFieldsErrorType {
     <span class="doccomment">/// The name is too short.
@@ -1456,7 +1456,7 @@
 }
 
 <span class="doccomment">/// A builder for voice fields.
-</span><span class="attribute">#[derive(Clone, Debug, Eq, PartialEq)]
+</span><span class="attr">#[derive(Clone, Debug, Eq, PartialEq)]
 #[must_use = <span class="string">&quot;must be built into a voice channel&quot;</span>]
 </span><span class="kw">pub struct </span>VoiceFieldsBuilder(VoiceFields);
 
@@ -1509,7 +1509,7 @@
     }
 
     <span class="doccomment">/// Build the voice fields.
-    </span><span class="attribute">#[allow(clippy::missing_const_for_fn)]
+    </span><span class="attr">#[allow(clippy::missing_const_for_fn)]
     </span><span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; VoiceFields {
         <span class="self">self</span>.<span class="number">0
     </span>}
@@ -1537,27 +1537,27 @@
 }
 
 <span class="doccomment">/// Error creating category fields.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>CategoryFieldsError {
     kind: CategoryFieldsErrorType,
 }
 
 <span class="kw">impl </span>CategoryFieldsError {
     <span class="doccomment">/// Immutable reference to the type of error that occurred.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
     </span><span class="kw">pub const fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>CategoryFieldsErrorType {
         <span class="kw-2">&amp;</span><span class="self">self</span>.kind
     }
 
     <span class="doccomment">/// Consume the error, returning the source error if there is any.
-    </span><span class="attribute">#[allow(clippy::unused_self)]
+    </span><span class="attr">#[allow(clippy::unused_self)]
     #[must_use = <span class="string">&quot;consuming the error and retrieving the source has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_source(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt; {
         <span class="prelude-val">None
     </span>}
 
     <span class="doccomment">/// Consume the error, returning the owned error type and the source error.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_parts(
         <span class="self">self</span>,
     ) -&gt; (
@@ -1588,7 +1588,7 @@
 <span class="kw">impl </span>Error <span class="kw">for </span>CategoryFieldsError {}
 
 <span class="doccomment">/// Type of [`CategoryFieldsError`] that occurred.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[non_exhaustive]
 </span><span class="kw">pub enum </span>CategoryFieldsErrorType {
     <span class="doccomment">/// The name is too short.
@@ -1604,7 +1604,7 @@
 }
 
 <span class="doccomment">/// A builder for a category channel, and its children.
-</span><span class="attribute">#[derive(Clone, Debug, Eq, PartialEq)]
+</span><span class="attr">#[derive(Clone, Debug, Eq, PartialEq)]
 #[must_use = <span class="string">&quot;must be built into a category channel&quot;</span>]
 </span><span class="kw">pub struct </span>CategoryFieldsBuilder {
     fields: CategoryFields,
@@ -1692,7 +1692,7 @@
 }
 
 <span class="doccomment">/// A builder for a list of channels.
-</span><span class="attribute">#[derive(Clone, Debug, Default, Eq, PartialEq)]
+</span><span class="attr">#[derive(Clone, Debug, Default, Eq, PartialEq)]
 #[must_use = <span class="string">&quot;must be built into a list of channels&quot;</span>]
 </span><span class="kw">pub struct </span>GuildChannelFieldsBuilder(Vec&lt;GuildChannelFields&gt;);
 
@@ -1703,7 +1703,7 @@
     }
 
     <span class="doccomment">/// Build the list of channels.
-    </span><span class="attribute">#[allow(clippy::missing_const_for_fn)]
+    </span><span class="attr">#[allow(clippy::missing_const_for_fn)]
     </span><span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; Vec&lt;GuildChannelFields&gt; {
         <span class="self">self</span>.<span class="number">0
     </span>}
@@ -1739,7 +1739,7 @@
     </span>}
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{
         <span class="kw">super</span>::{CategoryFields, GuildChannelFields, RoleFields, TextFields, VoiceFields},
@@ -1799,7 +1799,7 @@
             .build()
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>role_fields() {
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
             RoleFieldsBuilder::new(<span class="string">&quot;role&quot;</span>.to_owned())
@@ -1833,7 +1833,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>voice_fields() {
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
             VoiceFieldsBuilder::new(<span class="string">&quot;&quot;</span>.to_owned()).unwrap_err().kind(),
@@ -1872,7 +1872,7 @@
             .build()
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>text_fields() {
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
             TextFieldsBuilder::new(<span class="string">&quot;&quot;</span>.to_owned()).unwrap_err().kind(),
@@ -1907,7 +1907,7 @@
             .add_voice(voice())
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>category_fields() {
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
             CategoryFieldsBuilder::new(<span class="string">&quot;&quot;</span>.to_owned()).unwrap_err().kind(),
@@ -1968,7 +1968,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>channels() {
         <span class="kw">let </span>channels = GuildChannelFieldsBuilder::new()
             .add_text(text())
@@ -2019,4 +2019,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="twilight_http" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (95a3a7277 2022-10-31)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="twilight_http" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (e75aab045 2022-11-09)" data-search-js="search-39ee4160c7dc16c9.js" data-settings-js="settings-3a0b9947ba1bd99a.js" data-settings-css="settings-a66f7524084a489a.css" ></div></body></html>

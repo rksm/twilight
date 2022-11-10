@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-standby/src/future.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>future.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../twilight_standby/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-standby/src/future.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>future.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-71d02aebf3a9cedb.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-c11f492748536797.css"><link rel="stylesheet" disabled href="../../static.files/dark-a78f946771c40031.css"><link rel="stylesheet" disabled href="../../static.files/ayu-70b683d68cb31790.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-74087aa2e88f4475.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-0dede64717b247ca.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-201a7e04dc4c6fce.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../twilight_standby/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -244,11 +244,6 @@
 <span id="244">244</span>
 <span id="245">245</span>
 <span id="246">246</span>
-<span id="247">247</span>
-<span id="248">248</span>
-<span id="249">249</span>
-<span id="250">250</span>
-<span id="251">251</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Futures and streams returned by [`Standby`].
 //!
 //! [`Standby`]: super::Standby
@@ -274,12 +269,11 @@
 };
 
 <span class="doccomment">/// Future canceled due to Standby being dropped.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>Canceled(RecvError);
 
 <span class="kw">impl </span>Canceled {
     <span class="doccomment">/// Consume the error, returning the source error if there is any.
-    </span><span class="attribute">#[allow(clippy::must_use_candidate)]
     </span><span class="kw">pub fn </span>into_source(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt; {
         <span class="prelude-val">Some</span>(Box::new(<span class="self">self</span>.<span class="number">0</span>))
     }
@@ -300,8 +294,7 @@
 <span class="doccomment">/// The future returned from [`Standby::wait_for_event`].
 ///
 /// [`Standby::wait_for_event`]: crate::Standby::wait_for_event
-</span><span class="attribute">#[allow(clippy::module_name_repetitions)]
-#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;futures do nothing unless you `.await` or poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForEventFuture {
     <span class="doccomment">/// Receiver half of the oneshot channel.
@@ -319,7 +312,7 @@
 <span class="doccomment">/// The stream returned from [`Standby::wait_for_event_stream`].
 ///
 /// [`Standby::wait_for_event_stream`]: crate::Standby::wait_for_event_stream
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;streams do nothing unless you poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForEventStream {
     <span class="doccomment">/// Receiver half of the MPSC channel.
@@ -337,8 +330,7 @@
 <span class="doccomment">/// The future returned from [`Standby::wait_for`].
 ///
 /// [`Standby::wait_for`]: crate::Standby::wait_for
-</span><span class="attribute">#[allow(clippy::module_name_repetitions)]
-#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;futures do nothing unless you `.await` or poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForGuildEventFuture {
     <span class="doccomment">/// Receiver half of the oneshot channel.
@@ -356,7 +348,7 @@
 <span class="doccomment">/// The stream returned from [`Standby::wait_for_stream`].
 ///
 /// [`Standby::wait_for_stream`]: crate::Standby::wait_for_stream
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;streams do nothing unless you poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForGuildEventStream {
     <span class="doccomment">/// Receiver half of the MPSC channel.
@@ -374,8 +366,7 @@
 <span class="doccomment">/// The future returned from [`Standby::wait_for_message`].
 ///
 /// [`Standby::wait_for_message`]: crate::Standby::wait_for_message
-</span><span class="attribute">#[allow(clippy::module_name_repetitions)]
-#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;futures do nothing unless you `.await` or poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForMessageFuture {
     <span class="doccomment">/// Receiver half of the oneshot channel.
@@ -393,7 +384,7 @@
 <span class="doccomment">/// The stream returned from [`Standby::wait_for_message_stream`].
 ///
 /// [`Standby::wait_for_message_stream`]: crate::Standby::wait_for_message_stream
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;streams do nothing unless you poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForMessageStream {
     <span class="doccomment">/// Receiver half of the MPSC channel.
@@ -411,8 +402,7 @@
 <span class="doccomment">/// The future returned from [`Standby::wait_for_reaction`].
 ///
 /// [`Standby::wait_for_reaction`]: crate::Standby::wait_for_reaction
-</span><span class="attribute">#[allow(clippy::module_name_repetitions)]
-#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;futures do nothing unless you `.await` or poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForReactionFuture {
     <span class="doccomment">/// Receiver half of the oneshot channel.
@@ -430,7 +420,7 @@
 <span class="doccomment">/// The stream returned from [`Standby::wait_for_reaction_stream`].
 ///
 /// [`Standby::wait_for_reaction_stream`]: crate::Standby::wait_for_reaction_stream
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;streams do nothing unless you poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForReactionStream {
     <span class="doccomment">/// Receiver half of the MPSC channel.
@@ -448,7 +438,7 @@
 <span class="doccomment">/// The future returned from [`Standby::wait_for_component`].
 ///
 /// [`Standby::wait_for_component`]: crate::Standby::wait_for_component
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use = <span class="string">&quot;futures do nothing unless you `.await` or poll them&quot;</span>]
 </span><span class="kw">pub struct </span>WaitForComponentFuture {
     <span class="doccomment">/// Receiver half of the oneshot channel.
@@ -466,7 +456,7 @@
 <span class="doccomment">/// The stream returned from [`Standby::wait_for_component_stream`].
 ///
 /// [`Standby::wait_for_component_stream`]: crate::Standby::wait_for_component_stream
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[must_use]
 </span><span class="kw">pub struct </span>WaitForComponentStream {
     <span class="doccomment">/// Receiver half of the MPSC channel.
@@ -481,7 +471,7 @@
     }
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{
         WaitForEventFuture, WaitForEventStream, WaitForGuildEventFuture, WaitForGuildEventStream,
@@ -501,4 +491,4 @@
     <span class="macro">assert_impl_all!</span>(WaitForReactionStream: Debug, Stream, Send, Sync);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="twilight_standby" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (95a3a7277 2022-10-31)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="twilight_standby" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (e75aab045 2022-11-09)" data-search-js="search-39ee4160c7dc16c9.js" data-settings-js="settings-3a0b9947ba1bd99a.js" data-settings-css="settings-a66f7524084a489a.css" ></div></body></html>

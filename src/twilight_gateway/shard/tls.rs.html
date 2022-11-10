@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-gateway/src/shard/tls.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>tls.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../twilight_gateway/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-gateway/src/shard/tls.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>tls.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-71d02aebf3a9cedb.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-c11f492748536797.css"><link rel="stylesheet" disabled href="../../../static.files/dark-a78f946771c40031.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-70b683d68cb31790.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-74087aa2e88f4475.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-0dede64717b247ca.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-201a7e04dc4c6fce.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../twilight_gateway/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -197,7 +197,7 @@
 <span id="197">197</span>
 </pre><pre class="rust"><code><span class="doccomment">//! TLS manager to reuse connections between shards.
 
-</span><span class="attribute">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
+</span><span class="attr">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
 </span><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>std::{
@@ -205,51 +205,51 @@
     fmt::{Debug, Display, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult},
 };
 
-<span class="attribute">#[cfg(all(
+<span class="attr">#[cfg(all(
     feature = <span class="string">&quot;native&quot;</span>,
     not(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))
 ))]
 </span><span class="kw">use </span>native_tls::TlsConnector <span class="kw">as </span>NativeTlsConnector;
 
-<span class="attribute">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
+<span class="attr">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
 </span><span class="kw">use </span>rustls_tls::ClientConfig;
 
-<span class="attribute">#[cfg(feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>)]
 </span><span class="kw">use </span>rustls_tls::OwnedTrustAnchor;
 
 <span class="kw">use </span>tokio_tungstenite::Connector;
 
-<span class="attribute">#[cfg(all(
+<span class="attr">#[cfg(all(
     feature = <span class="string">&quot;native&quot;</span>,
     not(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))
 ))]
 </span><span class="kw">pub type </span>TlsConnector = NativeTlsConnector;
 
-<span class="attribute">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
+<span class="attr">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
 </span><span class="kw">pub type </span>TlsConnector = Arc&lt;ClientConfig&gt;;
 
-<span class="attribute">#[derive(Debug)]
+<span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>TlsError {
     kind: TlsErrorType,
     source: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt;,
 }
 
-<span class="attribute">#[allow(dead_code)]
+<span class="attr">#[allow(dead_code)]
 </span><span class="kw">impl </span>TlsError {
     <span class="doccomment">/// Immutable reference to the type of error that occurred.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
     </span><span class="kw">pub const fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>TlsErrorType {
         <span class="kw-2">&amp;</span><span class="self">self</span>.kind
     }
 
     <span class="doccomment">/// Consume the error, returning the source error if there is any.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;consuming the error and retrieving the source has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;consuming the error and retrieving the source has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_source(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt; {
         <span class="self">self</span>.source
     }
 
     <span class="doccomment">/// Consume the error, returning the owned error type and the source error.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_parts(<span class="self">self</span>) -&gt; (TlsErrorType, <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt;) {
         (<span class="self">self</span>.kind, <span class="self">self</span>.source)
     }
@@ -257,17 +257,17 @@
 
 <span class="kw">impl </span>Display <span class="kw">for </span>TlsError {
     <span class="comment">// If TlsErrorType is an empty type f is not used.
-    </span><span class="attribute">#[cfg_attr(feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>, allow(unused))]
+    </span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>, allow(unused))]
     </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; FmtResult {
         <span class="kw">match </span><span class="self">self</span>.kind {
-            <span class="attribute">#[cfg(all(
+            <span class="attr">#[cfg(all(
                 feature = <span class="string">&quot;native&quot;</span>,
                 not(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))
             ))]
             </span>TlsErrorType::NativeTls =&gt; {
                 f.write_str(<span class="string">&quot;construction of the native-tls connector failed&quot;</span>)
             }
-            <span class="attribute">#[cfg(feature = <span class="string">&quot;rustls-native-roots&quot;</span>)]
+            <span class="attr">#[cfg(feature = <span class="string">&quot;rustls-native-roots&quot;</span>)]
             </span>TlsErrorType::NativeCerts =&gt; f.write_str(<span class="string">&quot;could not load native certificates&quot;</span>),
         }
     }
@@ -282,21 +282,21 @@
 }
 
 <span class="doccomment">/// Type of [`ClusterCommandError`] that occurred.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[non_exhaustive]
 </span><span class="kw">pub enum </span>TlsErrorType {
     <span class="doccomment">/// Construction of the nativetls connector failed.
-    </span><span class="attribute">#[cfg(all(
+    </span><span class="attr">#[cfg(all(
         feature = <span class="string">&quot;native&quot;</span>,
         not(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))
     ))]
     </span>NativeTls,
     <span class="doccomment">/// Could not load native certificates.
-    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;rustls-native-roots&quot;</span>)]
+    </span><span class="attr">#[cfg(feature = <span class="string">&quot;rustls-native-roots&quot;</span>)]
     </span>NativeCerts,
 }
 
-<span class="attribute">#[derive(Clone)]
+<span class="attr">#[derive(Clone)]
 #[cfg_attr(
     all(
         feature = <span class="string">&quot;native&quot;</span>,
@@ -308,7 +308,7 @@
     tls: TlsConnector,
 }
 
-<span class="attribute">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
+<span class="attr">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
 </span><span class="kw">impl </span>Debug <span class="kw">for </span>TlsContainer {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; FmtResult {
         f.debug_struct(<span class="string">&quot;TlsContainer&quot;</span>).finish()
@@ -316,7 +316,7 @@
 }
 
 <span class="kw">impl </span>TlsContainer {
-    <span class="attribute">#[cfg(all(
+    <span class="attr">#[cfg(all(
         feature = <span class="string">&quot;native&quot;</span>,
         not(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))
     ))]
@@ -331,11 +331,11 @@
         })
     }
 
-    <span class="attribute">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
+    <span class="attr">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
     </span><span class="kw">pub fn </span>new() -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TlsError&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>roots = rustls_tls::RootCertStore::empty();
 
-        <span class="attribute">#[cfg(feature = <span class="string">&quot;rustls-native-roots&quot;</span>)]
+        <span class="attr">#[cfg(feature = <span class="string">&quot;rustls-native-roots&quot;</span>)]
         </span>{
             <span class="kw">let </span>certs = rustls_native_certs::load_native_certs().map_err(|err| TlsError {
                 kind: TlsErrorType::NativeCerts,
@@ -352,7 +352,7 @@
             }
         }
 
-        <span class="attribute">#[cfg(feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>)]
+        <span class="attr">#[cfg(feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>)]
         </span>{
             roots.add_server_trust_anchors(webpki_roots::TLS_SERVER_ROOTS.<span class="number">0</span>.iter().map(|ta| {
                 OwnedTrustAnchor::from_subject_spki_name_constraints(
@@ -374,18 +374,18 @@
     }
 
     <span class="kw">pub fn </span>connector(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Connector {
-        <span class="attribute">#[cfg(all(
+        <span class="attr">#[cfg(all(
             feature = <span class="string">&quot;native&quot;</span>,
             not(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))
         ))]
         </span><span class="kw">return </span>Connector::NativeTls(<span class="self">self</span>.tls.clone());
 
-        <span class="attribute">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
+        <span class="attr">#[cfg(any(feature = <span class="string">&quot;rustls-native-roots&quot;</span>, feature = <span class="string">&quot;rustls-webpki-roots&quot;</span>))]
         </span><span class="kw">return </span>Connector::Rustls(Arc::clone(<span class="kw-2">&amp;</span><span class="self">self</span>.tls));
     }
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span>std::fmt::Debug;
 
@@ -393,4 +393,4 @@
     <span class="macro">static_assertions::assert_impl_all!</span>(TlsContainer: Debug, Clone, Send, Sync);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_gateway" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (95a3a7277 2022-10-31)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="twilight_gateway" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (e75aab045 2022-11-09)" data-search-js="search-39ee4160c7dc16c9.js" data-settings-js="settings-3a0b9947ba1bd99a.js" data-settings-css="settings-a66f7524084a489a.css" ></div></body></html>

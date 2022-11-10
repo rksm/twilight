@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-model/src/util/image_hash.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>image_hash.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../twilight_model/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-model/src/util/image_hash.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>image_hash.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-71d02aebf3a9cedb.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-c11f492748536797.css"><link rel="stylesheet" disabled href="../../../static.files/dark-a78f946771c40031.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-70b683d68cb31790.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-74087aa2e88f4475.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-0dede64717b247ca.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-201a7e04dc4c6fce.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../twilight_model/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -786,7 +786,7 @@
 //! [`ImageHash::bytes`] and [`ImageHash::is_animated`] may be used to
 //! deconstruct the hash and [`ImageHash::new`] may be used to reconstruct one.
 
-</span><span class="attribute">#![allow(dead_code, unused_mut)]
+</span><span class="attr">#![allow(dead_code, unused_mut)]
 
 </span><span class="kw">use </span>serde::{
     de::{Deserialize, Deserializer, Error <span class="kw">as </span>DeError, Visitor},
@@ -807,7 +807,7 @@
 
 <span class="doccomment">/// Parsing an image hash into an efficient storage format via
 /// [`ImageHash::parse`] failed.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>ImageHashParseError {
     kind: ImageHashParseErrorType,
 }
@@ -819,20 +819,20 @@
     };
 
     <span class="doccomment">/// Immutable reference to the type of error that occurred.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;retrieving the type has no effect if left unused&quot;</span>]
     </span><span class="kw">pub const fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ImageHashParseErrorType {
         <span class="kw-2">&amp;</span><span class="self">self</span>.kind
     }
 
     <span class="doccomment">/// Consume the error, returning the source error if there is any.
-    </span><span class="attribute">#[allow(clippy::unused_self)]
+    </span><span class="attr">#[allow(clippy::unused_self)]
     #[must_use = <span class="string">&quot;consuming the error and retrieving the source has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_source(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Error + Send + Sync&gt;&gt; {
         <span class="prelude-val">None
     </span>}
 
     <span class="doccomment">/// Consume the error, returning the owned error type and the source error.
-    </span><span class="attribute">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
+    </span><span class="attr">#[must_use = <span class="string">&quot;consuming the error into its parts has no effect if left unused&quot;</span>]
     </span><span class="kw">pub fn </span>into_parts(
         <span class="self">self</span>,
     ) -&gt; (
@@ -872,7 +872,7 @@
 <span class="kw">impl </span>Error <span class="kw">for </span>ImageHashParseError {}
 
 <span class="doccomment">/// Type of [`ImageHashParseError`] that occurred.
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 #[non_exhaustive]
 </span><span class="kw">pub enum </span>ImageHashParseErrorType {
     <span class="doccomment">/// Input is either animated and not 34 characters long or is not animated
@@ -893,7 +893,7 @@
 /// heap-allocated [`std::string::String`]s.
 ///
 /// Parsing methods only support hashes provided by Discord&#39;s APIs.
-</span><span class="attribute">#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+</span><span class="attr">#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 </span><span class="kw">pub struct </span>ImageHash {
     <span class="doccomment">/// Whether the image is animated.
     ///
@@ -1273,7 +1273,7 @@
 /// ```
 ///
 /// [nibbles]: https://en.wikipedia.org/wiki/Nibble
-</span><span class="attribute">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>Nibbles {
     <span class="doccomment">/// Current index of the iterator.
     </span>idx: usize,
@@ -1383,7 +1383,7 @@
     }
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{ImageHash, ImageHashParseError, ImageHashParseErrorType, Nibbles};
     <span class="kw">use </span>static_assertions::assert_impl_all;
@@ -1415,7 +1415,7 @@
     );
 
     <span class="doccomment">/// Test that reconstruction of parted hashes is correct.
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>new() -&gt; <span class="prelude-ty">Result</span>&lt;(), ImageHashParseError&gt; {
         <span class="kw">let </span>source = ImageHash::parse(<span class="string">b&quot;85362c0262ef125a1182b1fad66b6a89&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>(bytes, animated) = (source.bytes(), source.is_animated());
@@ -1426,7 +1426,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>parse() -&gt; <span class="prelude-ty">Result</span>&lt;(), ImageHashParseError&gt; {
         <span class="kw">let </span>actual = ImageHash::parse(<span class="string">b&quot;77450a7713f093adaebab32b18dacc46&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>expected = [
@@ -1437,7 +1437,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>display() -&gt; <span class="prelude-ty">Result</span>&lt;(), ImageHashParseError&gt; {
         <span class="macro">assert_eq!</span>(
             <span class="string">&quot;58ec815c650e72f8eb31eec52e54b3b5&quot;</span>,
@@ -1452,7 +1452,7 @@
     }
 
     <span class="doccomment">/// Test that various formats are indeed invalid.
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>parse_format() {
         <span class="kw">const </span>INPUTS: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>[u8]] = <span class="kw-2">&amp;</span>[
             <span class="string">b&quot;not correct length&quot;</span>,
@@ -1472,7 +1472,7 @@
         }
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>parse_range() {
         <span class="kw">let </span><span class="kw-2">mut </span>input = [<span class="string">b&#39;a&#39;</span>; <span class="number">32</span>];
         input[<span class="number">17</span>] = <span class="string">b&#39;-&#39;</span>;
@@ -1486,7 +1486,7 @@
         ));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>nibbles() -&gt; <span class="prelude-ty">Result</span>&lt;(), ImageHashParseError&gt; {
         <span class="kw">const </span>INPUT: <span class="kw-2">&amp;</span>[u8] = <span class="string">b&quot;39eb706d6fbaeb22837c350993b97b42&quot;</span>;
 
@@ -1504,7 +1504,7 @@
 
     <span class="doccomment">/// Test that the [`core::iter::DoubleEndedIterator`] implementation on
     /// [`Nibbles`] functions like a double ended iterator should.
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>nibbles_double_ended() -&gt; <span class="prelude-ty">Result</span>&lt;(), ImageHashParseError&gt; {
         <span class="kw">const </span>INPUT: <span class="kw-2">&amp;</span>[u8] = <span class="string">b&quot;e72bbdec903c420b7aa9c45fc7994ac8&quot;</span>;
 
@@ -1542,7 +1542,7 @@
 
     <span class="doccomment">/// Test that image hash parsing correctly identifies animated hashes by its
     /// `a_` prefix.
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>is_animated() -&gt; <span class="prelude-ty">Result</span>&lt;(), ImageHashParseError&gt; {
         <span class="macro">assert!</span>(ImageHash::parse(<span class="string">b&quot;a_06c16474723fe537c283b8efa61a30c8&quot;</span>)<span class="question-mark">?</span>.is_animated());
         <span class="macro">assert!</span>(!ImageHash::parse(<span class="string">b&quot;06c16474723fe537c283b8efa61a30c8&quot;</span>)<span class="question-mark">?</span>.is_animated());
@@ -1551,4 +1551,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (95a3a7277 2022-10-31)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="twilight_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (e75aab045 2022-11-09)" data-search-js="search-39ee4160c7dc16c9.js" data-settings-js="settings-3a0b9947ba1bd99a.js" data-settings-css="settings-a66f7524084a489a.css" ></div></body></html>

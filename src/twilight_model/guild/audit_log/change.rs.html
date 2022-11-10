@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-model/src/guild/audit_log/change.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>change.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../twilight_model/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-model/src/guild/audit_log/change.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>change.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-71d02aebf3a9cedb.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-c11f492748536797.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-a78f946771c40031.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-70b683d68cb31790.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-74087aa2e88f4475.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-0dede64717b247ca.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-201a7e04dc4c6fce.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../twilight_model/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -988,7 +988,7 @@
 /// - [`AuditLogChange::RoleRemoved`]
 ///
 /// [role]: super::super::Role
-</span><span class="attribute">#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+</span><span class="attr">#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 </span><span class="kw">pub struct </span>AffectedRole {
     <span class="doccomment">/// ID of the role.
     </span><span class="kw">pub </span>id: Id&lt;RoleMarker&gt;,
@@ -999,667 +999,667 @@
 <span class="doccomment">/// Individual change within an [`AuditLogEntry`].
 ///
 /// [`AuditLogEntry`]: super::AuditLogEntry
-</span><span class="attribute">#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+</span><span class="attr">#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 #[non_exhaustive]
 #[serde(rename_all = <span class="string">&quot;snake_case&quot;</span>, tag = <span class="string">&quot;key&quot;</span>)]
 </span><span class="kw">pub enum </span>AuditLogChange {
     <span class="doccomment">/// AFK channel ID was changed.
     </span>AfkChannelId {
         <span class="doccomment">/// New ID of the AFK channel.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
         <span class="doccomment">/// Old ID of the AFK channel.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     },
     <span class="doccomment">/// Timeout to cause a user to be moved to an AFK voice channel.
     </span>AfkTimeout {
         <span class="doccomment">/// New timeout, in seconds.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>)]
         </span>new: u64,
         <span class="doccomment">/// Old timeout, in seconds.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>)]
         </span>old: u64,
     },
     <span class="doccomment">/// Allowed permissions of a permission overwrite target.
     </span>Allow {
         <span class="doccomment">/// New allowed permissions value.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Permissions&gt;,
         <span class="doccomment">/// Old allowed permissions value.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Permissions&gt;,
     },
     <span class="doccomment">/// ID of an application.
     </span>ApplicationId {
         <span class="doccomment">/// Application&#39;s ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;ApplicationMarker&gt;&gt;,
-        <span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        <span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;ApplicationMarker&gt;&gt;,
     },
     <span class="doccomment">/// Thread is now archived/unarchived.
     </span>Archived {
         <span class="doccomment">/// Whether the thread is archived.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Asset of a sticker.
     </span>Asset {
         <span class="doccomment">/// Empty string.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Auto archive duration of a thread changed.
     </span>AutoArchiveDuration {
         <span class="doccomment">/// New auto archive duration.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;AutoArchiveDuration&gt;,
         <span class="doccomment">/// Old auto archive duration.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;AutoArchiveDuration&gt;,
     },
     <span class="doccomment">/// Availability of a sticker.
     </span>Available {
         <span class="doccomment">/// New availability.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Old availability.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Hash of an avatar.
     </span>AvatarHash {
         <span class="doccomment">/// New hash of an avatar.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
         <span class="doccomment">/// Old hash of an avatar.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     },
     <span class="doccomment">/// Hash of a guild banner.
     </span>BannerHash {
         <span class="doccomment">/// New hash of a guild&#39;s banner.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
         <span class="doccomment">/// Old hash of a guild&#39;s banner.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     },
     <span class="doccomment">/// Bitrate of an audio channel.
     </span>Bitrate {
         <span class="doccomment">/// New bitrate.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Old bitrate.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Channel for an invite code.
     </span>ChannelId {
         <span class="doccomment">/// New invite&#39;s channel.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
         <span class="doccomment">/// Old invite&#39;s channel.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     },
     <span class="doccomment">/// Code of an invite.
     </span>Code {
         <span class="doccomment">/// New invite&#39;s code.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Color of a role.
     </span>Color {
         <span class="doccomment">/// New role color.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Old role color.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Permissions for a command were updated
     </span>CommandId {
         <span class="doccomment">/// New command permissions.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;GuildCommandPermissions&gt;,
         <span class="doccomment">/// Old command permissions.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;GuildCommandPermissions&gt;,
     },
     <span class="doccomment">/// Member timeout state changed.
     </span>CommunicationDisabledUntil {
         <span class="doccomment">/// New timeout timestamp.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Timestamp&gt;,
         <span class="doccomment">/// Old timeout timestamp.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Timestamp&gt;,
     },
     <span class="doccomment">/// Whether a member is guild deafened.
     </span>Deaf {
         <span class="doccomment">/// Whether a member is now guild deafened.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// default auto archive duration for newly created threads changed.
     </span>DefaultAutoArchiveDuration {
         <span class="doccomment">/// New auto archive duration.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;AutoArchiveDuration&gt;,
         <span class="doccomment">/// Old auto archive duration.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;AutoArchiveDuration&gt;,
     },
     <span class="doccomment">/// Default message notification level for a guild.
     </span>DefaultMessageNotifications {
         <span class="doccomment">/// New default message notification level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;DefaultMessageNotificationLevel&gt;,
         <span class="doccomment">/// Old default message notification level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;DefaultMessageNotificationLevel&gt;,
     },
     <span class="doccomment">/// Denied permissions of a permission overwrite target.
     </span>Deny {
         <span class="doccomment">/// New denied permissions level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Permissions&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Permissions&gt;,
     },
     <span class="doccomment">/// Description of a guild or sticker.
     </span>Description {
         <span class="doccomment">/// New guild description.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Old guild description.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Hash of a guild&#39;s discovery splash.
     </span>DiscoverySplashHash {
         <span class="doccomment">/// New discovery splash hash.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
         <span class="doccomment">/// Old discovery splash hash.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     },
     <span class="doccomment">/// Whether emoticons are enabled.
     </span>EnableEmoticons {
         <span class="doccomment">/// Whether emoticons are now enabled.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Whether emoticons were enabled.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Entity type of guild scheduled event was changed.
     </span>EntityType {
         <span class="doccomment">/// New entity type.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Behavior of the expiration of an integration.
     </span>ExpireBehavior {
         <span class="doccomment">/// New expiration behavior.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Grace period of the expiration of an integration.
     </span>ExpireGracePeriod {
         <span class="doccomment">/// New expiration grace period.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Explicit content filter level of a guild.
     </span>ExplicitContentFilter {
         <span class="doccomment">/// New explicit content filter level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;ExplicitContentFilter&gt;,
         <span class="doccomment">/// Old explicit content filter level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;ExplicitContentFilter&gt;,
     },
     <span class="doccomment">/// Format type of a sticker.
     </span>FormatType {
         <span class="doccomment">/// New format type of a sticker.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;StickerFormatType&gt;,
         <span class="doccomment">/// Old format type of a sticker.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;StickerFormatType&gt;,
     },
     <span class="doccomment">/// Guild that a sticker is in.
     </span>GuildId {
         <span class="doccomment">/// New guild that a sticker is in.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;GuildMarker&gt;&gt;,
         <span class="doccomment">/// Old guild that a sticker is in.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;GuildMarker&gt;&gt;,
     },
     <span class="doccomment">/// Whether a role is hoisted.
     </span>Hoist {
         <span class="doccomment">/// Whether a role is now hoisted.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Whether a role was hoisted.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Hash of a guild icon.
     </span>IconHash {
         <span class="doccomment">/// New hash of a guild&#39;s icon.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
         <span class="doccomment">/// Old hash of a guild&#39;s icon.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     },
     <span class="doccomment">/// ID of an entity.
     </span>Id {
         <span class="doccomment">/// New entity&#39;s ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;GenericMarker&gt;&gt;,
-        <span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        <span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;GenericMarker&gt;&gt;,
     },
     <span class="doccomment">/// Hash of a guild scheduled event cover.
     </span>ImageHash {
         <span class="doccomment">/// New hash of a guild&#39;s icon.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
         <span class="doccomment">/// Old hash of a guild&#39;s icon.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     },
     <span class="doccomment">/// Invitable state of a private thread.
     </span>Invitable {
         <span class="doccomment">/// New threads invitable state.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Old threads invitable state.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// ID of the user who created an invite.
     </span>InviterId {
         <span class="doccomment">/// User ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;UserMarker&gt;&gt;,
-        <span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        <span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;UserMarker&gt;&gt;,
     },
     <span class="doccomment">/// Location for a scheduled event changed.
     ///
     /// Can be an [`Id&lt;ChannelMarker&gt;`] or a [`String`].
     </span>Location {
-        <span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        <span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
-        <span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        <span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Thread was locked or unlocked.
     </span>Locked {
         <span class="doccomment">/// Whether the thread is now locked.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Maximum age of an invite.
     </span>MaxAge {
         <span class="doccomment">/// New maximum age.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Maximum uses of an invite.
     </span>MaxUses {
         <span class="doccomment">/// New maximum uses.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Whether a role can be mentioned in a message.
     </span>Mentionable {
         <span class="doccomment">/// Whether a role is now mentionable.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Whether a role was mentionable.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Multi-Factor Authentication level required of a guild&#39;s moderators.
     </span>MfaLevel {
         <span class="doccomment">/// New MFA level of a guild.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;MfaLevel&gt;,
         <span class="doccomment">/// Old MFA level of a guild.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;MfaLevel&gt;,
     },
     <span class="doccomment">/// Whether a user is guild muted.
     </span>Mute {
         <span class="doccomment">/// Whether a member is now muted.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Whether a member was muted.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Name of an entity such as a channel or role.
     </span>Name {
         <span class="doccomment">/// New entity name.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Old entity name.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Nickname of a member.
     </span>Nick {
         <span class="doccomment">/// New member nickname.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Old member nickname.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Whether a channel is NSFW.
     </span>Nsfw {
         <span class="doccomment">/// New state.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// NSFW level of a guild.
     </span>NsfwLevel {
         <span class="doccomment">/// New NSFW level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;NSFWLevel&gt;,
         <span class="doccomment">/// Old NSFW level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;NSFWLevel&gt;,
     },
     <span class="doccomment">/// ID of the owner of a guild.
     </span>OwnerId {
         <span class="doccomment">/// New owner&#39;s ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;UserMarker&gt;&gt;,
         <span class="doccomment">/// Old owner&#39;s ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;UserMarker&gt;&gt;,
     },
     <span class="doccomment">/// Permission overwrites on a channel changed.
     </span>PermissionOverwrites {
         <span class="doccomment">/// New set of overwrites.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Vec&lt;PermissionOverwrite&gt;&gt;,
         <span class="doccomment">/// Old set of overwrites.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Vec&lt;PermissionOverwrite&gt;&gt;,
     },
     <span class="doccomment">/// Default permissions of a role.
     </span>Permissions {
         <span class="doccomment">/// New set of permissions.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Permissions&gt;,
         <span class="doccomment">/// Old set of permissions.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Permissions&gt;,
     },
     <span class="doccomment">/// Position of an entity such as a channel or role.
     </span>Position {
         <span class="doccomment">/// New position value.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Old position value.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Preferred locale of a guild.
     </span>PreferredLocale {
         <span class="doccomment">/// New preferred locale.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Old preferred locale.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Privacy level of a stage instance.
     </span>PrivacyLevel {
         <span class="doccomment">/// New privacy level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;PrivacyLevel&gt;,
         <span class="doccomment">/// Old privacy level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;PrivacyLevel&gt;,
     },
     <span class="doccomment">/// Number of days&#39; worth of inactivity for a guild prune.
     </span>PruneDeleteDays {
         <span class="doccomment">/// Number of days.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
-        <span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        <span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// ID of a guild&#39;s public updates channel.
     </span>PublicUpdatesChannelId {
         <span class="doccomment">/// New public updates channel ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
         <span class="doccomment">/// Old public updates channel ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     },
     <span class="doccomment">/// Ratelimit per user in a textual channel.
     </span>RateLimitPerUser {
         <span class="doccomment">/// New ratelimit, in seconds.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Old ratelimit, in seconds.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Region of a guild changed.
     </span>Region {
         <span class="doccomment">/// New region.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Role was added to a user.
-    </span><span class="attribute">#[serde(rename = <span class="string">&quot;$add&quot;</span>)]
+    </span><span class="attr">#[serde(rename = <span class="string">&quot;$add&quot;</span>)]
     </span>RoleAdded {
         <span class="doccomment">/// Minimal information about a added role.
-        </span><span class="attribute">#[serde(default, rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
+        </span><span class="attr">#[serde(default, rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
         </span>new: Vec&lt;AffectedRole&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(default, rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
+        </span><span class="attr">#[serde(default, rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
         </span>old: Vec&lt;AffectedRole&gt;,
     },
     <span class="doccomment">/// Role was removed from a user.
-    </span><span class="attribute">#[serde(rename = <span class="string">&quot;$remove&quot;</span>)]
+    </span><span class="attr">#[serde(rename = <span class="string">&quot;$remove&quot;</span>)]
     </span>RoleRemoved {
         <span class="doccomment">/// Minimal information about a removed role.
-        </span><span class="attribute">#[serde(default, rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
+        </span><span class="attr">#[serde(default, rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
         </span>new: Vec&lt;AffectedRole&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(default, rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
+        </span><span class="attr">#[serde(default, rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
         </span>old: Vec&lt;AffectedRole&gt;,
     },
     <span class="doccomment">/// Guild&#39;s rules channel.
     </span>RulesChannelId {
         <span class="doccomment">/// New rules channel.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
         <span class="doccomment">/// Old rules channel.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     },
     <span class="doccomment">/// Hash of a guild&#39;s splash.
     </span>SplashHash {
         <span class="doccomment">/// Old hash of a guild&#39;s splash.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
         <span class="doccomment">/// New hash of a guild&#39;s splash.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     },
     <span class="doccomment">/// Status of guild scheduled event was changed.
     </span>Status {
         <span class="doccomment">/// New status.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// ID of guild&#39;s system channel.
     </span>SystemChannelId {
         <span class="doccomment">/// New system channel ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
         <span class="doccomment">/// Old system channel ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     },
     <span class="doccomment">/// Related emoji of a sticker.
     </span>Tags {
         <span class="doccomment">/// New related emoji of a sticker.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Old related emoji of a sticker.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Whether an invite is temporary.
     </span>Temporary {
         <span class="doccomment">/// New temporary state.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Topic of a textual channel.
     </span>Topic {
         <span class="doccomment">/// New topic.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Old topic.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Type of a created entity.
     </span>Type {
         <span class="doccomment">/// New target type.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Old target type.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Unicode emoji of a role icon changed.
     </span>UnicodeEmoji {
         <span class="doccomment">/// New unicode emoji.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Old target type.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Maximum number of users in a voice channel.
     </span>UserLimit {
         <span class="doccomment">/// New limit.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Old limit.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Number of uses of an invite.
     </span>Uses {
         <span class="doccomment">/// Number of uses.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;u64&gt;,
         <span class="doccomment">/// Previous state, if any.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     },
     <span class="doccomment">/// Code of a guild&#39;s vanity invite.
     </span>VanityUrlCode {
         <span class="doccomment">/// New vanity URL code.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;String&gt;,
         <span class="doccomment">/// Old vanity URL code.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
     <span class="doccomment">/// Required verification level of new members in a guild.
     </span>VerificationLevel {
         <span class="doccomment">/// New verification level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;VerificationLevel&gt;,
         <span class="doccomment">/// Old verification level.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;VerificationLevel&gt;,
     },
     <span class="doccomment">/// Channel ID of a widget.
     </span>WidgetChannelId {
         <span class="doccomment">/// New channel ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
         <span class="doccomment">/// Old channel ID.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     },
     <span class="doccomment">/// Whether a widget is enabled.
     </span>WidgetEnabled {
         <span class="doccomment">/// New state of a widget being enabled.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;new_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>new: <span class="prelude-ty">Option</span>&lt;bool&gt;,
         <span class="doccomment">/// Old state of a widget being enabled.
-        </span><span class="attribute">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+        </span><span class="attr">#[serde(rename = <span class="string">&quot;old_value&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
         </span>old: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     },
     <span class="doccomment">/// Other type of change not covered by other variants.
-    </span><span class="attribute">#[serde(other)]
+    </span><span class="attr">#[serde(other)]
     </span>Other,
 }
 
@@ -1771,7 +1771,7 @@
     }
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{<span class="kw">super</span>::AuditLogChangeKey, AffectedRole, AuditLogChange};
     <span class="kw">use crate</span>::{guild::Permissions, id::Id};
@@ -1861,7 +1861,7 @@
         Sync
     );
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>afk_channel_id() {
         <span class="kw">let </span>value = AuditLogChange::AfkChannelId {
             new: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),
@@ -1888,7 +1888,7 @@
         );
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>permissions() {
         <span class="kw">let </span>old: Permissions = Permissions::SEND_MESSAGES;
         <span class="kw">let </span>new: Permissions = old | Permissions::EMBED_LINKS;
@@ -1921,4 +1921,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="twilight_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (95a3a7277 2022-10-31)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="twilight_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (e75aab045 2022-11-09)" data-search-js="search-39ee4160c7dc16c9.js" data-settings-js="settings-3a0b9947ba1bd99a.js" data-settings-css="settings-a66f7524084a489a.css" ></div></body></html>
