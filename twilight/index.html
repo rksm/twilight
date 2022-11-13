@@ -100,7 +100,7 @@ bot’s token. You must also depend on <code>futures</code>, <code>tokio</code>,
 
     // A cluster is a manager for multiple shards that by default
     // creates as many shards as Discord recommends.
-    </span><span class="kw">let </span>(cluster, <span class="kw-2">mut </span>events) = Cluster::new(token.to_owned(), Intents::GUILD_MESSAGES).<span class="kw">await</span><span class="question-mark">?</span>;
+    </span><span class="kw">let </span>(cluster, <span class="kw-2">mut </span>events) = Cluster::new(token.to_owned(), Intents::GUILD_MESSAGES | Intents::MESSAGE_CONTENT).<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="kw">let </span>cluster = Arc::new(cluster);
 
     <span class="comment">// Start up the cluster.
