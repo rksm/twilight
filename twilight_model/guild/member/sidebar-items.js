@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Member",""],["MemberDeserializer","Deserialize a member when the payload doesn’t have the guild ID but you already know the guild ID."],["MemberIntermediary","Version of [`Member`] but without a guild ID, useful in some contexts."],["MemberListDeserializer",""]]};
+window.SIDEBAR_ITEMS = {"struct":[["Member","[`User`] that is in a `Guild`."],["MemberDeserializer","Deserialize a member when the payload doesn’t have the guild ID but you already know the guild ID."],["MemberListDeserializer",""]]};

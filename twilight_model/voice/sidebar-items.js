@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["CloseCode","Voice gateway close event codes."],["OpCode",""]],"struct":[["CloseCodeConversionError",""],["VoiceRegion",""],["VoiceState",""]]};
+window.SIDEBAR_ITEMS = {"enum":[["CloseCode","Voice gateway close event codes."],["OpCode","Voice gateway opcodes."]],"struct":[["VoiceRegion","Geographically based collection of voice servers."],["VoiceState","User’s voice connection status."]]};

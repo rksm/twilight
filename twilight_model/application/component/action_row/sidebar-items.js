@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["ActionRow","A non-interactive component that acts as a container for other components."]]};
