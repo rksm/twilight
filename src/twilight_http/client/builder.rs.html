@@ -170,6 +170,7 @@
 <a href="#170" id="170">170</a>
 <a href="#171" id="171">171</a>
 <a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{client::connector, Client};
 <span class="kw">use </span>hyper::header::HeaderMap;
 <span class="kw">use </span>std::{
@@ -321,7 +322,8 @@
 
 <span class="kw">impl </span>Default <span class="kw">for </span>ClientBuilder {
     <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{
+        <span class="attr">#[allow(clippy::box_default)]
+        </span><span class="self">Self </span>{
             default_allowed_mentions: <span class="prelude-val">None</span>,
             default_headers: <span class="prelude-val">None</span>,
             proxy: <span class="prelude-val">None</span>,

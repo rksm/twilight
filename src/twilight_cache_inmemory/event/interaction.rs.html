@@ -343,7 +343,7 @@
                 <span class="comment">// Cache resolved roles
                 </span><span class="kw">if </span>cache.wants(ResourceType::ROLE) {
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(guild_id) = <span class="self">self</span>.guild_id {
-                        cache.cache_roles(guild_id, resolved.roles.iter().map(|(<span class="kw">_</span>, v)| v).cloned());
+                        cache.cache_roles(guild_id, resolved.roles.values().cloned());
                     }
                 }
             }
