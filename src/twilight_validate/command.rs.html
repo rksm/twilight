@@ -558,6 +558,7 @@
 <a href="#558" id="558">558</a>
 <a href="#559" id="559">559</a>
 <a href="#560" id="560">560</a>
+<a href="#561" id="561">561</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Constants, error types, and functions for validating [`Command`]s.
 
 </span><span class="kw">use </span>std::{
@@ -1080,6 +1081,7 @@
             kind: CommandType::ChatInput,
             name: <span class="string">&quot;b&quot;</span>.repeat(<span class="number">32</span>),
             name_localizations: <span class="prelude-val">Some</span>(HashMap::from([(<span class="string">&quot;en-US&quot;</span>.to_string(), <span class="string">&quot;b&quot;</span>.repeat(<span class="number">32</span>))])),
+            nsfw: <span class="prelude-val">None</span>,
             options: Vec::new(),
             version: Id::new(<span class="number">4</span>),
         };

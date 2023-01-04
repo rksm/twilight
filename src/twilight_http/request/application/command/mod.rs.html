@@ -109,6 +109,10 @@
 <a href="#109" id="109">109</a>
 <a href="#110" id="110">110</a>
 <a href="#111" id="111">111</a>
+<a href="#112" id="112">112</a>
+<a href="#113" id="113">113</a>
+<a href="#114" id="114">114</a>
+<a href="#115" id="115">115</a>
 </pre><pre class="rust"><code><span class="kw">pub mod </span>create_global_command;
 <span class="kw">pub mod </span>create_guild_command;
 
@@ -165,6 +169,8 @@
     <span class="kw">pub </span>name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>name_localizations: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>HashMap&lt;String, String&gt;&gt;,
+    <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>nsfw: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     <span class="attr">#[serde(default)]
     </span><span class="kw">pub </span>options: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[CommandOption]&gt;,
 }
@@ -203,6 +209,7 @@
                 <span class="string">&quot;en-US&quot;</span>.to_owned(),
                 <span class="string">&quot;command name&quot;</span>.to_owned(),
             )])),
+            nsfw: <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
             options: Vec::new(),
             version: Id::new(<span class="number">1</span>),
         };
@@ -216,6 +223,7 @@
             kind: CommandType::ChatInput,
             name: <span class="kw-2">&amp;</span>command.name,
             name_localizations: command.name_localizations.as_ref(),
+            nsfw: command.nsfw,
             options: <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>command.options),
         };
     }

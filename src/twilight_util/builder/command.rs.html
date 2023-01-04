@@ -1716,6 +1716,18 @@
 <a href="#1716" id="1716">1716</a>
 <a href="#1717" id="1717">1717</a>
 <a href="#1718" id="1718">1718</a>
+<a href="#1719" id="1719">1719</a>
+<a href="#1720" id="1720">1720</a>
+<a href="#1721" id="1721">1721</a>
+<a href="#1722" id="1722">1722</a>
+<a href="#1723" id="1723">1723</a>
+<a href="#1724" id="1724">1724</a>
+<a href="#1725" id="1725">1725</a>
+<a href="#1726" id="1726">1726</a>
+<a href="#1727" id="1727">1727</a>
+<a href="#1728" id="1728">1728</a>
+<a href="#1729" id="1729">1729</a>
+<a href="#1730" id="1730">1730</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Create a [`Command`] with a builder.
 //!
 //! # Examples
@@ -1793,6 +1805,7 @@
             kind,
             name: name.into(),
             name_localizations: <span class="prelude-val">None</span>,
+            nsfw: <span class="prelude-val">None</span>,
             options: Vec::new(),
             version: Id::new(<span class="number">1</span>),
         })
@@ -1890,6 +1903,15 @@
 
     <span class="kw">fn </span>_option(<span class="kw-2">mut </span><span class="self">self</span>, option: CommandOption) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.<span class="number">0</span>.options.push(option);
+
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Set whether the command is age-restricted.
+    ///
+    /// Defaults to not being specified, which uses Discord&#39;s default.
+    </span><span class="kw">pub const fn </span>nsfw(<span class="kw-2">mut </span><span class="self">self</span>, nsfw: bool) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.<span class="number">0</span>.nsfw = <span class="prelude-val">Some</span>(nsfw);
 
         <span class="self">self
     </span>}
@@ -3126,6 +3148,7 @@
                 <span class="string">&quot;Get or edit permissions for a user or a role&quot;</span>,
                 CommandType::ChatInput,
             )
+            .nsfw(<span class="bool-val">true</span>)
             .option(
                 SubCommandGroupBuilder::new(<span class="string">&quot;user&quot;</span>, <span class="string">&quot;Get or edit permissions for a user&quot;</span>)
                     .subcommands([
@@ -3176,6 +3199,7 @@
             kind: CommandType::ChatInput,
             name: String::from(<span class="string">&quot;permissions&quot;</span>),
             name_localizations: <span class="prelude-val">None</span>,
+            nsfw: <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
             description_localizations: <span class="prelude-val">None</span>,
             options: Vec::from([
                 CommandOption {

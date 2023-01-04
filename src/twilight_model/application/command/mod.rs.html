@@ -558,6 +558,12 @@
 <a href="#558" id="558">558</a>
 <a href="#559" id="559">559</a>
 <a href="#560" id="560">560</a>
+<a href="#561" id="561">561</a>
+<a href="#562" id="562">562</a>
+<a href="#563" id="563">563</a>
+<a href="#564" id="564">564</a>
+<a href="#565" id="565">565</a>
+<a href="#566" id="566">566</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Used for building commands to send to Discord.
 //!
 //! It is highly recommended to use the associated [`CommandBuilder`] in the
@@ -643,6 +649,11 @@
     /// [Discord Docs/Localization]: https://discord.com/developers/docs/interactions/application-commands#localization
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>name_localizations: <span class="prelude-ty">Option</span>&lt;HashMap&lt;String, String&gt;&gt;,
+    <span class="doccomment">/// Whether the command is age-restricted.
+    ///
+    /// Defaults to false.
+    </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>nsfw: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     <span class="attr">#[serde(default)]
     </span><span class="kw">pub </span>options: Vec&lt;CommandOption&gt;,
     <span class="doccomment">/// Autoincrementing version identifier.
@@ -676,6 +687,7 @@
             kind: CommandType::ChatInput,
             name: <span class="string">&quot;test command&quot;</span>.into(),
             name_localizations: <span class="prelude-val">Some</span>(HashMap::from([(<span class="string">&quot;en-US&quot;</span>.into(), <span class="string">&quot;test command&quot;</span>.into())])),
+            nsfw: <span class="prelude-val">None</span>,
             options: Vec::from([CommandOption {
                 autocomplete: <span class="prelude-val">None</span>,
                 channel_types: <span class="prelude-val">None</span>,

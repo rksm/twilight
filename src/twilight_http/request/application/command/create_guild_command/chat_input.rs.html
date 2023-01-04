@@ -189,6 +189,18 @@
 <a href="#189" id="189">189</a>
 <a href="#190" id="190">190</a>
 <a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
+<a href="#193" id="193">193</a>
+<a href="#194" id="194">194</a>
+<a href="#195" id="195">195</a>
+<a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::<span class="kw">super</span>::CommandBorrowed;
 <span class="kw">use crate</span>::{
     client::Client,
@@ -228,6 +240,7 @@
     guild_id: Id&lt;GuildMarker&gt;,
     http: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Client,
     name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
+    nsfw: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     name_localizations: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>HashMap&lt;String, String&gt;&gt;,
     options: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[CommandOption]&gt;,
 }
@@ -253,6 +266,7 @@
             http,
             name,
             name_localizations: <span class="prelude-val">None</span>,
+            nsfw: <span class="prelude-val">None</span>,
             options: <span class="prelude-val">None</span>,
         })
     }
@@ -338,6 +352,15 @@
         <span class="prelude-val">Ok</span>(<span class="self">self</span>)
     }
 
+    <span class="doccomment">/// Set whether the command is age-restricted.
+    ///
+    /// Defaults to not being specified, which uses Discord&#39;s default.
+    </span><span class="kw">pub const fn </span>nsfw(<span class="kw-2">mut </span><span class="self">self</span>, nsfw: bool) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.nsfw = <span class="prelude-val">Some</span>(nsfw);
+
+        <span class="self">self
+    </span>}
+
     <span class="doccomment">/// Execute the request, returning a future resolving to a [`Response`].
     </span><span class="attr">#[deprecated(since = <span class="string">&quot;0.14.0&quot;</span>, note = <span class="string">&quot;use `.await` or `into_future` instead&quot;</span>)]
     </span><span class="kw">pub fn </span>exec(<span class="self">self</span>) -&gt; ResponseFuture&lt;Command&gt; {
@@ -375,6 +398,7 @@
             kind: CommandType::ChatInput,
             name: <span class="self">self</span>.name,
             name_localizations: <span class="self">self</span>.name_localizations,
+            nsfw: <span class="self">self</span>.nsfw,
             options: <span class="self">self</span>.options,
         })
         .map(RequestBuilder::build)
