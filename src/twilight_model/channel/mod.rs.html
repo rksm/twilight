@@ -632,6 +632,15 @@
 <a href="#632" id="632">632</a>
 <a href="#633" id="633">633</a>
 <a href="#634" id="634">634</a>
+<a href="#635" id="635">635</a>
+<a href="#636" id="636">636</a>
+<a href="#637" id="637">637</a>
+<a href="#638" id="638">638</a>
+<a href="#639" id="639">639</a>
+<a href="#640" id="640">640</a>
+<a href="#641" id="641">641</a>
+<a href="#642" id="642">642</a>
+<a href="#643" id="643">643</a>
 </pre><pre class="rust"><code><span class="kw">pub mod </span>forum;
 <span class="kw">pub mod </span>message;
 <span class="kw">pub mod </span>permission_overwrite;
@@ -660,7 +669,7 @@
 
 <span class="kw">use crate</span>::{
     channel::{
-        forum::{DefaultReaction, ForumTag},
+        forum::{DefaultReaction, ForumLayout, ForumTag},
         permission_overwrite::PermissionOverwrite,
         thread::{AutoArchiveDuration, ThreadMember, ThreadMetadata},
     },
@@ -706,6 +715,9 @@
     /// level.
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>default_auto_archive_duration: <span class="prelude-ty">Option</span>&lt;AutoArchiveDuration&gt;,
+    <span class="doccomment">/// Default forum layout view used to display posts in forum channels.
+    </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>default_forum_layout: <span class="prelude-ty">Option</span>&lt;ForumLayout&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>default_reaction_emoji: <span class="prelude-ty">Option</span>&lt;DefaultReaction&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
@@ -852,6 +864,7 @@
             available_tags: <span class="prelude-val">None</span>,
             bitrate: <span class="prelude-val">None</span>,
             default_auto_archive_duration: <span class="prelude-val">None</span>,
+            default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
@@ -892,6 +905,7 @@
             available_tags: <span class="prelude-val">None</span>,
             bitrate: <span class="prelude-val">None</span>,
             default_auto_archive_duration: <span class="prelude-val">None</span>,
+            default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
@@ -944,6 +958,7 @@
             available_tags: <span class="prelude-val">None</span>,
             bitrate: <span class="prelude-val">None</span>,
             default_auto_archive_duration: <span class="prelude-val">None</span>,
+            default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
@@ -1003,6 +1018,7 @@
             available_tags: <span class="prelude-val">None</span>,
             bitrate: <span class="prelude-val">None</span>,
             default_auto_archive_duration: <span class="prelude-val">Some</span>(AutoArchiveDuration::Hour),
+            default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
@@ -1089,6 +1105,7 @@
             available_tags: <span class="prelude-val">None</span>,
             bitrate: <span class="prelude-val">None</span>,
             default_auto_archive_duration: <span class="prelude-val">Some</span>(AutoArchiveDuration::Hour),
+            default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
@@ -1176,6 +1193,7 @@
             available_tags: <span class="prelude-val">None</span>,
             bitrate: <span class="prelude-val">None</span>,
             default_auto_archive_duration: <span class="prelude-val">Some</span>(AutoArchiveDuration::Hour),
+            default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,

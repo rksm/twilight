@@ -387,6 +387,16 @@
 <a href="#387" id="387">387</a>
 <a href="#388" id="388">388</a>
 <a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
+<a href="#394" id="394">394</a>
+<a href="#395" id="395">395</a>
+<a href="#396" id="396">396</a>
+<a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -398,7 +408,7 @@
 <span class="kw">use </span>std::future::IntoFuture;
 <span class="kw">use </span>twilight_model::{
     channel::{
-        forum::{DefaultReaction, ForumTag},
+        forum::{DefaultReaction, ForumLayout, ForumTag},
         permission_overwrite::PermissionOverwrite,
         Channel, ChannelFlags, ChannelType, VideoQualityMode,
     },
@@ -420,6 +430,8 @@
     </span>available_tags: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[ForumTag]&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>bitrate: <span class="prelude-ty">Option</span>&lt;u32&gt;,
+    <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span>default_forum_layout: <span class="prelude-ty">Option</span>&lt;ForumLayout&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>default_reaction_emoji: <span class="prelude-ty">Option</span>&lt;Nullable&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DefaultReaction&gt;&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
@@ -470,6 +482,7 @@
             fields: UpdateChannelFields {
                 available_tags: <span class="prelude-val">None</span>,
                 bitrate: <span class="prelude-val">None</span>,
+                default_forum_layout: <span class="prelude-val">None</span>,
                 default_reaction_emoji: <span class="prelude-val">None</span>,
                 default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
                 flags: <span class="prelude-val">None</span>,
@@ -516,6 +529,13 @@
 
         <span class="prelude-val">Ok</span>(<span class="self">self</span>)
     }
+
+    <span class="doccomment">/// Set the default layout for forum channels.
+    </span><span class="kw">pub const fn </span>default_forum_layout(<span class="kw-2">mut </span><span class="self">self</span>, default_forum_layout: ForumLayout) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fields.default_forum_layout = <span class="prelude-val">Some</span>(default_forum_layout);
+
+        <span class="self">self
+    </span>}
 
     <span class="doccomment">/// Set the default reaction emoji for new forum threads.
     </span><span class="kw">pub const fn </span>default_reaction_emoji(
