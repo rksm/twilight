@@ -86,6 +86,26 @@
 <a href="#86" id="86">86</a>
 <a href="#87" id="87">87</a>
 <a href="#88" id="88">88</a>
+<a href="#89" id="89">89</a>
+<a href="#90" id="90">90</a>
+<a href="#91" id="91">91</a>
+<a href="#92" id="92">92</a>
+<a href="#93" id="93">93</a>
+<a href="#94" id="94">94</a>
+<a href="#95" id="95">95</a>
+<a href="#96" id="96">96</a>
+<a href="#97" id="97">97</a>
+<a href="#98" id="98">98</a>
+<a href="#99" id="99">99</a>
+<a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
+<a href="#103" id="103">103</a>
+<a href="#104" id="104">104</a>
+<a href="#105" id="105">105</a>
+<a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
+<a href="#108" id="108">108</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     id::{
         marker::{IntegrationMarker, UserMarker},
@@ -122,11 +142,11 @@
     <span class="kw">use </span>serde_test::Token;
 
     <span class="attr">#[test]
-    </span><span class="kw">fn </span>role_tags_all() {
+    </span><span class="kw">fn </span>bot() {
         <span class="kw">let </span>tags = RoleTags {
             bot_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),
             integration_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">2</span>)),
-            premium_subscriber: <span class="bool-val">true</span>,
+            premium_subscriber: <span class="bool-val">false</span>,
         };
 
         serde_test::assert_tokens(
@@ -134,7 +154,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;RoleTags&quot;</span>,
-                    len: <span class="number">3</span>,
+                    len: <span class="number">2</span>,
                 },
                 Token::Str(<span class="string">&quot;bot_id&quot;</span>),
                 Token::Some,
@@ -144,6 +164,26 @@
                 Token::Some,
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;2&quot;</span>),
+                Token::StructEnd,
+            ],
+        );
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>premium_subscriber() {
+        <span class="kw">let </span>tags = RoleTags {
+            bot_id: <span class="prelude-val">None</span>,
+            integration_id: <span class="prelude-val">None</span>,
+            premium_subscriber: <span class="bool-val">true</span>,
+        };
+
+        serde_test::assert_tokens(
+            <span class="kw-2">&amp;</span>tags,
+            <span class="kw-2">&amp;</span>[
+                Token::Struct {
+                    name: <span class="string">&quot;RoleTags&quot;</span>,
+                    len: <span class="number">1</span>,
+                },
                 Token::Str(<span class="string">&quot;premium_subscriber&quot;</span>),
                 Token::None,
                 Token::StructEnd,
@@ -151,11 +191,11 @@
         );
     }
 
-    <span class="doccomment">/// Test that if all fields are None and `premium_subscriber` is false, then
-    /// serialize back into the source payload (where all fields are not
+    <span class="doccomment">/// Test that if all fields are None and the optional null fields are false,
+    /// then serialize back into the source payload (where all fields are not
     /// present).
     </span><span class="attr">#[test]
-    </span><span class="kw">fn </span>role_tags_none() {
+    </span><span class="kw">fn </span>none() {
         <span class="kw">let </span>tags = RoleTags {
             bot_id: <span class="prelude-val">None</span>,
             integration_id: <span class="prelude-val">None</span>,
