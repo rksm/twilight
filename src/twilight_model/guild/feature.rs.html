@@ -191,6 +191,14 @@
 <a href="#191" id="191">191</a>
 <a href="#192" id="192">192</a>
 <a href="#193" id="193">193</a>
+<a href="#194" id="194">194</a>
+<a href="#195" id="195">195</a>
+<a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
 </pre><pre class="rust"><code><span class="attr">#![allow(deprecated)]
 </span><span class="kw">use </span>std::borrow::Cow;
 
@@ -219,6 +227,8 @@
     <span class="doccomment">/// Can enable welcome screen, membership screening, stage channels,
     /// discovery, and receives community updates.
     </span>Community,
+    <span class="doccomment">/// Guild has been set as a support server on the App Directory.
+    </span>DeveloperSupportServer,
     <span class="doccomment">/// Is able to be discovered in the directory.
     </span>Discoverable,
     <span class="doccomment">/// Is able to be featured in the directory.
@@ -266,6 +276,7 @@
             GuildFeature::Banner =&gt; <span class="string">&quot;BANNER&quot;</span>.into(),
             GuildFeature::Commerce =&gt; <span class="string">&quot;COMMERCE&quot;</span>.into(),
             GuildFeature::Community =&gt; <span class="string">&quot;COMMUNITY&quot;</span>.into(),
+            GuildFeature::DeveloperSupportServer =&gt; <span class="string">&quot;DEVELOPER_SUPPORT_SERVER&quot;</span>.into(),
             GuildFeature::Discoverable =&gt; <span class="string">&quot;DISCOVERABLE&quot;</span>.into(),
             GuildFeature::Featurable =&gt; <span class="string">&quot;FEATURABLE&quot;</span>.into(),
             GuildFeature::InvitesDisabled =&gt; <span class="string">&quot;INVITES_DISABLED&quot;</span>.into(),
@@ -299,6 +310,7 @@
             <span class="string">&quot;BANNER&quot; </span>=&gt; <span class="self">Self</span>::Banner,
             <span class="string">&quot;COMMERCE&quot; </span>=&gt; <span class="self">Self</span>::Commerce,
             <span class="string">&quot;COMMUNITY&quot; </span>=&gt; <span class="self">Self</span>::Community,
+            <span class="string">&quot;DEVELOPER_SUPPORT_SERVER&quot; </span>=&gt; <span class="self">Self</span>::DeveloperSupportServer,
             <span class="string">&quot;DISCOVERABLE&quot; </span>=&gt; <span class="self">Self</span>::Discoverable,
             <span class="string">&quot;FEATURABLE&quot; </span>=&gt; <span class="self">Self</span>::Featurable,
             <span class="string">&quot;INVITES_DISABLED&quot; </span>=&gt; <span class="self">Self</span>::InvitesDisabled,
@@ -340,6 +352,10 @@
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::Banner, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;BANNER&quot;</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::Commerce, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;COMMERCE&quot;</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::Community, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;COMMUNITY&quot;</span>)]);
+        serde_test::assert_tokens(
+            <span class="kw-2">&amp;</span>GuildFeature::DeveloperSupportServer,
+            <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;DEVELOPER_SUPPORT_SERVER&quot;</span>)],
+        );
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::Discoverable, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;DISCOVERABLE&quot;</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>GuildFeature::Featurable, <span class="kw-2">&amp;</span>[Token::Str(<span class="string">&quot;FEATURABLE&quot;</span>)]);
         serde_test::assert_tokens(
