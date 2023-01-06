@@ -397,6 +397,16 @@
 <a href="#397" id="397">397</a>
 <a href="#398" id="398">398</a>
 <a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
+<a href="#401" id="401">401</a>
+<a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
+<a href="#404" id="404">404</a>
+<a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
+<a href="#407" id="407">407</a>
+<a href="#408" id="408">408</a>
+<a href="#409" id="409">409</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -408,7 +418,7 @@
 <span class="kw">use </span>std::future::IntoFuture;
 <span class="kw">use </span>twilight_model::{
     channel::{
-        forum::{DefaultReaction, ForumLayout, ForumTag},
+        forum::{DefaultReaction, ForumLayout, ForumSortOrder, ForumTag},
         permission_overwrite::PermissionOverwrite,
         Channel, ChannelFlags, ChannelType, VideoQualityMode,
     },
@@ -434,6 +444,8 @@
     </span>default_forum_layout: <span class="prelude-ty">Option</span>&lt;ForumLayout&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>default_reaction_emoji: <span class="prelude-ty">Option</span>&lt;Nullable&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DefaultReaction&gt;&gt;,
+    <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span>default_sort_order: <span class="prelude-ty">Option</span>&lt;Nullable&lt;ForumSortOrder&gt;&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>default_thread_rate_limit_per_user: <span class="prelude-ty">Option</span>&lt;Nullable&lt;u16&gt;&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
@@ -484,6 +496,7 @@
                 bitrate: <span class="prelude-val">None</span>,
                 default_forum_layout: <span class="prelude-val">None</span>,
                 default_reaction_emoji: <span class="prelude-val">None</span>,
+                default_sort_order: <span class="prelude-val">None</span>,
                 default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
                 flags: <span class="prelude-val">None</span>,
                 kind: <span class="prelude-val">None</span>,
@@ -543,6 +556,13 @@
         default_reaction_emoji: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DefaultReaction&gt;,
     ) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fields.default_reaction_emoji = <span class="prelude-val">Some</span>(Nullable(default_reaction_emoji));
+
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Set the default sort order for forum channels.
+    </span><span class="kw">pub const fn </span>default_sort_order(<span class="kw-2">mut </span><span class="self">self</span>, default_sort_order: <span class="prelude-ty">Option</span>&lt;ForumSortOrder&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fields.default_sort_order = <span class="prelude-val">Some</span>(Nullable(default_sort_order));
 
         <span class="self">self
     </span>}

@@ -641,6 +641,15 @@
 <a href="#641" id="641">641</a>
 <a href="#642" id="642">642</a>
 <a href="#643" id="643">643</a>
+<a href="#644" id="644">644</a>
+<a href="#645" id="645">645</a>
+<a href="#646" id="646">646</a>
+<a href="#647" id="647">647</a>
+<a href="#648" id="648">648</a>
+<a href="#649" id="649">649</a>
+<a href="#650" id="650">650</a>
+<a href="#651" id="651">651</a>
+<a href="#652" id="652">652</a>
 </pre><pre class="rust"><code><span class="kw">pub mod </span>forum;
 <span class="kw">pub mod </span>message;
 <span class="kw">pub mod </span>permission_overwrite;
@@ -669,7 +678,7 @@
 
 <span class="kw">use crate</span>::{
     channel::{
-        forum::{DefaultReaction, ForumLayout, ForumTag},
+        forum::{DefaultReaction, ForumLayout, ForumSortOrder, ForumTag},
         permission_overwrite::PermissionOverwrite,
         thread::{AutoArchiveDuration, ThreadMember, ThreadMetadata},
     },
@@ -720,6 +729,9 @@
     </span><span class="kw">pub </span>default_forum_layout: <span class="prelude-ty">Option</span>&lt;ForumLayout&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>default_reaction_emoji: <span class="prelude-ty">Option</span>&lt;DefaultReaction&gt;,
+    <span class="doccomment">/// Default sort order used to display posts in forum channels.
+    </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>default_sort_order: <span class="prelude-ty">Option</span>&lt;ForumSortOrder&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>default_thread_rate_limit_per_user: <span class="prelude-ty">Option</span>&lt;u16&gt;,
     <span class="doccomment">/// Flags of the channel.
@@ -866,6 +878,7 @@
             default_auto_archive_duration: <span class="prelude-val">None</span>,
             default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
+            default_sort_order: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
             guild_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),
@@ -907,6 +920,7 @@
             default_auto_archive_duration: <span class="prelude-val">None</span>,
             default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
+            default_sort_order: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
             guild_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">2</span>)),
@@ -960,6 +974,7 @@
             default_auto_archive_duration: <span class="prelude-val">None</span>,
             default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
+            default_sort_order: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
             guild_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">2</span>)),
@@ -1020,6 +1035,7 @@
             default_auto_archive_duration: <span class="prelude-val">Some</span>(AutoArchiveDuration::Hour),
             default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
+            default_sort_order: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
             guild_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),
@@ -1107,6 +1123,7 @@
             default_auto_archive_duration: <span class="prelude-val">Some</span>(AutoArchiveDuration::Hour),
             default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
+            default_sort_order: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
             guild_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),
@@ -1195,6 +1212,7 @@
             default_auto_archive_duration: <span class="prelude-val">Some</span>(AutoArchiveDuration::Hour),
             default_forum_layout: <span class="prelude-val">None</span>,
             default_reaction_emoji: <span class="prelude-val">None</span>,
+            default_sort_order: <span class="prelude-val">None</span>,
             default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
             flags: <span class="prelude-val">None</span>,
             guild_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),

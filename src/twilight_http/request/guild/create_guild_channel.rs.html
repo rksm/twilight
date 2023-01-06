@@ -320,6 +320,16 @@
 <a href="#320" id="320">320</a>
 <a href="#321" id="321">321</a>
 <a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -331,7 +341,7 @@
 <span class="kw">use </span>std::future::IntoFuture;
 <span class="kw">use </span>twilight_model::{
     channel::{
-        forum::{DefaultReaction, ForumTag},
+        forum::{DefaultReaction, ForumSortOrder, ForumTag},
         permission_overwrite::PermissionOverwrite,
         thread::AutoArchiveDuration,
         Channel, ChannelType, VideoQualityMode,
@@ -360,6 +370,8 @@
     </span>default_auto_archive_duration: <span class="prelude-ty">Option</span>&lt;AutoArchiveDuration&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>default_reaction_emoji: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DefaultReaction&gt;,
+    <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span>default_sort_order: <span class="prelude-ty">Option</span>&lt;ForumSortOrder&gt;,
     <span class="attr">#[serde(rename = <span class="string">&quot;type&quot;</span>, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>kind: <span class="prelude-ty">Option</span>&lt;ChannelType&gt;,
     name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
@@ -409,6 +421,7 @@
                 bitrate: <span class="prelude-val">None</span>,
                 default_auto_archive_duration: <span class="prelude-val">None</span>,
                 default_reaction_emoji: <span class="prelude-val">None</span>,
+                default_sort_order: <span class="prelude-val">None</span>,
                 kind: <span class="prelude-val">None</span>,
                 name,
                 nsfw: <span class="prelude-val">None</span>,
@@ -474,6 +487,13 @@
         default_reaction_emoji: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DefaultReaction,
     ) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fields.default_reaction_emoji = <span class="prelude-val">Some</span>(default_reaction_emoji);
+
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Set the default sort order for newly created forum channels.
+    </span><span class="kw">pub const fn </span>default_sort_order(<span class="kw-2">mut </span><span class="self">self</span>, default_sort_order: ForumSortOrder) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fields.default_sort_order = <span class="prelude-val">Some</span>(default_sort_order);
 
         <span class="self">self
     </span>}
