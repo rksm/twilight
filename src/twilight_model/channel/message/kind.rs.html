@@ -257,6 +257,17 @@
 <a href="#257" id="257">257</a>
 <a href="#258" id="258">258</a>
 <a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::guild::Permissions;
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 
@@ -315,6 +326,10 @@
     ContextMenuCommand,
     <span class="doccomment">/// Message is an auto moderation action.
     </span>AutoModerationAction,
+    <span class="doccomment">/// System message denoting a interaction premium upsell.
+    </span>InteractionPremiumUpsell,
+    <span class="doccomment">/// System message denoting a guild application premium subscription.
+    </span>GuildApplicationPremiumSubscription,
     <span class="doccomment">/// Variant value is unknown to the library.
     </span>Unknown(u8),
 }
@@ -350,6 +365,7 @@
                 | <span class="self">Self</span>::GuildInviteReminder
                 | <span class="self">Self</span>::ContextMenuCommand
                 | <span class="self">Self</span>::AutoModerationAction
+                | <span class="self">Self</span>::InteractionPremiumUpsell
         )
     }
 
@@ -405,6 +421,8 @@
             <span class="number">22 </span>=&gt; <span class="self">Self</span>::GuildInviteReminder,
             <span class="number">23 </span>=&gt; <span class="self">Self</span>::ContextMenuCommand,
             <span class="number">24 </span>=&gt; <span class="self">Self</span>::AutoModerationAction,
+            <span class="number">26 </span>=&gt; <span class="self">Self</span>::InteractionPremiumUpsell,
+            <span class="number">32 </span>=&gt; <span class="self">Self</span>::GuildApplicationPremiumSubscription,
             unknown =&gt; <span class="self">Self</span>::Unknown(unknown),
         }
     }
@@ -437,6 +455,8 @@
             MessageType::GuildInviteReminder =&gt; <span class="number">22</span>,
             MessageType::ContextMenuCommand =&gt; <span class="number">23</span>,
             MessageType::AutoModerationAction =&gt; <span class="number">24</span>,
+            MessageType::InteractionPremiumUpsell =&gt; <span class="number">26</span>,
+            MessageType::GuildApplicationPremiumSubscription =&gt; <span class="number">32</span>,
             MessageType::Unknown(unknown) =&gt; unknown,
         }
     }
@@ -499,6 +519,8 @@
             (MessageType::GuildInviteReminder, <span class="number">22</span>, <span class="bool-val">true</span>),
             (MessageType::ContextMenuCommand, <span class="number">23</span>, <span class="bool-val">true</span>),
             (MessageType::AutoModerationAction, <span class="number">24</span>, <span class="bool-val">true</span>),
+            (MessageType::InteractionPremiumUpsell, <span class="number">26</span>, <span class="bool-val">true</span>),
+            (MessageType::GuildApplicationPremiumSubscription, <span class="number">32</span>, <span class="bool-val">false</span>),
         ];
 
         <span class="kw">for </span>(message_type, number, deletable) <span class="kw">in </span>MAP {
