@@ -164,6 +164,7 @@
 <a href="#164" id="164">164</a>
 <a href="#165" id="165">165</a>
 <a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     id::{
         marker::{IntegrationMarker, RoleSubscriptionSkuMarker, UserMarker},
@@ -277,9 +278,10 @@
         <span class="kw">let </span>tags = RoleTags {
             available_for_purchase: <span class="bool-val">true</span>,
             bot_id: <span class="prelude-val">None</span>,
+            guild_connections: <span class="bool-val">false</span>,
             integration_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),
-            premium_subscriber: <span class="bool-val">false</span>,
             subscription_listing_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">2</span>)),
+            premium_subscriber: <span class="bool-val">false</span>,
         };
 
         serde_test::assert_tokens(
