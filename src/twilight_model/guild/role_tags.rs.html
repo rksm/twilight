@@ -154,6 +154,16 @@
 <a href="#154" id="154">154</a>
 <a href="#155" id="155">155</a>
 <a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     id::{
         marker::{IntegrationMarker, RoleSubscriptionSkuMarker, UserMarker},
@@ -178,6 +188,13 @@
     <span class="doccomment">/// ID of the bot the role belongs to.
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>bot_id: <span class="prelude-ty">Option</span>&lt;Id&lt;UserMarker&gt;&gt;,
+    <span class="doccomment">/// Whether this role is a guild&#39;s linked role.
+    </span><span class="attr">#[serde(
+        default,
+        skip_serializing_if = <span class="string">&quot;is_false&quot;</span>,
+        with = <span class="string">&quot;crate::visitor::null_boolean&quot;
+    </span>)]
+    </span><span class="kw">pub </span>guild_connections: bool,
     <span class="doccomment">/// ID of the integration the role belongs to.
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>integration_id: <span class="prelude-ty">Option</span>&lt;Id&lt;IntegrationMarker&gt;&gt;,
@@ -204,6 +221,7 @@
         <span class="kw">let </span>tags = RoleTags {
             available_for_purchase: <span class="bool-val">false</span>,
             bot_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),
+            guild_connections: <span class="bool-val">false</span>,
             integration_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">2</span>)),
             premium_subscriber: <span class="bool-val">false</span>,
             subscription_listing_id: <span class="prelude-val">None</span>,
@@ -234,6 +252,7 @@
         <span class="kw">let </span>tags = RoleTags {
             available_for_purchase: <span class="bool-val">false</span>,
             bot_id: <span class="prelude-val">None</span>,
+            guild_connections: <span class="bool-val">false</span>,
             integration_id: <span class="prelude-val">None</span>,
             premium_subscriber: <span class="bool-val">true</span>,
             subscription_listing_id: <span class="prelude-val">None</span>,
@@ -293,6 +312,7 @@
         <span class="kw">let </span>tags = RoleTags {
             available_for_purchase: <span class="bool-val">false</span>,
             bot_id: <span class="prelude-val">None</span>,
+            guild_connections: <span class="bool-val">false</span>,
             integration_id: <span class="prelude-val">None</span>,
             premium_subscriber: <span class="bool-val">false</span>,
             subscription_listing_id: <span class="prelude-val">None</span>,
