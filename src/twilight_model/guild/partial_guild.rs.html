@@ -218,6 +218,12 @@
 <a href="#218" id="218">218</a>
 <a href="#219" id="219">219</a>
 <a href="#220" id="220">220</a>
+<a href="#221" id="221">221</a>
+<a href="#222" id="222">222</a>
+<a href="#223" id="223">223</a>
+<a href="#224" id="224">224</a>
+<a href="#225" id="225">225</a>
+<a href="#226" id="226">226</a>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{
     DefaultMessageNotificationLevel, Emoji, ExplicitContentFilter, GuildFeature, MfaLevel,
     NSFWLevel, Permissions, PremiumTier, Role, SystemChannelFlags, VerificationLevel,
@@ -265,6 +271,9 @@
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>premium_subscription_count: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     <span class="kw">pub </span>premium_tier: PremiumTier,
+    <span class="doccomment">/// ID of the where moderators of Community guilds receive notices from
+    /// Discord.
+    </span><span class="kw">pub </span>public_updates_channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     <span class="kw">pub </span>roles: Vec&lt;Role&gt;,
     <span class="kw">pub </span>rules_channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     <span class="kw">pub </span>splash: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
@@ -318,6 +327,7 @@
             premium_progress_bar_enabled: <span class="bool-val">true</span>,
             premium_subscription_count: <span class="prelude-val">Some</span>(<span class="number">3</span>),
             premium_tier: PremiumTier::Tier1,
+            public_updates_channel_id: <span class="prelude-val">None</span>,
             roles: Vec::new(),
             rules_channel_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">6</span>)),
             splash: <span class="prelude-val">Some</span>(image_hash::SPLASH),
@@ -334,7 +344,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;PartialGuild&quot;</span>,
-                    len: <span class="number">34</span>,
+                    len: <span class="number">35</span>,
                 },
                 Token::Str(<span class="string">&quot;id&quot;</span>),
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
@@ -405,6 +415,8 @@
                 Token::U64(<span class="number">3</span>),
                 Token::Str(<span class="string">&quot;premium_tier&quot;</span>),
                 Token::U8(<span class="number">1</span>),
+                Token::Str(<span class="string">&quot;public_updates_channel_id&quot;</span>),
+                Token::None,
                 Token::Str(<span class="string">&quot;roles&quot;</span>),
                 Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">0</span>) },
                 Token::SeqEnd,

@@ -330,6 +330,13 @@
 <a href="#330" id="330">330</a>
 <a href="#331" id="331">331</a>
 <a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
+<a href="#338" id="338">338</a>
+<a href="#339" id="339">339</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::slice::Iter;
 
 <span class="kw">use </span>serde::Serialize;
@@ -377,6 +384,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) premium_progress_bar_enabled: bool,
     <span class="kw">pub</span>(<span class="kw">crate</span>) premium_subscription_count: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) premium_tier: PremiumTier,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) public_updates_channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) rules_channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) splash: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) system_channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
@@ -540,6 +548,12 @@
     <span class="doccomment">/// Server boost level.
     </span><span class="kw">pub const fn </span>premium_tier(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PremiumTier {
         <span class="self">self</span>.premium_tier
+    }
+
+    <span class="doccomment">/// ID of the where moderators of Community guilds receive notices from
+    /// Discord.
+    </span><span class="kw">pub const fn </span>public_updates_channel_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt; {
+        <span class="self">self</span>.public_updates_channel_id
     }
 
     <span class="doccomment">/// For Community guilds, the ID of the rules channel.

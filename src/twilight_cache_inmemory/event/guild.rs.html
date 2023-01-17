@@ -569,6 +569,10 @@
 <a href="#569" id="569">569</a>
 <a href="#570" id="570">570</a>
 <a href="#571" id="571">571</a>
+<a href="#572" id="572">572</a>
+<a href="#573" id="573">573</a>
+<a href="#574" id="574">574</a>
+<a href="#575" id="575">575</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     config::ResourceType,
     model::{CachedGuild, CachedPresence},
@@ -619,6 +623,7 @@
             premium_subscription_count,
             premium_tier,
             presences,
+            public_updates_channel_id,
             roles,
             rules_channel_id,
             splash,
@@ -719,6 +724,7 @@
                 premium_progress_bar_enabled,
                 premium_subscription_count,
                 premium_tier,
+                public_updates_channel_id,
                 rules_channel_id,
                 splash,
                 system_channel_id,
@@ -995,6 +1001,7 @@
             premium_subscription_count: <span class="prelude-val">Some</span>(<span class="number">0</span>),
             premium_tier: PremiumTier::None,
             presences: Vec::new(),
+            public_updates_channel_id: <span class="prelude-val">None</span>,
             roles: Vec::new(),
             rules_channel_id: <span class="prelude-val">None</span>,
             splash: <span class="prelude-val">None</span>,
@@ -1061,6 +1068,7 @@
             premium_progress_bar_enabled: guild.premium_progress_bar_enabled,
             premium_subscription_count: guild.premium_subscription_count,
             premium_tier: guild.premium_tier,
+            public_updates_channel_id: <span class="prelude-val">None</span>,
             roles: guild.roles,
             rules_channel_id: guild.rules_channel_id,
             splash: guild.splash,

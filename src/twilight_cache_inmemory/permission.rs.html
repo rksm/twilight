@@ -1114,6 +1114,7 @@
 <a href="#1114" id="1114">1114</a>
 <a href="#1115" id="1115">1115</a>
 <a href="#1116" id="1116">1116</a>
+<a href="#1117" id="1117">1117</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Calculate the permissions for members in on a guild- or channel-level with
 //! information from the cache.
 //!
@@ -1852,6 +1853,7 @@
             premium_subscription_count: <span class="prelude-val">Some</span>(<span class="number">0</span>),
             premium_tier: PremiumTier::None,
             presences: Vec::new(),
+            public_updates_channel_id: <span class="prelude-val">None</span>,
             roles: Vec::from([
                 <span class="comment">// Give the `@everyone` role a guild level and channel level
                 // permission.
