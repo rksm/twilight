@@ -21,6 +21,8 @@
 <a href="#21" id="21">21</a>
 <a href="#22" id="22">22</a>
 <a href="#23" id="23">23</a>
+<a href="#24" id="24">24</a>
+<a href="#25" id="25">25</a>
 </pre><pre class="rust"><code><span class="kw">pub mod </span>scope;
 <span class="kw">pub mod </span>team;
 
@@ -34,12 +36,14 @@
 
 <span class="kw">mod </span>application;
 <span class="kw">mod </span>application_flags;
+<span class="kw">mod </span>current_authorization_information;
 <span class="kw">mod </span>install_params;
 <span class="kw">mod </span>partial_application;
 
 <span class="kw">pub use </span><span class="self">self</span>::{
-    application::Application, application_flags::ApplicationFlags, install_params::InstallParams,
-    partial_application::PartialApplication,
+    application::Application, application_flags::ApplicationFlags,
+    current_authorization_information::CurrentAuthorizationInformation,
+    install_params::InstallParams, partial_application::PartialApplication,
 };
 
 <span class="attr">#[allow(deprecated)]

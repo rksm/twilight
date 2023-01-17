@@ -2604,12 +2604,19 @@
 <a href="#2604" id="2604">2604</a>
 <a href="#2605" id="2605">2605</a>
 <a href="#2606" id="2606">2606</a>
+<a href="#2607" id="2607">2607</a>
+<a href="#2608" id="2608">2608</a>
+<a href="#2609" id="2609">2609</a>
+<a href="#2610" id="2610">2610</a>
+<a href="#2611" id="2611">2611</a>
+<a href="#2612" id="2612">2612</a>
 </pre><pre class="rust"><code><span class="kw">mod </span>builder;
 <span class="kw">mod </span>connector;
 <span class="kw">mod </span>interaction;
 
 <span class="kw">pub use </span><span class="self">self</span>::{builder::ClientBuilder, interaction::InteractionClient};
 
+<span class="kw">use </span><span class="kw">crate</span>::request::GetCurrentAuthorizationInformation;
 <span class="attr">#[allow(deprecated)]
 </span><span class="kw">use crate</span>::{
     client::connector::Connector,
@@ -3255,6 +3262,11 @@
         guild_id: Id&lt;GuildMarker&gt;,
     ) -&gt; GetCurrentUserGuildMember&lt;<span class="lifetime">&#39;_</span>&gt; {
         GetCurrentUserGuildMember::new(<span class="self">self</span>, guild_id)
+    }
+
+    <span class="doccomment">/// Get information about the current OAuth authorization.
+    </span><span class="kw">pub const fn </span>current_authorization(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; GetCurrentAuthorizationInformation&lt;<span class="lifetime">&#39;_</span>&gt; {
+        GetCurrentAuthorizationInformation::new(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Get information about the current bot application.

@@ -4601,6 +4601,17 @@
 <a href="#4601" id="4601">4601</a>
 <a href="#4602" id="4602">4602</a>
 <a href="#4603" id="4603">4603</a>
+<a href="#4604" id="4604">4604</a>
+<a href="#4605" id="4605">4605</a>
+<a href="#4606" id="4606">4606</a>
+<a href="#4607" id="4607">4607</a>
+<a href="#4608" id="4608">4608</a>
+<a href="#4609" id="4609">4609</a>
+<a href="#4610" id="4610">4610</a>
+<a href="#4611" id="4611">4611</a>
+<a href="#4612" id="4612">4612</a>
+<a href="#4613" id="4613">4613</a>
+<a href="#4614" id="4614">4614</a>
 </pre><pre class="rust"><code><span class="kw">use </span>percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 <span class="kw">pub use </span>twilight_http_ratelimiting::request::{Path, PathParseError, PathParseErrorType};
 
@@ -5036,6 +5047,8 @@
         <span class="doccomment">/// The ID of the guild.
         </span>guild_id: u64,
     },
+    <span class="doccomment">/// Route information to get the current OAuth authorization information.
+    </span>GetCurrentAuthorizationInformation,
     <span class="doccomment">/// Route information to get the current user.
     </span>GetCurrentUser,
     <span class="doccomment">/// Route information to get info about application the current bot user belongs to
@@ -5746,6 +5759,7 @@
             | <span class="self">Self</span>::GetChannelWebhooks { .. }
             | <span class="self">Self</span>::GetChannels { .. }
             | <span class="self">Self</span>::GetCommandPermissions { .. }
+            | <span class="self">Self</span>::GetCurrentAuthorizationInformation
             | <span class="self">Self</span>::GetCurrentUserApplicationInfo
             | <span class="self">Self</span>::GetCurrentUser
             | <span class="self">Self</span>::GetCurrentUserGuildMember { .. }
@@ -6114,6 +6128,7 @@
             | <span class="self">Self</span>::UpdateCommandPermissions { application_id, .. } =&gt; {
                 Path::ApplicationGuildCommandId(application_id)
             }
+            <span class="self">Self</span>::GetCurrentAuthorizationInformation =&gt; Path::OauthMe,
             <span class="self">Self</span>::GetCurrentUserApplicationInfo =&gt; Path::OauthApplicationsMe,
             <span class="self">Self</span>::GetCurrentUser | <span class="self">Self</span>::GetUser { .. } | <span class="self">Self</span>::UpdateCurrentUser =&gt; Path::UsersId,
             <span class="self">Self</span>::GetCurrentUserGuildMember { .. } =&gt; Path::UsersIdGuildsIdMember,
@@ -6930,6 +6945,7 @@
 
                 f.write_str(<span class="string">&quot;/permissions&quot;</span>)
             }
+            Route::GetCurrentAuthorizationInformation =&gt; f.write_str(<span class="string">&quot;oauth2/@me&quot;</span>),
             Route::GetCurrentUserApplicationInfo =&gt; f.write_str(<span class="string">&quot;oauth2/applications/@me&quot;</span>),
             Route::GetCurrentUser | Route::UpdateCurrentUser =&gt; f.write_str(<span class="string">&quot;users/@me&quot;</span>),
             Route::GetCurrentUserGuildMember { guild_id } =&gt; {
@@ -8553,6 +8569,12 @@
                 <span class="string">&quot;applications/{APPLICATION_ID}/guilds/{GUILD_ID}/commands/{COMMAND_ID}/permissions&quot;
             </span>)
         );
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>get_current_authorization_info() {
+        <span class="kw">let </span>route = Route::GetCurrentAuthorizationInformation;
+        <span class="macro">assert_eq!</span>(route.to_string(), <span class="string">&quot;oauth2/@me&quot;</span>);
     }
 
     <span class="attr">#[test]

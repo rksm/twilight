@@ -354,6 +354,8 @@
 <a href="#354" id="354">354</a>
 <a href="#355" id="355">355</a>
 <a href="#356" id="356">356</a>
+<a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
 </pre><pre class="rust"><code><span class="kw">mod </span>private {
     <span class="kw">use </span><span class="kw">crate</span>::request::{
         application::{
@@ -442,7 +444,8 @@
             GetCurrentUserGuildMember, GetCurrentUserGuilds, GetUser, LeaveGuild,
             UpdateCurrentUser,
         },
-        GetGateway, GetGatewayAuthed, GetUserApplicationInfo, GetVoiceRegions,
+        GetCurrentAuthorizationInformation, GetGateway, GetGatewayAuthed, GetUserApplicationInfo,
+        GetVoiceRegions,
     };
 
     <span class="kw">pub trait </span>Sealed {}
@@ -526,6 +529,7 @@
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetChannelWebhooks&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetCommandPermissions&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetCurrentUser&lt;<span class="lifetime">&#39;_</span>&gt; {}
+    <span class="kw">impl </span>Sealed <span class="kw">for </span>GetCurrentAuthorizationInformation&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetCurrentUserConnections&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetCurrentUserGuildMember&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetCurrentUserGuilds&lt;<span class="lifetime">&#39;_</span>&gt; {}
