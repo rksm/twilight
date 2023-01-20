@@ -90,6 +90,7 @@
 <a href="#90" id="90">90</a>
 <a href="#91" id="91">91</a>
 <a href="#92" id="92">92</a>
+<a href="#93" id="93">93</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -117,10 +118,11 @@
 
 <span class="doccomment">/// Update command permissions for a single command in a guild.
 ///
-/// # Note:
+/// Note that this overwrites the command permissions, so the full set of
+/// permissions has to be sent every time.
 ///
-/// This overwrites the command permissions so the full set of permissions
-/// have to be sent every time.
+/// This request requires that the client was configured with an OAuth Bearer
+/// token.
 </span><span class="attr">#[must_use = <span class="string">&quot;requests must be configured and executed&quot;</span>]
 </span><span class="kw">pub struct </span>UpdateCommandPermissions&lt;<span class="lifetime">&#39;a</span>&gt; {
     application_id: Id&lt;ApplicationMarker&gt;,
