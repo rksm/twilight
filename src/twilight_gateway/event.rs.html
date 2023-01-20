@@ -431,6 +431,14 @@
 <a href="#431" id="431">431</a>
 <a href="#432" id="432">432</a>
 <a href="#433" id="433">433</a>
+<a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
+<a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
+<a href="#440" id="440">440</a>
+<a href="#441" id="441">441</a>
 </pre><pre class="rust"><code><span class="kw">use </span>bitflags::bitflags;
 <span class="kw">use </span>twilight_model::gateway::event::EventType;
 
@@ -480,6 +488,8 @@
         </span><span class="kw">const </span>GATEWAY_RECONNECT = <span class="number">1 </span>&lt;&lt; <span class="number">9</span>;
         <span class="doccomment">/// Gift code sent in a channel has been updated.
         </span><span class="kw">const </span>GIFT_CODE_UPDATE = <span class="number">1 </span>&lt;&lt; <span class="number">49</span>;
+        <span class="doccomment">/// An audit log entry has been created.
+        </span><span class="kw">const </span>GUILD_AUDIT_LOG_ENTRY_CREATE = <span class="number">1 </span>&lt;&lt; <span class="number">75</span>;
         <span class="doccomment">/// A guild has been created.
         </span><span class="kw">const </span>GUILD_CREATE = <span class="number">1 </span>&lt;&lt; <span class="number">10</span>;
         <span class="doccomment">/// A guild has been deleted or the current user has been removed from a guild.
@@ -657,7 +667,12 @@
         <span class="doccomment">/// All [`EventTypeFlags`] in [`Intents::GUILD_BANS`].
         ///
         /// [`Intents::GUILD_BANS`]: crate::Intents::GUILD_BANS
-        </span><span class="kw">const </span>GUILD_BANS = <span class="self">Self</span>::BAN_ADD.bits() | <span class="self">Self</span>::BAN_REMOVE.bits();
+        </span><span class="attr">#[deprecated(since = <span class="string">&quot;0.14.2&quot;</span>, note = <span class="string">&quot;use the `GUILD_MODERATION` intent instead&quot;</span>)]
+        </span><span class="kw">const </span>GUILD_BANS = <span class="self">Self</span>::BAN_ADD.bits() | <span class="self">Self</span>::BAN_REMOVE.bits() | <span class="self">Self</span>::GUILD_AUDIT_LOG_ENTRY_CREATE.bits();
+        <span class="doccomment">/// All [`EventTypeFlags`] in [`Intents::GUILD_MODERATION`].
+        ///
+        /// [`Intents::GUILD_MODERATION`]: crate::Intents::GUILD_MODERATION
+        </span><span class="kw">const </span>GUILD_MODERATION = <span class="self">Self</span>::BAN_ADD.bits() | <span class="self">Self</span>::BAN_REMOVE.bits() | <span class="self">Self</span>::GUILD_AUDIT_LOG_ENTRY_CREATE.bits();
         <span class="doccomment">/// All [`EventTypeFlags`] in [`Intents::GUILD_EMOJIS_AND_STICKERS`].
         ///
         /// [`Intents::GUILD_EMOJIS_AND_STICKERS`]: crate::Intents::GUILD_EMOJIS_AND_STICKERS
@@ -754,6 +769,7 @@
             EventType::GatewayInvalidateSession =&gt; <span class="self">Self</span>::GATEWAY_INVALIDATE_SESSION,
             EventType::GatewayReconnect =&gt; <span class="self">Self</span>::GATEWAY_RECONNECT,
             EventType::GiftCodeUpdate =&gt; <span class="self">Self</span>::GIFT_CODE_UPDATE,
+            EventType::GuildAuditLogEntryCreate =&gt; <span class="self">Self</span>::GUILD_AUDIT_LOG_ENTRY_CREATE,
             EventType::GuildCreate =&gt; <span class="self">Self</span>::GUILD_CREATE,
             EventType::GuildDelete =&gt; <span class="self">Self</span>::GUILD_DELETE,
             EventType::GuildEmojisUpdate =&gt; <span class="self">Self</span>::GUILD_EMOJIS_UPDATE,

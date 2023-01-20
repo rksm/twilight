@@ -122,9 +122,18 @@
 <a href="#122" id="122">122</a>
 <a href="#123" id="123">123</a>
 <a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{AuditLogChange, AuditLogEventType, AuditLogOptionalEntryInfo};
 <span class="kw">use </span><span class="kw">crate</span>::id::{
-    marker::{AuditLogEntryMarker, GenericMarker, UserMarker},
+    marker::{AuditLogEntryMarker, GenericMarker, GuildMarker, UserMarker},
     Id,
 };
 <span class="kw">use </span>serde::{Deserialize, Serialize};
@@ -139,6 +148,14 @@
     <span class="doccomment">/// List of changes included in the entry.
     </span><span class="attr">#[serde(default, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
     </span><span class="kw">pub </span>changes: Vec&lt;AuditLogChange&gt;,
+    <span class="doccomment">/// ID of the server where the entry was added.
+    ///
+    /// This is **only** available when receiving the event in
+    /// [`GuildAuditLogEntryCreate`].
+    ///
+    /// [`GuildAuditLogEntryCreate`]: crate::gateway::payload::incoming::GuildAuditLogEntryCreate
+    </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>guild_id: <span class="prelude-ty">Option</span>&lt;Id&lt;GuildMarker&gt;&gt;,
     <span class="doccomment">/// ID of the entire entry.
     </span><span class="kw">pub </span>id: Id&lt;AuditLogEntryMarker&gt;,
     <span class="doccomment">/// Optional information about the entry.
@@ -198,6 +215,7 @@
                 new: <span class="prelude-val">None</span>,
                 old: <span class="prelude-val">Some</span>(image_hash::ICON),
             }]),
+            guild_id: <span class="prelude-val">None</span>,
             id: Id::new(<span class="number">3</span>),
             options: <span class="prelude-val">None</span>,
             reason: <span class="prelude-val">Some</span>(<span class="string">&quot;some reason&quot;</span>.to_owned()),

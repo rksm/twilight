@@ -382,6 +382,13 @@
 <a href="#382" id="382">382</a>
 <a href="#383" id="383">383</a>
 <a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
+<a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
 </pre><pre class="rust"><code><span class="kw">use </span>serde::{Deserialize, Serialize};
 
 <span class="doccomment">/// The type of an event.
@@ -408,6 +415,7 @@
     GatewayInvalidateSession,
     GatewayReconnect,
     GiftCodeUpdate,
+    GuildAuditLogEntryCreate,
     GuildCreate,
     GuildDelete,
     GuildEmojisUpdate,
@@ -494,6 +502,7 @@
             <span class="self">Self</span>::ChannelUpdate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;CHANNEL_UPDATE&quot;</span>),
             <span class="self">Self</span>::CommandPermissionsUpdate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;APPLICATION_COMMAND_PERMISSIONS_UPDATE&quot;</span>),
             <span class="self">Self</span>::GiftCodeUpdate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;GIFT_CODE_UPDATE&quot;</span>),
+            <span class="self">Self</span>::GuildAuditLogEntryCreate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;GUILD_AUDIT_LOG_ENTRY_CREATE&quot;</span>),
             <span class="self">Self</span>::GuildCreate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;GUILD_CREATE&quot;</span>),
             <span class="self">Self</span>::GuildDelete =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;GUILD_DELETE&quot;</span>),
             <span class="self">Self</span>::GuildEmojisUpdate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;GUILD_EMOJIS_UPDATE&quot;</span>),
@@ -570,6 +579,7 @@
             <span class="string">&quot;AUTO_MODERATION_RULE_CREATE&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::AutoModerationRuleCreate),
             <span class="string">&quot;AUTO_MODERATION_RULE_DELETE&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::AutoModerationRuleDelete),
             <span class="string">&quot;AUTO_MODERATION_RULE_UPDATE&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::AutoModerationRuleUpdate),
+            <span class="string">&quot;GUILD_AUDIT_LOG_ENTRY_CREATE&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::GuildAuditLogEntryCreate),
             <span class="string">&quot;GUILD_BAN_ADD&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::BanAdd),
             <span class="string">&quot;GUILD_BAN_REMOVE&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::BanRemove),
             <span class="string">&quot;CHANNEL_CREATE&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::ChannelCreate),
@@ -686,6 +696,10 @@
         );
         assert_variant(EventType::GatewayReconnect, <span class="string">&quot;GATEWAY_RECONNECT&quot;</span>);
         assert_variant(EventType::GiftCodeUpdate, <span class="string">&quot;GIFT_CODE_UPDATE&quot;</span>);
+        assert_variant(
+            EventType::GuildAuditLogEntryCreate,
+            <span class="string">&quot;GUILD_AUDIT_LOG_ENTRY_CREATE&quot;</span>,
+        );
         assert_variant(EventType::GuildCreate, <span class="string">&quot;GUILD_CREATE&quot;</span>);
         assert_variant(EventType::GuildDelete, <span class="string">&quot;GUILD_DELETE&quot;</span>);
         assert_variant(EventType::GuildEmojisUpdate, <span class="string">&quot;GUILD_EMOJIS_UPDATE&quot;</span>);

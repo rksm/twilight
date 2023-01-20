@@ -582,6 +582,11 @@
 <a href="#582" id="582">582</a>
 <a href="#583" id="583">583</a>
 <a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a>
+<a href="#586" id="586">586</a>
+<a href="#587" id="587">587</a>
+<a href="#588" id="588">588</a>
+<a href="#589" id="589">589</a>
 </pre><pre class="rust"><code><span class="attr">#![allow(clippy::wildcard_imports)]
 
 </span><span class="kw">pub mod </span>gateway;
@@ -644,6 +649,8 @@
     </span>GatewayReconnect,
     <span class="doccomment">/// Undocumented event, should be ignored.
     </span>GiftCodeUpdate,
+    <span class="doccomment">/// A audit log entry was created.
+    </span>GuildAuditLogEntryCreate(Box&lt;GuildAuditLogEntryCreate&gt;),
     <span class="doccomment">/// A guild was created.
     </span>GuildCreate(Box&lt;GuildCreate&gt;),
     <span class="doccomment">/// A guild was deleted or the current user was removed from a guild.
@@ -789,6 +796,7 @@
             Event::ChannelDelete(e) =&gt; e.<span class="number">0</span>.guild_id,
             Event::ChannelUpdate(e) =&gt; e.<span class="number">0</span>.guild_id,
             Event::CommandPermissionsUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::GuildAuditLogEntryCreate(e) =&gt; e.<span class="number">0</span>.guild_id,
             Event::GuildCreate(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.id),
             Event::GuildDelete(e) =&gt; <span class="prelude-val">Some</span>(e.id),
             Event::GuildEmojisUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
@@ -876,6 +884,7 @@
             <span class="self">Self</span>::GatewayInvalidateSession(<span class="kw">_</span>) =&gt; EventType::GatewayInvalidateSession,
             <span class="self">Self</span>::GatewayReconnect =&gt; EventType::GatewayReconnect,
             <span class="self">Self</span>::GiftCodeUpdate =&gt; EventType::GiftCodeUpdate,
+            <span class="self">Self</span>::GuildAuditLogEntryCreate(<span class="kw">_</span>) =&gt; EventType::GuildAuditLogEntryCreate,
             <span class="self">Self</span>::GuildCreate(<span class="kw">_</span>) =&gt; EventType::GuildCreate,
             <span class="self">Self</span>::GuildDelete(<span class="kw">_</span>) =&gt; EventType::GuildDelete,
             <span class="self">Self</span>::GuildEmojisUpdate(<span class="kw">_</span>) =&gt; EventType::GuildEmojisUpdate,
@@ -955,6 +964,7 @@
             DispatchEvent::ChannelUpdate(v) =&gt; <span class="self">Self</span>::ChannelUpdate(v),
             DispatchEvent::CommandPermissionsUpdate(v) =&gt; <span class="self">Self</span>::CommandPermissionsUpdate(v),
             DispatchEvent::GiftCodeUpdate =&gt; <span class="self">Self</span>::GiftCodeUpdate,
+            DispatchEvent::GuildAuditLogEntryCreate(v) =&gt; <span class="self">Self</span>::GuildAuditLogEntryCreate(v),
             DispatchEvent::GuildCreate(v) =&gt; <span class="self">Self</span>::GuildCreate(v),
             DispatchEvent::GuildDelete(v) =&gt; <span class="self">Self</span>::GuildDelete(v),
             DispatchEvent::GuildEmojisUpdate(v) =&gt; <span class="self">Self</span>::GuildEmojisUpdate(v),

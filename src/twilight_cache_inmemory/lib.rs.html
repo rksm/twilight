@@ -1008,6 +1008,7 @@
 <a href="#1008" id="1008">1008</a>
 <a href="#1009" id="1009">1009</a>
 <a href="#1010" id="1010">1010</a>
+<a href="#1011" id="1011">1011</a>
 </pre><pre class="rust"><code><span class="attr">#![deny(
     clippy::all,
     clippy::missing_const_for_fn,
@@ -1902,6 +1903,7 @@
             | Event::GatewayInvalidateSession(<span class="kw">_</span>)
             | Event::GatewayReconnect
             | Event::GiftCodeUpdate
+            | Event::GuildAuditLogEntryCreate(<span class="kw">_</span>)
             | Event::GuildIntegrationsUpdate(<span class="kw">_</span>)
             | Event::GuildScheduledEventCreate(<span class="kw">_</span>)
             | Event::GuildScheduledEventDelete(<span class="kw">_</span>)

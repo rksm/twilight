@@ -449,6 +449,12 @@
 <a href="#449" id="449">449</a>
 <a href="#450" id="450">450</a>
 <a href="#451" id="451">451</a>
+<a href="#452" id="452">452</a>
+<a href="#453" id="453">453</a>
+<a href="#454" id="454">454</a>
+<a href="#455" id="455">455</a>
+<a href="#456" id="456">456</a>
+<a href="#457" id="457">457</a>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{<span class="kw">super</span>::payload::incoming::<span class="kw-2">*</span>, Event, EventConversionError, EventType};
 <span class="kw">use </span>serde::{
     de::{Deserialize, DeserializeSeed, Deserializer, Error <span class="kw">as </span>DeError, IgnoredAny},
@@ -477,6 +483,7 @@
     ChannelUpdate(Box&lt;ChannelUpdate&gt;),
     CommandPermissionsUpdate(CommandPermissionsUpdate),
     GiftCodeUpdate,
+    GuildAuditLogEntryCreate(Box&lt;GuildAuditLogEntryCreate&gt;),
     GuildCreate(Box&lt;GuildCreate&gt;),
     GuildDelete(GuildDelete),
     GuildEmojisUpdate(GuildEmojisUpdate),
@@ -546,6 +553,7 @@
             <span class="self">Self</span>::ChannelUpdate(<span class="kw">_</span>) =&gt; EventType::ChannelUpdate,
             <span class="self">Self</span>::CommandPermissionsUpdate(<span class="kw">_</span>) =&gt; EventType::CommandPermissionsUpdate,
             <span class="self">Self</span>::GiftCodeUpdate =&gt; EventType::GiftCodeUpdate,
+            <span class="self">Self</span>::GuildAuditLogEntryCreate(<span class="kw">_</span>) =&gt; EventType::GuildAuditLogEntryCreate,
             <span class="self">Self</span>::GuildCreate(<span class="kw">_</span>) =&gt; EventType::GuildCreate,
             <span class="self">Self</span>::GuildDelete(<span class="kw">_</span>) =&gt; EventType::GuildDelete,
             <span class="self">Self</span>::GuildEmojisUpdate(<span class="kw">_</span>) =&gt; EventType::GuildEmojisUpdate,
@@ -618,6 +626,7 @@
             Event::ChannelUpdate(v) =&gt; <span class="self">Self</span>::ChannelUpdate(v),
             Event::CommandPermissionsUpdate(v) =&gt; <span class="self">Self</span>::CommandPermissionsUpdate(v),
             Event::GiftCodeUpdate =&gt; <span class="self">Self</span>::GiftCodeUpdate,
+            Event::GuildAuditLogEntryCreate(v) =&gt; <span class="self">Self</span>::GuildAuditLogEntryCreate(v),
             Event::GuildCreate(v) =&gt; <span class="self">Self</span>::GuildCreate(v),
             Event::GuildDelete(v) =&gt; <span class="self">Self</span>::GuildDelete(v),
             Event::GuildEmojisUpdate(v) =&gt; <span class="self">Self</span>::GuildEmojisUpdate(v),
@@ -725,6 +734,9 @@
 
                 DispatchEvent::GiftCodeUpdate
             }
+            <span class="string">&quot;GUILD_AUDIT_LOG_ENTRY_CREATE&quot; </span>=&gt; DispatchEvent::GuildAuditLogEntryCreate(Box::new(
+                GuildAuditLogEntryCreate::deserialize(deserializer)<span class="question-mark">?</span>,
+            )),
             <span class="string">&quot;GUILD_BAN_ADD&quot; </span>=&gt; DispatchEvent::BanAdd(BanAdd::deserialize(deserializer)<span class="question-mark">?</span>),
             <span class="string">&quot;GUILD_BAN_REMOVE&quot; </span>=&gt; DispatchEvent::BanRemove(BanRemove::deserialize(deserializer)<span class="question-mark">?</span>),
             <span class="string">&quot;GUILD_CREATE&quot; </span>=&gt; {

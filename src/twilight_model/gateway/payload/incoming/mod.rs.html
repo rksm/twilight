@@ -106,6 +106,8 @@
 <a href="#106" id="106">106</a>
 <a href="#107" id="107">107</a>
 <a href="#108" id="108">108</a>
+<a href="#109" id="109">109</a>
+<a href="#110" id="110">110</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Payloads that are incoming from the Discord Gateway API.
 //!
 //! These are sent by the Discord Gateway API to shards. The only payload
@@ -133,6 +135,7 @@
 <span class="kw">mod </span>channel_pins_update;
 <span class="kw">mod </span>channel_update;
 <span class="kw">mod </span>command_permissions_update;
+<span class="kw">mod </span>guild_audit_log_entry_create;
 <span class="kw">mod </span>guild_create;
 <span class="kw">mod </span>guild_delete;
 <span class="kw">mod </span>guild_emojis_update;
@@ -188,7 +191,8 @@
     auto_moderation_rule_update::AutoModerationRuleUpdate, ban_add::BanAdd, ban_remove::BanRemove,
     channel_create::ChannelCreate, channel_delete::ChannelDelete,
     channel_pins_update::ChannelPinsUpdate, channel_update::ChannelUpdate,
-    command_permissions_update::CommandPermissionsUpdate, guild_create::GuildCreate,
+    command_permissions_update::CommandPermissionsUpdate,
+    guild_audit_log_entry_create::GuildAuditLogEntryCreate, guild_create::GuildCreate,
     guild_delete::GuildDelete, guild_emojis_update::GuildEmojisUpdate,
     guild_integrations_update::GuildIntegrationsUpdate,
     guild_scheduled_event_create::GuildScheduledEventCreate,
