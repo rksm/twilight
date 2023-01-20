@@ -650,6 +650,8 @@
 <a href="#650" id="650">650</a>
 <a href="#651" id="651">651</a>
 <a href="#652" id="652">652</a>
+<a href="#653" id="653">653</a>
+<a href="#654" id="654">654</a>
 </pre><pre class="rust"><code><span class="kw">pub mod </span>forum;
 <span class="kw">pub mod </span>message;
 <span class="kw">pub mod </span>permission_overwrite;
@@ -771,7 +773,7 @@
     /// At most a value of 50 is provided although the real number may be
     /// higher.
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
-    </span><span class="kw">pub </span>member_count: <span class="prelude-ty">Option</span>&lt;u8&gt;,
+    </span><span class="kw">pub </span>member_count: <span class="prelude-ty">Option</span>&lt;i8&gt;,
     <span class="doccomment">/// Number of messages in the channel.
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>message_count: <span class="prelude-ty">Option</span>&lt;u32&gt;,
@@ -1053,7 +1055,7 @@
                 presence: <span class="prelude-val">None</span>,
                 user_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">5</span>)),
             }),
-            member_count: <span class="prelude-val">Some</span>(<span class="number">50_u8</span>),
+            member_count: <span class="prelude-val">Some</span>(<span class="number">50</span>),
             message_count: <span class="prelude-val">Some</span>(<span class="number">50</span>),
             name: <span class="prelude-val">Some</span>(<span class="string">&quot;newsthread&quot;</span>.into()),
             newly_created: <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
@@ -1141,7 +1143,7 @@
                 presence: <span class="prelude-val">None</span>,
                 user_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">5</span>)),
             }),
-            member_count: <span class="prelude-val">Some</span>(<span class="number">50_u8</span>),
+            member_count: <span class="prelude-val">Some</span>(<span class="number">50</span>),
             message_count: <span class="prelude-val">Some</span>(<span class="number">50</span>),
             name: <span class="prelude-val">Some</span>(<span class="string">&quot;publicthread&quot;</span>.into()),
             newly_created: <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
@@ -1230,7 +1232,9 @@
                 presence: <span class="prelude-val">None</span>,
                 user_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">5</span>)),
             }),
-            member_count: <span class="prelude-val">Some</span>(<span class="number">50_u8</span>),
+            <span class="comment">// Old threads can have negative member counts, so we need to ensure
+            // we keep negative member counts around.
+            </span>member_count: <span class="prelude-val">Some</span>(-<span class="number">1</span>),
             message_count: <span class="prelude-val">Some</span>(<span class="number">50</span>),
             name: <span class="prelude-val">Some</span>(<span class="string">&quot;privatethread&quot;</span>.into()),
             newly_created: <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
@@ -1275,7 +1279,7 @@
                 },
                 <span class="string">&quot;default_auto_archive_duration&quot;</span>: <span class="number">60</span>,
                 <span class="string">&quot;invitable&quot;</span>: <span class="bool-val">true</span>,
-                <span class="string">&quot;member_count&quot;</span>: <span class="number">50</span>,
+                <span class="string">&quot;member_count&quot;</span>: -<span class="number">1</span>,
                 <span class="string">&quot;message_count&quot;</span>: <span class="number">50</span>,
                 <span class="string">&quot;name&quot;</span>: <span class="string">&quot;privatethread&quot;</span>,
                 <span class="string">&quot;newly_created&quot;</span>: <span class="bool-val">true</span>,
