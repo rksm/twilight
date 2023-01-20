@@ -64,7 +64,8 @@
     </span><span class="kw">pub </span>assets: <span class="prelude-ty">Option</span>&lt;ActivityAssets&gt;,
     <span class="attr">#[serde(default, skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
     </span><span class="kw">pub </span>buttons: Vec&lt;ActivityButton&gt;,
-    <span class="comment">// Introduced with custom statuses.
+    <span class="doccomment">/// Unix timestamp of when the activity was added to the user&#39;s session, in
+    /// milliseconds.
     </span><span class="kw">pub </span>created_at: <span class="prelude-ty">Option</span>&lt;u64&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>details: <span class="prelude-ty">Option</span>&lt;String&gt;,
@@ -72,8 +73,7 @@
     </span><span class="kw">pub </span>emoji: <span class="prelude-ty">Option</span>&lt;ActivityEmoji&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>flags: <span class="prelude-ty">Option</span>&lt;ActivityFlags&gt;,
-    <span class="comment">// Introduced with custom statuses.
-    </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>id: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>instance: <span class="prelude-ty">Option</span>&lt;bool&gt;,
