@@ -770,6 +770,26 @@
 <a href="#770" id="770">770</a>
 <a href="#771" id="771">771</a>
 <a href="#772" id="772">772</a>
+<a href="#773" id="773">773</a>
+<a href="#774" id="774">774</a>
+<a href="#775" id="775">775</a>
+<a href="#776" id="776">776</a>
+<a href="#777" id="777">777</a>
+<a href="#778" id="778">778</a>
+<a href="#779" id="779">779</a>
+<a href="#780" id="780">780</a>
+<a href="#781" id="781">781</a>
+<a href="#782" id="782">782</a>
+<a href="#783" id="783">783</a>
+<a href="#784" id="784">784</a>
+<a href="#785" id="785">785</a>
+<a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
+<a href="#790" id="790">790</a>
+<a href="#791" id="791">791</a>
+<a href="#792" id="792">792</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Constants, error types, and functions for validating [`Command`]s.
 
 </span><span class="kw">use </span>std::{
@@ -1035,13 +1055,18 @@
         ..
     } = value;
 
-    <span class="self">self</span>::description(description)<span class="question-mark">?</span>;
-
-    <span class="kw">if let </span><span class="prelude-val">Some</span>(description_localizations) = description_localizations {
-        <span class="kw">for </span>description <span class="kw">in </span>description_localizations.values() {
-            <span class="self">self</span>::description(description)<span class="question-mark">?</span>;
+    <span class="kw">if </span><span class="kw-2">*</span>kind == CommandType::ChatInput {
+        <span class="self">self</span>::description(description)<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(description_localizations) = description_localizations {
+            <span class="kw">for </span>description <span class="kw">in </span>description_localizations.values() {
+                <span class="self">self</span>::description(description)<span class="question-mark">?</span>;
+            }
         }
-    }
+    } <span class="kw">else if </span>!description.is_empty() {
+        <span class="kw">return </span><span class="prelude-val">Err</span>(CommandValidationError {
+            kind: CommandValidationErrorType::DescriptionInvalid,
+        });
+    };
 
     <span class="kw">if let </span><span class="prelude-val">Some</span>(name_localizations) = name_localizations {
         <span class="kw">for </span>name <span class="kw">in </span>name_localizations.values() {
@@ -1408,13 +1433,28 @@
 
         <span class="macro">assert!</span>(command(<span class="kw-2">&amp;</span>valid_command).is_ok());
 
-        <span class="kw">let </span>invalid_command = Command {
+        <span class="kw">let </span>invalid_message_command = Command {
             description: <span class="string">&quot;c&quot;</span>.repeat(<span class="number">101</span>),
             name: <span class="string">&quot;d&quot;</span>.repeat(<span class="number">33</span>),
+            ..valid_command.clone()
+        };
+        <span class="macro">assert!</span>(command(<span class="kw-2">&amp;</span>invalid_message_command).is_err());
+
+        <span class="kw">let </span>valid_context_menu_command = Command {
+            description: String::new(),
+            kind: CommandType::Message,
+            ..valid_command.clone()
+        };
+
+        <span class="macro">assert!</span>(command(<span class="kw-2">&amp;</span>valid_context_menu_command).is_ok());
+
+        <span class="kw">let </span>invalid_context_menu_command = Command {
+            description: <span class="string">&quot;example description&quot;</span>.to_string(),
+            kind: CommandType::Message,
             ..valid_command
         };
 
-        <span class="macro">assert!</span>(command(<span class="kw-2">&amp;</span>invalid_command).is_err());
+        <span class="macro">assert!</span>(command(<span class="kw-2">&amp;</span>invalid_context_menu_command).is_err());
     }
 
     <span class="attr">#[test]
