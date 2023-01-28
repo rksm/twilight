@@ -293,14 +293,6 @@
 <a href="#293" id="293">293</a>
 <a href="#294" id="294">294</a>
 <a href="#295" id="295">295</a>
-<a href="#296" id="296">296</a>
-<a href="#297" id="297">297</a>
-<a href="#298" id="298">298</a>
-<a href="#299" id="299">299</a>
-<a href="#300" id="300">300</a>
-<a href="#301" id="301">301</a>
-<a href="#302" id="302">302</a>
-<a href="#303" id="303">303</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     config::ResourceType,
     model::{member::ComputedInteractionMemberFields, CachedMember},
@@ -413,12 +405,6 @@
         }
 
         cache.cache_member(<span class="self">self</span>.guild_id, <span class="self">self</span>.<span class="number">0</span>.clone());
-
-        cache
-            .guild_members
-            .entry(<span class="self">self</span>.guild_id)
-            .or_default()
-            .insert(<span class="self">self</span>.<span class="number">0</span>.user.id);
     }
 }
 
@@ -433,8 +419,6 @@
         }
 
         cache.cache_members(<span class="self">self</span>.guild_id, <span class="self">self</span>.members.clone());
-        <span class="kw">let </span><span class="kw-2">mut </span>guild = cache.guild_members.entry(<span class="self">self</span>.guild_id).or_default();
-        guild.extend(<span class="self">self</span>.members.iter().map(|member| member.user.id));
     }
 }
 
