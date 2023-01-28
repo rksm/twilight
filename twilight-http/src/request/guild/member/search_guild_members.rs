@@ -2,7 +2,7 @@ use crate::{
     client::Client,
     error::Error,
     request::{Request, TryIntoRequest},
-    response::{marker::ListBody, Response, ResponseFuture},
+    response::{Response, ResponseFuture},
     routing::Route,
 };
 use std::future::IntoFuture;
@@ -88,15 +88,15 @@ impl<'a> SearchGuildMembers<'a> {
 
     /// Execute the request, returning a future resolving to a [`Response`].
     #[deprecated(since = "0.14.0", note = "use `.await` or `into_future` instead")]
-    pub fn exec(self) -> ResponseFuture<ListBody<Member>> {
+    pub fn exec(self) -> ResponseFuture<Vec<Member>> {
         self.into_future()
     }
 }
 
 impl IntoFuture for SearchGuildMembers<'_> {
-    type Output = Result<Response<ListBody<Member>>, Error>;
+    type Output = Result<Response<Vec<Member>>, Error>;
 
-    type IntoFuture = ResponseFuture<ListBody<Member>>;
+    type IntoFuture = ResponseFuture<Vec<Member>>;
 
     fn into_future(self) -> Self::IntoFuture {
         let http = self.http;

@@ -2,7 +2,7 @@ use crate::{
     client::Client,
     error::Error,
     request::{Request, RequestBuilder, TryIntoRequest},
-    response::{marker::ListBody, Response, ResponseFuture},
+    response::{Response, ResponseFuture},
     routing::Route,
 };
 use serde::Serialize;
@@ -60,15 +60,15 @@ impl<'a> UpdateCommandPermissions<'a> {
 
     /// Execute the request, returning a future resolving to a [`Response`].
     #[deprecated(since = "0.14.0", note = "use `.await` or `into_future` instead")]
-    pub fn exec(self) -> ResponseFuture<ListBody<CommandPermission>> {
+    pub fn exec(self) -> ResponseFuture<Vec<CommandPermission>> {
         self.into_future()
     }
 }
 
 impl IntoFuture for UpdateCommandPermissions<'_> {
-    type Output = Result<Response<ListBody<CommandPermission>>, Error>;
+    type Output = Result<Response<Vec<CommandPermission>>, Error>;
 
-    type IntoFuture = ResponseFuture<ListBody<CommandPermission>>;
+    type IntoFuture = ResponseFuture<Vec<CommandPermission>>;
 
     fn into_future(self) -> Self::IntoFuture {
         let http = self.http;

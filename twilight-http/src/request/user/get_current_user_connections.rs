@@ -2,7 +2,7 @@ use crate::{
     client::Client,
     error::Error,
     request::{Request, TryIntoRequest},
-    response::{marker::ListBody, Response, ResponseFuture},
+    response::{Response, ResponseFuture},
     routing::Route,
 };
 use std::future::IntoFuture;
@@ -23,15 +23,15 @@ impl<'a> GetCurrentUserConnections<'a> {
 
     /// Execute the request, returning a future resolving to a [`Response`].
     #[deprecated(since = "0.14.0", note = "use `.await` or `into_future` instead")]
-    pub fn exec(self) -> ResponseFuture<ListBody<Connection>> {
+    pub fn exec(self) -> ResponseFuture<Vec<Connection>> {
         self.into_future()
     }
 }
 
 impl IntoFuture for GetCurrentUserConnections<'_> {
-    type Output = Result<Response<ListBody<Connection>>, Error>;
+    type Output = Result<Response<Vec<Connection>>, Error>;
 
-    type IntoFuture = ResponseFuture<ListBody<Connection>>;
+    type IntoFuture = ResponseFuture<Vec<Connection>>;
 
     fn into_future(self) -> Self::IntoFuture {
         let http = self.http;

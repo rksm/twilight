@@ -2,7 +2,7 @@ use crate::{
     client::Client,
     error::Error,
     request::{Request, TryIntoRequest},
-    response::{marker::ListBody, Response, ResponseFuture},
+    response::{Response, ResponseFuture},
     routing::Route,
 };
 use std::future::IntoFuture;
@@ -43,15 +43,15 @@ impl<'a> GetEmojis<'a> {
 
     /// Execute the request, returning a future resolving to a [`Response`].
     #[deprecated(since = "0.14.0", note = "use `.await` or `into_future` instead")]
-    pub fn exec(self) -> ResponseFuture<ListBody<Emoji>> {
+    pub fn exec(self) -> ResponseFuture<Vec<Emoji>> {
         self.into_future()
     }
 }
 
 impl IntoFuture for GetEmojis<'_> {
-    type Output = Result<Response<ListBody<Emoji>>, Error>;
+    type Output = Result<Response<Vec<Emoji>>, Error>;
 
-    type IntoFuture = ResponseFuture<ListBody<Emoji>>;
+    type IntoFuture = ResponseFuture<Vec<Emoji>>;
 
     fn into_future(self) -> Self::IntoFuture {
         let http = self.http;

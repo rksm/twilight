@@ -3,7 +3,7 @@ use crate::{
     client::Client,
     error::Error,
     request::{Request, TryIntoRequest},
-    response::{marker::ListBody, Response, ResponseFuture},
+    response::{Response, ResponseFuture},
     routing::Route,
 };
 use std::future::IntoFuture;
@@ -85,15 +85,15 @@ impl<'a> GetReactions<'a> {
     }
 
     /// Execute the request, returning a future resolving to a [`Response`].
-    pub fn exec(self) -> ResponseFuture<ListBody<User>> {
+    pub fn exec(self) -> ResponseFuture<Vec<User>> {
         self.into_future()
     }
 }
 
 impl IntoFuture for GetReactions<'_> {
-    type Output = Result<Response<ListBody<User>>, Error>;
+    type Output = Result<Response<Vec<User>>, Error>;
 
-    type IntoFuture = ResponseFuture<ListBody<User>>;
+    type IntoFuture = ResponseFuture<Vec<User>>;
 
     fn into_future(self) -> Self::IntoFuture {
         let http = self.http;
