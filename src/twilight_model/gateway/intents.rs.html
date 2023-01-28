@@ -288,6 +288,83 @@
 <a href="#288" id="288">288</a>
 <a href="#289" id="289">289</a>
 <a href="#290" id="290">290</a>
+<a href="#291" id="291">291</a>
+<a href="#292" id="292">292</a>
+<a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
+<a href="#338" id="338">338</a>
+<a href="#339" id="339">339</a>
+<a href="#340" id="340">340</a>
+<a href="#341" id="341">341</a>
+<a href="#342" id="342">342</a>
+<a href="#343" id="343">343</a>
+<a href="#344" id="344">344</a>
+<a href="#345" id="345">345</a>
+<a href="#346" id="346">346</a>
+<a href="#347" id="347">347</a>
+<a href="#348" id="348">348</a>
+<a href="#349" id="349">349</a>
+<a href="#350" id="350">350</a>
+<a href="#351" id="351">351</a>
+<a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
+<a href="#354" id="354">354</a>
+<a href="#355" id="355">355</a>
+<a href="#356" id="356">356</a>
+<a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
+<a href="#360" id="360">360</a>
+<a href="#361" id="361">361</a>
+<a href="#362" id="362">362</a>
+<a href="#363" id="363">363</a>
+<a href="#364" id="364">364</a>
+<a href="#365" id="365">365</a>
+<a href="#366" id="366">366</a>
+<a href="#367" id="367">367</a>
 </pre><pre class="rust"><code><span class="kw">use </span>bitflags::bitflags;
 <span class="kw">use </span>serde::{
     de::{Deserialize, Deserializer},
@@ -576,6 +653,83 @@
         </span>S: Serializer,
     {
         serializer.serialize_u64(<span class="self">self</span>.bits())
+    }
+}
+
+<span class="attr">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="attr">#![allow(deprecated)]
+
+    </span><span class="kw">use </span><span class="kw">super</span>::Intents;
+    <span class="kw">use </span>serde::{Deserialize, Serialize};
+    <span class="kw">use </span>serde_test::Token;
+    <span class="kw">use </span>static_assertions::{assert_impl_all, const_assert_eq};
+    <span class="kw">use </span>std::{
+        fmt::{Binary, Debug, LowerHex, Octal, UpperHex},
+        hash::Hash,
+        ops::{
+            BitAnd, BitAndAssign, BitOr, BitOrAssign, BitXor, BitXorAssign, Not, Sub, SubAssign,
+        },
+    };
+
+    <span class="macro">assert_impl_all!</span>(
+        Intents: Binary,
+        BitAnd,
+        BitAndAssign,
+        BitOr,
+        BitOrAssign,
+        BitXor,
+        BitXorAssign,
+        Clone,
+        Copy,
+        Debug,
+        Deserialize&lt;<span class="lifetime">&#39;static</span>&gt;,
+        Eq,
+        Extend&lt;Intents&gt;,
+        FromIterator&lt;Intents&gt;,
+        Hash,
+        LowerHex,
+        Not,
+        Octal,
+        Ord,
+        PartialEq,
+        PartialOrd,
+        Send,
+        Serialize,
+        Sub,
+        SubAssign,
+        Sync,
+        UpperHex
+    );
+    <span class="macro">const_assert_eq!</span>(Intents::GUILDS.bits(), <span class="number">1</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_MEMBERS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">1</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_BANS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">2</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_MODERATION.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">2</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_EMOJIS_AND_STICKERS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">3</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_INTEGRATIONS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">4</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_WEBHOOKS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">5</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_INVITES.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">6</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_VOICE_STATES.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">7</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_PRESENCES.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">8</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_MESSAGES.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">9</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_MESSAGE_REACTIONS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">10</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_MESSAGE_TYPING.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">11</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::DIRECT_MESSAGES.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">12</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::DIRECT_MESSAGE_REACTIONS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">13</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::DIRECT_MESSAGE_TYPING.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">14</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::MESSAGE_CONTENT.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">15</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::GUILD_SCHEDULED_EVENTS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">16</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::AUTO_MODERATION_CONFIGURATION.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">20</span>);
+    <span class="macro">const_assert_eq!</span>(Intents::AUTO_MODERATION_EXECUTION.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">21</span>);
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>serde() {
+        serde_test::assert_tokens(
+            <span class="kw-2">&amp;</span>Intents::MESSAGE_CONTENT,
+            <span class="kw-2">&amp;</span>[Token::U64(Intents::MESSAGE_CONTENT.bits())],
+        );
+        <span class="comment">// Deserialization truncates unknown bits.
+        </span>serde_test::assert_de_tokens(<span class="kw-2">&amp;</span>Intents::empty(), <span class="kw-2">&amp;</span>[Token::U64(<span class="number">1 </span>&lt;&lt; <span class="number">63</span>)]);
     }
 }
 </code></pre></div>
