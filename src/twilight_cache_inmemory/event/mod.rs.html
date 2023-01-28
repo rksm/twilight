@@ -124,7 +124,7 @@
 <span class="kw">pub mod </span>voice_state;
 
 <span class="kw">use crate</span>::{config::ResourceType, InMemoryCache, UpdateCache};
-<span class="kw">use </span>std::{borrow::Cow, collections::BTreeSet};
+<span class="kw">use </span>std::{borrow::Cow, collections::HashSet};
 <span class="kw">use </span>twilight_model::{
     gateway::payload::incoming::{Ready, UnavailableGuild, UserUpdate},
     id::{marker::GuildMarker, Id},
@@ -159,7 +159,7 @@
         <span class="self">self</span>.users.insert(user_id, user);
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(guild_id) = guild_id {
-            <span class="kw">let </span><span class="kw-2">mut </span>guild_id_set = BTreeSet::new();
+            <span class="kw">let </span><span class="kw-2">mut </span>guild_id_set = HashSet::new();
             guild_id_set.insert(guild_id);
             <span class="self">self</span>.user_guilds.insert(user_id, guild_id_set);
         }

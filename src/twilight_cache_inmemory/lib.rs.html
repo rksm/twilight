@@ -1011,6 +1011,24 @@
 <a href="#1011" id="1011">1011</a>
 <a href="#1012" id="1012">1012</a>
 <a href="#1013" id="1013">1013</a>
+<a href="#1014" id="1014">1014</a>
+<a href="#1015" id="1015">1015</a>
+<a href="#1016" id="1016">1016</a>
+<a href="#1017" id="1017">1017</a>
+<a href="#1018" id="1018">1018</a>
+<a href="#1019" id="1019">1019</a>
+<a href="#1020" id="1020">1020</a>
+<a href="#1021" id="1021">1021</a>
+<a href="#1022" id="1022">1022</a>
+<a href="#1023" id="1023">1023</a>
+<a href="#1024" id="1024">1024</a>
+<a href="#1025" id="1025">1025</a>
+<a href="#1026" id="1026">1026</a>
+<a href="#1027" id="1027">1027</a>
+<a href="#1028" id="1028">1028</a>
+<a href="#1029" id="1029">1029</a>
+<a href="#1030" id="1030">1030</a>
+<a href="#1031" id="1031">1031</a>
 </pre><pre class="rust"><code><span class="attr">#![deny(
     clippy::all,
     clippy::missing_const_for_fn,
@@ -1067,7 +1085,7 @@
     DashMap, DashSet,
 };
 <span class="kw">use </span>std::{
-    collections::{BTreeSet, HashSet, VecDeque},
+    collections::{HashSet, VecDeque},
     fmt::{Debug, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult},
     hash::Hash,
     ops::Deref,
@@ -1234,7 +1252,7 @@
     stickers: DashMap&lt;Id&lt;StickerMarker&gt;, GuildResource&lt;CachedSticker&gt;&gt;,
     unavailable_guilds: DashSet&lt;Id&lt;GuildMarker&gt;&gt;,
     users: DashMap&lt;Id&lt;UserMarker&gt;, User&gt;,
-    user_guilds: DashMap&lt;Id&lt;UserMarker&gt;, BTreeSet&lt;Id&lt;GuildMarker&gt;&gt;&gt;,
+    user_guilds: DashMap&lt;Id&lt;UserMarker&gt;, HashSet&lt;Id&lt;GuildMarker&gt;&gt;&gt;,
     <span class="doccomment">/// Mapping of channels and the users currently connected.
     </span><span class="attr">#[allow(clippy::type_complexity)]
     </span>voice_state_channels: DashMap&lt;Id&lt;ChannelMarker&gt;, HashSet&lt;(Id&lt;GuildMarker&gt;, Id&lt;UserMarker&gt;)&gt;&gt;,
@@ -1670,6 +1688,24 @@
     /// [`GUILD_MEMBERS`]: ::twilight_model::gateway::Intents::GUILD_MEMBERS
     </span><span class="kw">pub fn </span>user(<span class="kw-2">&amp;</span><span class="self">self</span>, user_id: Id&lt;UserMarker&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;Reference&lt;<span class="lifetime">&#39;_</span>, Id&lt;UserMarker&gt;, User&gt;&gt; {
         <span class="self">self</span>.users.get(<span class="kw-2">&amp;</span>user_id).map(Reference::new)
+    }
+
+    <span class="doccomment">/// Get the guilds a user is in by ID.
+    ///
+    /// Users are cached from a range of events such as [`InteractionCreate`]
+    /// and [`MemberAdd`], so although no specific intent is required to cache
+    /// users the intents required for different events are required.
+    ///
+    /// Requires the [`USER`] resource type.
+    ///
+    /// [`MemberAdd`]: twilight_model::gateway::payload::incoming::MemberAdd
+    /// [`InteractionCreate`]: twilight_model::gateway::payload::incoming::InteractionCreate
+    /// [`USER`]: crate::config::ResourceType::USER
+    </span><span class="kw">pub fn </span>user_guilds(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        user_id: Id&lt;UserMarker&gt;,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;Reference&lt;<span class="lifetime">&#39;_</span>, Id&lt;UserMarker&gt;, HashSet&lt;Id&lt;GuildMarker&gt;&gt;&gt;&gt; {
+        <span class="self">self</span>.user_guilds.get(<span class="kw-2">&amp;</span>user_id).map(Reference::new)
     }
 
     <span class="doccomment">/// Gets the voice states within a voice channel.

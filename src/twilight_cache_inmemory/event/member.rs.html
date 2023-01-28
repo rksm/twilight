@@ -552,7 +552,7 @@
 
         <span class="comment">// Test the guild&#39;s ID is the only one in the user&#39;s set of guilds.
         </span>{
-            <span class="kw">let </span>user_guilds = cache.user_guilds.get(<span class="kw-2">&amp;</span>user_id).unwrap();
+            <span class="kw">let </span>user_guilds = cache.user_guilds(user_id).unwrap();
             <span class="macro">assert!</span>(user_guilds.contains(<span class="kw-2">&amp;</span>Id::new(<span class="number">1</span>)));
             <span class="macro">assert_eq!</span>(<span class="number">1</span>, user_guilds.len());
         }
@@ -561,7 +561,7 @@
         </span>cache.cache_user(Cow::Owned(test::user(user_id)), <span class="prelude-val">Some</span>(Id::new(<span class="number">3</span>)));
 
         {
-            <span class="kw">let </span>user_guilds = cache.user_guilds.get(<span class="kw-2">&amp;</span>user_id).unwrap();
+            <span class="kw">let </span>user_guilds = cache.user_guilds(user_id).unwrap();
             <span class="macro">assert!</span>(user_guilds.contains(<span class="kw-2">&amp;</span>Id::new(<span class="number">3</span>)));
             <span class="macro">assert_eq!</span>(<span class="number">2</span>, user_guilds.len());
         }
@@ -574,7 +574,7 @@
         });
 
         {
-            <span class="kw">let </span>user_guilds = cache.user_guilds.get(<span class="kw-2">&amp;</span>user_id).unwrap();
+            <span class="kw">let </span>user_guilds = cache.user_guilds(user_id).unwrap();
             <span class="macro">assert!</span>(!user_guilds.contains(<span class="kw-2">&amp;</span>Id::new(<span class="number">3</span>)));
             <span class="macro">assert_eq!</span>(<span class="number">1</span>, user_guilds.len());
         }
