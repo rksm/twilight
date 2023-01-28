@@ -291,6 +291,10 @@
 <a href="#291" id="291">291</a>
 <a href="#292" id="292">292</a>
 <a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{config::ResourceType, InMemoryCache, UpdateCache};
 <span class="kw">use </span>std::borrow::Cow;
 <span class="kw">use </span>twilight_model::{
@@ -374,7 +378,7 @@
             Message,
         },
         gateway::payload::incoming::InteractionCreate,
-        guild::{PartialMember, Permissions, Role},
+        guild::{MemberFlags, PartialMember, Permissions, Role},
         id::Id,
         user::User,
         util::{image_hash::ImageHashParseError, ImageHash, Timestamp},
@@ -387,6 +391,7 @@
         <span class="comment">// let avatar1 = ImageHash::parse(b&quot;1ef6bca4fddaa303a9cd32dd70fb395d&quot;)?;
         </span><span class="kw">let </span>avatar2 = ImageHash::parse(<span class="string">b&quot;3a43231a99f4dfcf0fd94d1d8defd301&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>avatar3 = ImageHash::parse(<span class="string">b&quot;5e23c298295ad37936cfe24ad314774f&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>cache = InMemoryCache::new();
 
@@ -408,6 +413,7 @@
                         InteractionMember {
                             avatar: <span class="prelude-val">None</span>,
                             communication_disabled_until: <span class="prelude-val">None</span>,
+                            flags,
                             joined_at: timestamp,
                             nick: <span class="prelude-val">None</span>,
                             pending: <span class="bool-val">false</span>,
@@ -454,6 +460,7 @@
                                 avatar: <span class="prelude-val">None</span>,
                                 communication_disabled_until: <span class="prelude-val">None</span>,
                                 deaf: <span class="bool-val">false</span>,
+                                flags,
                                 joined_at: timestamp,
                                 mute: <span class="bool-val">false</span>,
                                 nick: <span class="prelude-val">Some</span>(<span class="string">&quot;member nick&quot;</span>.to_owned()),
@@ -530,6 +537,7 @@
                 avatar: <span class="prelude-val">None</span>,
                 communication_disabled_until: <span class="prelude-val">None</span>,
                 deaf: <span class="bool-val">false</span>,
+                flags,
                 joined_at: timestamp,
                 mute: <span class="bool-val">false</span>,
                 nick: <span class="prelude-val">None</span>,

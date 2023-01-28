@@ -168,6 +168,11 @@
 <a href="#168" id="168">168</a>
 <a href="#169" id="169">169</a>
 <a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     application::interaction::InteractionType,
     guild::PartialMember,
@@ -199,6 +204,7 @@
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::<span class="kw-2">*</span>;
     <span class="kw">use crate</span>::{
+        guild::MemberFlags,
         test::image_hash,
         user::{PremiumType, UserFlags},
         util::Timestamp,
@@ -210,6 +216,7 @@
     #[test]
     </span><span class="kw">fn </span>message_interaction() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
         <span class="kw">let </span>joined_at = Timestamp::from_str(<span class="string">&quot;2015-04-26T06:26:56.936000+00:00&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>value = MessageInteraction {
             id: Id::new(<span class="number">1</span>),
@@ -218,6 +225,7 @@
                 avatar: <span class="prelude-val">None</span>,
                 communication_disabled_until: <span class="prelude-val">None</span>,
                 deaf: <span class="bool-val">false</span>,
+                flags,
                 joined_at,
                 mute: <span class="bool-val">true</span>,
                 nick: <span class="prelude-val">Some</span>(<span class="string">&quot;a nickname&quot;</span>.to_owned()),
@@ -264,12 +272,14 @@
                 Token::Some,
                 Token::Struct {
                     name: <span class="string">&quot;PartialMember&quot;</span>,
-                    len: <span class="number">7</span>,
+                    len: <span class="number">8</span>,
                 },
                 Token::Str(<span class="string">&quot;communication_disabled_until&quot;</span>),
                 Token::None,
                 Token::Str(<span class="string">&quot;deaf&quot;</span>),
                 Token::Bool(<span class="bool-val">false</span>),
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;joined_at&quot;</span>),
                 Token::Str(<span class="string">&quot;2015-04-26T06:26:56.936000+00:00&quot;</span>),
                 Token::Str(<span class="string">&quot;mute&quot;</span>),

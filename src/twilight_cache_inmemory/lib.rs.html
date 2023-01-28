@@ -1009,6 +1009,8 @@
 <a href="#1009" id="1009">1009</a>
 <a href="#1010" id="1010">1010</a>
 <a href="#1011" id="1011">1011</a>
+<a href="#1012" id="1012">1012</a>
+<a href="#1013" id="1013">1013</a>
 </pre><pre class="rust"><code><span class="attr">#![deny(
     clippy::all,
     clippy::missing_const_for_fn,
@@ -1935,7 +1937,7 @@
     <span class="kw">use crate</span>::{test, InMemoryCache};
     <span class="kw">use </span>twilight_model::{
         gateway::payload::incoming::RoleDelete,
-        guild::{Member, Permissions, Role},
+        guild::{Member, MemberFlags, Permissions, Role},
         id::Id,
         util::Timestamp,
     };
@@ -1965,12 +1967,14 @@
         <span class="kw">let </span>cache = InMemoryCache::new();
         <span class="kw">let </span>guild_id = Id::new(<span class="number">1</span>);
         <span class="kw">let </span>user = test::user(Id::new(<span class="number">1</span>));
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
         cache.cache_member(
             guild_id,
             Member {
                 avatar: <span class="prelude-val">None</span>,
                 communication_disabled_until: <span class="prelude-val">None</span>,
                 deaf: <span class="bool-val">false</span>,
+                flags,
                 guild_id,
                 joined_at,
                 mute: <span class="bool-val">false</span>,

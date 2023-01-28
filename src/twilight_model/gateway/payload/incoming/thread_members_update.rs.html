@@ -349,6 +349,10 @@
 <a href="#349" id="349">349</a>
 <a href="#350" id="350">350</a>
 <a href="#351" id="351">351</a>
+<a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
+<a href="#354" id="354">354</a>
+<a href="#355" id="355">355</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     channel::thread::member::{ThreadMember, ThreadMemberIntermediary},
     id::{
@@ -443,7 +447,7 @@
         gateway::presence::{
             Activity, ActivityEmoji, ActivityType, ClientStatus, Presence, Status, UserOrId,
         },
-        guild::Member,
+        guild::{Member, MemberFlags},
         id::Id,
         test::image_hash,
         user::User,
@@ -460,11 +464,13 @@
 
         <span class="kw">let </span>joined_at = Timestamp::from_str(JOIN_TIMESTAMP).expect(<span class="string">&quot;timestamp error&quot;</span>);
         <span class="kw">let </span>premium_since = Timestamp::from_str(PREMIUM_SINCE).expect(<span class="string">&quot;timestamp error&quot;</span>);
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>member = Member {
             avatar: <span class="prelude-val">Some</span>(image_hash::AVATAR),
             communication_disabled_until: <span class="prelude-val">None</span>,
             deaf: <span class="bool-val">false</span>,
+            flags,
             guild_id: Id::new(<span class="number">2</span>),
             joined_at,
             mute: <span class="bool-val">true</span>,
@@ -567,7 +573,7 @@
                 Token::Some,
                 Token::Struct {
                     name: <span class="string">&quot;Member&quot;</span>,
-                    len: <span class="number">11</span>,
+                    len: <span class="number">12</span>,
                 },
                 Token::Str(<span class="string">&quot;avatar&quot;</span>),
                 Token::Some,
@@ -576,6 +582,8 @@
                 Token::None,
                 Token::Str(<span class="string">&quot;deaf&quot;</span>),
                 Token::Bool(<span class="bool-val">false</span>),
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;guild_id&quot;</span>),
                 Token::NewtypeStruct { name: <span class="string">&quot;GuildId&quot; </span>},
                 Token::Str(<span class="string">&quot;1&quot;</span>),

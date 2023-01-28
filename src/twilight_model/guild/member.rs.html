@@ -369,9 +369,25 @@
 <a href="#369" id="369">369</a>
 <a href="#370" id="370">370</a>
 <a href="#371" id="371">371</a>
+<a href="#372" id="372">372</a>
+<a href="#373" id="373">373</a>
+<a href="#374" id="374">374</a>
+<a href="#375" id="375">375</a>
+<a href="#376" id="376">376</a>
+<a href="#377" id="377">377</a>
+<a href="#378" id="378">378</a>
+<a href="#379" id="379">379</a>
+<a href="#380" id="380">380</a>
+<a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Mostly internal custom serde deserializers.
 
-</span><span class="kw">use crate</span>::{
+</span><span class="kw">use </span><span class="kw">super</span>::MemberFlags;
+<span class="kw">use crate</span>::{
     id::{
         marker::{GuildMarker, RoleMarker},
         Id,
@@ -379,7 +395,6 @@
     user::User,
     util::{ImageHash, Timestamp},
 };
-
 <span class="kw">use </span>serde::{
     de::{
         value::MapAccessDeserializer, DeserializeSeed, Deserializer, MapAccess, SeqAccess, Visitor,
@@ -398,6 +413,10 @@
     </span><span class="kw">pub </span>avatar: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     <span class="kw">pub </span>communication_disabled_until: <span class="prelude-ty">Option</span>&lt;Timestamp&gt;,
     <span class="kw">pub </span>deaf: bool,
+    <span class="doccomment">/// Flags for the member.
+    ///
+    /// Defaults to an empty bitfield.
+    </span><span class="kw">pub </span>flags: MemberFlags,
     <span class="kw">pub </span>guild_id: Id&lt;GuildMarker&gt;,
     <span class="kw">pub </span>joined_at: Timestamp,
     <span class="kw">pub </span>mute: bool,
@@ -425,6 +444,7 @@
     </span><span class="kw">pub </span>avatar: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     <span class="kw">pub </span>communication_disabled_until: <span class="prelude-ty">Option</span>&lt;Timestamp&gt;,
     <span class="kw">pub </span>deaf: bool,
+    <span class="kw">pub </span>flags: MemberFlags,
     <span class="kw">pub </span>joined_at: Timestamp,
     <span class="kw">pub </span>mute: bool,
     <span class="kw">pub </span>nick: <span class="prelude-ty">Option</span>&lt;String&gt;,
@@ -444,6 +464,7 @@
             avatar: <span class="self">self</span>.avatar,
             communication_disabled_until: <span class="self">self</span>.communication_disabled_until,
             deaf: <span class="self">self</span>.deaf,
+            flags: <span class="self">self</span>.flags,
             guild_id,
             joined_at: <span class="self">self</span>.joined_at,
             mute: <span class="self">self</span>.mute,
@@ -540,6 +561,7 @@
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span><span class="kw">super</span>::Member;
     <span class="kw">use crate</span>::{
+        guild::MemberFlags,
         id::Id,
         test::image_hash,
         user::User,
@@ -552,11 +574,13 @@
     </span><span class="kw">fn </span>member_deserializer() -&gt; <span class="prelude-ty">Result</span>&lt;(), TimestampParseError&gt; {
         <span class="kw">let </span>joined_at = Timestamp::from_str(<span class="string">&quot;2015-04-26T06:26:56.936000+00:00&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>premium_since = Timestamp::from_str(<span class="string">&quot;2021-03-16T14:29:19.046000+00:00&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>value = Member {
             avatar: <span class="prelude-val">Some</span>(image_hash::AVATAR),
             communication_disabled_until: <span class="prelude-val">None</span>,
             deaf: <span class="bool-val">false</span>,
+            flags,
             guild_id: Id::new(<span class="number">1</span>),
             joined_at,
             mute: <span class="bool-val">true</span>,
@@ -588,7 +612,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;Member&quot;</span>,
-                    len: <span class="number">11</span>,
+                    len: <span class="number">12</span>,
                 },
                 Token::Str(<span class="string">&quot;avatar&quot;</span>),
                 Token::Some,
@@ -597,6 +621,8 @@
                 Token::None,
                 Token::Str(<span class="string">&quot;deaf&quot;</span>),
                 Token::Bool(<span class="bool-val">false</span>),
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;guild_id&quot;</span>),
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;1&quot;</span>),
@@ -648,11 +674,13 @@
         <span class="kw">let </span>communication_disabled_until = Timestamp::from_str(<span class="string">&quot;2021-12-23T14:29:19.046000+00:00&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>joined_at = Timestamp::from_str(<span class="string">&quot;2015-04-26T06:26:56.936000+00:00&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>premium_since = Timestamp::from_str(<span class="string">&quot;2021-03-16T14:29:19.046000+00:00&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>value = Member {
             avatar: <span class="prelude-val">Some</span>(image_hash::AVATAR),
             communication_disabled_until: <span class="prelude-val">Some</span>(communication_disabled_until),
             deaf: <span class="bool-val">false</span>,
+            flags,
             guild_id: Id::new(<span class="number">1</span>),
             joined_at,
             mute: <span class="bool-val">true</span>,
@@ -684,7 +712,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;Member&quot;</span>,
-                    len: <span class="number">11</span>,
+                    len: <span class="number">12</span>,
                 },
                 Token::Str(<span class="string">&quot;avatar&quot;</span>),
                 Token::Some,
@@ -694,6 +722,8 @@
                 Token::Str(<span class="string">&quot;2021-12-23T14:29:19.046000+00:00&quot;</span>),
                 Token::Str(<span class="string">&quot;deaf&quot;</span>),
                 Token::Bool(<span class="bool-val">false</span>),
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;guild_id&quot;</span>),
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;1&quot;</span>),

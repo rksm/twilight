@@ -365,6 +365,8 @@
 <a href="#365" id="365">365</a>
 <a href="#366" id="366">366</a>
 <a href="#367" id="367">367</a>
+<a href="#368" id="368">368</a>
+<a href="#369" id="369">369</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{config::ResourceType, model::CachedVoiceState, InMemoryCache, UpdateCache};
 <span class="kw">use </span>twilight_model::{gateway::payload::incoming::VoiceStateUpdate, voice::VoiceState};
 
@@ -461,7 +463,7 @@
     <span class="kw">use </span>std::str::FromStr;
     <span class="kw">use </span>twilight_model::{
         gateway::payload::incoming::VoiceStateUpdate,
-        guild::Member,
+        guild::{Member, MemberFlags},
         id::{
             marker::{ChannelMarker, GuildMarker, UserMarker},
             Id,
@@ -653,6 +655,7 @@
         <span class="kw">let </span>cache = InMemoryCache::new();
 
         <span class="kw">let </span>avatar = ImageHash::parse(<span class="string">b&quot;169280485ba78d541a9090e7ea35a14e&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>mutation = VoiceStateUpdate(VoiceState {
             channel_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">4</span>)),
@@ -662,6 +665,7 @@
                 avatar: <span class="prelude-val">None</span>,
                 communication_disabled_until: <span class="prelude-val">None</span>,
                 deaf: <span class="bool-val">false</span>,
+                flags,
                 guild_id: Id::new(<span class="number">2</span>),
                 joined_at,
                 mute: <span class="bool-val">false</span>,

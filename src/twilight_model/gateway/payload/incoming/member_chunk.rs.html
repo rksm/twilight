@@ -490,6 +490,15 @@
 <a href="#490" id="490">490</a>
 <a href="#491" id="491">491</a>
 <a href="#492" id="492">492</a>
+<a href="#493" id="493">493</a>
+<a href="#494" id="494">494</a>
+<a href="#495" id="495">495</a>
+<a href="#496" id="496">496</a>
+<a href="#497" id="497">497</a>
+<a href="#498" id="498">498</a>
+<a href="#499" id="499">499</a>
+<a href="#500" id="500">500</a>
+<a href="#501" id="501">501</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     gateway::presence::{Presence, PresenceListDeserializer},
     guild::member::{Member, MemberListDeserializer},
@@ -689,7 +698,7 @@
     <span class="kw">use </span><span class="kw">super</span>::<span class="kw">super</span>::MemberChunk;
     <span class="kw">use crate</span>::{
         gateway::presence::{ClientStatus, Presence, Status, UserOrId},
-        guild::Member,
+        guild::{Member, MemberFlags},
         id::Id,
         test::image_hash,
         user::{User, UserFlags},
@@ -701,6 +710,7 @@
     #[test]
     </span><span class="kw">fn </span>simple_member_chunk() -&gt; <span class="prelude-ty">Result</span>&lt;(), TimestampParseError&gt; {
         <span class="kw">let </span>joined_at = Timestamp::from_str(<span class="string">&quot;2020-04-04T04:04:04.000000+00:00&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>input = <span class="macro">serde_json::json!</span>({
             <span class="string">&quot;chunk_count&quot;</span>: <span class="number">1</span>,
@@ -709,6 +719,7 @@
             <span class="string">&quot;members&quot;</span>: [{
                 <span class="string">&quot;communication_disabled_until&quot;</span>: null,
                 <span class="string">&quot;deaf&quot;</span>: <span class="bool-val">false</span>,
+                <span class="string">&quot;flags&quot;</span>: flags.bits(),
                 <span class="string">&quot;hoisted_role&quot;</span>: <span class="string">&quot;6&quot;</span>,
                 <span class="string">&quot;joined_at&quot;</span>: <span class="string">&quot;2020-04-04T04:04:04.000000+00:00&quot;</span>,
                 <span class="string">&quot;mute&quot;</span>: <span class="bool-val">false</span>,
@@ -725,6 +736,7 @@
             }, {
                 <span class="string">&quot;communication_disabled_until&quot;</span>: null,
                 <span class="string">&quot;deaf&quot;</span>: <span class="bool-val">false</span>,
+                <span class="string">&quot;flags&quot;</span>: flags.bits(),
                 <span class="string">&quot;hoisted_role&quot;</span>: <span class="string">&quot;6&quot;</span>,
                 <span class="string">&quot;joined_at&quot;</span>: <span class="string">&quot;2020-04-04T04:04:04.000000+00:00&quot;</span>,
                 <span class="string">&quot;mute&quot;</span>: <span class="bool-val">false</span>,
@@ -739,6 +751,7 @@
             }, {
                 <span class="string">&quot;communication_disabled_until&quot;</span>: null,
                 <span class="string">&quot;deaf&quot;</span>: <span class="bool-val">false</span>,
+                <span class="string">&quot;flags&quot;</span>: flags.bits(),
                 <span class="string">&quot;hoisted_role&quot;</span>: <span class="string">&quot;6&quot;</span>,
                 <span class="string">&quot;joined_at&quot;</span>: <span class="string">&quot;2020-04-04T04:04:04.000000+00:00&quot;</span>,
                 <span class="string">&quot;mute&quot;</span>: <span class="bool-val">false</span>,
@@ -754,6 +767,7 @@
             }, {
                 <span class="string">&quot;communication_disabled_until&quot;</span>: null,
                 <span class="string">&quot;deaf&quot;</span>: <span class="bool-val">false</span>,
+                <span class="string">&quot;flags&quot;</span>: flags.bits(),
                 <span class="string">&quot;hoisted_role&quot;</span>: <span class="string">&quot;6&quot;</span>,
                 <span class="string">&quot;joined_at&quot;</span>: <span class="string">&quot;2020-04-04T04:04:04.000000+00:00&quot;</span>,
                 <span class="string">&quot;mute&quot;</span>: <span class="bool-val">false</span>,
@@ -812,6 +826,7 @@
                     avatar: <span class="prelude-val">None</span>,
                     communication_disabled_until: <span class="prelude-val">None</span>,
                     deaf: <span class="bool-val">false</span>,
+                    flags,
                     guild_id: Id::new(<span class="number">1</span>),
                     joined_at,
                     mute: <span class="bool-val">false</span>,
@@ -841,6 +856,7 @@
                     avatar: <span class="prelude-val">None</span>,
                     communication_disabled_until: <span class="prelude-val">None</span>,
                     deaf: <span class="bool-val">false</span>,
+                    flags,
                     guild_id: Id::new(<span class="number">1</span>),
                     joined_at,
                     mute: <span class="bool-val">false</span>,
@@ -870,6 +886,7 @@
                     avatar: <span class="prelude-val">None</span>,
                     communication_disabled_until: <span class="prelude-val">None</span>,
                     deaf: <span class="bool-val">false</span>,
+                    flags,
                     guild_id: Id::new(<span class="number">1</span>),
                     joined_at,
                     mute: <span class="bool-val">false</span>,
@@ -899,6 +916,7 @@
                     avatar: <span class="prelude-val">None</span>,
                     communication_disabled_until: <span class="prelude-val">None</span>,
                     deaf: <span class="bool-val">false</span>,
+                    flags,
                     guild_id: Id::new(<span class="number">1</span>),
                     joined_at,
                     mute: <span class="bool-val">false</span>,

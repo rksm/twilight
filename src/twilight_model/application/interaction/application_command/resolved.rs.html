@@ -540,9 +540,20 @@
 <a href="#540" id="540">540</a>
 <a href="#541" id="541">541</a>
 <a href="#542" id="542">542</a>
+<a href="#543" id="543">543</a>
+<a href="#544" id="544">544</a>
+<a href="#545" id="545">545</a>
+<a href="#546" id="546">546</a>
+<a href="#547" id="547">547</a>
+<a href="#548" id="548">548</a>
+<a href="#549" id="549">549</a>
+<a href="#550" id="550">550</a>
+<a href="#551" id="551">551</a>
+<a href="#552" id="552">552</a>
+<a href="#553" id="553">553</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     channel::{thread::ThreadMetadata, Attachment, ChannelType, Message},
-    guild::{Permissions, Role},
+    guild::{MemberFlags, Permissions, Role},
     id::{
         marker::{AttachmentMarker, ChannelMarker, MessageMarker, RoleMarker, UserMarker},
         Id,
@@ -617,6 +628,10 @@
     </span><span class="kw">pub </span>avatar: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     <span class="doccomment">/// If the member is timed out, when the timeout will expire.
     </span><span class="kw">pub </span>communication_disabled_until: <span class="prelude-ty">Option</span>&lt;Timestamp&gt;,
+    <span class="doccomment">/// Flags for the member.
+    ///
+    /// Defaults to an empty bitfield.
+    </span><span class="kw">pub </span>flags: MemberFlags,
     <span class="doccomment">/// Member guild join date.
     </span><span class="kw">pub </span>joined_at: Timestamp,
     <span class="doccomment">/// Member nickname.
@@ -644,7 +659,7 @@
             },
             Attachment, ChannelType, Message,
         },
-        guild::{PartialMember, Permissions, Role},
+        guild::{MemberFlags, PartialMember, Permissions, Role},
         id::Id,
         test::image_hash,
         user::{PremiumType, User, UserFlags},
@@ -658,6 +673,7 @@
     </span><span class="kw">fn </span>test_data_resolved() -&gt; <span class="prelude-ty">Result</span>&lt;(), TimestampParseError&gt; {
         <span class="kw">let </span>joined_at = Timestamp::from_str(<span class="string">&quot;2021-08-10T12:18:37.000000+00:00&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>timestamp = Timestamp::from_str(<span class="string">&quot;2020-02-02T02:02:02.020000+00:00&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>value = CommandInteractionDataResolved {
             attachments: IntoIterator::into_iter([(
@@ -693,6 +709,7 @@
                 InteractionMember {
                     avatar: <span class="prelude-val">None</span>,
                     communication_disabled_until: <span class="prelude-val">None</span>,
+                    flags,
                     joined_at,
                     nick: <span class="prelude-val">None</span>,
                     pending: <span class="bool-val">false</span>,
@@ -739,6 +756,7 @@
                     member: <span class="prelude-val">Some</span>(PartialMember {
                         avatar: <span class="prelude-val">None</span>,
                         communication_disabled_until: <span class="prelude-val">None</span>,
+                        flags,
                         deaf: <span class="bool-val">false</span>,
                         joined_at,
                         mute: <span class="bool-val">false</span>,
@@ -875,10 +893,12 @@
                 Token::Str(<span class="string">&quot;300&quot;</span>),
                 Token::Struct {
                     name: <span class="string">&quot;InteractionMember&quot;</span>,
-                    len: <span class="number">6</span>,
+                    len: <span class="number">7</span>,
                 },
                 Token::Str(<span class="string">&quot;communication_disabled_until&quot;</span>),
                 Token::None,
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;joined_at&quot;</span>),
                 Token::Str(<span class="string">&quot;2021-08-10T12:18:37.000000+00:00&quot;</span>),
                 Token::Str(<span class="string">&quot;nick&quot;</span>),
@@ -951,12 +971,14 @@
                 Token::Some,
                 Token::Struct {
                     name: <span class="string">&quot;PartialMember&quot;</span>,
-                    len: <span class="number">7</span>,
+                    len: <span class="number">8</span>,
                 },
                 Token::Str(<span class="string">&quot;communication_disabled_until&quot;</span>),
                 Token::None,
                 Token::Str(<span class="string">&quot;deaf&quot;</span>),
                 Token::Bool(<span class="bool-val">false</span>),
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;joined_at&quot;</span>),
                 Token::Str(<span class="string">&quot;2021-08-10T12:18:37.000000+00:00&quot;</span>),
                 Token::Str(<span class="string">&quot;mute&quot;</span>),

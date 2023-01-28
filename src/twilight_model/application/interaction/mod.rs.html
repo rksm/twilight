@@ -704,6 +704,13 @@
 <a href="#704" id="704">704</a>
 <a href="#705" id="705">705</a>
 <a href="#706" id="706">706</a>
+<a href="#707" id="707">707</a>
+<a href="#708" id="708">708</a>
+<a href="#709" id="709">709</a>
+<a href="#710" id="710">710</a>
+<a href="#711" id="711">711</a>
+<a href="#712" id="712">712</a>
+<a href="#713" id="713">713</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Used when receiving interactions through gateway or webhooks.
 //!
 //! See [Discord Docs/Receiving and Responding].
@@ -1128,7 +1135,7 @@
     };
     <span class="kw">use crate</span>::{
         application::command::{CommandOptionType, CommandType},
-        guild::{PartialMember, Permissions},
+        guild::{MemberFlags, PartialMember, Permissions},
         id::Id,
         test::image_hash,
         user::User,
@@ -1141,6 +1148,7 @@
     #[allow(clippy::too_many_lines)]
     </span><span class="kw">fn </span>test_interaction_full() -&gt; <span class="prelude-ty">Result</span>&lt;(), TimestampParseError&gt; {
         <span class="kw">let </span>joined_at = Timestamp::from_str(<span class="string">&quot;2020-01-01T00:00:00.000000+00:00&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>value = Interaction {
             app_permissions: <span class="prelude-val">Some</span>(Permissions::SEND_MESSAGES),
@@ -1163,6 +1171,7 @@
                         InteractionMember {
                             avatar: <span class="prelude-val">None</span>,
                             communication_disabled_until: <span class="prelude-val">None</span>,
+                            flags,
                             joined_at,
                             nick: <span class="prelude-val">Some</span>(<span class="string">&quot;nickname&quot;</span>.into()),
                             pending: <span class="bool-val">false</span>,
@@ -1207,6 +1216,7 @@
                 avatar: <span class="prelude-val">None</span>,
                 communication_disabled_until: <span class="prelude-val">None</span>,
                 deaf: <span class="bool-val">false</span>,
+                flags,
                 joined_at,
                 mute: <span class="bool-val">false</span>,
                 nick: <span class="prelude-val">Some</span>(<span class="string">&quot;nickname&quot;</span>.into()),
@@ -1293,10 +1303,12 @@
                 Token::Str(<span class="string">&quot;600&quot;</span>),
                 Token::Struct {
                     name: <span class="string">&quot;InteractionMember&quot;</span>,
-                    len: <span class="number">6</span>,
+                    len: <span class="number">7</span>,
                 },
                 Token::Str(<span class="string">&quot;communication_disabled_until&quot;</span>),
                 Token::None,
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;joined_at&quot;</span>),
                 Token::Str(<span class="string">&quot;2020-01-01T00:00:00.000000+00:00&quot;</span>),
                 Token::Str(<span class="string">&quot;nick&quot;</span>),
@@ -1358,12 +1370,14 @@
                 Token::Some,
                 Token::Struct {
                     name: <span class="string">&quot;PartialMember&quot;</span>,
-                    len: <span class="number">8</span>,
+                    len: <span class="number">9</span>,
                 },
                 Token::Str(<span class="string">&quot;communication_disabled_until&quot;</span>),
                 Token::None,
                 Token::Str(<span class="string">&quot;deaf&quot;</span>),
                 Token::Bool(<span class="bool-val">false</span>),
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;joined_at&quot;</span>),
                 Token::Str(<span class="string">&quot;2020-01-01T00:00:00.000000+00:00&quot;</span>),
                 Token::Str(<span class="string">&quot;mute&quot;</span>),

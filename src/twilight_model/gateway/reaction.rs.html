@@ -344,6 +344,14 @@
 <a href="#344" id="344">344</a>
 <a href="#345" id="345">345</a>
 <a href="#346" id="346">346</a>
+<a href="#347" id="347">347</a>
+<a href="#348" id="348">348</a>
+<a href="#349" id="349">349</a>
+<a href="#350" id="350">350</a>
+<a href="#351" id="351">351</a>
+<a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
+<a href="#354" id="354">354</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     channel::message::ReactionType,
     guild::member::{Member, MemberIntermediary},
@@ -511,7 +519,11 @@
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span><span class="kw">super</span>::GatewayReaction;
     <span class="kw">use crate</span>::{
-        channel::message::ReactionType, guild::Member, id::Id, test::image_hash, user::User,
+        channel::message::ReactionType,
+        guild::{Member, MemberFlags},
+        id::Id,
+        test::image_hash,
+        user::User,
         util::Timestamp,
     };
     <span class="kw">use </span>serde_test::Token;
@@ -521,6 +533,7 @@
     #[test]
     </span><span class="kw">fn </span>reaction_with_member() {
         <span class="kw">let </span>joined_at = Timestamp::from_str(<span class="string">&quot;2020-01-01T00:00:00.000000+00:00&quot;</span>).unwrap();
+        <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
 
         <span class="kw">let </span>value = GatewayReaction {
             channel_id: Id::new(<span class="number">2</span>),
@@ -532,6 +545,7 @@
                 avatar: <span class="prelude-val">None</span>,
                 communication_disabled_until: <span class="prelude-val">None</span>,
                 deaf: <span class="bool-val">false</span>,
+                flags,
                 guild_id: Id::new(<span class="number">1</span>),
                 joined_at,
                 mute: <span class="bool-val">false</span>,
@@ -587,12 +601,14 @@
                 Token::Some,
                 Token::Struct {
                     name: <span class="string">&quot;Member&quot;</span>,
-                    len: <span class="number">9</span>,
+                    len: <span class="number">10</span>,
                 },
                 Token::Str(<span class="string">&quot;communication_disabled_until&quot;</span>),
                 Token::None,
                 Token::Str(<span class="string">&quot;deaf&quot;</span>),
                 Token::Bool(<span class="bool-val">false</span>),
+                Token::Str(<span class="string">&quot;flags&quot;</span>),
+                Token::U64(flags.bits()),
                 Token::Str(<span class="string">&quot;guild_id&quot;</span>),
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;1&quot;</span>),
