@@ -9,8 +9,8 @@ with the provided string and optionally limiting the number of members
 to retrieve.</p>
 <p>If you specify no limit, then Discord’s default will be used, which will
 be an unbounded number of members. Specifying 0 is also equivalent.</p>
-<p>To request the entire member list, pass in a <code>None</code> query. You must also
-have the <code>GUILD_MEMBERS</code> intent enabled.</p>
+<p>To request the entire member list, pass in an empty string and no limit.
+You must also have the <code>GUILD_MEMBERS</code> intent enabled.</p>
 <h5 id="examples"><a href="#examples">Examples</a></h5>
 <p>Request all of the guild members that start with the letter “a” and
 their presences:</p>
