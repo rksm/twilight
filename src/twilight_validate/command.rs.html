@@ -844,8 +844,6 @@
 <a href="#844" id="844">844</a>
 <a href="#845" id="845">845</a>
 <a href="#846" id="846">846</a>
-<a href="#847" id="847">847</a>
-<a href="#848" id="848">848</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Constants, error types, and functions for validating [`Command`]s.
 
 </span><span class="kw">use </span>std::{
@@ -854,7 +852,7 @@
     fmt::{Display, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult},
 };
 <span class="kw">use </span>twilight_model::application::command::{
-    Command, CommandOption, CommandOptionChoice, CommandOptionType, CommandType,
+    Command, CommandOption, CommandOptionChoiceValue, CommandOptionType, CommandType,
 };
 
 <span class="doccomment">/// Maximum number of choices an option can have.
@@ -1195,11 +1193,11 @@
         CommandOptionType::String =&gt; {
             <span class="kw">if let </span><span class="prelude-val">Some</span>(choices) = option.choices.as_ref() {
                 <span class="kw">for </span>choice <span class="kw">in </span>choices {
-                    <span class="kw">if let </span>CommandOptionChoice::String(string_choice) = choice {
+                    <span class="kw">if let </span>CommandOptionChoiceValue::String(string_choice) = <span class="kw-2">&amp;</span>choice.value {
                         characters += longest_localization_characters(
-                            <span class="kw-2">&amp;</span>string_choice.name,
-                            <span class="kw-2">&amp;</span>string_choice.name_localizations,
-                        ) + string_choice.value.len();
+                            <span class="kw-2">&amp;</span>choice.name,
+                            <span class="kw-2">&amp;</span>choice.name_localizations,
+                        ) + string_choice.len();
                     }
                 }
             }
@@ -1490,7 +1488,7 @@
     <span class="kw">use </span>std::collections::HashMap;
     <span class="kw">use </span>twilight_model::{
         application::command::{
-            CommandOptionChoice, CommandOptionChoiceData, CommandOptionType, CommandType,
+            CommandOptionChoice, CommandOptionChoiceValue, CommandOptionType, CommandType,
         },
         id::Id,
     };
@@ -1621,16 +1619,14 @@
                     options: <span class="prelude-val">Some</span>(Vec::from([CommandOption {
                         autocomplete: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
                         channel_types: <span class="prelude-val">None</span>,
-                        choices: <span class="prelude-val">Some</span>(Vec::from([CommandOptionChoice::String(
-                            CommandOptionChoiceData {
-                                name: <span class="string">&quot;b&quot;</span>.repeat(<span class="number">32</span>),
-                                name_localizations: <span class="prelude-val">Some</span>(HashMap::from([(
-                                    <span class="string">&quot;en-US&quot;</span>.to_string(),
-                                    <span class="string">&quot;b&quot;</span>.repeat(<span class="number">10</span>),
-                                )])),
-                                value: <span class="string">&quot;c&quot;</span>.repeat(<span class="number">100</span>),
-                            },
-                        )])),
+                        choices: <span class="prelude-val">Some</span>(Vec::from([CommandOptionChoice {
+                            name: <span class="string">&quot;b&quot;</span>.repeat(<span class="number">32</span>),
+                            name_localizations: <span class="prelude-val">Some</span>(HashMap::from([(
+                                <span class="string">&quot;en-US&quot;</span>.to_string(),
+                                <span class="string">&quot;b&quot;</span>.repeat(<span class="number">10</span>),
+                            )])),
+                            value: CommandOptionChoiceValue::String(<span class="string">&quot;c&quot;</span>.repeat(<span class="number">100</span>)),
+                        }])),
                         description: <span class="string">&quot;a&quot;</span>.repeat(<span class="number">100</span>),
                         description_localizations: <span class="prelude-val">Some</span>(HashMap::from([(
                             <span class="string">&quot;en-US&quot;</span>.to_string(),

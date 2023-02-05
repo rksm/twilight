@@ -107,10 +107,9 @@
 <a href="#107" id="107">107</a>
 <a href="#108" id="108">108</a>
 <a href="#109" id="109">109</a>
-<a href="#110" id="110">110</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     gateway::presence::{Presence, PresenceIntermediary},
-    guild::{member::MemberIntermediary, Member},
+    guild::Member,
     id::{
         marker::{ChannelMarker, GuildMarker, UserMarker},
         Id,
@@ -144,7 +143,7 @@
     </span><span class="kw">pub </span>id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     <span class="kw">pub </span>join_timestamp: Timestamp,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
-    </span><span class="kw">pub </span>member: <span class="prelude-ty">Option</span>&lt;MemberIntermediary&gt;,
+    </span><span class="kw">pub </span>member: <span class="prelude-ty">Option</span>&lt;Member&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>presence: <span class="prelude-ty">Option</span>&lt;PresenceIntermediary&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
@@ -154,13 +153,12 @@
 <span class="kw">impl </span>ThreadMemberIntermediary {
     <span class="doccomment">/// Inject a guild ID into a thread member intermediary
     </span><span class="kw">pub fn </span>into_thread_member(<span class="self">self</span>, guild_id: Id&lt;GuildMarker&gt;) -&gt; ThreadMember {
-        <span class="kw">let </span>member = <span class="self">self</span>.member.map(|m| m.into_member(guild_id));
         <span class="kw">let </span>presence = <span class="self">self</span>.presence.map(|p| p.into_presence(guild_id));
         ThreadMember {
             flags: <span class="self">self</span>.flags,
             id: <span class="self">self</span>.id,
             join_timestamp: <span class="self">self</span>.join_timestamp,
-            member,
+            member: <span class="self">self</span>.member,
             presence,
             user_id: <span class="self">self</span>.user_id,
         }

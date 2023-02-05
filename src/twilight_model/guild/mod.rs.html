@@ -1085,31 +1085,21 @@
 <a href="#1085" id="1085">1085</a>
 <a href="#1086" id="1086">1086</a>
 <a href="#1087" id="1087">1087</a>
-<a href="#1088" id="1088">1088</a>
-<a href="#1089" id="1089">1089</a>
-<a href="#1090" id="1090">1090</a>
-<a href="#1091" id="1091">1091</a>
-<a href="#1092" id="1092">1092</a>
-<a href="#1093" id="1093">1093</a>
-<a href="#1094" id="1094">1094</a>
-<a href="#1095" id="1095">1095</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Group of [`Channel`]s and [`User`]s with additional moderation options.
 //!
 //! [`Guild`]s allow, for example, assigning [`Role`]s to [`Member`]s to limit
 //! their [`Permissions`] globally, or per [`Channel`].
-//!
-//! Advanced user&#39;s may look inside the [`member`] module for custom
-//! [`Member`] deserializers.
 //!
 //! [`User`]: super::user::User
 
 </span><span class="kw">pub mod </span>audit_log;
 <span class="kw">pub mod </span>auto_moderation;
 <span class="kw">pub mod </span>invite;
-<span class="kw">pub mod </span>member;
 <span class="kw">pub mod </span>scheduled_event;
 <span class="kw">pub mod </span>template;
+<span class="kw">pub mod </span>widget;
 
+<span class="kw">mod </span>afk_timeout;
 <span class="kw">mod </span>ban;
 <span class="kw">mod </span>default_message_notification_level;
 <span class="kw">mod </span>emoji;
@@ -1120,6 +1110,8 @@
 <span class="kw">mod </span>integration_account;
 <span class="kw">mod </span>integration_application;
 <span class="kw">mod </span>integration_expire_behavior;
+<span class="kw">mod </span>integration_type;
+<span class="kw">mod </span>member;
 <span class="kw">mod </span>member_flags;
 <span class="kw">mod </span>mfa_level;
 <span class="kw">mod </span>nsfw_level;
@@ -1135,26 +1127,23 @@
 <span class="kw">mod </span>unavailable_guild;
 <span class="kw">mod </span>vanity_url;
 <span class="kw">mod </span>verification_level;
-<span class="kw">mod </span>widget;
 
-<span class="comment">// `Member` should appear inline, as the `member` module is only for advanced
-// use. Public documentation is not available for re-exports.
-</span><span class="attr">#[doc(inline)]
-</span><span class="kw">pub use </span><span class="self">self</span>::member::Member;
+<span class="kw">pub use </span><span class="self">self</span>::nsfw_level::NSFWLevel;
+<span class="kw">pub use </span><span class="self">self</span>::permissions::Permissions;
 <span class="kw">pub use </span><span class="self">self</span>::{
-    ban::Ban, default_message_notification_level::DefaultMessageNotificationLevel, emoji::Emoji,
+    afk_timeout::AfkTimeout, ban::Ban,
+    default_message_notification_level::DefaultMessageNotificationLevel, emoji::Emoji,
     explicit_content_filter::ExplicitContentFilter, feature::GuildFeature, info::GuildInfo,
     integration::GuildIntegration, integration_account::IntegrationAccount,
     integration_application::IntegrationApplication,
-    integration_expire_behavior::IntegrationExpireBehavior, member_flags::MemberFlags,
-    mfa_level::MfaLevel, nsfw_level::NSFWLevel, partial_guild::PartialGuild,
-    partial_member::PartialMember, permissions::Permissions, premium_tier::PremiumTier,
-    preview::GuildPreview, prune::GuildPrune, role::Role, role_tags::RoleTags,
-    system_channel_flags::SystemChannelFlags, unavailable_guild::UnavailableGuild,
-    vanity_url::VanityUrl, verification_level::VerificationLevel, widget::GuildWidget,
+    integration_expire_behavior::IntegrationExpireBehavior, integration_type::GuildIntegrationType,
+    member::Member, member_flags::MemberFlags, mfa_level::MfaLevel, partial_guild::PartialGuild,
+    partial_member::PartialMember, premium_tier::PremiumTier, preview::GuildPreview,
+    prune::GuildPrune, role::Role, role_tags::RoleTags, system_channel_flags::SystemChannelFlags,
+    unavailable_guild::UnavailableGuild, vanity_url::VanityUrl,
+    verification_level::VerificationLevel, widget::GuildWidget,
 };
 
-<span class="kw">use </span><span class="self">self</span>::member::MemberListDeserializer;
 <span class="kw">use </span><span class="kw">super</span>::gateway::presence::PresenceListDeserializer;
 <span class="kw">use crate</span>::{
     channel::{message::sticker::Sticker, Channel, StageInstance},
@@ -1175,7 +1164,7 @@
 <span class="attr">#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 </span><span class="kw">pub struct </span>Guild {
     <span class="kw">pub </span>afk_channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
-    <span class="kw">pub </span>afk_timeout: u64,
+    <span class="kw">pub </span>afk_timeout: AfkTimeout,
     <span class="kw">pub </span>application_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ApplicationMarker&gt;&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>approximate_member_count: <span class="prelude-ty">Option</span>&lt;u64&gt;,
@@ -1544,9 +1533,7 @@
                                 <span class="kw">return </span><span class="prelude-val">Err</span>(DeError::duplicate_field(<span class="string">&quot;members&quot;</span>));
                             }
 
-                            <span class="kw">let </span>deserializer = MemberListDeserializer::new(Id::new(<span class="number">1</span>));
-
-                            members = <span class="prelude-val">Some</span>(map.next_value_seed(deserializer)<span class="question-mark">?</span>);
+                            members = <span class="prelude-val">Some</span>(map.next_value()<span class="question-mark">?</span>);
                         }
                         Field::MfaLevel =&gt; {
                             <span class="kw">if </span>mfa_level.is_some() {
@@ -1774,7 +1761,7 @@
                 <span class="kw">let </span>max_presences = max_presences.unwrap_or_default();
                 <span class="kw">let </span>max_video_channel_users = max_video_channel_users.unwrap_or_default();
                 <span class="kw">let </span>member_count = member_count.unwrap_or_default();
-                <span class="kw">let </span><span class="kw-2">mut </span>members = members.unwrap_or_default();
+                <span class="kw">let </span>members = members.unwrap_or_default();
                 <span class="kw">let </span>nsfw_level = nsfw_level.ok_or_else(|| DeError::missing_field(<span class="string">&quot;nsfw_level&quot;</span>))<span class="question-mark">?</span>;
                 <span class="kw">let </span>owner = owner.unwrap_or_default();
                 <span class="kw">let </span>permissions = permissions.unwrap_or_default();
@@ -1796,7 +1783,7 @@
 
                 <span class="macro">tracing::trace!</span>(
                     <span class="question-mark">?</span>afk_channel_id,
-                    %afk_timeout,
+                    <span class="question-mark">?</span>afk_timeout,
                     <span class="question-mark">?</span>application_id,
                     <span class="question-mark">?</span>approximate_member_count,
                     <span class="question-mark">?</span>approximate_presence_count,
@@ -1850,10 +1837,6 @@
 
                 <span class="kw">for </span>channel <span class="kw">in </span><span class="kw-2">&amp;mut </span>channels {
                     channel.guild_id = <span class="prelude-val">Some</span>(id);
-                }
-
-                <span class="kw">for </span>member <span class="kw">in </span><span class="kw-2">&amp;mut </span>members {
-                    member.guild_id = id;
                 }
 
                 <span class="kw">for </span>presence <span class="kw">in </span><span class="kw-2">&amp;mut </span>presences {
@@ -1977,8 +1960,8 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{
-        DefaultMessageNotificationLevel, ExplicitContentFilter, Guild, GuildFeature, MfaLevel,
-        NSFWLevel, Permissions, PremiumTier, SystemChannelFlags, VerificationLevel,
+        AfkTimeout, DefaultMessageNotificationLevel, ExplicitContentFilter, Guild, GuildFeature,
+        MfaLevel, NSFWLevel, Permissions, PremiumTier, SystemChannelFlags, VerificationLevel,
     };
     <span class="kw">use crate</span>::{
         id::Id,
@@ -1995,7 +1978,7 @@
 
         <span class="kw">let </span>value = Guild {
             afk_channel_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">2</span>)),
-            afk_timeout: <span class="number">900</span>,
+            afk_timeout: AfkTimeout::FIFTEEN_MINUTES,
             application_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">3</span>)),
             approximate_member_count: <span class="prelude-val">Some</span>(<span class="number">1_200</span>),
             approximate_presence_count: <span class="prelude-val">Some</span>(<span class="number">900</span>),
@@ -2056,7 +2039,8 @@
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;2&quot;</span>),
                 Token::Str(<span class="string">&quot;afk_timeout&quot;</span>),
-                Token::U64(<span class="number">900</span>),
+                Token::NewtypeStruct { name: <span class="string">&quot;AfkTimeout&quot; </span>},
+                Token::U16(<span class="number">900</span>),
                 Token::Str(<span class="string">&quot;application_id&quot;</span>),
                 Token::Some,
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},

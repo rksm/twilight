@@ -355,7 +355,12 @@
 <a href="#355" id="355">355</a>
 <a href="#356" id="356">356</a>
 <a href="#357" id="357">357</a>
-</pre><pre class="rust"><code><span class="kw">use super</span>::{IntegrationAccount, IntegrationApplication, IntegrationExpireBehavior};
+<a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
+<a href="#360" id="360">360</a>
+</pre><pre class="rust"><code><span class="kw">use super</span>::{
+    GuildIntegrationType, IntegrationAccount, IntegrationApplication, IntegrationExpireBehavior,
+};
 <span class="kw">use crate</span>::{
     id::{
         marker::{GuildMarker, IntegrationMarker, RoleMarker},
@@ -385,7 +390,7 @@
     </span><span class="kw">pub </span>guild_id: <span class="prelude-ty">Option</span>&lt;Id&lt;GuildMarker&gt;&gt;,
     <span class="kw">pub </span>id: Id&lt;IntegrationMarker&gt;,
     <span class="attr">#[serde(rename = <span class="string">&quot;type&quot;</span>)]
-    </span><span class="kw">pub </span>kind: String,
+    </span><span class="kw">pub </span>kind: GuildIntegrationType,
     <span class="kw">pub </span>name: String,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>revoked: <span class="prelude-ty">Option</span>&lt;bool&gt;,
@@ -413,6 +418,7 @@
         User,
     };
     <span class="kw">use crate</span>::{
+        guild::GuildIntegrationType,
         id::Id,
         oauth::scope,
         test::image_hash,
@@ -438,7 +444,7 @@
             expire_grace_period: <span class="prelude-val">Some</span>(<span class="number">3_600</span>),
             guild_id: <span class="prelude-val">None</span>,
             id: Id::new(<span class="number">2</span>),
-            kind: <span class="string">&quot;a&quot;</span>.to_owned(),
+            kind: GuildIntegrationType::Discord,
             name: <span class="string">&quot;integration name&quot;</span>.to_owned(),
             revoked: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
             role_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">3</span>)),
@@ -501,7 +507,7 @@
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;2&quot;</span>),
                 Token::Str(<span class="string">&quot;type&quot;</span>),
-                Token::Str(<span class="string">&quot;a&quot;</span>),
+                Token::Str(<span class="string">&quot;discord&quot;</span>),
                 Token::Str(<span class="string">&quot;name&quot;</span>),
                 Token::Str(<span class="string">&quot;integration name&quot;</span>),
                 Token::Str(<span class="string">&quot;revoked&quot;</span>),
@@ -579,7 +585,7 @@
             expire_grace_period: <span class="prelude-val">Some</span>(<span class="number">3_600</span>),
             guild_id: <span class="prelude-val">None</span>,
             id: Id::new(<span class="number">2</span>),
-            kind: <span class="string">&quot;a&quot;</span>.to_owned(),
+            kind: GuildIntegrationType::Discord,
             name: <span class="string">&quot;integration name&quot;</span>.to_owned(),
             revoked: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
             role_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">3</span>)),
@@ -657,7 +663,7 @@
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;2&quot;</span>),
                 Token::Str(<span class="string">&quot;type&quot;</span>),
-                Token::Str(<span class="string">&quot;a&quot;</span>),
+                Token::Str(<span class="string">&quot;discord&quot;</span>),
                 Token::Str(<span class="string">&quot;name&quot;</span>),
                 Token::Str(<span class="string">&quot;integration name&quot;</span>),
                 Token::Str(<span class="string">&quot;revoked&quot;</span>),

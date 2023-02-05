@@ -371,24 +371,6 @@
 <a href="#371" id="371">371</a>
 <a href="#372" id="372">372</a>
 <a href="#373" id="373">373</a>
-<a href="#374" id="374">374</a>
-<a href="#375" id="375">375</a>
-<a href="#376" id="376">376</a>
-<a href="#377" id="377">377</a>
-<a href="#378" id="378">378</a>
-<a href="#379" id="379">379</a>
-<a href="#380" id="380">380</a>
-<a href="#381" id="381">381</a>
-<a href="#382" id="382">382</a>
-<a href="#383" id="383">383</a>
-<a href="#384" id="384">384</a>
-<a href="#385" id="385">385</a>
-<a href="#386" id="386">386</a>
-<a href="#387" id="387">387</a>
-<a href="#388" id="388">388</a>
-<a href="#389" id="389">389</a>
-<a href="#390" id="390">390</a>
-<a href="#391" id="391">391</a>
 </pre><pre class="rust"><code><span class="kw">use </span>serde::{Deserialize, Serialize};
 
 <span class="doccomment">/// The type of an event.
@@ -409,6 +391,7 @@
     ChannelUpdate,
     <span class="attr">#[serde(rename = <span class="string">&quot;APPLICATION_COMMAND_PERMISSIONS_UPDATE&quot;</span>)]
     </span>CommandPermissionsUpdate,
+    GatewayClose,
     GatewayHeartbeat,
     GatewayHeartbeatAck,
     GatewayHello,
@@ -463,13 +446,6 @@
     </span>RoleDelete,
     <span class="attr">#[serde(rename = <span class="string">&quot;GUILD_ROLE_UPDATE&quot;</span>)]
     </span>RoleUpdate,
-    ShardConnected,
-    ShardConnecting,
-    ShardDisconnected,
-    ShardIdentifying,
-    ShardPayload,
-    ShardReconnecting,
-    ShardResuming,
     StageInstanceCreate,
     StageInstanceDelete,
     StageInstanceUpdate,
@@ -554,18 +530,12 @@
             <span class="self">Self</span>::VoiceServerUpdate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;VOICE_SERVER_UPDATE&quot;</span>),
             <span class="self">Self</span>::VoiceStateUpdate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;VOICE_STATE_UPDATE&quot;</span>),
             <span class="self">Self</span>::WebhooksUpdate =&gt; <span class="prelude-val">Some</span>(<span class="string">&quot;WEBHOOKS_UPDATE&quot;</span>),
-            <span class="self">Self</span>::GatewayHeartbeat
+            <span class="self">Self</span>::GatewayClose
+            | <span class="self">Self</span>::GatewayHeartbeat
             | <span class="self">Self</span>::GatewayHeartbeatAck
             | <span class="self">Self</span>::GatewayHello
             | <span class="self">Self</span>::GatewayInvalidateSession
-            | <span class="self">Self</span>::GatewayReconnect
-            | <span class="self">Self</span>::ShardConnected
-            | <span class="self">Self</span>::ShardConnecting
-            | <span class="self">Self</span>::ShardDisconnected
-            | <span class="self">Self</span>::ShardIdentifying
-            | <span class="self">Self</span>::ShardPayload
-            | <span class="self">Self</span>::ShardReconnecting
-            | <span class="self">Self</span>::ShardResuming =&gt; <span class="prelude-val">None</span>,
+            | <span class="self">Self</span>::GatewayReconnect =&gt; <span class="prelude-val">None</span>,
         }
     }
 }
@@ -687,6 +657,7 @@
             EventType::CommandPermissionsUpdate,
             <span class="string">&quot;APPLICATION_COMMAND_PERMISSIONS_UPDATE&quot;</span>,
         );
+        assert_variant(EventType::GatewayClose, <span class="string">&quot;GATEWAY_CLOSE&quot;</span>);
         assert_variant(EventType::GatewayHeartbeat, <span class="string">&quot;GATEWAY_HEARTBEAT&quot;</span>);
         assert_variant(EventType::GatewayHeartbeatAck, <span class="string">&quot;GATEWAY_HEARTBEAT_ACK&quot;</span>);
         assert_variant(EventType::GatewayHello, <span class="string">&quot;GATEWAY_HELLO&quot;</span>);
@@ -756,13 +727,6 @@
         assert_variant(EventType::RoleCreate, <span class="string">&quot;GUILD_ROLE_CREATE&quot;</span>);
         assert_variant(EventType::RoleDelete, <span class="string">&quot;GUILD_ROLE_DELETE&quot;</span>);
         assert_variant(EventType::RoleUpdate, <span class="string">&quot;GUILD_ROLE_UPDATE&quot;</span>);
-        assert_variant(EventType::ShardConnected, <span class="string">&quot;SHARD_CONNECTED&quot;</span>);
-        assert_variant(EventType::ShardConnecting, <span class="string">&quot;SHARD_CONNECTING&quot;</span>);
-        assert_variant(EventType::ShardDisconnected, <span class="string">&quot;SHARD_DISCONNECTED&quot;</span>);
-        assert_variant(EventType::ShardIdentifying, <span class="string">&quot;SHARD_IDENTIFYING&quot;</span>);
-        assert_variant(EventType::ShardPayload, <span class="string">&quot;SHARD_PAYLOAD&quot;</span>);
-        assert_variant(EventType::ShardReconnecting, <span class="string">&quot;SHARD_RECONNECTING&quot;</span>);
-        assert_variant(EventType::ShardResuming, <span class="string">&quot;SHARD_RESUMING&quot;</span>);
         assert_variant(EventType::StageInstanceCreate, <span class="string">&quot;STAGE_INSTANCE_CREATE&quot;</span>);
         assert_variant(EventType::StageInstanceDelete, <span class="string">&quot;STAGE_INSTANCE_DELETE&quot;</span>);
         assert_variant(EventType::StageInstanceUpdate, <span class="string">&quot;STAGE_INSTANCE_UPDATE&quot;</span>);

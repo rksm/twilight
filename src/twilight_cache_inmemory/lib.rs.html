@@ -1022,13 +1022,6 @@
 <a href="#1022" id="1022">1022</a>
 <a href="#1023" id="1023">1023</a>
 <a href="#1024" id="1024">1024</a>
-<a href="#1025" id="1025">1025</a>
-<a href="#1026" id="1026">1026</a>
-<a href="#1027" id="1027">1027</a>
-<a href="#1028" id="1028">1028</a>
-<a href="#1029" id="1029">1029</a>
-<a href="#1030" id="1030">1030</a>
-<a href="#1031" id="1031">1031</a>
 </pre><pre class="rust"><code><span class="attr">#![deny(
     clippy::all,
     clippy::missing_const_for_fn,
@@ -1935,6 +1928,7 @@
             | Event::BanAdd(<span class="kw">_</span>)
             | Event::BanRemove(<span class="kw">_</span>)
             | Event::CommandPermissionsUpdate(<span class="kw">_</span>)
+            | Event::GatewayClose(<span class="kw">_</span>)
             | Event::GatewayHeartbeat(<span class="kw">_</span>)
             | Event::GatewayHeartbeatAck
             | Event::GatewayHello(<span class="kw">_</span>)
@@ -1952,13 +1946,6 @@
             | Event::InviteDelete(<span class="kw">_</span>)
             | Event::PresencesReplace
             | Event::Resumed
-            | Event::ShardConnected(<span class="kw">_</span>)
-            | Event::ShardConnecting(<span class="kw">_</span>)
-            | Event::ShardDisconnected(<span class="kw">_</span>)
-            | Event::ShardIdentifying(<span class="kw">_</span>)
-            | Event::ShardPayload(<span class="kw">_</span>)
-            | Event::ShardReconnecting(<span class="kw">_</span>)
-            | Event::ShardResuming(<span class="kw">_</span>)
             | Event::ThreadMembersUpdate(<span class="kw">_</span>)
             | Event::ThreadMemberUpdate(<span class="kw">_</span>)
             | Event::TypingStart(<span class="kw">_</span>)
@@ -1991,7 +1978,7 @@
     </span><span class="kw">fn </span>clear() {
         <span class="kw">let </span>cache = InMemoryCache::new();
         cache.cache_emoji(Id::new(<span class="number">1</span>), test::emoji(Id::new(<span class="number">3</span>), <span class="prelude-val">None</span>));
-        cache.cache_member(Id::new(<span class="number">2</span>), test::member(Id::new(<span class="number">4</span>), Id::new(<span class="number">2</span>)));
+        cache.cache_member(Id::new(<span class="number">2</span>), test::member(Id::new(<span class="number">2</span>)));
         cache.clear();
         <span class="macro">assert!</span>(cache.emojis.is_empty());
         <span class="macro">assert!</span>(cache.members.is_empty());
@@ -2011,7 +1998,6 @@
                 communication_disabled_until: <span class="prelude-val">None</span>,
                 deaf: <span class="bool-val">false</span>,
                 flags,
-                guild_id,
                 joined_at,
                 mute: <span class="bool-val">false</span>,
                 nick: <span class="prelude-val">None</span>,

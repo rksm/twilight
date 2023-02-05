@@ -16,12 +16,18 @@
 <a href="#16" id="16">16</a>
 <a href="#17" id="17">17</a>
 <a href="#18" id="18">18</a>
+<a href="#19" id="19">19</a>
+<a href="#20" id="20">20</a>
+<a href="#21" id="21">21</a>
+<a href="#22" id="22">22</a>
 </pre><pre class="rust"><code><span class="kw">pub mod </span>connection_info;
 <span class="kw">pub mod </span>event;
 <span class="kw">pub mod </span>payload;
 <span class="kw">pub mod </span>presence;
 
 <span class="kw">mod </span>close_code;
+<span class="kw">mod </span>frame;
+<span class="kw">mod </span>id;
 <span class="kw">mod </span>intents;
 <span class="kw">mod </span>opcode;
 <span class="kw">mod </span>reaction;
@@ -29,6 +35,8 @@
 
 <span class="kw">pub use </span><span class="self">self</span>::{
     close_code::{CloseCode, CloseCodeConversionError},
+    frame::CloseFrame,
+    id::{ShardId, ShardIdParseError, ShardIdParseErrorType},
     intents::Intents,
     opcode::OpCode,
     reaction::GatewayReaction,

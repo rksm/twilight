@@ -52,52 +52,154 @@
 <a href="#52" id="52">52</a>
 <a href="#53" id="53">53</a>
 <a href="#54" id="54">54</a>
+<a href="#55" id="55">55</a>
+<a href="#56" id="56">56</a>
+<a href="#57" id="57">57</a>
+<a href="#58" id="58">58</a>
+<a href="#59" id="59">59</a>
+<a href="#60" id="60">60</a>
+<a href="#61" id="61">61</a>
+<a href="#62" id="62">62</a>
+<a href="#63" id="63">63</a>
+<a href="#64" id="64">64</a>
+<a href="#65" id="65">65</a>
+<a href="#66" id="66">66</a>
+<a href="#67" id="67">67</a>
+<a href="#68" id="68">68</a>
+<a href="#69" id="69">69</a>
+<a href="#70" id="70">70</a>
+<a href="#71" id="71">71</a>
+<a href="#72" id="72">72</a>
+<a href="#73" id="73">73</a>
+<a href="#74" id="74">74</a>
+<a href="#75" id="75">75</a>
+<a href="#76" id="76">76</a>
+<a href="#77" id="77">77</a>
+<a href="#78" id="78">78</a>
+<a href="#79" id="79">79</a>
+<a href="#80" id="80">80</a>
+<a href="#81" id="81">81</a>
+<a href="#82" id="82">82</a>
+<a href="#83" id="83">83</a>
+<a href="#84" id="84">84</a>
+<a href="#85" id="85">85</a>
+<a href="#86" id="86">86</a>
+<a href="#87" id="87">87</a>
+<a href="#88" id="88">88</a>
+<a href="#89" id="89">89</a>
+<a href="#90" id="90">90</a>
+<a href="#91" id="91">91</a>
+<a href="#92" id="92">92</a>
+<a href="#93" id="93">93</a>
+<a href="#94" id="94">94</a>
+<a href="#95" id="95">95</a>
+<a href="#96" id="96">96</a>
+<a href="#97" id="97">97</a>
+<a href="#98" id="98">98</a>
+<a href="#99" id="99">99</a>
+<a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
+<a href="#103" id="103">103</a>
+<a href="#104" id="104">104</a>
+<a href="#105" id="105">105</a>
 </pre><pre class="rust"><code><span class="kw">use </span>serde_repr::{Deserialize_repr, Serialize_repr};
 
-<span class="doccomment">/// Gateway opcodes.
+<span class="doccomment">/// Gateway event opcodes.
+///
+/// The documentation is written from a client&#39;s perspective.
+///
+/// [`PresenceUpdate`], [`RequestGuildMembers`], and [`VoiceStateUpdate`] are
+/// not requiried for establishing or maintaining a gateway connection.
+///
+/// [`PresenceUpdate`]: Self::PresenceUpdate
+/// [`RequestGuildMembers`]: Self::RequestGuildMembers
+/// [`VoiceStateUpdate`]: Self::VoiceStateUpdate
 </span><span class="attr">#[derive(Clone, Copy, Debug, Deserialize_repr, Eq, Hash, PartialEq, Serialize_repr)]
 #[non_exhaustive]
 #[repr(u8)]
 </span><span class="kw">pub enum </span>OpCode {
-    <span class="doccomment">/// An event was received.
-    </span>Event = <span class="number">0</span>,
-    <span class="doccomment">/// Fired periodically to keep connection alive.
+    <span class="doccomment">/// [`DispatchEvent`] and sequence number.
+    ///
+    /// Will only be received after establishing or resuming a session.
+    ///
+    /// [`DispatchEvent`]: super::event::DispatchEvent
+    </span>Dispatch = <span class="number">0</span>,
+    <span class="doccomment">/// Periodically sent to maintain the connection and may be received to
+    /// immediately request one.
     </span>Heartbeat = <span class="number">1</span>,
     <span class="doccomment">/// Start a new session.
     </span>Identify = <span class="number">2</span>,
-    <span class="doccomment">/// Update the client&#39;s presence information.
+    <span class="doccomment">/// Request to update the client&#39;s presence.
     </span>PresenceUpdate = <span class="number">3</span>,
-    <span class="doccomment">/// Join, leave or move between voice channels.
+    <span class="doccomment">/// Request to join, leave or move between voice channels.
     </span>VoiceStateUpdate = <span class="number">4</span>,
-    <span class="doccomment">/// Voice ping checking. This opcode is deprecated.
-    </span>VoiceServerPing = <span class="number">5</span>,
-    <span class="doccomment">/// Resume a previously disconnected session.
+    <span class="doccomment">/// Resume a previously disconnected session, skipping over [`Identify`].
+    ///
+    /// [`Identify`]: Self::Identify
     </span>Resume = <span class="number">6</span>,
-    <span class="doccomment">/// Received to indicate a reconnect is required.
+    <span class="doccomment">/// Indicates that a reconnect is required.
     </span>Reconnect = <span class="number">7</span>,
     <span class="doccomment">/// Request a list of members for a guild.
     </span>RequestGuildMembers = <span class="number">8</span>,
     <span class="doccomment">/// Received when the session is invalidated.
     </span>InvalidSession = <span class="number">9</span>,
-    <span class="doccomment">/// Received after connecting, contains heartbeat interval.
+    <span class="doccomment">/// Received after connecting, contains the heartbeat interval.
     </span>Hello = <span class="number">10</span>,
-    <span class="doccomment">/// Received in response to a heartbeat.
+    <span class="doccomment">/// Received in response to sending a [`Heartbeat`].
+    ///
+    /// [`Heartbeat`]: Self::Heartbeat
     </span>HeartbeatAck = <span class="number">11</span>,
+}
+
+<span class="kw">impl </span>OpCode {
+    <span class="doccomment">/// Try to match an integer value to an opcode, returning [`None`] if no
+    /// match is found.
+    </span><span class="kw">pub const fn </span>from(code: u8) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="prelude-val">Some</span>(<span class="kw">match </span>code {
+            <span class="number">0 </span>=&gt; <span class="self">Self</span>::Dispatch,
+            <span class="number">1 </span>=&gt; <span class="self">Self</span>::Heartbeat,
+            <span class="number">2 </span>=&gt; <span class="self">Self</span>::Identify,
+            <span class="number">3 </span>=&gt; <span class="self">Self</span>::PresenceUpdate,
+            <span class="number">4 </span>=&gt; <span class="self">Self</span>::VoiceStateUpdate,
+            <span class="number">6 </span>=&gt; <span class="self">Self</span>::Resume,
+            <span class="number">7 </span>=&gt; <span class="self">Self</span>::Reconnect,
+            <span class="number">8 </span>=&gt; <span class="self">Self</span>::RequestGuildMembers,
+            <span class="number">9 </span>=&gt; <span class="self">Self</span>::InvalidSession,
+            <span class="number">10 </span>=&gt; <span class="self">Self</span>::Hello,
+            <span class="number">11 </span>=&gt; <span class="self">Self</span>::HeartbeatAck,
+            <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
+        })
+    }
 }
 
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span><span class="kw">super</span>::OpCode;
+    <span class="kw">use </span>serde::{Deserialize, Serialize};
     <span class="kw">use </span>serde_test::Token;
+    <span class="kw">use </span>static_assertions::assert_impl_all;
+    <span class="kw">use </span>std::fmt::Debug;
+
+    <span class="macro">assert_impl_all!</span>(
+        OpCode: Clone,
+        Copy,
+        Debug,
+        Deserialize&lt;<span class="lifetime">&#39;static</span>&gt;,
+        Eq,
+        PartialEq,
+        Send,
+        Serialize,
+        Sync,
+    );
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>variants() {
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::Event, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">0</span>)]);
+        serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::Dispatch, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">0</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::Heartbeat, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">1</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::Identify, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">2</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::PresenceUpdate, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">3</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::VoiceStateUpdate, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">4</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::VoiceServerPing, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">5</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::Resume, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">6</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::Reconnect, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">7</span>)]);
         serde_test::assert_tokens(<span class="kw-2">&amp;</span>OpCode::RequestGuildMembers, <span class="kw-2">&amp;</span>[Token::U8(<span class="number">8</span>)]);

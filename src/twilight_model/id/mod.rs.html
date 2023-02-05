@@ -784,6 +784,10 @@
 <a href="#784" id="784">784</a>
 <a href="#785" id="785">785</a>
 <a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
+<a href="#790" id="790">790</a>
 </pre><pre class="rust"><code><span class="doccomment">//! ID with type-safe markers for each resource.
 //!
 //! When IDs are simple 64-bit integers then it may be easy to accidentally use
@@ -828,6 +832,10 @@
 //! ```
 
 </span><span class="kw">pub mod </span>marker;
+
+<span class="kw">mod </span>anonymizable;
+
+<span class="kw">pub use </span>anonymizable::AnonymizableId;
 
 <span class="kw">use </span>serde::{
     de::{Deserialize, Deserializer, Error <span class="kw">as </span>DeError, Unexpected, Visitor},

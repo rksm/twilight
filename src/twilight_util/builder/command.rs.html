@@ -1722,12 +1722,6 @@
 <a href="#1722" id="1722">1722</a>
 <a href="#1723" id="1723">1723</a>
 <a href="#1724" id="1724">1724</a>
-<a href="#1725" id="1725">1725</a>
-<a href="#1726" id="1726">1726</a>
-<a href="#1727" id="1727">1727</a>
-<a href="#1728" id="1728">1728</a>
-<a href="#1729" id="1729">1729</a>
-<a href="#1730" id="1730">1730</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Create a [`Command`] with a builder.
 //!
 //! # Examples
@@ -1776,7 +1770,7 @@
 
 </span><span class="kw">use </span>twilight_model::{
     application::command::{
-        Command, CommandOption, CommandOptionChoice, CommandOptionChoiceData, CommandOptionType,
+        Command, CommandOption, CommandOptionChoice, CommandOptionChoiceValue, CommandOptionType,
         CommandOptionValue, CommandType,
     },
     channel::ChannelType,
@@ -2227,7 +2221,7 @@
     ///
     /// # Panics
     ///
-    /// Panics if choices are not set.
+    /// Panics if the choice was not set.
     ///
     /// [`choices`]: Self::choices
     </span><span class="attr">#[track_caller]
@@ -2236,13 +2230,21 @@
         choice_name: <span class="kw-2">&amp;</span>str,
         name_localizations: <span class="kw">impl </span>IntoIterator&lt;Item = (K, V)&gt;,
     ) -&gt; <span class="self">Self </span>{
-        <span class="kw">let </span>choice = <span class="self">self</span>.<span class="number">0</span>.choices.as_mut().expect(<span class="string">&quot;choices are set&quot;</span>).iter_mut().find(
-            |choice| <span class="macro">matches!</span>(choice, CommandOptionChoice::Integer(CommandOptionChoiceData{ name, ..})  <span class="kw">if </span>name == choice_name),
-        );
+        <span class="kw">let </span>choice = <span class="self">self
+            </span>.<span class="number">0
+            </span>.choices
+            .as_mut()
+            .expect(<span class="string">&quot;choice exists&quot;</span>)
+            .iter_mut()
+            .find(|choice| choice.name == choice_name)
+            .expect(<span class="string">&quot;choice exists&quot;</span>);
 
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(choice) = choice {
-            set_choice_localizations(choice, name_localizations);
-        }
+        choice.name_localizations = <span class="prelude-val">Some</span>(
+            name_localizations
+                .into_iter()
+                .map(|(k, v)| (k.into(), v.into()))
+                .collect(),
+        );
 
         <span class="self">self
     </span>}
@@ -2259,12 +2261,10 @@
         <span class="self">self</span>.<span class="number">0</span>.choices = <span class="prelude-val">Some</span>(
             choices
                 .into_iter()
-                .map(|(name, value, ..)| {
-                    CommandOptionChoice::Integer(CommandOptionChoiceData {
-                        name: name.into(),
-                        name_localizations: <span class="prelude-val">None</span>,
-                        value,
-                    })
+                .map(|(name, value, ..)| CommandOptionChoice {
+                    name: name.into(),
+                    name_localizations: <span class="prelude-val">None</span>,
+                    value: CommandOptionChoiceValue::Integer(value),
                 })
                 .collect(),
         );
@@ -2474,7 +2474,7 @@
     ///
     /// # Panics
     ///
-    /// Panics if choices are not set.
+    /// Panics if the choice was not set.
     ///
     /// [`choices`]: Self::choices
     </span><span class="attr">#[track_caller]
@@ -2483,13 +2483,21 @@
         choice_name: <span class="kw-2">&amp;</span>str,
         name_localizations: <span class="kw">impl </span>IntoIterator&lt;Item = (K, V)&gt;,
     ) -&gt; <span class="self">Self </span>{
-        <span class="kw">let </span>choice = <span class="self">self</span>.<span class="number">0</span>.choices.as_mut().expect(<span class="string">&quot;choices are set&quot;</span>).iter_mut().find(
-            |choice| <span class="macro">matches!</span>(choice, CommandOptionChoice::Number(CommandOptionChoiceData {name, ..}) <span class="kw">if </span>name == choice_name),
-        );
+        <span class="kw">let </span>choice = <span class="self">self
+            </span>.<span class="number">0
+            </span>.choices
+            .as_mut()
+            .expect(<span class="string">&quot;choice exists&quot;</span>)
+            .iter_mut()
+            .find(|choice| choice.name == choice_name)
+            .expect(<span class="string">&quot;choice exists&quot;</span>);
 
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(choice) = choice {
-            set_choice_localizations(choice, name_localizations);
-        }
+        choice.name_localizations = <span class="prelude-val">Some</span>(
+            name_localizations
+                .into_iter()
+                .map(|(k, v)| (k.into(), v.into()))
+                .collect(),
+        );
 
         <span class="self">self
     </span>}
@@ -2506,12 +2514,10 @@
         <span class="self">self</span>.<span class="number">0</span>.choices = <span class="prelude-val">Some</span>(
             choices
                 .into_iter()
-                .map(|(name, value, ..)| {
-                    CommandOptionChoice::Number(CommandOptionChoiceData {
-                        name: name.into(),
-                        name_localizations: <span class="prelude-val">None</span>,
-                        value,
-                    })
+                .map(|(name, value, ..)| CommandOptionChoice {
+                    name: name.into(),
+                    name_localizations: <span class="prelude-val">None</span>,
+                    value: CommandOptionChoiceValue::Number(value),
                 })
                 .collect(),
         );
@@ -2721,7 +2727,7 @@
     ///
     /// # Panics
     ///
-    /// Panics if choices are not set.
+    /// Panics if the choice was not set.
     ///
     /// [`choices`]: Self::choices
     </span><span class="attr">#[track_caller]
@@ -2730,13 +2736,21 @@
         choice_name: <span class="kw-2">&amp;</span>str,
         name_localizations: <span class="kw">impl </span>IntoIterator&lt;Item = (K, V)&gt;,
     ) -&gt; <span class="self">Self </span>{
-        <span class="kw">let </span>choice = <span class="self">self</span>.<span class="number">0</span>.choices.as_mut().expect(<span class="string">&quot;choices are set&quot;</span>).iter_mut().find(
-            |choice| <span class="macro">matches!</span>(choice, CommandOptionChoice::String(CommandOptionChoiceData{name, ..}) <span class="kw">if </span>name == choice_name),
-        );
+        <span class="kw">let </span>choice = <span class="self">self
+            </span>.<span class="number">0
+            </span>.choices
+            .as_mut()
+            .expect(<span class="string">&quot;choice exists&quot;</span>)
+            .iter_mut()
+            .find(|choice| choice.name == choice_name)
+            .expect(<span class="string">&quot;choice exists&quot;</span>);
 
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(choice) = choice {
-            set_choice_localizations(choice, name_localizations);
-        }
+        choice.name_localizations = <span class="prelude-val">Some</span>(
+            name_localizations
+                .into_iter()
+                .map(|(k, v)| (k.into(), v.into()))
+                .collect(),
+        );
 
         <span class="self">self
     </span>}
@@ -2756,12 +2770,10 @@
         <span class="self">self</span>.<span class="number">0</span>.choices = <span class="prelude-val">Some</span>(
             choices
                 .into_iter()
-                .map(|(name, value, ..)| {
-                    CommandOptionChoice::String(CommandOptionChoiceData {
-                        name: name.into(),
-                        name_localizations: <span class="prelude-val">None</span>,
-                        value: value.into(),
-                    })
+                .map(|(name, value, ..)| CommandOptionChoice {
+                    name: name.into(),
+                    name_localizations: <span class="prelude-val">None</span>,
+                    value: CommandOptionChoiceValue::String(value.into()),
                 })
                 .collect(),
         );
@@ -3095,30 +3107,6 @@
     <span class="kw">fn </span>from(builder: UserBuilder) -&gt; CommandOption {
         builder.build()
     }
-}
-
-<span class="kw">fn </span>set_choice_localizations&lt;K: Into&lt;String&gt;, V: Into&lt;String&gt;&gt;(
-    choice: <span class="kw-2">&amp;mut </span>CommandOptionChoice,
-    localizations: <span class="kw">impl </span>IntoIterator&lt;Item = (K, V)&gt;,
-) {
-    <span class="kw">let </span>name_localizations = <span class="kw">match </span>choice {
-        CommandOptionChoice::String(CommandOptionChoiceData {
-            name_localizations, ..
-        })
-        | CommandOptionChoice::Integer(CommandOptionChoiceData {
-            name_localizations, ..
-        })
-        | CommandOptionChoice::Number(CommandOptionChoiceData {
-            name_localizations, ..
-        }) =&gt; name_localizations,
-    };
-
-    <span class="kw-2">*</span>name_localizations = <span class="prelude-val">Some</span>(
-        localizations
-            .into_iter()
-            .map(|(k, v)| (k.into(), v.into()))
-            .collect(),
-    );
 }
 
 <span class="attr">#[cfg(test)]

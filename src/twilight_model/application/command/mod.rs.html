@@ -562,8 +562,6 @@
 <a href="#562" id="562">562</a>
 <a href="#563" id="563">563</a>
 <a href="#564" id="564">564</a>
-<a href="#565" id="565">565</a>
-<a href="#566" id="566">566</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Used for building commands to send to Discord.
 //!
 //! It is highly recommended to use the associated [`CommandBuilder`] in the
@@ -581,7 +579,7 @@
 <span class="kw">pub use </span><span class="self">self</span>::{
     command_type::CommandType,
     option::{
-        CommandOption, CommandOptionChoice, CommandOptionChoiceData, CommandOptionType,
+        CommandOption, CommandOptionChoice, CommandOptionChoiceValue, CommandOptionType,
         CommandOptionValue,
     },
 };
@@ -663,7 +661,7 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{
-        Command, CommandOption, CommandOptionChoice, CommandOptionChoiceData, CommandOptionType,
+        Command, CommandOption, CommandOptionChoice, CommandOptionChoiceValue, CommandOptionType,
         CommandOptionValue, CommandType,
     };
     <span class="kw">use crate</span>::{channel::ChannelType, guild::Permissions, id::Id};
@@ -817,16 +815,14 @@
                         CommandOption {
                             autocomplete: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
                             channel_types: <span class="prelude-val">None</span>,
-                            choices: <span class="prelude-val">Some</span>(Vec::from([CommandOptionChoice::Number(
-                                CommandOptionChoiceData {
-                                    name: <span class="string">&quot;number choice&quot;</span>.to_owned(),
-                                    name_localizations: <span class="prelude-val">Some</span>(HashMap::from([(
-                                        <span class="string">&quot;en-US&quot;</span>.to_owned(),
-                                        <span class="string">&quot;number choice (but american)&quot;</span>.to_owned(),
-                                    )])),
-                                    value: <span class="number">10.0</span>,
-                                },
-                            )])),
+                            choices: <span class="prelude-val">Some</span>(Vec::from([CommandOptionChoice {
+                                name: <span class="string">&quot;number choice&quot;</span>.to_owned(),
+                                name_localizations: <span class="prelude-val">Some</span>(HashMap::from([(
+                                    <span class="string">&quot;en-US&quot;</span>.to_owned(),
+                                    <span class="string">&quot;number choice (but american)&quot;</span>.to_owned(),
+                                )])),
+                                value: CommandOptionChoiceValue::Number(<span class="number">10.0</span>),
+                            }])),
                             description: <span class="string">&quot;number desc&quot;</span>.to_owned(),
                             description_localizations: <span class="prelude-val">None</span>,
                             kind: CommandOptionType::Number,
@@ -1061,7 +1057,7 @@
                 Token::Some,
                 Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">1</span>) },
                 Token::Struct {
-                    name: <span class="string">&quot;CommandOptionChoiceData&quot;</span>,
+                    name: <span class="string">&quot;CommandOptionChoice&quot;</span>,
                     len: <span class="number">3</span>,
                 },
                 Token::Str(<span class="string">&quot;name&quot;</span>),

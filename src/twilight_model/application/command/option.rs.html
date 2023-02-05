@@ -388,23 +388,8 @@
 }
 
 <span class="doccomment">/// A predetermined choice users can select.
-///
-/// Note that the right variant must be selected based on the
-/// [`CommandOption`]&#39;s [`CommandOptionType`].
 </span><span class="attr">#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(untagged)]
-</span><span class="kw">pub enum </span>CommandOptionChoice {
-    <span class="doccomment">/// String choice.
-    </span>String(CommandOptionChoiceData&lt;String&gt;),
-    <span class="doccomment">/// Integer choice.
-    </span>Integer(CommandOptionChoiceData&lt;i64&gt;),
-    <span class="doccomment">/// Number choice.
-    </span>Number(CommandOptionChoiceData&lt;f64&gt;),
-}
-
-<span class="doccomment">/// Data of [`CommandOptionChoice`].
-</span><span class="attr">#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-</span><span class="kw">pub struct </span>CommandOptionChoiceData&lt;T&gt; {
+</span><span class="kw">pub struct </span>CommandOptionChoice {
     <span class="doccomment">/// Name of the choice. Must be 100 characters or less.
     </span><span class="kw">pub </span>name: String,
     <span class="doccomment">/// Localization dictionary for the [`name`] field.
@@ -418,8 +403,23 @@
     /// [`name`]: Self::name
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>name_localizations: <span class="prelude-ty">Option</span>&lt;HashMap&lt;String, String&gt;&gt;,
-    <span class="doccomment">/// Value of the choice. Must be 100 characters or less if it is a string.
-    </span><span class="kw">pub </span>value: T,
+    <span class="doccomment">/// Value of the choice.
+    </span><span class="kw">pub </span>value: CommandOptionChoiceValue,
+}
+
+<span class="doccomment">/// Value of a [`CommandOptionChoice`].
+///
+/// Note that the right variant must be selected based on the
+/// [`CommandOption`]&#39;s [`CommandOptionType`].
+</span><span class="attr">#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[serde(untagged)]
+</span><span class="kw">pub enum </span>CommandOptionChoiceValue {
+    <span class="doccomment">/// String choice. Must be 100 characters or less.
+    </span>String(String),
+    <span class="doccomment">/// Integer choice.
+    </span>Integer(i64),
+    <span class="doccomment">/// Number choice.
+    </span>Number(f64),
 }
 
 <span class="doccomment">/// Type used in the `max_value` and `min_value` [`CommandOption`] field.

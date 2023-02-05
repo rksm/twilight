@@ -122,14 +122,14 @@
 };
 <span class="kw">use </span>twilight_http::Client;
 
-<span class="doccomment">/// Queue built for single-process clusters that require identifying via
-/// [Sharding for Very Large Bots].
+<span class="doccomment">/// Queue built for single-process groups of shards that require identifying via
+/// [Sharding for Large Bots].
 ///
-/// Usage with other processes will cause inconsistencies between each process
-/// cluster&#39;s ratelimit buckets. If you use multiple processes for clusters,
-/// then refer to the [module-level] documentation.
+/// Usage with other processes will cause inconsistencies between each process&#39;s
+/// ratelimit buckets. If using multiple processes for shard groups, then refer
+/// to the [module-level] documentation.
 ///
-/// [Sharding for Very Large Bots]: https://discord.com/developers/docs/topics/gateway#sharding-for-very-large-bots
+/// [Sharding for Large Bots]: https://discord.com/developers/docs/topics/gateway#sharding-for-very-large-bots
 /// [module-level]: crate
 </span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>LargeBotQueue {

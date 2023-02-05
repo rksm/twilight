@@ -340,30 +340,12 @@
 <a href="#340" id="340">340</a>
 <a href="#341" id="341">341</a>
 <a href="#342" id="342">342</a>
-<a href="#343" id="343">343</a>
-<a href="#344" id="344">344</a>
-<a href="#345" id="345">345</a>
-<a href="#346" id="346">346</a>
-<a href="#347" id="347">347</a>
-<a href="#348" id="348">348</a>
-<a href="#349" id="349">349</a>
-<a href="#350" id="350">350</a>
-<a href="#351" id="351">351</a>
-<a href="#352" id="352">352</a>
-<a href="#353" id="353">353</a>
-<a href="#354" id="354">354</a>
-<a href="#355" id="355">355</a>
-<a href="#356" id="356">356</a>
-<a href="#357" id="357">357</a>
-<a href="#358" id="358">358</a>
-<a href="#359" id="359">359</a>
-<a href="#360" id="360">360</a>
 </pre><pre class="rust"><code><span class="kw">use </span>serde::Serialize;
 <span class="kw">use </span>twilight_model::{
     application::interaction::application_command::InteractionMember,
     guild::{Member, MemberFlags, PartialMember},
     id::{
-        marker::{GuildMarker, RoleMarker, UserMarker},
+        marker::{RoleMarker, UserMarker},
         Id,
     },
     util::{ImageHash, Timestamp},
@@ -386,7 +368,6 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) communication_disabled_until: <span class="prelude-ty">Option</span>&lt;Timestamp&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) deaf: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) flags: MemberFlags,
-    <span class="kw">pub</span>(<span class="kw">crate</span>) guild_id: Id&lt;GuildMarker&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) joined_at: Timestamp,
     <span class="kw">pub</span>(<span class="kw">crate</span>) mute: <span class="prelude-ty">Option</span>&lt;bool&gt;,
     <span class="kw">pub</span>(<span class="kw">crate</span>) nick: <span class="prelude-ty">Option</span>&lt;String&gt;,
@@ -424,11 +405,6 @@
     /// Defaults to an empty bitfield.
     </span><span class="kw">pub const fn </span>flags(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; MemberFlags {
         <span class="self">self</span>.flags
-    }
-
-    <span class="doccomment">/// ID of the guild this member is a part of.
-    </span><span class="kw">pub const fn </span>guild_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Id&lt;GuildMarker&gt; {
-        <span class="self">self</span>.guild_id
     }
 
     <span class="doccomment">/// [`Timestamp`] of this member&#39;s join date.
@@ -475,7 +451,6 @@
             communication_disabled_until,
             deaf,
             flags,
-            guild_id,
             joined_at,
             mute,
             nick,
@@ -490,7 +465,6 @@
             communication_disabled_until,
             deaf: <span class="prelude-val">Some</span>(deaf),
             flags,
-            guild_id,
             joined_at,
             mute: <span class="prelude-val">Some</span>(mute),
             nick,
@@ -505,7 +479,6 @@
     // clippy: the contents of `fields` is consumed
     </span><span class="attr">#[allow(clippy::missing_const_for_fn, clippy::needless_pass_by_value)]
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_interaction_member(
-        guild_id: Id&lt;GuildMarker&gt;,
         user_id: Id&lt;UserMarker&gt;,
         member: InteractionMember,
         fields: ComputedInteractionMemberFields,
@@ -528,7 +501,6 @@
             communication_disabled_until,
             deaf,
             flags,
-            guild_id,
             joined_at,
             mute,
             nick,
@@ -539,11 +511,7 @@
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_partial_member(
-        guild_id: Id&lt;GuildMarker&gt;,
-        user_id: Id&lt;UserMarker&gt;,
-        member: PartialMember,
-    ) -&gt; <span class="self">Self </span>{
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_partial_member(user_id: Id&lt;UserMarker&gt;, member: PartialMember) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>PartialMember {
             avatar,
             communication_disabled_until,
@@ -563,7 +531,6 @@
             communication_disabled_until,
             deaf: <span class="prelude-val">Some</span>(deaf),
             flags,
-            guild_id,
             joined_at,
             mute: <span class="prelude-val">Some</span>(mute),
             nick,
@@ -624,7 +591,6 @@
 
     <span class="macro">assert_fields!</span>(
         CachedMember: deaf,
-        guild_id,
         joined_at,
         mute,
         nick,
@@ -642,7 +608,6 @@
             communication_disabled_until: <span class="prelude-val">None</span>,
             deaf: <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
             flags,
-            guild_id: Id::new(<span class="number">3</span>),
             joined_at,
             mute: <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
             nick: <span class="prelude-val">Some</span>(<span class="string">&quot;member nick&quot;</span>.to_owned()),
@@ -683,7 +648,6 @@
             communication_disabled_until: <span class="prelude-val">None</span>,
             deaf: <span class="bool-val">false</span>,
             flags,
-            guild_id: Id::new(<span class="number">3</span>),
             joined_at,
             mute: <span class="bool-val">true</span>,
             nick: <span class="prelude-val">Some</span>(<span class="string">&quot;member nick&quot;</span>.to_owned()),

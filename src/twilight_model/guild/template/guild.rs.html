@@ -30,7 +30,7 @@
 <span class="kw">use crate</span>::{
     channel::Channel,
     guild::{
-        DefaultMessageNotificationLevel, ExplicitContentFilter, SystemChannelFlags,
+        AfkTimeout, DefaultMessageNotificationLevel, ExplicitContentFilter, SystemChannelFlags,
         VerificationLevel,
     },
     id::{marker::ChannelMarker, Id},
@@ -41,7 +41,7 @@
 <span class="attr">#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 </span><span class="kw">pub struct </span>TemplateGuild {
     <span class="kw">pub </span>afk_channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
-    <span class="kw">pub </span>afk_timeout: u64,
+    <span class="kw">pub </span>afk_timeout: AfkTimeout,
     <span class="kw">pub </span>channels: Vec&lt;Channel&gt;,
     <span class="kw">pub </span>default_message_notifications: DefaultMessageNotificationLevel,
     <span class="kw">pub </span>description: <span class="prelude-ty">Option</span>&lt;String&gt;,

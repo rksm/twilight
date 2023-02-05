@@ -505,8 +505,8 @@
 <span class="kw">use </span>twilight_model::{
     channel::ChannelType,
     guild::{
-        DefaultMessageNotificationLevel, ExplicitContentFilter, PartialGuild, Permissions,
-        SystemChannelFlags, VerificationLevel,
+        AfkTimeout, DefaultMessageNotificationLevel, ExplicitContentFilter, PartialGuild,
+        Permissions, SystemChannelFlags, VerificationLevel,
     },
     http::permission_overwrite::PermissionOverwrite,
     id::{
@@ -594,7 +594,7 @@
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>afk_channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
-    </span>afk_timeout: <span class="prelude-ty">Option</span>&lt;u64&gt;,
+    </span>afk_timeout: <span class="prelude-ty">Option</span>&lt;AfkTimeout&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span>channels: <span class="prelude-ty">Option</span>&lt;Vec&lt;GuildChannelFields&gt;&gt;,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
@@ -769,7 +769,7 @@
     </span>}
 
     <span class="doccomment">/// Set the AFK timeout, in seconds.
-    </span><span class="kw">pub const fn </span>afk_timeout(<span class="kw-2">mut </span><span class="self">self</span>, afk_timeout: u64) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub const fn </span>afk_timeout(<span class="kw-2">mut </span><span class="self">self</span>, afk_timeout: AfkTimeout) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fields.afk_timeout = <span class="prelude-val">Some</span>(afk_timeout);
 
         <span class="self">self

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":[["Message","Message to send over the connection to the remote."]],"struct":[["CloseFrame","Information about a close message, if any."]]};

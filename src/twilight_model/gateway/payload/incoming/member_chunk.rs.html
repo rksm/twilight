@@ -486,22 +486,9 @@
 <a href="#486" id="486">486</a>
 <a href="#487" id="487">487</a>
 <a href="#488" id="488">488</a>
-<a href="#489" id="489">489</a>
-<a href="#490" id="490">490</a>
-<a href="#491" id="491">491</a>
-<a href="#492" id="492">492</a>
-<a href="#493" id="493">493</a>
-<a href="#494" id="494">494</a>
-<a href="#495" id="495">495</a>
-<a href="#496" id="496">496</a>
-<a href="#497" id="497">497</a>
-<a href="#498" id="498">498</a>
-<a href="#499" id="499">499</a>
-<a href="#500" id="500">500</a>
-<a href="#501" id="501">501</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     gateway::presence::{Presence, PresenceListDeserializer},
-    guild::member::{Member, MemberListDeserializer},
+    guild::Member,
     id::{
         marker::{GuildMarker, UserMarker},
         Id,
@@ -608,12 +595,7 @@
                         <span class="kw">return </span><span class="prelude-val">Err</span>(DeError::duplicate_field(<span class="string">&quot;members&quot;</span>));
                     }
 
-                    <span class="comment">// Since the guild ID may not be deserialized yet we&#39;ll use
-                    // a temporary placeholder value and update it with the real
-                    // guild ID after all the fields have been deserialized.
-                    </span><span class="kw">let </span>deserializer = MemberListDeserializer::new(Id::new(<span class="number">1</span>));
-
-                    members = <span class="prelude-val">Some</span>(map.next_value_seed(deserializer)<span class="question-mark">?</span>);
+                    members = <span class="prelude-val">Some</span>(map.next_value()<span class="question-mark">?</span>);
                 }
                 Field::Nonce =&gt; {
                     <span class="kw">if </span>nonce.is_some() {
@@ -644,7 +626,7 @@
         <span class="kw">let </span>chunk_count = chunk_count.ok_or_else(|| DeError::missing_field(<span class="string">&quot;chunk_count&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">let </span>chunk_index = chunk_index.ok_or_else(|| DeError::missing_field(<span class="string">&quot;chunk_index&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">let </span>guild_id = guild_id.ok_or_else(|| DeError::missing_field(<span class="string">&quot;guild_id&quot;</span>))<span class="question-mark">?</span>;
-        <span class="kw">let </span><span class="kw-2">mut </span>members = members.ok_or_else(|| DeError::missing_field(<span class="string">&quot;members&quot;</span>))<span class="question-mark">?</span>;
+        <span class="kw">let </span>members = members.ok_or_else(|| DeError::missing_field(<span class="string">&quot;members&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">let </span>not_found = not_found.unwrap_or_default();
         <span class="kw">let </span><span class="kw-2">mut </span>presences = presences.unwrap_or_default();
 
@@ -656,10 +638,6 @@
             <span class="question-mark">?</span>not_found,
             <span class="question-mark">?</span>presences,
         );
-
-        <span class="kw">for </span>member <span class="kw">in </span><span class="kw-2">&amp;mut </span>members {
-            member.guild_id = guild_id;
-        }
 
         <span class="kw">for </span>presence <span class="kw">in </span><span class="kw-2">&amp;mut </span>presences {
             presence.guild_id = guild_id;
@@ -827,7 +805,6 @@
                     communication_disabled_until: <span class="prelude-val">None</span>,
                     deaf: <span class="bool-val">false</span>,
                     flags,
-                    guild_id: Id::new(<span class="number">1</span>),
                     joined_at,
                     mute: <span class="bool-val">false</span>,
                     nick: <span class="prelude-val">Some</span>(<span class="string">&quot;chunk&quot;</span>.to_owned()),
@@ -857,7 +834,6 @@
                     communication_disabled_until: <span class="prelude-val">None</span>,
                     deaf: <span class="bool-val">false</span>,
                     flags,
-                    guild_id: Id::new(<span class="number">1</span>),
                     joined_at,
                     mute: <span class="bool-val">false</span>,
                     nick: <span class="prelude-val">Some</span>(<span class="string">&quot;chunk&quot;</span>.to_owned()),
@@ -887,7 +863,6 @@
                     communication_disabled_until: <span class="prelude-val">None</span>,
                     deaf: <span class="bool-val">false</span>,
                     flags,
-                    guild_id: Id::new(<span class="number">1</span>),
                     joined_at,
                     mute: <span class="bool-val">false</span>,
                     nick: <span class="prelude-val">Some</span>(<span class="string">&quot;chunk&quot;</span>.to_owned()),
@@ -917,7 +892,6 @@
                     communication_disabled_until: <span class="prelude-val">None</span>,
                     deaf: <span class="bool-val">false</span>,
                     flags,
-                    guild_id: Id::new(<span class="number">1</span>),
                     joined_at,
                     mute: <span class="bool-val">false</span>,
                     nick: <span class="prelude-val">Some</span>(<span class="string">&quot;chunk&quot;</span>.to_owned()),

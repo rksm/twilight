@@ -356,6 +356,7 @@
 <a href="#356" id="356">356</a>
 <a href="#357" id="357">357</a>
 <a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
 </pre><pre class="rust"><code><span class="kw">mod </span>private {
     <span class="kw">use </span><span class="kw">crate</span>::request::{
         application::{
@@ -425,9 +426,9 @@
             CreateGuild, CreateGuildChannel, CreateGuildPrune, DeleteGuild, GetActiveThreads,
             GetAuditLog, GetGuild, GetGuildChannels, GetGuildInvites, GetGuildPreview,
             GetGuildPruneCount, GetGuildVanityUrl, GetGuildVoiceRegions, GetGuildWebhooks,
-            GetGuildWelcomeScreen, GetGuildWidget, UpdateCurrentMember, UpdateGuild,
-            UpdateGuildChannelPositions, UpdateGuildMfa, UpdateGuildWelcomeScreen,
-            UpdateGuildWidget,
+            GetGuildWelcomeScreen, GetGuildWidget, GetGuildWidgetSettings, UpdateCurrentMember,
+            UpdateGuild, UpdateGuildChannelPositions, UpdateGuildMfa, UpdateGuildWelcomeScreen,
+            UpdateGuildWidgetSettings,
         },
         scheduled_event::{
             CreateGuildExternalScheduledEvent, CreateGuildStageInstanceScheduledEvent,
@@ -562,6 +563,7 @@
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetGuildWebhooks&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetGuildWelcomeScreen&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetGuildWidget&lt;<span class="lifetime">&#39;_</span>&gt; {}
+    <span class="kw">impl </span>Sealed <span class="kw">for </span>GetGuildWidgetSettings&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetInvite&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetJoinedPrivateArchivedThreads&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>GetMember&lt;<span class="lifetime">&#39;_</span>&gt; {}
@@ -611,7 +613,7 @@
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildScheduledEvent&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildSticker&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildWelcomeScreen&lt;<span class="lifetime">&#39;_</span>&gt; {}
-    <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildWidget&lt;<span class="lifetime">&#39;_</span>&gt; {}
+    <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildWidgetSettings&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateMessage&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateResponse&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateRole&lt;<span class="lifetime">&#39;_</span>&gt; {}

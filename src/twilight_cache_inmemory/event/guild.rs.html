@@ -573,6 +573,7 @@
 <a href="#573" id="573">573</a>
 <a href="#574" id="574">574</a>
 <a href="#575" id="575">575</a>
+<a href="#576" id="576">576</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     config::ResourceType,
     model::{CachedGuild, CachedPresence},
@@ -865,8 +866,9 @@
             GuildCreate, GuildUpdate, MemberAdd, MemberRemove, UnavailableGuild,
         },
         guild::{
-            DefaultMessageNotificationLevel, ExplicitContentFilter, Guild, MfaLevel, NSFWLevel,
-            PartialGuild, Permissions, PremiumTier, SystemChannelFlags, VerificationLevel,
+            AfkTimeout, DefaultMessageNotificationLevel, ExplicitContentFilter, Guild, MfaLevel,
+            NSFWLevel, PartialGuild, Permissions, PremiumTier, SystemChannelFlags,
+            VerificationLevel,
         },
         id::Id,
         util::datetime::{Timestamp, TimestampParseError},
@@ -969,7 +971,7 @@
 
         <span class="kw">let </span>guild = Guild {
             afk_channel_id: <span class="prelude-val">None</span>,
-            afk_timeout: <span class="number">300</span>,
+            afk_timeout: AfkTimeout::FIFTEEN_MINUTES,
             application_id: <span class="prelude-val">None</span>,
             approximate_member_count: <span class="prelude-val">None</span>,
             approximate_presence_count: <span class="prelude-val">None</span>,
@@ -1093,11 +1095,11 @@
         <span class="kw">let </span>guild_id = Id::new(<span class="number">1</span>);
         <span class="kw">let </span>cache = InMemoryCache::new();
         <span class="kw">let </span>user = test::user(user_id);
-        <span class="kw">let </span>member = test::member(user_id, guild_id);
+        <span class="kw">let </span>member = test::member(user_id);
         <span class="kw">let </span>guild = test::guild(guild_id, <span class="prelude-val">Some</span>(<span class="number">1</span>));
 
         cache.update(<span class="kw-2">&amp;</span>GuildCreate(guild));
-        cache.update(<span class="kw-2">&amp;</span>MemberAdd(member));
+        cache.update(<span class="kw-2">&amp;</span>MemberAdd { guild_id, member });
 
         <span class="macro">assert_eq!</span>(cache.guild(guild_id).unwrap().member_count, <span class="prelude-val">Some</span>(<span class="number">2</span>));
 
@@ -1111,7 +1113,7 @@
         <span class="kw">let </span>user_id = Id::new(<span class="number">2</span>);
         <span class="kw">let </span>guild_id = Id::new(<span class="number">1</span>);
         <span class="kw">let </span>cache = InMemoryCache::new();
-        <span class="kw">let </span>member = test::member(user_id, guild_id);
+        <span class="kw">let </span>member = test::member(user_id);
         <span class="kw">let </span><span class="kw-2">mut </span>guild = test::guild(guild_id, <span class="prelude-val">Some</span>(<span class="number">1</span>));
         guild.members.push(member);
 

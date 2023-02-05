@@ -1,69 +1,124 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="twilight-gateway"><title>twilight_gateway - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-fcf36bf1daa7018b.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../static.files/light-f501212b8b071243.css"><link rel="stylesheet" disabled href="../static.files/dark-e92fc12c34ff89d3.css"><link rel="stylesheet" disabled href="../static.files/ayu-c8c85693c8a4f9db.css"><script id="default-settings" ></script><script src="../static.files/storage-3891ce972e3a2bf8.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-364b95f387bc3166.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../twilight_gateway/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../twilight_gateway/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2 class="location"><a href="#">Crate twilight_gateway</a></h2><div class="sidebar-elems"><ul class="block"><li class="version">Version 0.14.2</li><li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#constants">Constants</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">twilight_gateway</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../src/twilight_gateway/lib.rs.html#1-44">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="twilight-gateway"><a href="#twilight-gateway">twilight-gateway</a></h2>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="twilight-gateway"><title>twilight_gateway - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-fcf36bf1daa7018b.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../static.files/light-f501212b8b071243.css"><link rel="stylesheet" disabled href="../static.files/dark-e92fc12c34ff89d3.css"><link rel="stylesheet" disabled href="../static.files/ayu-c8c85693c8a4f9db.css"><script id="default-settings" ></script><script src="../static.files/storage-3891ce972e3a2bf8.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-364b95f387bc3166.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../twilight_gateway/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../twilight_gateway/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2 class="location"><a href="#">Crate twilight_gateway</a></h2><div class="sidebar-elems"><ul class="block"><li class="version">Version 0.15.0</li><li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#constants">Constants</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">twilight_gateway</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../src/twilight_gateway/lib.rs.html#1-64">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="twilight-gateway"><a href="#twilight-gateway">twilight-gateway</a></h2>
 <p><a href="https://app.codecov.io/gh/twilight-rs/twilight/"><img src="https://img.shields.io/codecov/c/gh/twilight-rs/twilight?logo=codecov&amp;style=for-the-badge&amp;token=E9ERLJL0L2" alt="codecov badge" /></a> <a href="https://discord.gg/7jj8n7D"><img src="https://img.shields.io/discord/745809834183753828?color=%237289DA&amp;label=discord%20server&amp;logo=discord&amp;style=for-the-badge" alt="discord badge" /></a> <a href="https://github.com/twilight-rs/twilight"><img src="https://img.shields.io/badge/github-twilight-6f42c1.svg?style=for-the-badge&amp;logo=github" alt="github badge" /></a> <a href="https://github.com/twilight-rs/twilight/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-ISC-blue.svg?style=for-the-badge&amp;logo=pastebin" alt="license badge" /></a> <img src="https://img.shields.io/badge/rust-1.64+-93450a.svg?style=for-the-badge&amp;logo=rust" alt="rust badge" /></p>
 <p><code>twilight-gateway</code> is an implementation of Discord’s sharding gateway sessions.
-This is responsible for receiving stateful events in real-time from Discord
-and sending <em>some</em> stateful information.</p>
-<p>It includes two primary types: the Shard and Cluster.</p>
-<p>The Shard handles a single websocket connection and can manage up to 2500
-guilds. If you manage a small bot in under about 2000 guilds, then this is
-what you use. See the <a href="https://discord.com/developers/docs/topics/gateway#sharding">Discord Docs/Sharding</a> for
-more information on sharding.</p>
-<p>The Cluster is an interface which manages the health of the shards it
-manages and proxies all of their events under one unified stream. This is
-useful to use if you have a large bot in over 1000 or 2000 guilds.</p>
+This is responsible for receiving stateful events in real-time from Discord and
+sending <em>some</em> stateful information.</p>
+<p>The primary type is the <code>Shard</code>, a stateful interface to maintain a Websocket
+connection to Discord’s gateway. Much of its functionality can be configured,
+and it’s used to receive gateway events or raw Websocket messages, useful for
+load balancing and microservices.</p>
+<p>Using the <code>stream</code> module, shards can be easily managed in groups.</p>
+<h3 id="features"><a href="#features">Features</a></h3>
+<ul>
+<li><code>simd-json</code>: use <a href="https://crates.io/crates/simd-json"><code>simd-json</code></a> instead of <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a> for deserializing
+events</li>
+<li>TLS (mutually exclusive)
+<ul>
+<li><code>native</code>: platform’s native TLS implementation via <a href="https://crates.io/crates/native-tls"><code>native-tls</code></a></li>
+<li><code>rustls-native-roots</code> (<em>default</em>): <a href="https://crates.io/crates/rustls"><code>rustls</code></a> using native root certificates</li>
+<li><code>rustls-webpki-roots</code>: <a href="https://crates.io/crates/rustls"><code>rustls</code></a> using <a href="https://crates.io/crates/webpki-roots"><code>webpki-roots</code></a> for root
+certificates, useful for <code>scratch</code> containers</li>
+</ul>
+</li>
+<li><code>twilight-http</code> (<em>default</em>): enable the <code>stream::create_recommended</code> function</li>
+<li>Zlib (mutually exclusive)
+<ul>
+<li><code>zlib-stock</code> (<em>default</em>): <a href="https://crates.io/crates/flate2"><code>flate2</code></a>’s stock zlib implementation</li>
+<li><code>zlib-ng</code>: use <a href="https://github.com/zlib-ng/zlib-ng"><code>zlib-ng</code></a> for zlib, may have better performance</li>
+</ul>
+</li>
+</ul>
 <h3 id="examples"><a href="#examples">Examples</a></h3>
-<p>There are a few usage examples located in the <a href="https://github.com/twilight-rs/twilight/tree/main/examples">root of the <code>twilight</code>
-repository</a>.</p>
-<h3 id="features"><a href="#features">Features</a></h3><h4 id="deserialization"><a href="#deserialization">Deserialization</a></h4>
-<p><code>twilight-gateway</code> supports <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a> and <a href="https://crates.io/crates/simd-json"><code>simd-json</code></a> for
-deserializing and serializing events.</p>
-<h5 id="simd-json"><a href="#simd-json"><code>simd-json</code></a></h5>
-<p>The <code>simd-json</code> feature enables <a href="https://crates.io/crates/simd-json"><code>simd-json</code></a> support to use simd features
-of modern cpus to deserialize responses faster. It is not enabled by
-default.</p>
-<p>To use this feature you need to also add these lines to
-<code>&lt;project root&gt;/.cargo/config</code>:</p>
-<div class="example-wrap"><pre class="language-toml"><code>[build]
-rustflags = [&quot;-C&quot;, &quot;target-cpu=native&quot;]
-</code></pre></div>
-<p>you can also use this environment variable <code>RUSTFLAGS=&quot;-C target-cpu=native&quot;</code>.</p>
-<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
-twilight-gateway = { default-features = false, features = [&quot;rustls-native-roots&quot;, &quot;simd-json&quot;], version = &quot;0.2&quot; }
-</code></pre></div><h4 id="tls"><a href="#tls">TLS</a></h4>
-<p><strong>Note</strong>: not enabling any TLS feature is support for use behind a proxy;
-Discord’s API is HTTPS only.</p>
-<p><code>twilight-gateway</code> has features to enable <a href="https://crates.io/crates/tokio-tungstenite"><code>tokio-tungstenite</code></a> and
-<a href="https://twilight-rs.github.io/twilight/twilight_http/index.html"><code>twilight-http</code></a>’s TLS features. These features are mutually exclusive.
-<code>rustls-native-roots</code> is enabled by default.</p>
-<h5 id="native"><a href="#native"><code>native</code></a></h5>
-<p>The <code>native</code> feature enables <a href="https://crates.io/crates/tokio-tungstenite"><code>tokio-tungstenite</code></a>’s <code>native-tls</code>
-feature as well as <a href="https://twilight-rs.github.io/twilight/twilight_http/index.html"><code>twilight-http</code></a>’s <code>native</code> feature which is mostly
-equivalent to using <a href="https://crates.io/crates/native-tls"><code>native-tls</code></a>.</p>
-<p>To enable <code>native</code>, do something like this in your <code>Cargo.toml</code>:</p>
-<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
-twilight-gateway = { default-features = false, features = [&quot;native&quot;], version = &quot;0.2&quot; }
-</code></pre></div><h5 id="rustls-native-roots"><a href="#rustls-native-roots"><code>rustls-native-roots</code></a></h5>
-<p>The <code>rustls-native-roots</code> feature enables <a href="https://crates.io/crates/tokio-tungstenite"><code>tokio-tungstenite</code></a>’s <code>rustls-tls-native-roots</code> feature and
-<a href="https://twilight-rs.github.io/twilight/twilight_http/index.html"><code>twilight-http</code></a>’s <code>rustls-native-roots</code> feature, which use <a href="https://crates.io/crates/rustls"><code>rustls</code></a> as the TLS backend and <a href="https://crates.io/crates/rustls-native-certs"><code>rustls-native-certs</code></a>
-for root certificates.</p>
-<p>This is enabled by default.</p>
-<h5 id="rustls-webpki-roots"><a href="#rustls-webpki-roots"><code>rustls-webpki-roots</code></a></h5>
-<p>The <code>rustls-webpki-roots</code> feature enables <a href="https://crates.io/crates/tokio-tungstenite"><code>tokio-tungstenite</code></a>’s <code>rustls-tls-webpki-roots</code> feature and
-<a href="https://twilight-rs.github.io/twilight/twilight_http/index.html"><code>twilight-http</code></a>’s <code>rustls-webpki-roots</code> feature, which use <a href="https://crates.io/crates/rustls"><code>rustls</code></a> as the TLS backend and <a href="https://crates.io/crates/webpki-roots"><code>webpki-roots</code></a>
-for root certificates.</p>
-<p>This should be preferred over <code>rustls-native-roots</code> in Docker containers based on <code>scratch</code>.</p>
-<h4 id="zlib"><a href="#zlib">zlib</a></h4>
-<p>zlib compression is enabled with one of the two <code>zlib</code> features described below.</p>
-<p>There are 2 zlib features <code>zlib-stock</code> and <code>zlib-simd</code>, if both are enabled it
-will use <code>zlib-simd</code>.</p>
-<p><code>zlib-stock</code> is enabled by default.</p>
-<p>Enabling <code>zlib-simd</code> will make the library use <a href="https://github.com/zlib-ng/zlib-ng"><code>zlib-ng</code></a> which is a modern
-fork of zlib that is faster and more efficient, but it needs <code>cmake</code> to compile.</p>
-<h4 id="metrics"><a href="#metrics">Metrics</a></h4>
-<p>The <code>metrics</code> feature provides metrics information via the <code>metrics</code> crate.
-Some of the metrics logged are counters about received event counts and
-their types and gauges about the capacity and efficiency of the inflater of
-each shard.</p>
-<p>This is disabled by default.</p>
-</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><div class="item-table"><div class="item-row"><div class="item-left" id="reexport.Cluster"><code>pub use self::cluster::<a class="struct" href="cluster/struct.Cluster.html" title="struct twilight_gateway::cluster::Cluster">Cluster</a>;</code></div></div><div class="item-row"><div class="item-left" id="reexport.ClusterConfig"><code>pub use self::cluster::<a class="struct" href="cluster/struct.Config.html" title="struct twilight_gateway::cluster::Config">Config</a> as ClusterConfig;</code></div></div><div class="item-row"><div class="item-left" id="reexport.ShardConfig"><code>pub use self::shard::<a class="struct" href="shard/struct.Config.html" title="struct twilight_gateway::shard::Config">Config</a> as ShardConfig;</code></div></div><div class="item-row"><div class="item-left" id="reexport.Shard"><code>pub use self::shard::<a class="struct" href="shard/struct.Shard.html" title="struct twilight_gateway::shard::Shard">Shard</a>;</code></div></div><div class="item-row"><div class="item-left" id="reexport.queue"><code>pub use <a class="mod" href="../twilight_gateway_queue/index.html" title="mod twilight_gateway_queue">twilight_gateway_queue</a> as queue;</code></div></div><div class="item-row"><div class="item-left" id="reexport.Event"><code>pub use twilight_model::gateway::event::Event;</code></div></div><div class="item-row"><div class="item-left" id="reexport.EventType"><code>pub use twilight_model::gateway::event::EventType;</code></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="mod" href="cluster/index.html" title="mod twilight_gateway::cluster">cluster</a></div><div class="item-right docblock-short">The cluster is a manager for running and maintaining multiple shards,
-bringing their event streams into one unified stream.</div></div><div class="item-row"><div class="item-left"><a class="mod" href="shard/index.html" title="mod twilight_gateway::shard">shard</a></div><div class="item-right docblock-short">Types for working with and running connections to the gateway.</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="struct" href="struct.EventTypeFlags.html" title="struct twilight_gateway::EventTypeFlags">EventTypeFlags</a></div><div class="item-right docblock-short">Bitflags representing all of the possible types of events.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.Intents.html" title="struct twilight_gateway::Intents">Intents</a></div><div class="item-right docblock-short">Gateway intents.</div></div></div><h2 id="constants" class="small-section-header"><a href="#constants">Constants</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="constant" href="constant.API_VERSION.html" title="constant twilight_gateway::API_VERSION">API_VERSION</a></div><div class="item-right docblock-short">Discord API version used by this crate.</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="twilight_gateway" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (50d3ba5bc 2023-02-04)" data-search-js="search-98d53477a794af0b.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>
+<p>Create a shard and loop over guild and voice state events:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::env;
+<span class="kw">use </span>twilight_gateway::{Intents, Shard, ShardId};
+
+<span class="attr">#[tokio::main]
+</span><span class="kw">async fn </span>main() -&gt; anyhow::Result&lt;()&gt; {
+    <span class="comment">// Initialize the tracing subscriber.
+    </span>tracing_subscriber::fmt::init();
+
+    <span class="kw">let </span>token = env::var(<span class="string">&quot;DISCORD_TOKEN&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>intents = Intents::GUILDS | Intents::GUILD_VOICE_STATES;
+
+    <span class="comment">// Initialize the first and only shard in use by a bot.
+    </span><span class="kw">let </span><span class="kw-2">mut </span>shard = Shard::new(ShardId::ONE, token, intents);
+
+    <span class="macro">tracing::info!</span>(<span class="string">&quot;started shard&quot;</span>);
+
+    <span class="kw">loop </span>{
+        <span class="kw">let </span>event = <span class="kw">match </span>shard.next_event().<span class="kw">await </span>{
+            <span class="prelude-val">Ok</span>(event) =&gt; event,
+            <span class="prelude-val">Err</span>(source) =&gt; {
+                <span class="macro">tracing::warn!</span>(<span class="question-mark">?</span>source, <span class="string">&quot;error receiving event&quot;</span>);
+
+                <span class="comment">// If the error is fatal, as may be the case for invalid
+                // authentication or intents, then break out of the loop to
+                // avoid constantly attempting to reconnect.
+                </span><span class="kw">if </span>source.is_fatal() {
+                    <span class="kw">break</span>;
+                }
+
+                <span class="kw">continue</span>;
+            },
+        };
+
+        <span class="comment">// You&#39;d normally want to spawn a new tokio task for each event and
+        // handle the event there to not block the shard.
+        </span><span class="macro">tracing::debug!</span>(<span class="question-mark">?</span>event, <span class="string">&quot;received event&quot;</span>);
+    }
+
+    <span class="prelude-val">Ok</span>(())
+}</code></pre></div>
+<p>Create the recommended number of shards and run them concurrently through
+<code>ShardEventStream</code>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>futures::StreamExt;
+<span class="kw">use </span>std::env;
+<span class="kw">use </span>twilight_gateway::{
+    stream::{<span class="self">self</span>, ShardEventStream},
+    Config, Intents,
+};
+<span class="kw">use </span>twilight_http::Client;
+
+<span class="attr">#[tokio::main]
+</span><span class="kw">async fn </span>main() -&gt; anyhow::Result&lt;()&gt; {
+    tracing_subscriber::fmt::init();
+
+    <span class="kw">let </span>token = env::var(<span class="string">&quot;DISCORD_TOKEN&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>client = Client::new(token.clone());
+    <span class="kw">let </span>config = Config::new(token, Intents::GUILDS);
+
+    <span class="kw">let </span><span class="kw-2">mut </span>shards = stream::create_recommended(<span class="kw-2">&amp;</span>client, config, |<span class="kw">_</span>, builder| builder.build())
+        .<span class="kw">await</span><span class="question-mark">?
+        </span>.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+
+    <span class="comment">// Create an infinite stream over the shards&#39; events.
+    </span><span class="kw">let </span><span class="kw-2">mut </span>stream = ShardEventStream::new(shards.iter_mut());
+
+    <span class="kw">while let </span><span class="prelude-val">Some</span>((shard, event)) = stream.next().<span class="kw">await </span>{
+        <span class="kw">let </span>event = <span class="kw">match </span>event {
+            <span class="prelude-val">Ok</span>(event) =&gt; event,
+            <span class="prelude-val">Err</span>(source) =&gt; {
+                <span class="macro">tracing::warn!</span>(<span class="question-mark">?</span>source, <span class="string">&quot;error receiving event&quot;</span>);
+
+                <span class="kw">if </span>source.is_fatal() {
+                    <span class="kw">break</span>;
+                }
+
+                <span class="kw">continue</span>;
+            }
+        };
+
+        <span class="comment">// You&#39;d normally want to spawn a new tokio task for each event and
+        // handle the event there to not block the shards.
+        </span><span class="macro">tracing::debug!</span>(<span class="question-mark">?</span>event, shard = <span class="question-mark">?</span>shard.id(), <span class="string">&quot;received event&quot;</span>);
+    }
+
+    <span class="prelude-val">Ok</span>(())
+}</code></pre></div>
+<p>There are a few additional examples located in the
+<a href="https://github.com/twilight-rs/twilight/tree/main/examples">repository</a>.</p>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><div class="item-table"><div class="item-row"><div class="item-left" id="reexport.queue"><code>pub use <a class="mod" href="../twilight_gateway_queue/index.html" title="mod twilight_gateway_queue">twilight_gateway_queue</a> as queue;</code></div></div><div class="item-row"><div class="item-left" id="reexport.Event"><code>pub use twilight_model::gateway::event::Event;</code></div></div><div class="item-row"><div class="item-left" id="reexport.EventType"><code>pub use twilight_model::gateway::event::EventType;</code></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="mod" href="error/index.html" title="mod twilight_gateway::error">error</a></div><div class="item-right docblock-short">Errors returned by gateway operations.</div></div><div class="item-row"><div class="item-left"><a class="mod" href="stream/index.html" title="mod twilight_gateway::stream">stream</a></div><div class="item-right docblock-short">Utilities for managing collections of shards.</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="struct" href="struct.CloseFrame.html" title="struct twilight_gateway::CloseFrame">CloseFrame</a></div><div class="item-right docblock-short">Information about a close message.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.CommandRatelimiter.html" title="struct twilight_gateway::CommandRatelimiter">CommandRatelimiter</a></div><div class="item-right docblock-short">Ratelimiter for sending commands over the gateway to Discord.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.Config.html" title="struct twilight_gateway::Config">Config</a></div><div class="item-right docblock-short">Configuration used by the shard to identify with the gateway and operate.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.ConfigBuilder.html" title="struct twilight_gateway::ConfigBuilder">ConfigBuilder</a></div><div class="item-right docblock-short">Builder to customize the operation of a shard.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.EventTypeFlags.html" title="struct twilight_gateway::EventTypeFlags">EventTypeFlags</a></div><div class="item-right docblock-short">Important optimization for narrowing requested event types.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.Inflater.html" title="struct twilight_gateway::Inflater">Inflater</a><span class="stab portability" title="Available on crate features `zlib-stock` or `zlib-simd` only"><code>zlib-stock</code> or <code>zlib-simd</code></span></div><div class="item-right docblock-short">Gateway event decompressor.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.Intents.html" title="struct twilight_gateway::Intents">Intents</a></div><div class="item-right docblock-short">Gateway intents.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.Latency.html" title="struct twilight_gateway::Latency">Latency</a></div><div class="item-right docblock-short"><a href="struct.Shard.html"><code>Shard</code></a>’s gateway connection latency.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.MessageSender.html" title="struct twilight_gateway::MessageSender">MessageSender</a></div><div class="item-right docblock-short">Channel to send messages over a <a href="struct.Shard.html"><code>Shard</code></a> to the Discord gateway.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.Session.html" title="struct twilight_gateway::Session">Session</a></div><div class="item-right docblock-short">Gateway session information for a shard’s active connection.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.Shard.html" title="struct twilight_gateway::Shard">Shard</a></div><div class="item-right docblock-short">Gateway API client responsible for up to 2500 guilds.</div></div><div class="item-row"><div class="item-left"><a class="struct" href="struct.ShardId.html" title="struct twilight_gateway::ShardId">ShardId</a></div><div class="item-right docblock-short">Shard identifier to calculate if it receivies a given event.</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="enum" href="enum.ConnectionStatus.html" title="enum twilight_gateway::ConnectionStatus">ConnectionStatus</a></div><div class="item-right docblock-short">Current status of a shard.</div></div><div class="item-row"><div class="item-left"><a class="enum" href="enum.Message.html" title="enum twilight_gateway::Message">Message</a></div><div class="item-right docblock-short">Message to send over the connection to the remote.</div></div></div><h2 id="constants" class="small-section-header"><a href="#constants">Constants</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="constant" href="constant.API_VERSION.html" title="constant twilight_gateway::API_VERSION">API_VERSION</a></div><div class="item-right docblock-short">Discord Gateway API version used by this crate.</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="trait" href="trait.Command.html" title="trait twilight_gateway::Command">Command</a></div><div class="item-right docblock-short">Trait marker denoting what can be provided to <a href="struct.Shard.html#method.command"><code>Shard::command</code></a>.</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2><div class="item-table"><div class="item-row"><div class="item-left"><a class="fn" href="fn.parse.html" title="fn twilight_gateway::parse">parse</a></div><div class="item-right docblock-short">Parse a JSON encoded event into a gateway event if its type is in
+<code>wanted_event_types</code>.</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="twilight_gateway" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (50d3ba5bc 2023-02-04)" data-search-js="search-98d53477a794af0b.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>

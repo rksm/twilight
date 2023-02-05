@@ -165,7 +165,7 @@
 <a href="#165" id="165">165</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::WelcomeScreen;
 <span class="kw">use crate</span>::{
-    guild::VerificationLevel,
+    guild::{GuildFeature, VerificationLevel},
     id::{marker::GuildMarker, Id},
     util::image_hash::ImageHash,
 };
@@ -178,7 +178,7 @@
     <span class="doccomment">/// Description used for guild discovery.
     </span><span class="kw">pub </span>description: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// List of features that the guild has had enabled.
-    </span><span class="kw">pub </span>features: Vec&lt;String&gt;,
+    </span><span class="kw">pub </span>features: Vec&lt;GuildFeature&gt;,
     <span class="doccomment">/// Hash of the icon image.
     </span><span class="kw">pub </span>icon: <span class="prelude-ty">Option</span>&lt;ImageHash&gt;,
     <span class="doccomment">/// ID of the guild.
@@ -202,7 +202,7 @@
     <span class="kw">use crate</span>::{
         guild::{
             invite::{InviteGuild, WelcomeScreen, WelcomeScreenChannel},
-            VerificationLevel,
+            GuildFeature, VerificationLevel,
         },
         id::Id,
         test::image_hash,
@@ -215,7 +215,7 @@
         <span class="kw">let </span>value = InviteGuild {
             banner: <span class="prelude-val">Some</span>(image_hash::BANNER),
             description: <span class="prelude-val">Some</span>(<span class="string">&quot;a description&quot;</span>.to_owned()),
-            features: <span class="macro">vec!</span>[<span class="string">&quot;a feature&quot;</span>.to_owned()],
+            features: Vec::from([GuildFeature::Community]),
             icon: <span class="prelude-val">Some</span>(image_hash::ICON),
             id: Id::new(<span class="number">1</span>),
             name: <span class="string">&quot;guild name&quot;</span>.to_owned(),
@@ -257,7 +257,7 @@
                 Token::Str(<span class="string">&quot;a description&quot;</span>),
                 Token::Str(<span class="string">&quot;features&quot;</span>),
                 Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">1</span>) },
-                Token::Str(<span class="string">&quot;a feature&quot;</span>),
+                Token::Str(<span class="string">&quot;COMMUNITY&quot;</span>),
                 Token::SeqEnd,
                 Token::Str(<span class="string">&quot;icon&quot;</span>),
                 Token::Some,

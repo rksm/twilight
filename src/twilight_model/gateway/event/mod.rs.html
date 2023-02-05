@@ -538,79 +538,28 @@
 <a href="#538" id="538">538</a>
 <a href="#539" id="539">539</a>
 <a href="#540" id="540">540</a>
-<a href="#541" id="541">541</a>
-<a href="#542" id="542">542</a>
-<a href="#543" id="543">543</a>
-<a href="#544" id="544">544</a>
-<a href="#545" id="545">545</a>
-<a href="#546" id="546">546</a>
-<a href="#547" id="547">547</a>
-<a href="#548" id="548">548</a>
-<a href="#549" id="549">549</a>
-<a href="#550" id="550">550</a>
-<a href="#551" id="551">551</a>
-<a href="#552" id="552">552</a>
-<a href="#553" id="553">553</a>
-<a href="#554" id="554">554</a>
-<a href="#555" id="555">555</a>
-<a href="#556" id="556">556</a>
-<a href="#557" id="557">557</a>
-<a href="#558" id="558">558</a>
-<a href="#559" id="559">559</a>
-<a href="#560" id="560">560</a>
-<a href="#561" id="561">561</a>
-<a href="#562" id="562">562</a>
-<a href="#563" id="563">563</a>
-<a href="#564" id="564">564</a>
-<a href="#565" id="565">565</a>
-<a href="#566" id="566">566</a>
-<a href="#567" id="567">567</a>
-<a href="#568" id="568">568</a>
-<a href="#569" id="569">569</a>
-<a href="#570" id="570">570</a>
-<a href="#571" id="571">571</a>
-<a href="#572" id="572">572</a>
-<a href="#573" id="573">573</a>
-<a href="#574" id="574">574</a>
-<a href="#575" id="575">575</a>
-<a href="#576" id="576">576</a>
-<a href="#577" id="577">577</a>
-<a href="#578" id="578">578</a>
-<a href="#579" id="579">579</a>
-<a href="#580" id="580">580</a>
-<a href="#581" id="581">581</a>
-<a href="#582" id="582">582</a>
-<a href="#583" id="583">583</a>
-<a href="#584" id="584">584</a>
-<a href="#585" id="585">585</a>
-<a href="#586" id="586">586</a>
-<a href="#587" id="587">587</a>
-<a href="#588" id="588">588</a>
-<a href="#589" id="589">589</a>
 </pre><pre class="rust"><code><span class="attr">#![allow(clippy::wildcard_imports)]
 
 </span><span class="kw">pub mod </span>gateway;
-<span class="kw">pub mod </span>shard;
 
 <span class="kw">mod </span>dispatch;
 <span class="kw">mod </span>kind;
 
 <span class="kw">pub use </span><span class="self">self</span>::{
     dispatch::{DispatchEvent, DispatchEventWithTypeDeserializer},
-    gateway::{GatewayEvent, GatewayEventDeserializer, GatewayEventDeserializerOwned},
+    gateway::{GatewayEvent, GatewayEventDeserializer},
     kind::EventType,
 };
 
-<span class="kw">use </span><span class="self">self</span>::shard::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">super</span>::payload::incoming::<span class="kw-2">*</span>;
+<span class="kw">use super</span>::{payload::incoming::<span class="kw-2">*</span>, CloseFrame};
 <span class="kw">use </span><span class="kw">crate</span>::id::{marker::GuildMarker, Id};
 <span class="kw">use </span>std::error::Error;
 <span class="kw">use </span>std::fmt::{Debug, Display, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult};
 
 <span class="doccomment">/// Any type of event that a shard emits.
 ///
-/// This brings together all of the types of [`DispatchEvent`]s,
-/// [`GatewayEvent`]s, and [`ShardEvent`]s.
+/// This brings together all of the types of [`DispatchEvent`] and
+/// [`GatewayEvent`].
 </span><span class="attr">#[derive(Clone, Debug, PartialEq)]
 </span><span class="kw">pub enum </span>Event {
     <span class="doccomment">/// Message was blocked by AutoMod according to a rule.
@@ -635,12 +584,15 @@
     </span>ChannelUpdate(Box&lt;ChannelUpdate&gt;),
     <span class="doccomment">/// A command&#39;s permissions were updated.
     </span>CommandPermissionsUpdate(CommandPermissionsUpdate),
+    <span class="doccomment">/// Close message with an optional frame including information about the
+    /// reason for the close.
+    </span>GatewayClose(<span class="prelude-ty">Option</span>&lt;CloseFrame&lt;<span class="lifetime">&#39;static</span>&gt;&gt;),
     <span class="doccomment">/// A heartbeat was sent to or received from the gateway.
     </span>GatewayHeartbeat(u64),
     <span class="doccomment">/// A heartbeat acknowledgement was received from the gateway.
     </span>GatewayHeartbeatAck,
     <span class="doccomment">/// A &quot;hello&quot; packet was received from the gateway.
-    </span>GatewayHello(u64),
+    </span>GatewayHello(Hello),
     <span class="doccomment">/// A shard&#39;s session was invalidated.
     ///
     /// `true` if resumable. If not, then the shard must do a full reconnect.
@@ -726,23 +678,6 @@
     </span>RoleDelete(RoleDelete),
     <span class="doccomment">/// A role was updated in a guild.
     </span>RoleUpdate(RoleUpdate),
-    <span class="doccomment">/// A shard is now in a connected stage after being fully connected to the
-    /// gateway.
-    </span>ShardConnected(Connected),
-    <span class="doccomment">/// A shard is now in a connecting stage after starting to connect to the
-    /// gateway.
-    </span>ShardConnecting(Connecting),
-    <span class="doccomment">/// A shard is now in a disconnected stage after the connection was closed.
-    </span>ShardDisconnected(Disconnected),
-    <span class="doccomment">/// A shard is now in a identifying stage after starting a new session.
-    </span>ShardIdentifying(Identifying),
-    <span class="doccomment">/// A shard is now in a reconnecting stage after a disconnect or session was
-    /// ended.
-    </span>ShardReconnecting(Reconnecting),
-    <span class="doccomment">/// A payload of bytes came in through the shard&#39;s connection.
-    </span>ShardPayload(Payload),
-    <span class="doccomment">/// A shard is now in a Resuming stage after a disconnect.
-    </span>ShardResuming(Resuming),
     <span class="doccomment">/// A stage instance was created in a stage channel.
     </span>StageInstanceCreate(StageInstanceCreate),
     <span class="doccomment">/// A stage instance was deleted in a stage channel.
@@ -814,7 +749,7 @@
             Event::InteractionCreate(e) =&gt; e.<span class="number">0</span>.guild_id,
             Event::InviteCreate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
             Event::InviteDelete(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
-            Event::MemberAdd(e) =&gt; <span class="prelude-val">Some</span>(e.<span class="number">0</span>.guild_id),
+            Event::MemberAdd(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
             Event::MemberChunk(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
             Event::MemberRemove(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
             Event::MemberUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
@@ -841,6 +776,7 @@
             Event::VoiceStateUpdate(e) =&gt; e.<span class="number">0</span>.guild_id,
             Event::WebhooksUpdate(e) =&gt; <span class="prelude-val">Some</span>(e.guild_id),
             Event::ChannelPinsUpdate(<span class="kw">_</span>)
+            | Event::GatewayClose(<span class="kw">_</span>)
             | Event::GatewayHeartbeat(<span class="kw">_</span>)
             | Event::GatewayHeartbeatAck
             | Event::GatewayHello(<span class="kw">_</span>)
@@ -853,13 +789,6 @@
             | Event::PresencesReplace
             | Event::Ready(<span class="kw">_</span>)
             | Event::Resumed
-            | Event::ShardConnected(<span class="kw">_</span>)
-            | Event::ShardConnecting(<span class="kw">_</span>)
-            | Event::ShardDisconnected(<span class="kw">_</span>)
-            | Event::ShardIdentifying(<span class="kw">_</span>)
-            | Event::ShardPayload(<span class="kw">_</span>)
-            | Event::ShardReconnecting(<span class="kw">_</span>)
-            | Event::ShardResuming(<span class="kw">_</span>)
             | Event::ThreadMemberUpdate(<span class="kw">_</span>)
             | Event::UserUpdate(<span class="kw">_</span>) =&gt; <span class="prelude-val">None</span>,
         }
@@ -878,6 +807,7 @@
             <span class="self">Self</span>::ChannelPinsUpdate(<span class="kw">_</span>) =&gt; EventType::ChannelPinsUpdate,
             <span class="self">Self</span>::ChannelUpdate(<span class="kw">_</span>) =&gt; EventType::ChannelUpdate,
             <span class="self">Self</span>::CommandPermissionsUpdate(<span class="kw">_</span>) =&gt; EventType::CommandPermissionsUpdate,
+            <span class="self">Self</span>::GatewayClose(<span class="kw">_</span>) =&gt; EventType::GatewayClose,
             <span class="self">Self</span>::GatewayHeartbeat(<span class="kw">_</span>) =&gt; EventType::GatewayHeartbeat,
             <span class="self">Self</span>::GatewayHeartbeatAck =&gt; EventType::GatewayHeartbeatAck,
             <span class="self">Self</span>::GatewayHello(<span class="kw">_</span>) =&gt; EventType::GatewayHello,
@@ -921,13 +851,6 @@
             <span class="self">Self</span>::RoleCreate(<span class="kw">_</span>) =&gt; EventType::RoleCreate,
             <span class="self">Self</span>::RoleDelete(<span class="kw">_</span>) =&gt; EventType::RoleDelete,
             <span class="self">Self</span>::RoleUpdate(<span class="kw">_</span>) =&gt; EventType::RoleUpdate,
-            <span class="self">Self</span>::ShardConnected(<span class="kw">_</span>) =&gt; EventType::ShardConnected,
-            <span class="self">Self</span>::ShardConnecting(<span class="kw">_</span>) =&gt; EventType::ShardConnecting,
-            <span class="self">Self</span>::ShardDisconnected(<span class="kw">_</span>) =&gt; EventType::ShardDisconnected,
-            <span class="self">Self</span>::ShardIdentifying(<span class="kw">_</span>) =&gt; EventType::ShardIdentifying,
-            <span class="self">Self</span>::ShardReconnecting(<span class="kw">_</span>) =&gt; EventType::ShardReconnecting,
-            <span class="self">Self</span>::ShardPayload(<span class="kw">_</span>) =&gt; EventType::ShardPayload,
-            <span class="self">Self</span>::ShardResuming(<span class="kw">_</span>) =&gt; EventType::ShardResuming,
             <span class="self">Self</span>::StageInstanceCreate(<span class="kw">_</span>) =&gt; EventType::StageInstanceCreate,
             <span class="self">Self</span>::StageInstanceDelete(<span class="kw">_</span>) =&gt; EventType::StageInstanceDelete,
             <span class="self">Self</span>::StageInstanceUpdate(<span class="kw">_</span>) =&gt; EventType::StageInstanceUpdate,
@@ -1035,20 +958,6 @@
     }
 }
 
-<span class="kw">impl </span>From&lt;ShardEvent&gt; <span class="kw">for </span>Event {
-    <span class="kw">fn </span>from(event: ShardEvent) -&gt; <span class="self">Self </span>{
-        <span class="kw">match </span>event {
-            ShardEvent::Connected(v) =&gt; <span class="self">Self</span>::ShardConnected(v),
-            ShardEvent::Connecting(v) =&gt; <span class="self">Self</span>::ShardConnecting(v),
-            ShardEvent::Disconnected(v) =&gt; <span class="self">Self</span>::ShardDisconnected(v),
-            ShardEvent::Identifying(v) =&gt; <span class="self">Self</span>::ShardIdentifying(v),
-            ShardEvent::Payload(v) =&gt; <span class="self">Self</span>::ShardPayload(v),
-            ShardEvent::Reconnecting(v) =&gt; <span class="self">Self</span>::ShardReconnecting(v),
-            ShardEvent::Resuming(v) =&gt; <span class="self">Self</span>::ShardResuming(v),
-        }
-    }
-}
-
 <span class="doccomment">/// An error that describes a failure to convert from one event type to another.
 </span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>EventConversionError {
@@ -1096,7 +1005,7 @@
     //! wrapping the event in the `Event` type and move the assertion to the
     //! &quot;unboxed&quot; section.
 
-    </span><span class="kw">use super</span>::{<span class="kw">super</span>::payload::incoming::<span class="kw-2">*</span>, shard::<span class="kw-2">*</span>, Event};
+    </span><span class="kw">use super</span>::{<span class="kw">super</span>::payload::incoming::<span class="kw-2">*</span>, Event};
     <span class="kw">use </span>static_assertions::const_assert;
     <span class="kw">use </span>std::mem;
 
@@ -1143,25 +1052,18 @@
     <span class="macro">const_assert!</span>(mem::size_of::&lt;BanRemove&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;ChannelPinsUpdate&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;CommandPermissionsUpdate&gt;() &lt;= EVENT_THRESHOLD);
-    <span class="macro">const_assert!</span>(mem::size_of::&lt;Connected&gt;() &lt;= EVENT_THRESHOLD);
-    <span class="macro">const_assert!</span>(mem::size_of::&lt;Connecting&gt;() &lt;= EVENT_THRESHOLD);
-    <span class="macro">const_assert!</span>(mem::size_of::&lt;Disconnected&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;GuildDelete&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;GuildEmojisUpdate&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;GuildIntegrationsUpdate&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;GuildScheduledEventUserAdd&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;GuildScheduledEventUserRemove&gt;() &lt;= EVENT_THRESHOLD);
-    <span class="macro">const_assert!</span>(mem::size_of::&lt;Identifying&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;IntegrationDelete&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;InviteDelete&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;MemberChunk&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;MemberRemove&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;MessageDelete&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;MessageDeleteBulk&gt;() &lt;= EVENT_THRESHOLD);
-    <span class="macro">const_assert!</span>(mem::size_of::&lt;Payload&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;ReactionRemoveAll&gt;() &lt;= EVENT_THRESHOLD);
-    <span class="macro">const_assert!</span>(mem::size_of::&lt;Reconnecting&gt;() &lt;= EVENT_THRESHOLD);
-    <span class="macro">const_assert!</span>(mem::size_of::&lt;Resuming&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;RoleCreate&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;RoleDelete&gt;() &lt;= EVENT_THRESHOLD);
     <span class="macro">const_assert!</span>(mem::size_of::&lt;RoleUpdate&gt;() &lt;= EVENT_THRESHOLD);

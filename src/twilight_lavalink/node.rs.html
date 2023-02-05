@@ -716,6 +716,52 @@
 <a href="#716" id="716">716</a>
 <a href="#717" id="717">717</a>
 <a href="#718" id="718">718</a>
+<a href="#719" id="719">719</a>
+<a href="#720" id="720">720</a>
+<a href="#721" id="721">721</a>
+<a href="#722" id="722">722</a>
+<a href="#723" id="723">723</a>
+<a href="#724" id="724">724</a>
+<a href="#725" id="725">725</a>
+<a href="#726" id="726">726</a>
+<a href="#727" id="727">727</a>
+<a href="#728" id="728">728</a>
+<a href="#729" id="729">729</a>
+<a href="#730" id="730">730</a>
+<a href="#731" id="731">731</a>
+<a href="#732" id="732">732</a>
+<a href="#733" id="733">733</a>
+<a href="#734" id="734">734</a>
+<a href="#735" id="735">735</a>
+<a href="#736" id="736">736</a>
+<a href="#737" id="737">737</a>
+<a href="#738" id="738">738</a>
+<a href="#739" id="739">739</a>
+<a href="#740" id="740">740</a>
+<a href="#741" id="741">741</a>
+<a href="#742" id="742">742</a>
+<a href="#743" id="743">743</a>
+<a href="#744" id="744">744</a>
+<a href="#745" id="745">745</a>
+<a href="#746" id="746">746</a>
+<a href="#747" id="747">747</a>
+<a href="#748" id="748">748</a>
+<a href="#749" id="749">749</a>
+<a href="#750" id="750">750</a>
+<a href="#751" id="751">751</a>
+<a href="#752" id="752">752</a>
+<a href="#753" id="753">753</a>
+<a href="#754" id="754">754</a>
+<a href="#755" id="755">755</a>
+<a href="#756" id="756">756</a>
+<a href="#757" id="757">757</a>
+<a href="#758" id="758">758</a>
+<a href="#759" id="759">759</a>
+<a href="#760" id="760">760</a>
+<a href="#761" id="761">761</a>
+<a href="#762" id="762">762</a>
+<a href="#763" id="763">763</a>
+<a href="#764" id="764">764</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Nodes for communicating with a Lavalink server.
 //!
 //! Using nodes, you can send events to a server and receive events.
@@ -747,7 +793,7 @@
 <span class="kw">use </span>http::{header::HeaderName, Request, Response, StatusCode};
 <span class="kw">use </span>std::{
     error::Error,
-    fmt::{Display, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult},
+    fmt::{Debug, Display, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult},
     net::SocketAddr,
     pin::Pin,
     task::{Context, Poll},
@@ -941,8 +987,9 @@
 }
 
 <span class="doccomment">/// The configuration that a [`Node`] uses to connect to a Lavalink server.
-</span><span class="attr">#[derive(Clone, Debug, Eq, PartialEq)]
+</span><span class="attr">#[derive(Clone, Eq, PartialEq)]
 #[non_exhaustive]
+</span><span class="comment">// Keep fields in sync with its Debug implementation.
 </span><span class="kw">pub struct </span>NodeConfig {
     <span class="doccomment">/// The address of the node.
     </span><span class="kw">pub </span>address: SocketAddr,
@@ -954,6 +1001,28 @@
     </span><span class="kw">pub </span>resume: <span class="prelude-ty">Option</span>&lt;Resume&gt;,
     <span class="doccomment">/// The user ID of the bot.
     </span><span class="kw">pub </span>user_id: Id&lt;UserMarker&gt;,
+}
+
+<span class="kw">impl </span>Debug <span class="kw">for </span>NodeConfig {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; FmtResult {
+        <span class="doccomment">/// Debug as `&lt;redacted&gt;`. Necessary because debugging a struct field
+        /// with a value of of `&quot;&lt;redacted&gt;&quot;` will insert quotations in the
+        /// string, which doesn&#39;t align with other token debugs.
+        </span><span class="kw">struct </span>Redacted;
+
+        <span class="kw">impl </span>Debug <span class="kw">for </span>Redacted {
+            <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; FmtResult {
+                f.write_str(<span class="string">&quot;&lt;redacted&gt;&quot;</span>)
+            }
+        }
+
+        f.debug_struct(<span class="string">&quot;NodeConfig&quot;</span>)
+            .field(<span class="string">&quot;address&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.address)
+            .field(<span class="string">&quot;authorization&quot;</span>, <span class="kw-2">&amp;</span>Redacted)
+            .field(<span class="string">&quot;resume&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.resume)
+            .field(<span class="string">&quot;user_id&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.user_id)
+            .finish()
+    }
 }
 
 <span class="doccomment">/// Configuration for a session which can be resumed.
@@ -1373,7 +1442,13 @@
 
 <span class="kw">async fn </span>backoff(
     config: <span class="kw-2">&amp;</span>NodeConfig,
-) -&gt; <span class="prelude-ty">Result</span>&lt;(WebSocketStream&lt;MaybeTlsStream&lt;TcpStream&gt;&gt;, Response&lt;()&gt;), NodeError&gt; {
+) -&gt; <span class="prelude-ty">Result</span>&lt;
+    (
+        WebSocketStream&lt;MaybeTlsStream&lt;TcpStream&gt;&gt;,
+        Response&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;&gt;,
+    ),
+    NodeError,
+&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>seconds = <span class="number">1</span>;
 
     <span class="kw">loop </span>{
@@ -1422,7 +1497,12 @@
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{Node, NodeConfig, NodeError, NodeErrorType, Resume};
     <span class="kw">use </span>static_assertions::{assert_fields, assert_impl_all};
-    <span class="kw">use </span>std::{error::Error, fmt::Debug};
+    <span class="kw">use </span>std::{
+        error::Error,
+        fmt::Debug,
+        net::{Ipv4Addr, SocketAddr, SocketAddrV4},
+    };
+    <span class="kw">use </span>twilight_model::id::Id;
 
     <span class="macro">assert_fields!</span>(NodeConfig: address, authorization, resume, user_id);
     <span class="macro">assert_impl_all!</span>(NodeConfig: Clone, Debug, Send, Sync);
@@ -1433,6 +1513,18 @@
     <span class="macro">assert_impl_all!</span>(Node: Debug, Send, Sync);
     <span class="macro">assert_fields!</span>(Resume: timeout);
     <span class="macro">assert_impl_all!</span>(Resume: Clone, Debug, Default, Eq, PartialEq, Send, Sync);
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>node_config_debug() {
+        <span class="kw">let </span>config = NodeConfig {
+            address: SocketAddr::V4(SocketAddrV4::new(Ipv4Addr::new(<span class="number">127</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>), <span class="number">1312</span>)),
+            authorization: <span class="string">&quot;some auth&quot;</span>.to_owned(),
+            resume: <span class="prelude-val">None</span>,
+            user_id: Id::new(<span class="number">123</span>),
+        };
+
+        <span class="macro">assert!</span>(<span class="macro">format!</span>(<span class="string">&quot;{config:?}&quot;</span>).contains(<span class="string">&quot;authorization: &lt;redacted&gt;&quot;</span>));
+    }
 }
 </code></pre></div>
 </section></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="twilight_lavalink" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (50d3ba5bc 2023-02-04)" data-search-js="search-98d53477a794af0b.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>

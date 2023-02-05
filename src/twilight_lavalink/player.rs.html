@@ -246,7 +246,7 @@
 <span class="kw">use </span>std::{
     fmt::Debug,
     sync::{
-        atomic::{AtomicBool, AtomicI64, AtomicU16, AtomicU64, Ordering},
+        atomic::{AtomicBool, AtomicI64, AtomicU64, Ordering},
         Arc,
     },
 };
@@ -318,7 +318,7 @@
     paused: AtomicBool,
     position: AtomicI64,
     time: AtomicI64,
-    volume: AtomicU16,
+    volume: AtomicI64,
 }
 
 <span class="kw">impl </span>Player {
@@ -330,7 +330,7 @@
             paused: AtomicBool::new(<span class="bool-val">false</span>),
             position: AtomicI64::new(<span class="number">0</span>),
             time: AtomicI64::new(<span class="number">0</span>),
-            volume: AtomicU16::new(<span class="number">100</span>),
+            volume: AtomicI64::new(<span class="number">100</span>),
         }
     }
 
@@ -381,7 +381,7 @@
             OutgoingEvent::Pause(event) =&gt; <span class="self">self</span>.paused.store(event.pause, Ordering::Release),
             OutgoingEvent::Volume(event) =&gt; {
                 <span class="attr">#[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
-                </span><span class="self">self</span>.volume.store(event.volume <span class="kw">as </span>u16, Ordering::Release);
+                </span><span class="self">self</span>.volume.store(event.volume, Ordering::Release);
             }
             <span class="kw">_ </span>=&gt; {}
         }
@@ -442,7 +442,7 @@
     }
 
     <span class="doccomment">/// Return the player&#39;s volume.
-    </span><span class="kw">pub fn </span>volume(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+    </span><span class="kw">pub fn </span>volume(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; i64 {
         <span class="self">self</span>.volume.load(Ordering::Relaxed)
     }
 }

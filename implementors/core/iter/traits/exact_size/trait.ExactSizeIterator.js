@@ -1,4 +1,3 @@
 (function() {var implementors = {
-"twilight_gateway":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/iter/traits/exact_size/trait.ExactSizeIterator.html\" title=\"trait core::iter::traits::exact_size::ExactSizeIterator\">ExactSizeIterator</a> for <a class=\"struct\" href=\"twilight_gateway/cluster/struct.Shards.html\" title=\"struct twilight_gateway::cluster::Shards\">Shards</a>&lt;'_&gt;"]],
 "twilight_model":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/iter/traits/exact_size/trait.ExactSizeIterator.html\" title=\"trait core::iter::traits::exact_size::ExactSizeIterator\">ExactSizeIterator</a> for <a class=\"struct\" href=\"twilight_model/util/image_hash/struct.Nibbles.html\" title=\"struct twilight_model::util::image_hash::Nibbles\">Nibbles</a>"]]
 };if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

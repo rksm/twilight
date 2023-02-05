@@ -1115,6 +1115,16 @@
 <a href="#1115" id="1115">1115</a>
 <a href="#1116" id="1116">1116</a>
 <a href="#1117" id="1117">1117</a>
+<a href="#1118" id="1118">1118</a>
+<a href="#1119" id="1119">1119</a>
+<a href="#1120" id="1120">1120</a>
+<a href="#1121" id="1121">1121</a>
+<a href="#1122" id="1122">1122</a>
+<a href="#1123" id="1123">1123</a>
+<a href="#1124" id="1124">1124</a>
+<a href="#1125" id="1125">1125</a>
+<a href="#1126" id="1126">1126</a>
+<a href="#1127" id="1127">1127</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Calculate the permissions for members in on a guild- or channel-level with
 //! information from the cache.
 //!
@@ -1532,7 +1542,7 @@
         })<span class="question-mark">?</span>;
 
         <span class="kw">let </span>MemberRoles { assigned, everyone } = <span class="self">self
-            </span>.member_roles(<span class="kw-2">&amp;</span>member)
+            </span>.member_roles(guild_id, <span class="kw-2">&amp;</span>member)
             .map_err(ChannelError::from_member_roles)<span class="question-mark">?</span>;
 
         <span class="kw">let </span>overwrites = <span class="kw">match </span>channel.kind {
@@ -1612,7 +1622,7 @@
         })<span class="question-mark">?</span>;
 
         <span class="kw">let </span>MemberRoles { assigned, everyone } = <span class="self">self
-            </span>.member_roles(<span class="kw-2">&amp;</span>member)
+            </span>.member_roles(guild_id, <span class="kw-2">&amp;</span>member)
             .map_err(RootError::from_member_roles)<span class="question-mark">?</span>;
         <span class="kw">let </span>calculator =
             PermissionCalculator::new(guild_id, user_id, everyone, assigned.as_slice());
@@ -1685,7 +1695,11 @@
     ///
     /// Returns [`MemberRolesErrorType::RoleMissing`] if a role is missing from
     /// the cache.
-    </span><span class="kw">fn </span>member_roles(<span class="kw-2">&amp;</span><span class="self">self</span>, member: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>CachedMember) -&gt; <span class="prelude-ty">Result</span>&lt;MemberRoles, MemberRolesErrorType&gt; {
+    </span><span class="kw">fn </span>member_roles(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        guild_id: Id&lt;GuildMarker&gt;,
+        member: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>CachedMember,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;MemberRoles, MemberRolesErrorType&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>member_roles = Vec::with_capacity(member.roles.len());
 
         <span class="kw">for </span>role_id <span class="kw">in </span><span class="kw-2">&amp;</span>member.roles {
@@ -1698,8 +1712,7 @@
             member_roles.push((<span class="kw-2">*</span>role_id, role.permissions));
         }
 
-        <span class="comment">// Assume that the `@everyone` role is always present, so do this last.
-        </span><span class="kw">let </span>everyone_role_id = member.guild_id().cast();
+        <span class="kw">let </span>everyone_role_id = guild_id.cast();
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(everyone_role) = <span class="self">self</span>.cache.roles.get(<span class="kw-2">&amp;</span>everyone_role_id) {
             <span class="prelude-val">Ok</span>(MemberRoles {
@@ -1777,8 +1790,8 @@
             ChannelCreate, GuildCreate, MemberAdd, MemberUpdate, RoleCreate, ThreadCreate,
         },
         guild::{
-            DefaultMessageNotificationLevel, ExplicitContentFilter, Guild, MfaLevel, NSFWLevel,
-            Permissions, PremiumTier, Role, SystemChannelFlags, VerificationLevel,
+            AfkTimeout, DefaultMessageNotificationLevel, ExplicitContentFilter, Guild, MfaLevel,
+            NSFWLevel, Permissions, PremiumTier, Role, SystemChannelFlags, VerificationLevel,
         },
         id::{
             marker::{ChannelMarker, GuildMarker, RoleMarker, UserMarker},
@@ -1825,7 +1838,7 @@
         Guild {
             id: GUILD_ID,
             afk_channel_id: <span class="prelude-val">None</span>,
-            afk_timeout: <span class="number">300</span>,
+            afk_timeout: AfkTimeout::FIVE_MINUTES,
             application_id: <span class="prelude-val">None</span>,
             banner: <span class="prelude-val">None</span>,
             channels: Vec::new(),
@@ -2002,7 +2015,10 @@
             <span class="kw">if </span>g_id == GUILD_ID &amp;&amp; u_id == USER_ID
         ));
 
-        cache.update(<span class="kw-2">&amp;</span>MemberAdd(test::member(USER_ID, GUILD_ID)));
+        cache.update(<span class="kw-2">&amp;</span>MemberAdd {
+            guild_id: GUILD_ID,
+            member: test::member(USER_ID),
+        });
 
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
             permissions.root(USER_ID, GUILD_ID).unwrap_err().kind(),
@@ -2026,7 +2042,10 @@
         <span class="kw">let </span>permissions = cache.permissions();
 
         cache.update(<span class="kw-2">&amp;</span>GuildCreate(base_guild()));
-        cache.update(<span class="kw-2">&amp;</span>MemberAdd(test::member(USER_ID, GUILD_ID)));
+        cache.update(<span class="kw-2">&amp;</span>MemberAdd {
+            guild_id: GUILD_ID,
+            member: test::member(USER_ID),
+        });
         cache.update(<span class="kw-2">&amp;</span>MemberUpdate {
             avatar: <span class="prelude-val">None</span>,
             communication_disabled_until: <span class="prelude-val">None</span>,
@@ -2081,13 +2100,13 @@
             ChannelErrorType::MemberUnavailable { guild_id: g_id, user_id: u_id }
             <span class="kw">if </span><span class="kw-2">*</span>g_id == GUILD_ID &amp;&amp; <span class="kw-2">*</span>u_id == USER_ID
         ));
+        <span class="kw">let </span><span class="kw-2">mut </span>member = test::member(USER_ID);
+        member.roles.push(OTHER_ROLE_ID);
 
-        cache.update(<span class="kw-2">&amp;</span>MemberAdd({
-            <span class="kw">let </span><span class="kw-2">mut </span>member = test::member(USER_ID, GUILD_ID);
-            member.roles.push(OTHER_ROLE_ID);
-
-            member
-        }));
+        cache.update(<span class="kw-2">&amp;</span>MemberAdd {
+            guild_id: GUILD_ID,
+            member,
+        });
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
             permissions.in_channel(USER_ID, CHANNEL_ID).unwrap_err().kind(),
             <span class="kw-2">&amp;</span>ChannelErrorType::RoleUnavailable { role_id }
@@ -2188,11 +2207,12 @@
         )]);
 
         cache.update(<span class="kw-2">&amp;</span>GuildCreate(guild));
-        cache.update(<span class="kw-2">&amp;</span>MemberAdd({
-            <span class="kw">let </span><span class="kw-2">mut </span>member = test::member(USER_ID, GUILD_ID);
-            member.communication_disabled_until = <span class="prelude-val">Some</span>(in_future);
-            member
-        }));
+        <span class="kw">let </span><span class="kw-2">mut </span>member = test::member(USER_ID);
+        member.communication_disabled_until = <span class="prelude-val">Some</span>(in_future);
+        cache.update(<span class="kw-2">&amp;</span>MemberAdd {
+            guild_id: GUILD_ID,
+            member,
+        });
         <span class="macro">assert_eq!</span>(
             Permissions::VIEW_CHANNEL | Permissions::READ_MESSAGE_HISTORY,
             permissions.root(USER_ID, GUILD_ID)<span class="question-mark">?

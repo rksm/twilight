@@ -97,6 +97,11 @@
 <a href="#97" id="97">97</a>
 <a href="#98" id="98">98</a>
 <a href="#99" id="99">99</a>
+<a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
+<a href="#103" id="103">103</a>
+<a href="#104" id="104">104</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -110,7 +115,10 @@
     marker::{ChannelMarker, MessageMarker},
     Id,
 };
-<span class="kw">use </span>twilight_validate::request::{audit_reason <span class="kw">as </span>validate_audit_reason, ValidationError};
+<span class="kw">use </span>twilight_validate::{
+    channel::{bulk_delete_messages <span class="kw">as </span>validate_bulk_delete_messages, ChannelValidationError},
+    request::{audit_reason <span class="kw">as </span>validate_audit_reason, ValidationError},
+};
 
 <span class="attr">#[derive(Serialize)]
 </span><span class="kw">struct </span>DeleteMessagesFields&lt;<span class="lifetime">&#39;a</span>&gt; {
@@ -134,17 +142,19 @@
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; DeleteMessages&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const fn </span>new(
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>new(
         http: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Client,
         channel_id: Id&lt;ChannelMarker&gt;,
         messages: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Id&lt;MessageMarker&gt;],
-    ) -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ChannelValidationError&gt; {
+        validate_bulk_delete_messages(messages.len())<span class="question-mark">?</span>;
+
+        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
             channel_id,
             fields: DeleteMessagesFields { messages },
             http,
             reason: <span class="prelude-val">None</span>,
-        }
+        })
     }
 
     <span class="doccomment">/// Execute the request, returning a future resolving to a [`Response`].

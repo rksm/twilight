@@ -696,6 +696,7 @@
 <a href="#696" id="696">696</a>
 <a href="#697" id="697">697</a>
 <a href="#698" id="698">698</a>
+<a href="#699" id="699">699</a>
 </pre><pre class="rust"><code><span class="kw">mod </span>guild;
 <span class="kw">mod </span>role;
 
@@ -739,7 +740,7 @@
             Channel, ChannelType,
         },
         guild::{
-            DefaultMessageNotificationLevel, ExplicitContentFilter, Permissions,
+            AfkTimeout, DefaultMessageNotificationLevel, ExplicitContentFilter, Permissions,
             SystemChannelFlags, VerificationLevel,
         },
         id::Id,
@@ -899,7 +900,7 @@
             name: <span class="string">&quot;name&quot;</span>.into(),
             serialized_source_guild: TemplateGuild {
                 afk_channel_id: <span class="prelude-val">None</span>,
-                afk_timeout: <span class="number">300</span>,
+                afk_timeout: AfkTimeout::FIVE_MINUTES,
                 channels: Vec::from([
                     Channel {
                         application_id: <span class="prelude-val">None</span>,
@@ -1179,7 +1180,8 @@
                 Token::Str(<span class="string">&quot;afk_channel_id&quot;</span>),
                 Token::None,
                 Token::Str(<span class="string">&quot;afk_timeout&quot;</span>),
-                Token::U64(<span class="number">300</span>),
+                Token::NewtypeStruct { name: <span class="string">&quot;AfkTimeout&quot; </span>},
+                Token::U16(<span class="number">300</span>),
                 Token::Str(<span class="string">&quot;channels&quot;</span>),
                 Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">4</span>) },
                 Token::Struct {

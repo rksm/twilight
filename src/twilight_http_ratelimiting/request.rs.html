@@ -524,6 +524,9 @@
 <a href="#524" id="524">524</a>
 <a href="#525" id="525">525</a>
 <a href="#526" id="526">526</a>
+<a href="#527" id="527">527</a>
+<a href="#528" id="528">528</a>
+<a href="#529" id="529">529</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Request parameters for ratelimiting.
 //!
 //! This module contains the type definitions for parameters
@@ -766,8 +769,10 @@
     </span>GuildsIdWebhooks(u64),
     <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; welcome screen.
     </span>GuildsIdWelcomeScreen(u64),
-    <span class="doccomment">/// Operating on one of the user&#39;s guilds&#39; widget.
+    <span class="doccomment">/// Operating on one of the user&#39;s guild&#39;s widget settings.
     </span>GuildsIdWidget(u64),
+    <span class="doccomment">/// Operating on one of the user&#39;s guild&#39;s widget.
+    </span>GuildsIdWidgetJson(u64),
     <span class="doccomment">/// Operating on a guild template.
     </span>GuildsTemplatesCode(String),
     <span class="doccomment">/// Operating on an interaction&#39;s callback.
@@ -913,7 +918,6 @@
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;bans&quot;</span>] =&gt; GuildsIdBans(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;bans&quot;</span>, <span class="kw">_</span>] =&gt; GuildsIdBansUserId(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;channels&quot;</span>] =&gt; GuildsIdChannels(parse_id(id)<span class="question-mark">?</span>),
-            [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;widget&quot; </span>| <span class="string">&quot;widget.json&quot;</span>] =&gt; GuildsIdWidget(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;emojis&quot;</span>] =&gt; GuildsIdEmojis(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;emojis&quot;</span>, <span class="kw">_</span>] =&gt; GuildsIdEmojisId(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;integrations&quot;</span>] =&gt; GuildsIdIntegrations(parse_id(id)<span class="question-mark">?</span>),
@@ -947,6 +951,8 @@
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;voice-states&quot;</span>, <span class="kw">_</span>] =&gt; GuildsIdVoiceStates(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;welcome-screen&quot;</span>] =&gt; GuildsIdWelcomeScreen(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;webhooks&quot;</span>] =&gt; GuildsIdWebhooks(parse_id(id)<span class="question-mark">?</span>),
+            [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;widget&quot;</span>] =&gt; GuildsIdWidget(parse_id(id)<span class="question-mark">?</span>),
+            [<span class="string">&quot;guilds&quot;</span>, id, <span class="string">&quot;widget.json&quot;</span>] =&gt; GuildsIdWidgetJson(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;invites&quot;</span>, <span class="kw">_</span>] =&gt; InvitesCode,
             [<span class="string">&quot;interactions&quot;</span>, id, <span class="kw">_</span>, <span class="string">&quot;callback&quot;</span>] =&gt; InteractionCallback(parse_id(id)<span class="question-mark">?</span>),
             [<span class="string">&quot;stage-instances&quot;</span>, <span class="kw">_</span>] =&gt; StageInstances,

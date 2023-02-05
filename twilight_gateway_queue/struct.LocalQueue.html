@@ -3,8 +3,8 @@ connection attempts of one or more shards.</p>
 <p>The queue will take incoming requests and then queue them, releasing one of
 the requests every 6 seconds. The queue is necessary because there’s a
 ratelimit on how often shards can initiate sessions.</p>
-<p>You usually won’t need to handle this yourself, because the <code>Cluster</code> will
-do that for you when managing multiple shards.</p>
+<p>Handling shard queues usually won’t need to be manually handled due to the
+gateway having built-in queueing when managing multiple shards.</p>
 <h2 id="when-not-to-use-this"><a href="#when-not-to-use-this">When not to use this</a></h2>
 <p>This queue implementation is “local”, meaning it’s intended to be used if
 you manage shards only in this process. If you run shards in multiple

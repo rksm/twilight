@@ -1842,7 +1842,7 @@
     /// let ready = standby
     ///     .wait_for_event(|event: &amp;Event| {
     ///         if let Event::Ready(ready) = event {
-    ///             ready.shard.map(|[id, _]| id == 5).unwrap_or(false)
+    ///             ready.shard.map_or(false, |id| id.number() == 5)
     ///         } else {
     ///             false
     ///         }
@@ -1899,7 +1899,7 @@
     ///
     /// let mut events = standby.wait_for_event_stream(|event: &amp;Event| {
     ///     if let Event::Ready(ready) = event {
-    ///         ready.shard.map(|[id, _]| id == 5).unwrap_or(false)
+    ///         ready.shard.map_or(false, |id| id.number() == 5)
     ///     } else {
     ///         false
     ///     }
@@ -2586,7 +2586,7 @@
         channel::message::{component::ComponentType, Message, MessageType, ReactionType},
         gateway::{
             payload::incoming::{InteractionCreate, MessageCreate, ReactionAdd, Ready, RoleDelete},
-            GatewayReaction,
+            GatewayReaction, ShardId,
         },
         guild::Permissions,
         id::{marker::GuildMarker, Id},
@@ -2844,8 +2844,9 @@
                 id: Id::new(<span class="number">1</span>),
             },
             guilds: Vec::new(),
+            resume_gateway_url: <span class="string">&quot;wss://gateway.discord.gg&quot;</span>.into(),
             session_id: String::new(),
-            shard: <span class="prelude-val">Some</span>([<span class="number">5</span>, <span class="number">7</span>]),
+            shard: <span class="prelude-val">Some</span>(ShardId::new(<span class="number">5</span>, <span class="number">7</span>)),
             user: CurrentUser {
                 accent_color: <span class="prelude-val">None</span>,
                 avatar: <span class="prelude-val">None</span>,
@@ -2863,13 +2864,12 @@
                 locale: <span class="prelude-val">None</span>,
             },
             version: <span class="number">6</span>,
-            resume_gateway_url: <span class="string">&quot;wss://gateway.discord.gg/&quot;</span>.to_owned(),
         };
         <span class="kw">let </span>event = Event::Ready(Box::new(ready));
 
         <span class="kw">let </span>standby = Standby::new();
         <span class="kw">let </span>wait = standby.wait_for_event(|event: <span class="kw-2">&amp;</span>Event| <span class="kw">match </span>event {
-            Event::Ready(ready) =&gt; ready.shard.map_or(<span class="bool-val">false</span>, |[id, <span class="kw">_</span>]| id == <span class="number">5</span>),
+            Event::Ready(ready) =&gt; ready.shard.map_or(<span class="bool-val">false</span>, |id| id.number() == <span class="number">5</span>),
             <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
         });
         <span class="macro">assert!</span>(!standby.events.is_empty());

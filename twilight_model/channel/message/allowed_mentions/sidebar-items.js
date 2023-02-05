@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":[["ParseTypes","Allowed mention type in message content."]],"struct":[["AllowedMentions","Allows for more granular control over mentions."],["AllowedMentionsBuilder","Create an [`AllowedMentions`] with a builder."]]};

@@ -108,6 +108,7 @@
 <a href="#108" id="108">108</a>
 <a href="#109" id="109">109</a>
 <a href="#110" id="110">110</a>
+<a href="#111" id="111">111</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Payloads that are incoming from the Discord Gateway API.
 //!
 //! These are sent by the Discord Gateway API to shards. The only payload
@@ -147,6 +148,7 @@
 <span class="kw">mod </span>guild_scheduled_event_user_remove;
 <span class="kw">mod </span>guild_stickers_update;
 <span class="kw">mod </span>guild_update;
+<span class="kw">mod </span>hello;
 <span class="kw">mod </span>integration_create;
 <span class="kw">mod </span>integration_delete;
 <span class="kw">mod </span>integration_update;
@@ -200,7 +202,7 @@
     guild_scheduled_event_update::GuildScheduledEventUpdate,
     guild_scheduled_event_user_add::GuildScheduledEventUserAdd,
     guild_scheduled_event_user_remove::GuildScheduledEventUserRemove,
-    guild_stickers_update::GuildStickersUpdate, guild_update::GuildUpdate,
+    guild_stickers_update::GuildStickersUpdate, guild_update::GuildUpdate, hello::Hello,
     integration_create::IntegrationCreate, integration_delete::IntegrationDelete,
     integration_update::IntegrationUpdate, interaction_create::InteractionCreate,
     invite_create::InviteCreate, invite_delete::InviteDelete, member_add::MemberAdd,

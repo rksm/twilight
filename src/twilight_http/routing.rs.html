@@ -4607,6 +4607,25 @@
 <a href="#4607" id="4607">4607</a>
 <a href="#4608" id="4608">4608</a>
 <a href="#4609" id="4609">4609</a>
+<a href="#4610" id="4610">4610</a>
+<a href="#4611" id="4611">4611</a>
+<a href="#4612" id="4612">4612</a>
+<a href="#4613" id="4613">4613</a>
+<a href="#4614" id="4614">4614</a>
+<a href="#4615" id="4615">4615</a>
+<a href="#4616" id="4616">4616</a>
+<a href="#4617" id="4617">4617</a>
+<a href="#4618" id="4618">4618</a>
+<a href="#4619" id="4619">4619</a>
+<a href="#4620" id="4620">4620</a>
+<a href="#4621" id="4621">4621</a>
+<a href="#4622" id="4622">4622</a>
+<a href="#4623" id="4623">4623</a>
+<a href="#4624" id="4624">4624</a>
+<a href="#4625" id="4625">4625</a>
+<a href="#4626" id="4626">4626</a>
+<a href="#4627" id="4627">4627</a>
+<a href="#4628" id="4628">4628</a>
 </pre><pre class="rust"><code><span class="kw">use </span>percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 <span class="kw">pub use </span>twilight_http_ratelimiting::request::{Path, PathParseError, PathParseErrorType};
 
@@ -5240,7 +5259,12 @@
     },
     <span class="doccomment">/// Route information to get a guild&#39;s widget.
     </span>GetGuildWidget {
-        <span class="doccomment">/// The ID of the guild.
+        <span class="doccomment">/// ID of the guild.
+        </span>guild_id: u64,
+    },
+    <span class="doccomment">/// Route information to get a guild&#39;s widget settings.
+    </span>GetGuildWidgetSettings {
+        <span class="doccomment">/// ID of the guild.
         </span>guild_id: u64,
     },
     <span class="doccomment">/// Route information to get a paginated list of guilds.
@@ -5604,9 +5628,9 @@
         <span class="doccomment">/// ID of the guild.
         </span>guild_id: u64,
     },
-    <span class="doccomment">/// Route information to update a guild&#39;s widget.
-    </span>UpdateGuildWidget {
-        <span class="doccomment">/// The ID of the guild.
+    <span class="doccomment">/// Route information to update a guild&#39;s widget settings.
+    </span>UpdateGuildWidgetSettings {
+        <span class="doccomment">/// ID of the guild.
         </span>guild_id: u64,
     },
     <span class="doccomment">/// Update the original interaction response.
@@ -5785,6 +5809,7 @@
             | <span class="self">Self</span>::GetGuildWelcomeScreen { .. }
             | <span class="self">Self</span>::GetGuildWebhooks { .. }
             | <span class="self">Self</span>::GetGuildWidget { .. }
+            | <span class="self">Self</span>::GetGuildWidgetSettings { .. }
             | <span class="self">Self</span>::GetGuilds { .. }
             | <span class="self">Self</span>::GetInteractionOriginal { .. }
             | <span class="self">Self</span>::GetInvite { .. }
@@ -5822,7 +5847,7 @@
             | <span class="self">Self</span>::UpdateGuildChannels { .. }
             | <span class="self">Self</span>::UpdateGuildCommand { .. }
             | <span class="self">Self</span>::UpdateGuildMfa { .. }
-            | <span class="self">Self</span>::UpdateGuildWidget { .. }
+            | <span class="self">Self</span>::UpdateGuildWidgetSettings { .. }
             | <span class="self">Self</span>::UpdateGuildIntegration { .. }
             | <span class="self">Self</span>::UpdateGuildScheduledEvent { .. }
             | <span class="self">Self</span>::UpdateGuildSticker { .. }
@@ -6134,9 +6159,9 @@
             <span class="self">Self</span>::GetGuild { guild_id, .. } | <span class="self">Self</span>::UpdateGuild { guild_id } =&gt; {
                 Path::GuildsId(guild_id)
             }
-            <span class="self">Self</span>::GetGuildWidget { guild_id } | <span class="self">Self</span>::UpdateGuildWidget { guild_id } =&gt; {
-                Path::GuildsIdWidget(guild_id)
-            }
+            <span class="self">Self</span>::GetGuildWidget { guild_id } =&gt; Path::GuildsIdWidgetJson(guild_id),
+            <span class="self">Self</span>::GetGuildWidgetSettings { guild_id }
+            | <span class="self">Self</span>::UpdateGuildWidgetSettings { guild_id } =&gt; Path::GuildsIdWidget(guild_id),
             <span class="self">Self</span>::GetGuildIntegrations { guild_id } =&gt; Path::GuildsIdIntegrations(guild_id),
             <span class="self">Self</span>::GetGuildInvites { guild_id } =&gt; Path::GuildsIdInvites(guild_id),
             <span class="self">Self</span>::GetGuildMembers { guild_id, .. } | <span class="self">Self</span>::UpdateCurrentMember { guild_id, .. } =&gt; {
@@ -7148,7 +7173,14 @@
 
                 f.write_str(<span class="string">&quot;/webhooks&quot;</span>)
             }
-            Route::GetGuildWidget { guild_id } | Route::UpdateGuildWidget { guild_id } =&gt; {
+            Route::GetGuildWidget { guild_id } =&gt; {
+                f.write_str(<span class="string">&quot;guilds/&quot;</span>)<span class="question-mark">?</span>;
+                Display::fmt(guild_id, f)<span class="question-mark">?</span>;
+
+                f.write_str(<span class="string">&quot;/widget.json&quot;</span>)
+            }
+            Route::GetGuildWidgetSettings { guild_id }
+            | Route::UpdateGuildWidgetSettings { guild_id } =&gt; {
                 f.write_str(<span class="string">&quot;guilds/&quot;</span>)<span class="question-mark">?</span>;
                 Display::fmt(guild_id, f)<span class="question-mark">?</span>;
 
@@ -8699,12 +8731,18 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>get_guild_widget() {
         <span class="kw">let </span>route = Route::GetGuildWidget { guild_id: GUILD_ID };
+        <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/widget.json&quot;</span>));
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>get_guild_widget_settings() {
+        <span class="kw">let </span>route = Route::GetGuildWidgetSettings { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/widget&quot;</span>));
     }
 
     <span class="attr">#[test]
-    </span><span class="kw">fn </span>update_guild_widget() {
-        <span class="kw">let </span>route = Route::UpdateGuildWidget { guild_id: GUILD_ID };
+    </span><span class="kw">fn </span>update_guild_widget_settings() {
+        <span class="kw">let </span>route = Route::UpdateGuildWidgetSettings { guild_id: GUILD_ID };
         <span class="macro">assert_eq!</span>(route.to_string(), <span class="macro">format!</span>(<span class="string">&quot;guilds/{GUILD_ID}/widget&quot;</span>));
     }
 

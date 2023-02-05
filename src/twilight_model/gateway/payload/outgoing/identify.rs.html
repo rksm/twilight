@@ -49,7 +49,7 @@
 <a href="#49" id="49">49</a>
 <a href="#50" id="50">50</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::update_presence::UpdatePresencePayload;
-<span class="kw">use </span><span class="kw">crate</span>::gateway::{intents::Intents, opcode::OpCode};
+<span class="kw">use </span><span class="kw">crate</span>::gateway::{intents::Intents, opcode::OpCode, ShardId};
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 
 <span class="attr">#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
@@ -74,7 +74,7 @@
     <span class="kw">pub </span>large_threshold: u64,
     <span class="kw">pub </span>presence: <span class="prelude-ty">Option</span>&lt;UpdatePresencePayload&gt;,
     <span class="kw">pub </span>properties: IdentifyProperties,
-    <span class="kw">pub </span>shard: <span class="prelude-ty">Option</span>&lt;[u64; <span class="number">2</span>]&gt;,
+    <span class="kw">pub </span>shard: <span class="prelude-ty">Option</span>&lt;ShardId&gt;,
     <span class="kw">pub </span>token: String,
 }
 

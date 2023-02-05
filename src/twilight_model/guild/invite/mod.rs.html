@@ -466,7 +466,7 @@
     };
     <span class="kw">use crate</span>::{
         channel::ChannelType,
-        guild::VerificationLevel,
+        guild::{GuildFeature, VerificationLevel},
         id::Id,
         test::image_hash,
         util::datetime::{Timestamp, TimestampParseError},
@@ -582,7 +582,7 @@
             guild: <span class="prelude-val">Some</span>(InviteGuild {
                 banner: <span class="prelude-val">Some</span>(image_hash::BANNER),
                 description: <span class="prelude-val">Some</span>(<span class="string">&quot;a description&quot;</span>.to_owned()),
-                features: <span class="macro">vec!</span>[<span class="string">&quot;a feature&quot;</span>.to_owned()],
+                features: Vec::from([GuildFeature::Discoverable]),
                 icon: <span class="prelude-val">Some</span>(image_hash::ICON),
                 id: Id::new(<span class="number">1</span>),
                 name: <span class="string">&quot;guild name&quot;</span>.to_owned(),
@@ -696,7 +696,7 @@
                 Token::Str(<span class="string">&quot;a description&quot;</span>),
                 Token::Str(<span class="string">&quot;features&quot;</span>),
                 Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">1</span>) },
-                Token::Str(<span class="string">&quot;a feature&quot;</span>),
+                Token::Str(<span class="string">&quot;DISCOVERABLE&quot;</span>),
                 Token::SeqEnd,
                 Token::Str(<span class="string">&quot;icon&quot;</span>),
                 Token::Some,

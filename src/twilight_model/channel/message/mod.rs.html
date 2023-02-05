@@ -699,12 +699,12 @@
 </pre><pre class="rust"><code><span class="doccomment">//! Textual user communication method.
 </span><span class="attr">#![deny(missing_docs)]
 
-</span><span class="kw">pub mod </span>allowed_mentions;
-<span class="kw">pub mod </span>component;
+</span><span class="kw">pub mod </span>component;
 <span class="kw">pub mod </span>embed;
 <span class="kw">pub mod </span>sticker;
 
 <span class="kw">mod </span>activity;
+<span class="kw">mod </span>allowed_mentions;
 <span class="kw">mod </span>application;
 <span class="kw">mod </span>flags;
 <span class="kw">mod </span>interaction;
@@ -716,7 +716,7 @@
 
 <span class="kw">pub use </span><span class="self">self</span>::{
     activity::{MessageActivity, MessageActivityType},
-    allowed_mentions::AllowedMentions,
+    allowed_mentions::{AllowedMentions, MentionType},
     application::MessageApplication,
     component::Component,
     embed::Embed,

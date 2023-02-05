@@ -83,7 +83,7 @@ event type.</p>
 <span class="kw">let </span>ready = standby
     .wait_for_event(|event: <span class="kw-2">&amp;</span>Event| {
         <span class="kw">if let </span>Event::Ready(ready) = event {
-            ready.shard.map(|[id, <span class="kw">_</span>]| id == <span class="number">5</span>).unwrap_or(<span class="bool-val">false</span>)
+            ready.shard.map_or(<span class="bool-val">false</span>, |id| id.number() == <span class="number">5</span>)
         } <span class="kw">else </span>{
             <span class="bool-val">false
         </span>}
@@ -107,7 +107,7 @@ filtered by an event type.</p>
 
 <span class="kw">let </span><span class="kw-2">mut </span>events = standby.wait_for_event_stream(|event: <span class="kw-2">&amp;</span>Event| {
     <span class="kw">if let </span>Event::Ready(ready) = event {
-        ready.shard.map(|[id, <span class="kw">_</span>]| id == <span class="number">5</span>).unwrap_or(<span class="bool-val">false</span>)
+        ready.shard.map_or(<span class="bool-val">false</span>, |id| id.number() == <span class="number">5</span>)
     } <span class="kw">else </span>{
         <span class="bool-val">false
     </span>}

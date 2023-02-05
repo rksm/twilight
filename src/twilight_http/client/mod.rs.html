@@ -2609,6 +2609,77 @@
 <a href="#2609" id="2609">2609</a>
 <a href="#2610" id="2610">2610</a>
 <a href="#2611" id="2611">2611</a>
+<a href="#2612" id="2612">2612</a>
+<a href="#2613" id="2613">2613</a>
+<a href="#2614" id="2614">2614</a>
+<a href="#2615" id="2615">2615</a>
+<a href="#2616" id="2616">2616</a>
+<a href="#2617" id="2617">2617</a>
+<a href="#2618" id="2618">2618</a>
+<a href="#2619" id="2619">2619</a>
+<a href="#2620" id="2620">2620</a>
+<a href="#2621" id="2621">2621</a>
+<a href="#2622" id="2622">2622</a>
+<a href="#2623" id="2623">2623</a>
+<a href="#2624" id="2624">2624</a>
+<a href="#2625" id="2625">2625</a>
+<a href="#2626" id="2626">2626</a>
+<a href="#2627" id="2627">2627</a>
+<a href="#2628" id="2628">2628</a>
+<a href="#2629" id="2629">2629</a>
+<a href="#2630" id="2630">2630</a>
+<a href="#2631" id="2631">2631</a>
+<a href="#2632" id="2632">2632</a>
+<a href="#2633" id="2633">2633</a>
+<a href="#2634" id="2634">2634</a>
+<a href="#2635" id="2635">2635</a>
+<a href="#2636" id="2636">2636</a>
+<a href="#2637" id="2637">2637</a>
+<a href="#2638" id="2638">2638</a>
+<a href="#2639" id="2639">2639</a>
+<a href="#2640" id="2640">2640</a>
+<a href="#2641" id="2641">2641</a>
+<a href="#2642" id="2642">2642</a>
+<a href="#2643" id="2643">2643</a>
+<a href="#2644" id="2644">2644</a>
+<a href="#2645" id="2645">2645</a>
+<a href="#2646" id="2646">2646</a>
+<a href="#2647" id="2647">2647</a>
+<a href="#2648" id="2648">2648</a>
+<a href="#2649" id="2649">2649</a>
+<a href="#2650" id="2650">2650</a>
+<a href="#2651" id="2651">2651</a>
+<a href="#2652" id="2652">2652</a>
+<a href="#2653" id="2653">2653</a>
+<a href="#2654" id="2654">2654</a>
+<a href="#2655" id="2655">2655</a>
+<a href="#2656" id="2656">2656</a>
+<a href="#2657" id="2657">2657</a>
+<a href="#2658" id="2658">2658</a>
+<a href="#2659" id="2659">2659</a>
+<a href="#2660" id="2660">2660</a>
+<a href="#2661" id="2661">2661</a>
+<a href="#2662" id="2662">2662</a>
+<a href="#2663" id="2663">2663</a>
+<a href="#2664" id="2664">2664</a>
+<a href="#2665" id="2665">2665</a>
+<a href="#2666" id="2666">2666</a>
+<a href="#2667" id="2667">2667</a>
+<a href="#2668" id="2668">2668</a>
+<a href="#2669" id="2669">2669</a>
+<a href="#2670" id="2670">2670</a>
+<a href="#2671" id="2671">2671</a>
+<a href="#2672" id="2672">2672</a>
+<a href="#2673" id="2673">2673</a>
+<a href="#2674" id="2674">2674</a>
+<a href="#2675" id="2675">2675</a>
+<a href="#2676" id="2676">2676</a>
+<a href="#2677" id="2677">2677</a>
+<a href="#2678" id="2678">2678</a>
+<a href="#2679" id="2679">2679</a>
+<a href="#2680" id="2680">2680</a>
+<a href="#2681" id="2681">2681</a>
+<a href="#2682" id="2682">2682</a>
 </pre><pre class="rust"><code><span class="kw">mod </span>builder;
 <span class="kw">mod </span>connector;
 <span class="kw">mod </span>interaction;
@@ -2671,9 +2742,9 @@
             CreateGuild, CreateGuildChannel, CreateGuildPrune, DeleteGuild, GetActiveThreads,
             GetAuditLog, GetGuild, GetGuildChannels, GetGuildInvites, GetGuildPreview,
             GetGuildPruneCount, GetGuildVanityUrl, GetGuildVoiceRegions, GetGuildWebhooks,
-            GetGuildWelcomeScreen, GetGuildWidget, UpdateCurrentMember, UpdateGuild,
-            UpdateGuildChannelPositions, UpdateGuildMfa, UpdateGuildWelcomeScreen,
-            UpdateGuildWidget,
+            GetGuildWelcomeScreen, GetGuildWidget, GetGuildWidgetSettings, UpdateCurrentMember,
+            UpdateGuild, UpdateGuildChannelPositions, UpdateGuildMfa, UpdateGuildWelcomeScreen,
+            UpdateGuildWidgetSettings,
         },
         scheduled_event::{
             CreateGuildScheduledEvent, DeleteGuildScheduledEvent, GetGuildScheduledEvent,
@@ -2700,6 +2771,8 @@
     Body,
 };
 <span class="kw">use </span>std::{
+    fmt::{Debug, Formatter, <span class="prelude-ty">Result </span><span class="kw">as </span>FmtResult},
+    ops::Deref,
     sync::{
         atomic::{AtomicBool, Ordering},
         Arc,
@@ -2709,7 +2782,7 @@
 <span class="kw">use </span>tokio::time;
 <span class="kw">use </span>twilight_http_ratelimiting::Ratelimiter;
 <span class="kw">use </span>twilight_model::{
-    channel::{message::allowed_mentions::AllowedMentions, ChannelType},
+    channel::{message::AllowedMentions, ChannelType},
     guild::{auto_moderation::AutoModerationEventType, scheduled_event::PrivacyLevel, MfaLevel},
     http::permission_overwrite::PermissionOverwrite,
     id::{
@@ -2732,6 +2805,35 @@
     <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>),
     <span class="string">&quot;) Twilight-rs&quot;</span>,
 );
+
+<span class="doccomment">/// Wrapper for an authorization token with a debug implementation that redacts
+/// the string.
+</span><span class="attr">#[derive(Default)]
+</span><span class="kw">struct </span>Token {
+    <span class="doccomment">/// Authorization token that is redacted in the Debug implementation.
+    </span>inner: Box&lt;str&gt;,
+}
+
+<span class="kw">impl </span>Token {
+    <span class="doccomment">/// Create a new authorization wrapper.
+    </span><span class="kw">const fn </span>new(token: Box&lt;str&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ inner: token }
+    }
+}
+
+<span class="kw">impl </span>Debug <span class="kw">for </span>Token {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; FmtResult {
+        f.write_str(<span class="string">&quot;&lt;redacted&gt;&quot;</span>)
+    }
+}
+
+<span class="kw">impl </span>Deref <span class="kw">for </span>Token {
+    <span class="kw">type </span>Target = str;
+
+    <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.inner
+    }
+}
 
 <span class="doccomment">/// Twilight&#39;s http client.
 ///
@@ -2817,7 +2919,7 @@
     /// Whether an invalid token is tracked can be configured via
     /// [`ClientBuilder::remember_invalid_token`].
     </span>token_invalidated: <span class="prelude-ty">Option</span>&lt;Arc&lt;AtomicBool&gt;&gt;,
-    token: <span class="prelude-ty">Option</span>&lt;Box&lt;str&gt;&gt;,
+    token: <span class="prelude-ty">Option</span>&lt;Token&gt;,
     use_http: bool,
 }
 
@@ -3539,7 +3641,7 @@
         UpdateGuildChannelPositions::new(<span class="self">self</span>, guild_id, channel_positions)
     }
 
-    <span class="doccomment">/// Get the guild widget.
+    <span class="doccomment">/// Get a guild&#39;s widget.
     ///
     /// See [Discord Docs/Get Guild Widget].
     ///
@@ -3548,9 +3650,28 @@
         GetGuildWidget::new(<span class="self">self</span>, guild_id)
     }
 
-    <span class="doccomment">/// Modify the guild widget.
-    </span><span class="kw">pub const fn </span>update_guild_widget(<span class="kw-2">&amp;</span><span class="self">self</span>, guild_id: Id&lt;GuildMarker&gt;) -&gt; UpdateGuildWidget&lt;<span class="lifetime">&#39;_</span>&gt; {
-        UpdateGuildWidget::new(<span class="self">self</span>, guild_id)
+    <span class="doccomment">/// Get a guild&#39;s widget settings.
+    ///
+    /// See [Discord Docs/Get Guild Widget Settings].
+    ///
+    /// [Discord Docs/Get Guild Widget]: https://discord.com/developers/docs/resources/guild#get-guild-widget-settings
+    </span><span class="kw">pub const fn </span>guild_widget_settings(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        guild_id: Id&lt;GuildMarker&gt;,
+    ) -&gt; GetGuildWidgetSettings&lt;<span class="lifetime">&#39;_</span>&gt; {
+        GetGuildWidgetSettings::new(<span class="self">self</span>, guild_id)
+    }
+
+    <span class="doccomment">/// Modify a guild&#39;s widget.
+    ///
+    /// See [Discord Docs/Modify Guild Widget].
+    ///
+    /// [Discord Docs/Modify Guild Widget]: https://discord.com/developers/docs/resources/guild#modify-guild-widget
+    </span><span class="kw">pub const fn </span>update_guild_widget_settings(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        guild_id: Id&lt;GuildMarker&gt;,
+    ) -&gt; UpdateGuildWidgetSettings&lt;<span class="lifetime">&#39;_</span>&gt; {
+        UpdateGuildWidgetSettings::new(<span class="self">self</span>, guild_id)
     }
 
     <span class="doccomment">/// Get the guild&#39;s integrations.
@@ -3972,12 +4093,20 @@
     /// and upper limits. This method will not delete messages older than two
     /// weeks. See [Discord Docs/Bulk Delete Messages].
     ///
+    /// # Errors
+    ///
+    /// Returns an error of type
+    /// [`ChannelValidationErrorType::BulkDeleteMessagesInvalid`] when the number of
+    /// messages to delete in bulk is invalid.
+    /// is not between 1 and 120 characters in length.
+    ///
     /// [Discord Docs/Bulk Delete Messages]: https://discord.com/developers/docs/resources/channel#bulk-delete-messages
-    </span><span class="kw">pub const fn </span>delete_messages&lt;<span class="lifetime">&#39;a</span>&gt;(
+    /// [`ChannelValidationErrorType::BulkDeleteMessagesInvalid`]: twilight_validate::channel::ChannelValidationErrorType::BulkDeleteMessagesInvalid
+    </span><span class="kw">pub fn </span>delete_messages&lt;<span class="lifetime">&#39;a</span>&gt;(
         <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>,
         channel_id: Id&lt;ChannelMarker&gt;,
         message_ids: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Id&lt;MessageMarker&gt;],
-    ) -&gt; DeleteMessages&lt;<span class="lifetime">&#39;a</span>&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;DeleteMessages&lt;<span class="lifetime">&#39;a</span>&gt;, ChannelValidationError&gt; {
         DeleteMessages::new(<span class="self">self</span>, channel_id, message_ids)
     }
 
@@ -5139,7 +5268,7 @@
         <span class="kw">let </span><span class="kw-2">mut </span>builder = hyper::Request::builder().method(method.to_http()).uri(<span class="kw-2">&amp;</span>url);
 
         <span class="kw">if </span>use_authorization_token {
-            <span class="kw">if let </span><span class="prelude-val">Some</span>(token) = <span class="kw-2">&amp;</span><span class="self">self</span>.token {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(token) = <span class="self">self</span>.token.as_deref() {
                 <span class="kw">let </span>value = HeaderValue::from_str(token).map_err(|source| {
                     <span class="kw">let </span>name = AUTHORIZATION.to_string();
 
@@ -5218,6 +5347,19 @@
         } <span class="kw">else </span>{
             ResponseFuture::new(Box::pin(time::timeout(<span class="self">self</span>.timeout, inner)), invalid_token)
         })
+    }
+}
+
+<span class="attr">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span><span class="kw">super</span>::Client;
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>client_debug_with_token() {
+        <span class="macro">assert!</span>(
+            <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, Client::new(<span class="string">&quot;Bot foo&quot;</span>.to_owned())).contains(<span class="string">&quot;token: Some(&lt;redacted&gt;)&quot;</span>)
+        );
+        <span class="macro">assert!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, Client::builder().build()).contains(<span class="string">&quot;token: None&quot;</span>));
     }
 }
 </code></pre></div>

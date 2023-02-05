@@ -156,6 +156,8 @@
 <a href="#156" id="156">156</a>
 <a href="#157" id="157">157</a>
 <a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
 </pre><pre class="rust"><code><span class="kw">use </span>twilight_validate::request::ValidationError;
 
 <span class="doccomment">/// Attach a reason for a request.
@@ -196,6 +198,7 @@
             role::{CreateRole, DeleteRole, UpdateRole},
             sticker::{CreateGuildSticker, UpdateGuildSticker},
             CreateGuildChannel, CreateGuildPrune, UpdateCurrentMember, UpdateGuild, UpdateGuildMfa,
+            UpdateGuildWidgetSettings,
         },
         scheduled_event::{
             CreateGuildExternalScheduledEvent, CreateGuildScheduledEvent,
@@ -249,6 +252,7 @@
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildMfa&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildScheduledEvent&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildSticker&lt;<span class="lifetime">&#39;_</span>&gt; {}
+    <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateGuildWidgetSettings&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateRole&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateThread&lt;<span class="lifetime">&#39;_</span>&gt; {}
     <span class="kw">impl </span>Sealed <span class="kw">for </span>UpdateWebhook&lt;<span class="lifetime">&#39;_</span>&gt; {}

@@ -148,7 +148,12 @@
 <a href="#148" id="148">148</a>
 <a href="#149" id="149">149</a>
 <a href="#150" id="150">150</a>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::{guild::UnavailableGuild, oauth::PartialApplication, user::CurrentUser};
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+</pre><pre class="rust"><code><span class="kw">use crate</span>::{
+    gateway::ShardId, guild::UnavailableGuild, oauth::PartialApplication, user::CurrentUser,
+};
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 
 <span class="attr">#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -158,7 +163,7 @@
     <span class="kw">pub </span>resume_gateway_url: String,
     <span class="kw">pub </span>session_id: String,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
-    </span><span class="kw">pub </span>shard: <span class="prelude-ty">Option</span>&lt;[u64; <span class="number">2</span>]&gt;,
+    </span><span class="kw">pub </span>shard: <span class="prelude-ty">Option</span>&lt;ShardId&gt;,
     <span class="kw">pub </span>user: CurrentUser,
     <span class="attr">#[serde(rename = <span class="string">&quot;v&quot;</span>)]
     </span><span class="kw">pub </span>version: u64,
@@ -168,6 +173,7 @@
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span><span class="kw">super</span>::Ready;
     <span class="kw">use crate</span>::{
+        gateway::ShardId,
         guild::UnavailableGuild,
         id::Id,
         oauth::{ApplicationFlags, PartialApplication},
@@ -177,7 +183,7 @@
 
     <span class="attr">#[test]
     #[allow(clippy::too_many_lines)]
-    </span><span class="kw">fn </span>test_ready() {
+    </span><span class="kw">fn </span>ready() {
         <span class="kw">let </span>guilds = <span class="macro">vec!</span>[
             UnavailableGuild {
                 id: Id::new(<span class="number">1</span>),
@@ -195,8 +201,9 @@
                 id: Id::new(<span class="number">100</span>),
             },
             guilds,
+            resume_gateway_url: <span class="string">&quot;wss://gateway.discord.gg&quot;</span>.into(),
             session_id: <span class="string">&quot;foo&quot;</span>.to_owned(),
-            shard: <span class="prelude-val">Some</span>([<span class="number">4</span>, <span class="number">7</span>]),
+            shard: <span class="prelude-val">Some</span>(ShardId::new(<span class="number">4</span>, <span class="number">7</span>)),
             user: CurrentUser {
                 accent_color: <span class="prelude-val">None</span>,
                 avatar: <span class="prelude-val">None</span>,
@@ -214,7 +221,6 @@
                 verified: <span class="prelude-val">None</span>,
             },
             version: <span class="number">8</span>,
-            resume_gateway_url: <span class="string">&quot;wss://gateway.discord.gg/&quot;</span>.to_owned(),
         };
 
         serde_test::assert_tokens(
@@ -259,7 +265,7 @@
                 Token::StructEnd,
                 Token::SeqEnd,
                 Token::Str(<span class="string">&quot;resume_gateway_url&quot;</span>),
-                Token::Str(<span class="string">&quot;wss://gateway.discord.gg/&quot;</span>),
+                Token::Str(<span class="string">&quot;wss://gateway.discord.gg&quot;</span>),
                 Token::Str(<span class="string">&quot;session_id&quot;</span>),
                 Token::Str(<span class="string">&quot;foo&quot;</span>),
                 Token::Str(<span class="string">&quot;shard&quot;</span>),
