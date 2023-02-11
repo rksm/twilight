@@ -115,6 +115,9 @@
 <a href="#115" id="115">115</a>
 <a href="#116" id="116">116</a>
 <a href="#117" id="117">117</a>
+<a href="#118" id="118">118</a>
+<a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
 </pre><pre class="rust"><code><span class="kw">use </span>bitflags::bitflags;
 <span class="kw">use </span>serde::{
     de::{Deserialize, Deserializer},
@@ -148,6 +151,8 @@
         <span class="doccomment">/// This message failed to mention some roles in a thread, which
         /// subsequently failed to add the role&#39;s members to the thread.
         </span><span class="kw">const </span>FAILED_TO_MENTION_SOME_ROLES_IN_THREAD  = <span class="number">1 </span>&lt;&lt; <span class="number">8</span>;
+        <span class="doccomment">/// This message will not trigger push and desktop notifications.
+        </span><span class="kw">const </span>SUPPRESS_NOTIFICATIONS = <span class="number">1 </span>&lt;&lt; <span class="number">12</span>;
     }
 }
 
@@ -221,6 +226,7 @@
         MessageFlags::FAILED_TO_MENTION_SOME_ROLES_IN_THREAD.bits(),
         <span class="number">1 </span>&lt;&lt; <span class="number">8
     </span>);
+    <span class="macro">const_assert_eq!</span>(MessageFlags::SUPPRESS_NOTIFICATIONS.bits(), <span class="number">1 </span>&lt;&lt; <span class="number">12</span>);
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>serde() {

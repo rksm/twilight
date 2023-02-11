@@ -379,6 +379,8 @@
 <a href="#379" id="379">379</a>
 <a href="#380" id="380">380</a>
 <a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
@@ -619,9 +621,11 @@
 
     <span class="doccomment">/// Set the message&#39;s flags.
     ///
-    /// The only supported flag is [`SUPPRESS_EMBEDS`].
+    /// The only supported flags are [`SUPPRESS_EMBEDS`] and
+    /// [`SUPPRESS_NOTIFICATIONS`].
     ///
     /// [`SUPPRESS_EMBEDS`]: MessageFlags::SUPPRESS_EMBEDS
+    /// [`SUPPRESS_NOTIFICATIONS`]: MessageFlags::SUPPRESS_NOTIFICATIONS
     </span><span class="kw">pub const fn </span>flags(<span class="kw-2">mut </span><span class="self">self</span>, flags: MessageFlags) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fields.flags = <span class="prelude-val">Some</span>(flags);
 

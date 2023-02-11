@@ -219,6 +219,8 @@
 <a href="#219" id="219">219</a>
 <a href="#220" id="220">220</a>
 <a href="#221" id="221">221</a>
+<a href="#222" id="222">222</a>
+<a href="#223" id="223">223</a>
 </pre><pre class="rust"><code><span class="kw">use super</span>::{CreateForumThread, ForumThread};
 <span class="kw">use crate</span>::{
     request::{attachment::PartialAttachment, Nullable, TryIntoRequest},
@@ -373,9 +375,11 @@
 
     <span class="doccomment">/// Set the message&#39;s flags.
     ///
-    /// The only supported flag is [`SUPPRESS_EMBEDS`].
+    /// The only supported flags are [`SUPPRESS_EMBEDS`] and
+    /// [`SUPPRESS_NOTIFICATIONS`].
     ///
     /// [`SUPPRESS_EMBEDS`]: MessageFlags::SUPPRESS_EMBEDS
+    /// [`SUPPRESS_NOTIFICATIONS`]: MessageFlags::SUPPRESS_NOTIFICATIONS
     </span><span class="kw">pub const fn </span>flags(<span class="kw-2">mut </span><span class="self">self</span>, flags: MessageFlags) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.<span class="number">0</span>.fields.message.flags = <span class="prelude-val">Some</span>(flags);
 
