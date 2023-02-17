@@ -574,6 +574,8 @@
 <a href="#574" id="574">574</a>
 <a href="#575" id="575">575</a>
 <a href="#576" id="576">576</a>
+<a href="#577" id="577">577</a>
+<a href="#578" id="578">578</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     config::ResourceType,
     model::{CachedGuild, CachedPresence},
@@ -899,6 +901,7 @@
             kind: ChannelType::GuildText,
             last_message_id: <span class="prelude-val">None</span>,
             last_pin_timestamp: <span class="prelude-val">None</span>,
+            managed: <span class="prelude-val">None</span>,
             member: <span class="prelude-val">None</span>,
             member_count: <span class="prelude-val">None</span>,
             message_count: <span class="prelude-val">None</span>,
@@ -936,6 +939,7 @@
             kind: ChannelType::PublicThread,
             last_message_id: <span class="prelude-val">None</span>,
             last_pin_timestamp: <span class="prelude-val">None</span>,
+            managed: <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
             member: <span class="prelude-val">Some</span>(ThreadMember {
                 flags: <span class="number">0</span>,
                 id: <span class="prelude-val">Some</span>(Id::new(<span class="number">1</span>)),
