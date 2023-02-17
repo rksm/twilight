@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["message","Cached message-related models."]],"struct":[["CachedEmoji","Represents a cached `Emoji`."],["CachedGuild","Represents a cached `Guild`."],["CachedMember","Represents a cached `Member`."],["CachedPresence","Represents a cached `Presence`."],["CachedSticker","Representation of a cached `Sticker`."],["CachedVoiceState","Represents a cached `VoiceState`."]]};
+window.SIDEBAR_ITEMS = {"mod":["message"],"struct":["CachedEmoji","CachedGuild","CachedMember","CachedPresence","CachedSticker","CachedVoiceState"]};

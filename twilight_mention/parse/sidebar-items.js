@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["MentionType","Any type of mention."],["ParseMentionErrorType","Type of [`ParseMentionError`] that occurred."]],"struct":[["MentionIter","Iterator of mentions within a buffer."],["ParseMentionError","Parsing a mention failed due to invalid syntax."]],"trait":[["ParseMention","Parse mentions out of buffers."]]};
+window.SIDEBAR_ITEMS = {"enum":["MentionType","ParseMentionErrorType"],"struct":["MentionIter","ParseMentionError"],"trait":["ParseMention"]};

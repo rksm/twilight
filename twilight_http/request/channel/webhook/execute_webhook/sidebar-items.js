@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["ExecuteWebhook","Execute a webhook, sending a message to its channel."]]};
+window.SIDEBAR_ITEMS = {"struct":["ExecuteWebhook"]};

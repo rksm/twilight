@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["UpdateMessage","Update a message by [`Id<ChannelMarker>`] and [`Id<MessageMarker>`]."]]};
+window.SIDEBAR_ITEMS = {"struct":["UpdateMessage"]};

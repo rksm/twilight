@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["GatewayEvent","An event from the gateway, which can either be a dispatch event with stateful updates or a heartbeat, hello, etc. that a shard needs to operate."]],"struct":[["GatewayEventDeserializer","Deserialize into a [`GatewayEvent`] by knowing its dispatch event type and opcode."]]};
+window.SIDEBAR_ITEMS = {"enum":["GatewayEvent"],"struct":["GatewayEventDeserializer"]};

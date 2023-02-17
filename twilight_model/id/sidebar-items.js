@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["AnonymizableId",""]],"mod":[["marker","Markers for various resource types, such as channels or users."]],"struct":[["Id","ID of a resource, such as the ID of a channel or user."]]};
+window.SIDEBAR_ITEMS = {"enum":["AnonymizableId"],"mod":["marker"],"struct":["Id"]};

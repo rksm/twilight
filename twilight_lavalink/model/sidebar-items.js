@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["Opcode","The type of event that something is."]],"mod":[["incoming","Events that Lavalink sends to clients."],["outgoing","Events that clients send to Lavalink."]]};
+window.SIDEBAR_ITEMS = {"enum":["Opcode"],"mod":["incoming","outgoing"]};

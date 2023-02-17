@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["RequestGuildMemberId","One or a list of IDs in a request."],["UserIdsErrorType","Type of [`UserIdsError`] that occurred."]],"struct":[["RequestGuildMembers",""],["RequestGuildMembersBuilder",""],["RequestGuildMembersInfo",""],["UserIdsError","Provided IDs is invalid for the request."]]};
+window.SIDEBAR_ITEMS = {"enum":["RequestGuildMemberId","UserIdsErrorType"],"struct":["RequestGuildMembers","RequestGuildMembersBuilder","RequestGuildMembersInfo","UserIdsError"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["LargeBotQueue","Queue built for single-process groups of shards that require identifying via Sharding for Large Bots."],["LocalQueue","A local, in-process implementation of a [`Queue`] which manages the connection attempts of one or more shards."],["NoOpQueue","An implementation of [`Queue`] that instantly allows requests."]],"trait":[["Queue","Queue for shards to request the ability to initialize new sessions with the gateway."]]};
+window.SIDEBAR_ITEMS = {"struct":["LargeBotQueue","LocalQueue","NoOpQueue"],"trait":["Queue"]};

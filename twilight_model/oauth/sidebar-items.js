@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["current_application_info",""],["scope","Known list of available OAuth 2 scopes."],["team",""]],"struct":[["Application",""],["ApplicationFlags",""],["CurrentAuthorizationInformation","Information about the current OAuth authorization."],["InstallParams","Parameters for in-app authorization links."],["PartialApplication",""]]};
+window.SIDEBAR_ITEMS = {"mod":["current_application_info","scope","team"],"struct":["Application","ApplicationFlags","CurrentAuthorizationInformation","InstallParams","PartialApplication"]};

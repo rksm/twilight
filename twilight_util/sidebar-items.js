@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["builder","Builders for large structs."],["link","Utilities for parsing and formatting links to various resources."],["permission_calculator","Calculate the permissions of a member on a guild-level or a channel-level."],["snowflake","Provides the Snowflake trait for defining extractable information from a Discord Snowflake."]]};
+window.SIDEBAR_ITEMS = {"mod":["builder","link","permission_calculator","snowflake"]};

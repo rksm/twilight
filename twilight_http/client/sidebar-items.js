@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Client","Twilight’s http client."],["ClientBuilder","A builder for [`Client`]."],["InteractionClient","Client interface for using interactions."]]};
+window.SIDEBAR_ITEMS = {"struct":["Client","ClientBuilder","InteractionClient"]};

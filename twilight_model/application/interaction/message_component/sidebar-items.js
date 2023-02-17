@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["MessageComponentInteractionData","Data received when an `MessageComponent` interaction is executed."]]};
+window.SIDEBAR_ITEMS = {"struct":["MessageComponentInteractionData"]};

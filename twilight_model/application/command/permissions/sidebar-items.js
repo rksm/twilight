@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["CommandPermissionType","Resources commands can allow or disallow from executing them."]],"struct":[["CommandPermission","Member, channel or role explicit permission to use a command."],["GuildCommandPermissions","List of [`CommandPermission`]s for a command in a guild."]]};
+window.SIDEBAR_ITEMS = {"enum":["CommandPermissionType"],"struct":["CommandPermission","GuildCommandPermissions"]};

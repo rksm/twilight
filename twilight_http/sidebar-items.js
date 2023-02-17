@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":[["API_VERSION","Discord API version used by this crate."]],"mod":[["api_error",""],["client",""],["error",""],["request","Typed request builders, multipart form support, a manual request builder for low-level request construction, and audit log reason support."],["response","Response utility type and related types."],["routing",""]]};
+window.SIDEBAR_ITEMS = {"constant":["API_VERSION"],"mod":["api_error","client","error","request","response","routing"]};

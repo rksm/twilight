@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Attachment","Attachments used in messages."]]};
+window.SIDEBAR_ITEMS = {"struct":["Attachment"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"type":[["ApplicationFlags",""],["CurrentApplicationInfo",""]]};
+window.SIDEBAR_ITEMS = {"type":["ApplicationFlags","CurrentApplicationInfo"]};

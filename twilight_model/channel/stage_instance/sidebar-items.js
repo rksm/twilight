@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["PrivacyLevel",""]],"struct":[["StageInstance",""]]};
+window.SIDEBAR_ITEMS = {"enum":["PrivacyLevel"],"struct":["StageInstance"]};

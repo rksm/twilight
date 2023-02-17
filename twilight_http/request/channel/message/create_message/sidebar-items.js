@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["CreateMessage","Send a message to a channel."]]};
+window.SIDEBAR_ITEMS = {"struct":["CreateMessage"]};

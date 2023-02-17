@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["Method","Request method."],["Path","An enum representing a path, most useful for ratelimiting implementations."],["PathParseErrorType","Type of [`PathParseError`] specifying what failed to parse."]],"struct":[["PathParseError","Error returned when a [`Path`] could not be parsed from a string."]]};
+window.SIDEBAR_ITEMS = {"enum":["Method","Path","PathParseErrorType"],"struct":["PathParseError"]};
