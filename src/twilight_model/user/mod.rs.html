@@ -355,6 +355,16 @@
 <a href="#355" id="355">355</a>
 <a href="#356" id="356">356</a>
 <a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
+<a href="#360" id="360">360</a>
+<a href="#361" id="361">361</a>
+<a href="#362" id="362">362</a>
+<a href="#363" id="363">363</a>
+<a href="#364" id="364">364</a>
+<a href="#365" id="365">365</a>
+<a href="#366" id="366">366</a>
+<a href="#367" id="367">367</a>
 </pre><pre class="rust"><code><span class="kw">mod </span>connection;
 <span class="kw">mod </span>connection_visibility;
 <span class="kw">mod </span>current_user;
@@ -488,11 +498,20 @@
     </span><span class="kw">pub </span>bot: bool,
     <span class="doccomment">/// Discriminator used to differentiate people with the same username.
     ///
+    /// # Formatting
+    ///
+    /// Because discriminators are stored as an integer they&#39;re not in the
+    /// format of Discord user tags due to a lack of padding with zeros. The
+    /// [`discriminator`] method can be used to retrieve a formatter to pad the
+    /// discriminator with zeros.
+    ///
     /// # serde
     ///
     /// The discriminator field can be deserialized from either a string or an
     /// integer. The field will always serialize into a string due to that being
     /// the type Discord&#39;s API uses.
+    ///
+    /// [`discriminator`]: Self::discriminator
     </span><span class="attr">#[serde(with = <span class="string">&quot;discriminator&quot;</span>)]
     </span><span class="kw">pub </span>discriminator: u16,
     <span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
@@ -517,7 +536,8 @@
 }
 
 <span class="kw">impl </span>User {
-    <span class="doccomment">/// Create a [`Display`] formatter for a user discriminator.
+    <span class="doccomment">/// Create a [`Display`] formatter for a user discriminator that pads the
+    /// discriminator with zeros up to 4 digits.
     ///
     /// [`Display`]: core::fmt::Display
     </span><span class="kw">pub const fn </span>discriminator(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DiscriminatorDisplay {
@@ -713,4 +733,4 @@
     }
 }
 </code></pre></div>
-</section></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="twilight_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (9a7cc6c32 2023-02-16)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>
+</section></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="twilight_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (9aa5c24b7 2023-02-17)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>
