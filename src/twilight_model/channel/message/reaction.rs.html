@@ -150,6 +150,9 @@
 <a href="#150" id="150">150</a>
 <a href="#151" id="151">151</a>
 <a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::id::{marker::EmojiMarker, Id};
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 
@@ -186,7 +189,10 @@
         // example if the emoji have been deleted off the guild.
         </span>name: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
-    <span class="doccomment">/// Standard [Unicode] emoji.
+    <span class="doccomment">/// Standard [Unicode] emoji value.
+    ///
+    /// Unicode reactions must be specified by their unicode value, and *not*
+    /// their Discord display name. Instead of using &quot;:arrow_right:&quot;, use &quot;➡️&quot;.
     ///
     /// [Unicode]: https://unicode.org/emoji/
     </span>Unicode {
