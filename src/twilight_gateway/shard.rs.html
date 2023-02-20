@@ -1256,6 +1256,12 @@
 <a href="#1256" id="1256">1256</a>
 <a href="#1257" id="1257">1257</a>
 <a href="#1258" id="1258">1258</a>
+<a href="#1259" id="1259">1259</a>
+<a href="#1260" id="1260">1260</a>
+<a href="#1261" id="1261">1261</a>
+<a href="#1262" id="1262">1262</a>
+<a href="#1263" id="1263">1263</a>
+<a href="#1264" id="1264">1264</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Primary logic and implementation details of Discord gateway websocket
 //! connections.
 //!
@@ -1727,6 +1733,11 @@
 
     <span class="doccomment">/// Wait for the next Discord event from the gateway.
     ///
+    /// This is a convenience method that internally calls [`next_message`] and
+    /// only returns wanted [`Event`]s, configured via
+    /// [`ConfigBuilder::event_types`]. Close messages are always considered
+    /// wanted and map onto the [`Event::GatewayClose`] variant.
+    ///
     /// Events not registered in Twilight are skipped. If you need to receive
     /// events Twilight doesn&#39;t support, use [`next_message`] to receive raw
     /// payloads.
@@ -1752,12 +1763,13 @@
     /// Returns a [`ReceiveMessageErrorType::SendingMessage`] error type if the
     /// shard failed to send a message to the gateway, such as a heartbeat.
     ///
+    /// [`ConfigBuilder::event_types`]: crate::ConfigBuilder::event_types
     /// [`next_message`]: Self::next_message
     </span><span class="kw">pub async fn </span>next_event(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Event, ReceiveMessageError&gt; {
         <span class="kw">loop </span>{
             <span class="kw">match </span><span class="self">self</span>.next_message().<span class="kw">await</span><span class="question-mark">? </span>{
                 Message::Close(frame) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(Event::GatewayClose(frame)),
-                Message::Text(text) =&gt; <span class="kw">match </span>json::parse(text, <span class="self">self</span>.config.event_types()) {
+                Message::Text(text) =&gt; <span class="kw">match </span><span class="kw">crate</span>::parse(text, <span class="self">self</span>.config.event_types()) {
                     <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(event)) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(event.into()),
                     <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; {}
                     <span class="prelude-val">Err</span>(source) =&gt; {

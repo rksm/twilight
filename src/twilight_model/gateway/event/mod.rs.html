@@ -538,6 +538,8 @@
 <a href="#538" id="538">538</a>
 <a href="#539" id="539">539</a>
 <a href="#540" id="540">540</a>
+<a href="#541" id="541">541</a>
+<a href="#542" id="542">542</a>
 </pre><pre class="rust"><code><span class="attr">#![allow(clippy::wildcard_imports)]
 
 </span><span class="kw">pub mod </span>gateway;
@@ -558,8 +560,10 @@
 
 <span class="doccomment">/// Any type of event that a shard emits.
 ///
-/// This brings together all of the types of [`DispatchEvent`] and
-/// [`GatewayEvent`].
+/// Flattened type containing all the variants of [`DispatchEvent`] and
+/// [`GatewayEvent`], along with a [gateway close event].
+///
+/// [gateway close event]: Self::GatewayClose
 </span><span class="attr">#[derive(Clone, Debug, PartialEq)]
 </span><span class="kw">pub enum </span>Event {
     <span class="doccomment">/// Message was blocked by AutoMod according to a rule.
