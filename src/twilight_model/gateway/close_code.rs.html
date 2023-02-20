@@ -233,19 +233,6 @@
 <a href="#233" id="233">233</a>
 <a href="#234" id="234">234</a>
 <a href="#235" id="235">235</a>
-<a href="#236" id="236">236</a>
-<a href="#237" id="237">237</a>
-<a href="#238" id="238">238</a>
-<a href="#239" id="239">239</a>
-<a href="#240" id="240">240</a>
-<a href="#241" id="241">241</a>
-<a href="#242" id="242">242</a>
-<a href="#243" id="243">243</a>
-<a href="#244" id="244">244</a>
-<a href="#245" id="245">245</a>
-<a href="#246" id="246">246</a>
-<a href="#247" id="247">247</a>
-<a href="#248" id="248">248</a>
 </pre><pre class="rust"><code><span class="kw">use </span>serde_repr::{Deserialize_repr, Serialize_repr};
 <span class="kw">use </span>std::{
     error::Error,
@@ -427,71 +414,58 @@
 
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
-    <span class="kw">use </span><span class="kw">super</span>::CloseCode;
+    <span class="kw">use super</span>::{CloseCode, CloseCodeConversionError};
+    <span class="kw">use </span>serde::{Deserialize, Serialize};
     <span class="kw">use </span>serde_test::Token;
+    <span class="kw">use </span>static_assertions::assert_impl_all;
+    <span class="kw">use </span>std::{fmt::Debug, hash::Hash};
+
+    <span class="macro">assert_impl_all!</span>(
+        CloseCode: Clone,
+        Copy,
+        Debug,
+        Deserialize&lt;<span class="lifetime">&#39;static</span>&gt;,
+        Eq,
+        Hash,
+        PartialEq,
+        Send,
+        Serialize,
+        Sync
+    );
+    <span class="macro">assert_impl_all!</span>(CloseCodeConversionError: Debug, Eq, PartialEq, Send, Sync);
+
+    <span class="kw">const </span>MAP: <span class="kw-2">&amp;</span>[(CloseCode, u16, bool)] = <span class="kw-2">&amp;</span>[
+        (CloseCode::UnknownError, <span class="number">4000</span>, <span class="bool-val">true</span>),
+        (CloseCode::UnknownOpcode, <span class="number">4001</span>, <span class="bool-val">true</span>),
+        (CloseCode::DecodeError, <span class="number">4002</span>, <span class="bool-val">true</span>),
+        (CloseCode::NotAuthenticated, <span class="number">4003</span>, <span class="bool-val">true</span>),
+        (CloseCode::AuthenticationFailed, <span class="number">4004</span>, <span class="bool-val">false</span>),
+        (CloseCode::AlreadyAuthenticated, <span class="number">4005</span>, <span class="bool-val">true</span>),
+        (CloseCode::InvalidSequence, <span class="number">4007</span>, <span class="bool-val">true</span>),
+        (CloseCode::RateLimited, <span class="number">4008</span>, <span class="bool-val">true</span>),
+        (CloseCode::SessionTimedOut, <span class="number">4009</span>, <span class="bool-val">true</span>),
+        (CloseCode::InvalidShard, <span class="number">4010</span>, <span class="bool-val">false</span>),
+        (CloseCode::ShardingRequired, <span class="number">4011</span>, <span class="bool-val">false</span>),
+        (CloseCode::InvalidApiVersion, <span class="number">4012</span>, <span class="bool-val">false</span>),
+        (CloseCode::InvalidIntents, <span class="number">4013</span>, <span class="bool-val">false</span>),
+        (CloseCode::DisallowedIntents, <span class="number">4014</span>, <span class="bool-val">false</span>),
+    ];
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>variants() {
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::UnknownError, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4000</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::UnknownOpcode, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4001</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::DecodeError, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4002</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::NotAuthenticated, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4003</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::AuthenticationFailed, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4004</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::AlreadyAuthenticated, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4005</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::InvalidSequence, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4007</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::RateLimited, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4008</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::SessionTimedOut, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4009</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::InvalidShard, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4010</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::ShardingRequired, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4011</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::InvalidApiVersion, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4012</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::InvalidIntents, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4013</span>)]);
-        serde_test::assert_tokens(<span class="kw-2">&amp;</span>CloseCode::DisallowedIntents, <span class="kw-2">&amp;</span>[Token::U16(<span class="number">4014</span>)]);
+        <span class="kw">for </span>(kind, num, can_reconnect) <span class="kw">in </span>MAP {
+            serde_test::assert_tokens(kind, <span class="kw-2">&amp;</span>[Token::U16(<span class="kw-2">*</span>num)]);
+            <span class="macro">assert_eq!</span>(<span class="kw-2">*</span>kind, CloseCode::try_from(<span class="kw-2">*</span>num).unwrap());
+            <span class="macro">assert_eq!</span>(<span class="kw-2">*</span>num, <span class="kw-2">*</span>kind <span class="kw">as </span>u16);
+            <span class="macro">assert!</span>(kind.can_reconnect() == <span class="kw-2">*</span>can_reconnect)
+        }
     }
 
     <span class="attr">#[test]
-    </span><span class="kw">fn </span>conversion() {
-        <span class="macro">assert_eq!</span>(CloseCode::try_from(<span class="number">4000</span>).unwrap(), CloseCode::UnknownError);
-        <span class="macro">assert_eq!</span>(CloseCode::try_from(<span class="number">4001</span>).unwrap(), CloseCode::UnknownOpcode);
-        <span class="macro">assert_eq!</span>(CloseCode::try_from(<span class="number">4002</span>).unwrap(), CloseCode::DecodeError);
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4003</span>).unwrap(),
-            CloseCode::NotAuthenticated
+    </span><span class="kw">fn </span>try_from() {
+        <span class="macro">assert!</span>(
+            <span class="macro">matches!</span>(CloseCode::try_from(<span class="number">5000</span>), <span class="prelude-val">Err</span>(CloseCodeConversionError { code }) <span class="kw">if </span>code == <span class="number">5000</span>)
         );
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4004</span>).unwrap(),
-            CloseCode::AuthenticationFailed
-        );
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4005</span>).unwrap(),
-            CloseCode::AlreadyAuthenticated
-        );
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4007</span>).unwrap(),
-            CloseCode::InvalidSequence
-        );
-        <span class="macro">assert_eq!</span>(CloseCode::try_from(<span class="number">4008</span>).unwrap(), CloseCode::RateLimited);
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4009</span>).unwrap(),
-            CloseCode::SessionTimedOut
-        );
-        <span class="macro">assert_eq!</span>(CloseCode::try_from(<span class="number">4010</span>).unwrap(), CloseCode::InvalidShard);
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4011</span>).unwrap(),
-            CloseCode::ShardingRequired
-        );
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4012</span>).unwrap(),
-            CloseCode::InvalidApiVersion
-        );
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4013</span>).unwrap(),
-            CloseCode::InvalidIntents
-        );
-        <span class="macro">assert_eq!</span>(
-            CloseCode::try_from(<span class="number">4014</span>).unwrap(),
-            CloseCode::DisallowedIntents
-        );
-        <span class="macro">assert!</span>(CloseCode::try_from(<span class="number">5000</span>).is_err());
     }
 }
 </code></pre></div>
