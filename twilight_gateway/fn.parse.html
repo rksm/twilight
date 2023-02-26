@@ -3,12 +3,12 @@
     wanted_event_types: <a class="struct" href="struct.EventTypeFlags.html" title="struct twilight_gateway::EventTypeFlags">EventTypeFlags</a>
 ) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;GatewayEvent&gt;, <a class="struct" href="error/struct.ReceiveMessageError.html" title="struct twilight_gateway::error::ReceiveMessageError">ReceiveMessageError</a>&gt;</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Parse a JSON encoded event into a gateway event if its type is in
 <code>wanted_event_types</code>.</p>
-<p>This function can be used together with <a href="struct.Shard.html#method.next_message" title="associated function twilight_gateway::Shard::next_message"><code>Shard::next_message</code></a> for greater
+<p>This function can be used together with <a href="struct.Shard.html#method.next_message" title="method twilight_gateway::Shard::next_message"><code>Shard::next_message</code></a> for greater
 control of the deserialization process without giving up the ease of use of
-<a href="struct.Shard.html#method.next_event" title="associated function twilight_gateway::Shard::next_event"><code>Shard::next_event</code></a>.</p>
+<a href="struct.Shard.html#method.next_event" title="method twilight_gateway::Shard::next_event"><code>Shard::next_event</code></a>.</p>
 <p>Returns <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="variant core::option::Option::None"><code>None</code></a> if the event type is not contained inside of
 <code>wanted_event_types</code>.</p>
 <h2 id="errors"><a href="#errors">Errors</a></h2>
 <p>Returns a <a href="error/enum.ReceiveMessageErrorType.html#variant.Deserializing" title="variant twilight_gateway::error::ReceiveMessageErrorType::Deserializing"><code>ReceiveMessageErrorType::Deserializing</code></a> error if the event
 could not be deserialized.</p>
-</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="twilight_gateway" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (7aa413d59 2023-02-19)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>
+</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="twilight_gateway" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (34e6673a0 2023-02-25)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>

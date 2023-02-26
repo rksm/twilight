@@ -7,22 +7,22 @@ application-level state or event stream may not suit your use case. It may
 be cleaner to wait for a reaction inline to your function. This is where
 Twilight Standby comes in.</p>
 <p>Standby allows you to wait for things like an event in a certain guild
-(<a href="struct.Standby.html#method.wait_for" title="associated function twilight_standby::Standby::wait_for"><code>Standby::wait_for</code></a>), a new message in a channel
-(<a href="struct.Standby.html#method.wait_for_message" title="associated function twilight_standby::Standby::wait_for_message"><code>Standby::wait_for_message</code></a>), a new reaction on a message
-(<a href="struct.Standby.html#method.wait_for_reaction" title="associated function twilight_standby::Standby::wait_for_reaction"><code>Standby::wait_for_reaction</code></a>), and any event that might not take place in
-a guild, such as a new <code>Ready</code> event (<a href="struct.Standby.html#method.wait_for_event" title="associated function twilight_standby::Standby::wait_for_event"><code>Standby::wait_for_event</code></a>). Each
+(<a href="struct.Standby.html#method.wait_for" title="method twilight_standby::Standby::wait_for"><code>Standby::wait_for</code></a>), a new message in a channel
+(<a href="struct.Standby.html#method.wait_for_message" title="method twilight_standby::Standby::wait_for_message"><code>Standby::wait_for_message</code></a>), a new reaction on a message
+(<a href="struct.Standby.html#method.wait_for_reaction" title="method twilight_standby::Standby::wait_for_reaction"><code>Standby::wait_for_reaction</code></a>), and any event that might not take place in
+a guild, such as a new <code>Ready</code> event (<a href="struct.Standby.html#method.wait_for_event" title="method twilight_standby::Standby::wait_for_event"><code>Standby::wait_for_event</code></a>). Each
 method also has a stream variant.</p>
 <p>To use Standby it must process events, such as in an event loop of events
-received by the gateway. Check out the <a href="struct.Standby.html#method.process" title="associated function twilight_standby::Standby::process"><code>Standby::process</code></a> method.</p>
+received by the gateway. Check out the <a href="struct.Standby.html#method.process" title="method twilight_standby::Standby::process"><code>Standby::process</code></a> method.</p>
 <h3 id="when-to-use-futures-and-streams"><a href="#when-to-use-futures-and-streams">When to use futures and streams</a></h3>
 <p><a href="struct.Standby.html" title="struct twilight_standby::Standby"><code>Standby</code></a> has two variants of each method: a future variant and a stream
-variant. An example is <a href="struct.Standby.html#method.wait_for_message" title="associated function twilight_standby::Standby::wait_for_message"><code>Standby::wait_for_message</code></a>, which also has a
-<a href="struct.Standby.html#method.wait_for_message_stream" title="associated function twilight_standby::Standby::wait_for_message_stream"><code>Standby::wait_for_message_stream</code></a> variant. The future variant is useful
+variant. An example is <a href="struct.Standby.html#method.wait_for_message" title="method twilight_standby::Standby::wait_for_message"><code>Standby::wait_for_message</code></a>, which also has a
+<a href="struct.Standby.html#method.wait_for_message_stream" title="method twilight_standby::Standby::wait_for_message_stream"><code>Standby::wait_for_message_stream</code></a> variant. The future variant is useful
 when you want to oneshot an event that you need to wait for. This means that
 if you only need to wait for one message in a channel to come in, you’d use
 the future variant. If you need to wait for multiple messages, such as maybe
 all of the messages within a minute’s timespan, you’d use the
-<a href="struct.Standby.html#method.wait_for_message_stream" title="associated function twilight_standby::Standby::wait_for_message_stream"><code>Standby::wait_for_message_stream</code></a> method.</p>
+<a href="struct.Standby.html#method.wait_for_message_stream" title="method twilight_standby::Standby::wait_for_message_stream"><code>Standby::wait_for_message_stream</code></a> method.</p>
 <p>The difference is that if you use the futures variant in a loop then you may
 miss some events while processing a received event. By using a stream, you
 won’t miss any events.</p>
@@ -114,4 +114,4 @@ including a handler to wait for reactions:</p>
 }</code></pre></div>
 <p>For more examples, check out each of the methods on <a href="struct.Standby.html" title="struct twilight_standby::Standby"><code>Standby</code></a>.</p>
 </div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="future/index.html" title="mod twilight_standby::future">future</a></div><div class="desc docblock-short">Futures and streams returned by <a href="struct.Standby.html" title="struct twilight_standby::Standby"><code>Standby</code></a>.</div></li></ul><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.ProcessResults.html" title="struct twilight_standby::ProcessResults">ProcessResults</a></div><div class="desc docblock-short">Number of <a href="struct.Standby.html" title="struct twilight_standby::Standby"><code>Standby</code></a> calls that were completed.</div></li><li><div class="item-name"><a class="struct" href="struct.Standby.html" title="struct twilight_standby::Standby">Standby</a></div><div class="desc docblock-short">The <code>Standby</code> struct, used by the main event loop to process events and by
-tasks to wait for an event.</div></li></ul></section></div></main><div id="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="twilight_standby" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (7aa413d59 2023-02-19)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>
+tasks to wait for an event.</div></li></ul></section></div></main><div id="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="twilight_standby" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (34e6673a0 2023-02-25)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>

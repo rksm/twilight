@@ -245,6 +245,8 @@
 <a href="#245" id="245">245</a>
 <a href="#246" id="246">246</a>
 <a href="#247" id="247">247</a>
+<a href="#248" id="248">248</a>
+<a href="#249" id="249">249</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Types for Auto Moderation.
 //!
 //! Auto Moderation is a feature which allows each guild to set up rules that
@@ -369,6 +371,7 @@
                     kind: AutoModerationActionType::SendAlertMessage,
                     metadata: <span class="prelude-val">Some</span>(AutoModerationActionMetadata {
                         channel_id: <span class="prelude-val">Some</span>(ACTION_CHANNEL_ID),
+                        custom_message: <span class="prelude-val">None</span>,
                         duration_seconds: <span class="prelude-val">None</span>,
                     }),
                 },
@@ -376,6 +379,7 @@
                     kind: AutoModerationActionType::Timeout,
                     metadata: <span class="prelude-val">Some</span>(AutoModerationActionMetadata {
                         channel_id: <span class="prelude-val">None</span>,
+                        custom_message: <span class="prelude-val">None</span>,
                         duration_seconds: <span class="prelude-val">Some</span>(<span class="number">120</span>),
                     }),
                 },
@@ -493,4 +497,4 @@
     }
 }
 </code></pre></div>
-</section></main><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="twilight_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (7aa413d59 2023-02-19)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>
+</section></main><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="twilight_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (34e6673a0 2023-02-25)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>
