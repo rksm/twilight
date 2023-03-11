@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["ChannelType","VideoQualityMode","WebhookType"],"mod":["forum","message","permission_overwrite","stage_instance","thread","webhook"],"struct":["Attachment","Channel","ChannelFlags","ChannelMention","FollowedChannel"]};
+window.SIDEBAR_ITEMS = {"enum":["ChannelType","VideoQualityMode"],"mod":["forum","message","permission_overwrite","stage_instance","thread","webhook"],"struct":["Attachment","Channel","ChannelFlags","ChannelMention","FollowedChannel"]};
