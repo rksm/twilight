@@ -198,16 +198,54 @@
 <a href="#198" id="198">198</a>
 <a href="#199" id="199">199</a>
 <a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
+<a href="#211" id="211">211</a>
+<a href="#212" id="212">212</a>
+<a href="#213" id="213">213</a>
+<a href="#214" id="214">214</a>
+<a href="#215" id="215">215</a>
+<a href="#216" id="216">216</a>
+<a href="#217" id="217">217</a>
+<a href="#218" id="218">218</a>
+<a href="#219" id="219">219</a>
+<a href="#220" id="220">220</a>
+<a href="#221" id="221">221</a>
+<a href="#222" id="222">222</a>
+<a href="#223" id="223">223</a>
+<a href="#224" id="224">224</a>
+<a href="#225" id="225">225</a>
+<a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
+<a href="#229" id="229">229</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Ratelimiter on the user&#39;s ability to [send messages].
 //!
 //! See &lt;https://discord.com/developers/docs/topics/gateway#rate-limiting&gt;
 //!
+//! # Algorithm
+//!
+//! [`CommandRatelimiter`] is implemented as a sliding window log. This is the
+//! only ratelimit algorithm that supports burst requests and guarantees that
+//! the (t - [`PERIOD`], t] window is never exceeded. See
+//! &lt;https://hechao.li/2018/06/25/Rate-Limiter-Part1&gt; for an overview of it and
+//! other alternative ratelimit algorithms.
+//!
+//! [`Instant::now`]: std::time::Instant::now
 //! [send messages]: crate::Shard::send
 
 </span><span class="kw">use </span>std::{
     future::{poll_fn, Future},
     pin::Pin,
-    task::{ready, Context, Poll},
+    task::{Context, Poll},
 };
 <span class="kw">use </span>tokio::time::{sleep, Duration, Instant, Sleep};
 
@@ -222,7 +260,7 @@
 </span><span class="kw">pub struct </span>CommandRatelimiter {
     <span class="doccomment">/// Future that completes the next time the ratelimiter allows a permit.
     </span>delay: Pin&lt;Box&lt;Sleep&gt;&gt;,
-    <span class="doccomment">/// Queue of instants started when a permit was acquired.
+    <span class="doccomment">/// Ordered queue of instants when a permit elapses.
     </span>instants: Vec&lt;Instant&gt;,
 }
 
@@ -238,16 +276,13 @@
     }
 
     <span class="doccomment">/// Number of available permits.
+    </span><span class="attr">#[allow(clippy::cast_possible_truncation)]
     </span><span class="kw">pub fn </span>available(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u8 {
-        <span class="comment">// Filter out elapsed instants.
-        </span><span class="attr">#[allow(clippy::cast_possible_truncation)]
-        </span><span class="kw">let </span>used_permits = <span class="self">self
-            </span>.instants
-            .iter()
-            .filter(|instant| instant.elapsed() &lt; PERIOD)
-            .count() <span class="kw">as </span>u8;
+        <span class="kw">let </span>now = Instant::now();
+        <span class="kw">let </span>elapsed_permits = <span class="self">self</span>.instants.partition_point(|<span class="kw-2">&amp;</span>elapsed| elapsed &lt;= now);
+        <span class="kw">let </span>used_permits = <span class="self">self</span>.instants.len() - elapsed_permits;
 
-        <span class="self">self</span>.max() - used_permits
+        <span class="self">self</span>.max() - used_permits <span class="kw">as </span>u8
     }
 
     <span class="doccomment">/// Maximum number of available permits.
@@ -258,37 +293,46 @@
 
     <span class="doccomment">/// Duration until the next permit is available.
     </span><span class="kw">pub fn </span>next_available(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Duration {
-        <span class="self">self</span>.instants.first().map_or(Duration::ZERO, |instant| {
-            PERIOD.saturating_sub(instant.elapsed())
+        <span class="self">self</span>.instants.first().map_or(Duration::ZERO, |elapsed| {
+            elapsed.saturating_duration_since(Instant::now())
         })
     }
 
     <span class="doccomment">/// Returns when a ratelimit permit becomes available.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">async fn </span>acquire(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
         poll_fn(|cx| <span class="self">self</span>.poll_available(cx)).<span class="kw">await</span>;
-        <span class="self">self</span>.clean();
 
-        <span class="self">self</span>.instants.push(Instant::now());
+        <span class="self">self</span>.instants.push(Instant::now() + PERIOD);
     }
 
     <span class="doccomment">/// Polls for the next time a permit is available.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>poll_available(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cx: <span class="kw-2">&amp;mut </span>Context&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; Poll&lt;()&gt; {
-        <span class="kw">if </span><span class="self">self</span>.available() == <span class="number">0 </span>{
-            <span class="kw">let </span>new_deadline = Instant::now() + <span class="self">self</span>.next_available();
-            <span class="comment">// Conditionally reset `Sleep` as it is expensive to do so.
-            </span><span class="kw">if </span><span class="self">self</span>.delay.deadline() != new_deadline {
-                <span class="macro">tracing::trace!</span>(<span class="question-mark">?</span>new_deadline, old_deadline = <span class="question-mark">?</span><span class="self">self</span>.delay.deadline());
-                <span class="self">self</span>.delay.as_mut().reset(new_deadline);
-            }
-            <span class="macro">ready!</span>(<span class="self">self</span>.delay.as_mut().poll(cx));
+        <span class="kw">if </span><span class="self">self</span>.instants.len() != <span class="self">self</span>.instants.capacity() {
+            <span class="kw">return </span>Poll::Ready(());
         }
 
-        Poll::Ready(())
-    }
+        <span class="kw">let </span>new_deadline = <span class="self">self</span>.instants[<span class="number">0</span>];
+        <span class="kw">let </span>is_deadline_different = new_deadline != <span class="self">self</span>.delay.deadline();
+        <span class="kw">let </span>is_deadline_in_future = new_deadline &gt; Instant::now();
+        <span class="kw">match </span>(is_deadline_different, is_deadline_in_future) {
+            (<span class="bool-val">true</span>, <span class="bool-val">true</span>) =&gt; {
+                <span class="macro">tracing::trace!</span>(<span class="question-mark">?</span>new_deadline, old_deadline = <span class="question-mark">?</span><span class="self">self</span>.delay.deadline());
+                <span class="self">self</span>.delay.as_mut().reset(new_deadline);
 
-    <span class="doccomment">/// Cleans up elapsed instants.
-    </span><span class="kw">fn </span>clean(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="self">self</span>.instants.retain(|instant| instant.elapsed() &lt; PERIOD);
+                <span class="comment">// Register waker.
+                </span><span class="kw">_ </span>= <span class="self">self</span>.delay.as_mut().poll(cx);
+
+                Poll::Pending
+            }
+            (<span class="bool-val">false</span>, <span class="bool-val">true</span>) =&gt; Poll::Pending,
+            <span class="kw">_ </span>=&gt; {
+                <span class="kw">let </span>used_permits = (<span class="self">self</span>.max() - <span class="self">self</span>.available()).into();
+                <span class="self">self</span>.instants.rotate_right(used_permits);
+                <span class="self">self</span>.instants.truncate(used_permits);
+
+                Poll::Ready(())
+            }
+        }
     }
 }
 
@@ -396,6 +440,20 @@
         <span class="comment">// All should be refilled.
         </span>time::advance(PERIOD / <span class="number">2</span>).<span class="kw">await</span>;
         <span class="macro">assert_eq!</span>(ratelimiter.available(), ratelimiter.max());
+    }
+
+    <span class="attr">#[tokio::test(start_paused = <span class="bool-val">true</span>)]
+    </span><span class="kw">async fn </span>constant_capacity() {
+        <span class="kw">let </span><span class="kw-2">mut </span>ratelimiter = CommandRatelimiter::new(HEARTBEAT_INTERVAL);
+        <span class="kw">let </span>max = ratelimiter.max();
+
+        <span class="kw">for _ in </span><span class="number">0</span>..max {
+            ratelimiter.acquire().<span class="kw">await</span>;
+        }
+        <span class="macro">assert_eq!</span>(ratelimiter.available(), <span class="number">0</span>);
+
+        ratelimiter.acquire().<span class="kw">await</span>;
+        <span class="macro">assert_eq!</span>(max, ratelimiter.max());
     }
 }
 </code></pre></div></section></main></body></html>
