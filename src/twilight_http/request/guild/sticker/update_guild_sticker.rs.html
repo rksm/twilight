@@ -168,10 +168,14 @@
 <a href="#168" id="168">168</a>
 <a href="#169" id="169">169</a>
 <a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     client::Client,
     error::Error,
-    request::{AuditLogReason, Request, TryIntoRequest},
+    request::{<span class="self">self</span>, AuditLogReason, Request, TryIntoRequest},
     response::{Response, ResponseFuture},
     routing::Route,
 };
@@ -329,11 +333,15 @@
 
 <span class="kw">impl </span>TryIntoRequest <span class="kw">for </span>UpdateGuildSticker&lt;<span class="lifetime">&#39;_</span>&gt; {
     <span class="kw">fn </span>try_into_request(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Request, Error&gt; {
-        <span class="kw">let </span>request = Request::builder(<span class="kw-2">&amp;</span>Route::UpdateGuildSticker {
+        <span class="kw">let </span><span class="kw-2">mut </span>request = Request::builder(<span class="kw-2">&amp;</span>Route::UpdateGuildSticker {
             guild_id: <span class="self">self</span>.guild_id.get(),
             sticker_id: <span class="self">self</span>.sticker_id.get(),
         })
         .json(<span class="kw-2">&amp;</span><span class="self">self</span>.fields)<span class="question-mark">?</span>;
+
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(reason) = <span class="self">self</span>.reason {
+            request = request.headers(request::audit_header(reason)<span class="question-mark">?</span>);
+        }
 
         <span class="prelude-val">Ok</span>(request.build())
     }
