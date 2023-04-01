@@ -247,6 +247,14 @@
 <a href="#247" id="247">247</a>
 <a href="#248" id="248">248</a>
 <a href="#249" id="249">249</a>
+<a href="#250" id="250">250</a>
+<a href="#251" id="251">251</a>
+<a href="#252" id="252">252</a>
+<a href="#253" id="253">253</a>
+<a href="#254" id="254">254</a>
+<a href="#255" id="255">255</a>
+<a href="#256" id="256">256</a>
+<a href="#257" id="257">257</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Types for Auto Moderation.
 //!
 //! Auto Moderation is a feature which allows each guild to set up rules that
@@ -396,6 +404,8 @@
                 allow_list: <span class="prelude-val">None</span>,
                 keyword_filter: <span class="prelude-val">Some</span>(Vec::from([<span class="string">&quot;shoot&quot;</span>.into(), <span class="string">&quot;darn&quot;</span>.into()])),
                 presets: <span class="prelude-val">None</span>,
+                regex_patterns: <span class="prelude-val">Some</span>(Vec::from([<span class="string">&quot;[a-z]+&quot;</span>.into(), <span class="string">&quot;[0-9]+&quot;</span>.into()])),
+                mention_total_limit: <span class="prelude-val">None</span>,
             },
             trigger_type: AutoModerationTriggerType::Keyword,
         };
@@ -480,13 +490,19 @@
                 Token::Str(<span class="string">&quot;trigger_metadata&quot;</span>),
                 Token::Struct {
                     name: <span class="string">&quot;AutoModerationTriggerMetadata&quot;</span>,
-                    len: <span class="number">1</span>,
+                    len: <span class="number">2</span>,
                 },
                 Token::Str(<span class="string">&quot;keyword_filter&quot;</span>),
                 Token::Some,
                 Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">2</span>) },
                 Token::Str(<span class="string">&quot;shoot&quot;</span>),
                 Token::Str(<span class="string">&quot;darn&quot;</span>),
+                Token::SeqEnd,
+                Token::Str(<span class="string">&quot;regex_patterns&quot;</span>),
+                Token::Some,
+                Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">2</span>) },
+                Token::Str(<span class="string">&quot;[a-z]+&quot;</span>),
+                Token::Str(<span class="string">&quot;[0-9]+&quot;</span>),
                 Token::SeqEnd,
                 Token::StructEnd,
                 Token::Str(<span class="string">&quot;trigger_type&quot;</span>),

@@ -88,6 +88,23 @@
 <a href="#88" id="88">88</a>
 <a href="#89" id="89">89</a>
 <a href="#90" id="90">90</a>
+<a href="#91" id="91">91</a>
+<a href="#92" id="92">92</a>
+<a href="#93" id="93">93</a>
+<a href="#94" id="94">94</a>
+<a href="#95" id="95">95</a>
+<a href="#96" id="96">96</a>
+<a href="#97" id="97">97</a>
+<a href="#98" id="98">98</a>
+<a href="#99" id="99">99</a>
+<a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
+<a href="#103" id="103">103</a>
+<a href="#104" id="104">104</a>
+<a href="#105" id="105">105</a>
+<a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::AutoModerationKeywordPresetType;
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 
@@ -113,6 +130,13 @@
     /// [Discord Docs/Keyword Matching Strategies]: https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-keyword-matching-strategies
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
     </span><span class="kw">pub </span>presets: <span class="prelude-ty">Option</span>&lt;Vec&lt;AutoModerationKeywordPresetType&gt;&gt;,
+    <span class="doccomment">/// Total number of unique role and user mentions allowed per message (Maximum of 50).
+    </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>mention_total_limit: <span class="prelude-ty">Option</span>&lt;u8&gt;,
+    <span class="doccomment">/// Regular expression patterns which will be matched against content (Maximum of 10).
+    /// Only Rust flavored regex is supported. Each regex pattern must be 260 characters or less.
+    </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>regex_patterns: <span class="prelude-ty">Option</span>&lt;Vec&lt;String&gt;&gt;,
 }
 
 <span class="attr">#[cfg(test)]
@@ -146,6 +170,8 @@
                 AutoModerationKeywordPresetType::SexualContent,
                 AutoModerationKeywordPresetType::Slurs,
             ])),
+            mention_total_limit: <span class="prelude-val">Some</span>(<span class="number">5</span>),
+            regex_patterns: <span class="prelude-val">Some</span>(Vec::from([<span class="string">&quot;^\\d+$&quot;</span>.into()])),
         };
 
         serde_test::assert_ser_tokens(
@@ -153,7 +179,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;AutoModerationTriggerMetadata&quot;</span>,
-                    len: <span class="number">3</span>,
+                    len: <span class="number">5</span>,
                 },
                 Token::Str(<span class="string">&quot;allow_list&quot;</span>),
                 Token::Some,
@@ -172,6 +198,14 @@
                 Token::U8(u8::from(AutoModerationKeywordPresetType::Profanity)),
                 Token::U8(u8::from(AutoModerationKeywordPresetType::SexualContent)),
                 Token::U8(u8::from(AutoModerationKeywordPresetType::Slurs)),
+                Token::SeqEnd,
+                Token::Str(<span class="string">&quot;mention_total_limit&quot;</span>),
+                Token::Some,
+                Token::U8(<span class="number">5</span>),
+                Token::Str(<span class="string">&quot;regex_patterns&quot;</span>),
+                Token::Some,
+                Token::Seq { len: <span class="prelude-val">Some</span>(<span class="number">1</span>) },
+                Token::Str(<span class="string">&quot;^\\d+$&quot;</span>),
                 Token::SeqEnd,
                 Token::StructEnd,
             ],
