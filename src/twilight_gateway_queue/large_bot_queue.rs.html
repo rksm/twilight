@@ -211,7 +211,7 @@
 
             <span class="macro">tracing::info!</span>(<span class="string">&quot;waiting for allowance on shard {}&quot;</span>, shard_id[<span class="number">0</span>]);
 
-            <span class="kw">let _ </span>= rx.<span class="kw">await</span>;
+            <span class="kw">_ </span>= rx.<span class="kw">await</span>;
         })
     }
 }

@@ -112,7 +112,6 @@
 <a href="#112" id="112">112</a>
 <a href="#113" id="113">113</a>
 <a href="#114" id="114">114</a>
-<a href="#115" id="115">115</a>
 </pre></div><pre class="rust"><code><span class="kw">pub mod </span>create_global_command;
 <span class="kw">pub mod </span>create_guild_command;
 
@@ -213,8 +212,7 @@
             options: Vec::new(),
             version: Id::new(<span class="number">1</span>),
         };
-
-        <span class="kw">let _ </span>= CommandBorrowed {
+        <span class="kw">_ </span>= CommandBorrowed {
             application_id: command.application_id,
             default_member_permissions: command.default_member_permissions,
             dm_permission: command.dm_permission,
