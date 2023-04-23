@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-model/src/application/interaction/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ba5701c5741a7b69.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="twilight_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.71.0-nightly (8bdcc62cb 2023-04-20)" data-search-js="search-e077946657036a58.js" data-settings-js="settings-298e1ea74db45b39.js" data-settings-css="settings-7bfb4c59cc6bc502.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ></div><script src="../../../../static.files/storage-62ce34ea385b278a.js"></script><script defer src="../../../../static.files/source-script-905937fbbdc8e9ea.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-1a524efa7bd4ab32.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../../../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../../../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../../../twilight_model/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `twilight-model/src/application/interaction/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ba5701c5741a7b69.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="twilight_model" data-themes="" data-resource-suffix="" data-rustdoc-version="1.71.0-nightly (b628260df 2023-04-22)" data-search-js="search-618e954b235f6acc.js" data-settings-js="settings-298e1ea74db45b39.js" data-settings-css="settings-7bfb4c59cc6bc502.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ></div><script src="../../../../static.files/storage-62ce34ea385b278a.js"></script><script defer src="../../../../static.files/source-script-11255107d0a65077.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-f0540c1d82cde29b.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../../../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../../../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../../../twilight_model/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -711,6 +711,76 @@
 <a href="#711" id="711">711</a>
 <a href="#712" id="712">712</a>
 <a href="#713" id="713">713</a>
+<a href="#714" id="714">714</a>
+<a href="#715" id="715">715</a>
+<a href="#716" id="716">716</a>
+<a href="#717" id="717">717</a>
+<a href="#718" id="718">718</a>
+<a href="#719" id="719">719</a>
+<a href="#720" id="720">720</a>
+<a href="#721" id="721">721</a>
+<a href="#722" id="722">722</a>
+<a href="#723" id="723">723</a>
+<a href="#724" id="724">724</a>
+<a href="#725" id="725">725</a>
+<a href="#726" id="726">726</a>
+<a href="#727" id="727">727</a>
+<a href="#728" id="728">728</a>
+<a href="#729" id="729">729</a>
+<a href="#730" id="730">730</a>
+<a href="#731" id="731">731</a>
+<a href="#732" id="732">732</a>
+<a href="#733" id="733">733</a>
+<a href="#734" id="734">734</a>
+<a href="#735" id="735">735</a>
+<a href="#736" id="736">736</a>
+<a href="#737" id="737">737</a>
+<a href="#738" id="738">738</a>
+<a href="#739" id="739">739</a>
+<a href="#740" id="740">740</a>
+<a href="#741" id="741">741</a>
+<a href="#742" id="742">742</a>
+<a href="#743" id="743">743</a>
+<a href="#744" id="744">744</a>
+<a href="#745" id="745">745</a>
+<a href="#746" id="746">746</a>
+<a href="#747" id="747">747</a>
+<a href="#748" id="748">748</a>
+<a href="#749" id="749">749</a>
+<a href="#750" id="750">750</a>
+<a href="#751" id="751">751</a>
+<a href="#752" id="752">752</a>
+<a href="#753" id="753">753</a>
+<a href="#754" id="754">754</a>
+<a href="#755" id="755">755</a>
+<a href="#756" id="756">756</a>
+<a href="#757" id="757">757</a>
+<a href="#758" id="758">758</a>
+<a href="#759" id="759">759</a>
+<a href="#760" id="760">760</a>
+<a href="#761" id="761">761</a>
+<a href="#762" id="762">762</a>
+<a href="#763" id="763">763</a>
+<a href="#764" id="764">764</a>
+<a href="#765" id="765">765</a>
+<a href="#766" id="766">766</a>
+<a href="#767" id="767">767</a>
+<a href="#768" id="768">768</a>
+<a href="#769" id="769">769</a>
+<a href="#770" id="770">770</a>
+<a href="#771" id="771">771</a>
+<a href="#772" id="772">772</a>
+<a href="#773" id="773">773</a>
+<a href="#774" id="774">774</a>
+<a href="#775" id="775">775</a>
+<a href="#776" id="776">776</a>
+<a href="#777" id="777">777</a>
+<a href="#778" id="778">778</a>
+<a href="#779" id="779">779</a>
+<a href="#780" id="780">780</a>
+<a href="#781" id="781">781</a>
+<a href="#782" id="782">782</a>
+<a href="#783" id="783">783</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Used when receiving interactions through gateway or webhooks.
 //!
 //! See [Discord Docs/Receiving and Responding].
@@ -730,7 +800,7 @@
     modal::ModalInteractionData,
 };
 <span class="kw">use crate</span>::{
-    channel::Message,
+    channel::{Channel, Message},
     guild::{PartialMember, Permissions},
     id::{
         marker::{ApplicationMarker, ChannelMarker, GuildMarker, InteractionMarker, UserMarker},
@@ -759,12 +829,22 @@
     </span><span class="kw">pub </span>app_permissions: <span class="prelude-ty">Option</span>&lt;Permissions&gt;,
     <span class="doccomment">/// ID of the associated application.
     </span><span class="kw">pub </span>application_id: Id&lt;ApplicationMarker&gt;,
+    <span class="doccomment">/// The channel the interaction was invoked in.
+    ///
+    /// Present on all interactions types, except [`Ping`].
+    ///
+    /// [`Ping`]: InteractionType::Ping
+    </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>channel: <span class="prelude-ty">Option</span>&lt;Channel&gt;,
     <span class="doccomment">/// ID of the channel the interaction was invoked in.
     ///
     /// Present on all interactions types, except [`Ping`].
     ///
     /// [`Ping`]: InteractionType::Ping
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    #[deprecated(
+        note = <span class="string">&quot;channel_id is deprecated in the discord API and will no be sent in the future, users should use the channel field instead.&quot;
+    </span>)]
     </span><span class="kw">pub </span>channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt;,
     <span class="doccomment">/// Data from the interaction.
     ///
@@ -873,6 +953,7 @@
 </span><span class="kw">enum </span>InteractionField {
     AppPermissions,
     ApplicationId,
+    Channel,
     ChannelId,
     Data,
     GuildId,
@@ -896,10 +977,11 @@
         f.write_str(<span class="string">&quot;enum Interaction&quot;</span>)
     }
 
-    <span class="attr">#[allow(clippy::too_many_lines)]
+    <span class="attr">#[allow(clippy::too_many_lines, deprecated)]
     </span><span class="kw">fn </span>visit_map&lt;V: MapAccess&lt;<span class="lifetime">&#39;de</span>&gt;&gt;(<span class="self">self</span>, <span class="kw-2">mut </span>map: V) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Value, V::Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>app_permissions: <span class="prelude-ty">Option</span>&lt;Permissions&gt; = <span class="prelude-val">None</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>application_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ApplicationMarker&gt;&gt; = <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>channel: <span class="prelude-ty">Option</span>&lt;Channel&gt; = <span class="prelude-val">None</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>channel_id: <span class="prelude-ty">Option</span>&lt;Id&lt;ChannelMarker&gt;&gt; = <span class="prelude-val">None</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>data: <span class="prelude-ty">Option</span>&lt;Value&gt; = <span class="prelude-val">None</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>guild_id: <span class="prelude-ty">Option</span>&lt;Id&lt;GuildMarker&gt;&gt; = <span class="prelude-val">None</span>;
@@ -950,6 +1032,13 @@
                     }
 
                     application_id = <span class="prelude-val">Some</span>(map.next_value()<span class="question-mark">?</span>);
+                }
+                InteractionField::Channel =&gt; {
+                    <span class="kw">if </span>channel.is_some() {
+                        <span class="kw">return </span><span class="prelude-val">Err</span>(DeError::duplicate_field(<span class="string">&quot;channel&quot;</span>));
+                    }
+
+                    channel = map.next_value()<span class="question-mark">?</span>;
                 }
                 InteractionField::ChannelId =&gt; {
                     <span class="kw">if </span>channel_id.is_some() {
@@ -1088,6 +1177,7 @@
         <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Value {
             app_permissions,
             application_id,
+            channel,
             channel_id,
             data,
             guild_id,
@@ -1135,6 +1225,7 @@
     };
     <span class="kw">use crate</span>::{
         application::command::{CommandOptionType, CommandType},
+        channel::Channel,
         guild::{MemberFlags, PartialMember, Permissions},
         id::Id,
         test::image_hash,
@@ -1145,7 +1236,7 @@
     <span class="kw">use </span>std::{collections::HashMap, str::FromStr};
 
     <span class="attr">#[test]
-    #[allow(clippy::too_many_lines)]
+    #[allow(clippy::too_many_lines, deprecated)]
     </span><span class="kw">fn </span>test_interaction_full() -&gt; <span class="prelude-ty">Result</span>&lt;(), TimestampParseError&gt; {
         <span class="kw">let </span>joined_at = Timestamp::from_str(<span class="string">&quot;2020-01-01T00:00:00.000000+00:00&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>flags = MemberFlags::BYPASSES_VERIFICATION | MemberFlags::DID_REJOIN;
@@ -1153,6 +1244,43 @@
         <span class="kw">let </span>value = Interaction {
             app_permissions: <span class="prelude-val">Some</span>(Permissions::SEND_MESSAGES),
             application_id: Id::new(<span class="number">100</span>),
+            channel: <span class="prelude-val">Some</span>(Channel {
+                bitrate: <span class="prelude-val">None</span>,
+                guild_id: <span class="prelude-val">None</span>,
+                id: Id::new(<span class="number">400</span>),
+                kind: <span class="kw">crate</span>::channel::ChannelType::GuildText,
+                last_message_id: <span class="prelude-val">None</span>,
+                last_pin_timestamp: <span class="prelude-val">None</span>,
+                name: <span class="prelude-val">None</span>,
+                nsfw: <span class="prelude-val">None</span>,
+                owner_id: <span class="prelude-val">None</span>,
+                parent_id: <span class="prelude-val">None</span>,
+                permission_overwrites: <span class="prelude-val">None</span>,
+                position: <span class="prelude-val">None</span>,
+                rate_limit_per_user: <span class="prelude-val">None</span>,
+                recipients: <span class="prelude-val">None</span>,
+                rtc_region: <span class="prelude-val">None</span>,
+                topic: <span class="prelude-val">None</span>,
+                user_limit: <span class="prelude-val">None</span>,
+                application_id: <span class="prelude-val">None</span>,
+                applied_tags: <span class="prelude-val">None</span>,
+                available_tags: <span class="prelude-val">None</span>,
+                default_auto_archive_duration: <span class="prelude-val">None</span>,
+                default_forum_layout: <span class="prelude-val">None</span>,
+                default_reaction_emoji: <span class="prelude-val">None</span>,
+                default_sort_order: <span class="prelude-val">None</span>,
+                default_thread_rate_limit_per_user: <span class="prelude-val">None</span>,
+                flags: <span class="prelude-val">None</span>,
+                icon: <span class="prelude-val">None</span>,
+                invitable: <span class="prelude-val">None</span>,
+                managed: <span class="prelude-val">None</span>,
+                member: <span class="prelude-val">None</span>,
+                member_count: <span class="prelude-val">None</span>,
+                message_count: <span class="prelude-val">None</span>,
+                newly_created: <span class="prelude-val">None</span>,
+                thread_metadata: <span class="prelude-val">None</span>,
+                video_quality_mode: <span class="prelude-val">None</span>,
+            }),
             channel_id: <span class="prelude-val">Some</span>(Id::new(<span class="number">200</span>)),
             data: <span class="prelude-val">Some</span>(InteractionData::ApplicationCommand(Box::new(CommandData {
                 guild_id: <span class="prelude-val">None</span>,
@@ -1251,7 +1379,7 @@
             <span class="kw-2">&amp;</span>[
                 Token::Struct {
                     name: <span class="string">&quot;Interaction&quot;</span>,
-                    len: <span class="number">11</span>,
+                    len: <span class="number">12</span>,
                 },
                 Token::Str(<span class="string">&quot;app_permissions&quot;</span>),
                 Token::Some,
@@ -1259,6 +1387,18 @@
                 Token::Str(<span class="string">&quot;application_id&quot;</span>),
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
                 Token::Str(<span class="string">&quot;100&quot;</span>),
+                Token::Str(<span class="string">&quot;channel&quot;</span>),
+                Token::Some,
+                Token::Struct {
+                    name: <span class="string">&quot;Channel&quot;</span>,
+                    len: <span class="number">2</span>,
+                },
+                Token::Str(<span class="string">&quot;id&quot;</span>),
+                Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
+                Token::Str(<span class="string">&quot;400&quot;</span>),
+                Token::Str(<span class="string">&quot;type&quot;</span>),
+                Token::U8(<span class="number">0</span>),
+                Token::StructEnd,
                 Token::Str(<span class="string">&quot;channel_id&quot;</span>),
                 Token::Some,
                 Token::NewtypeStruct { name: <span class="string">&quot;Id&quot; </span>},
