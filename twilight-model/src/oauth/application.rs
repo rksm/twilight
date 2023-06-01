@@ -20,6 +20,7 @@ pub struct Application {
     pub custom_install_url: Option<String>,
     /// Description of the application.
     pub description: String,
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     /// Public flags of the application.
     pub flags: Option<ApplicationFlags>,

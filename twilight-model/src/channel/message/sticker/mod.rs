@@ -35,6 +35,7 @@ pub struct Sticker {
     pub format_type: StickerFormatType,
     /// ID of the guild that owns the sticker.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     /// Unique ID of the sticker.
     pub id: Id<StickerMarker>,

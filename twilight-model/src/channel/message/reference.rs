@@ -15,6 +15,7 @@ pub struct MessageReference {
     pub channel_id: Option<Id<ChannelMarker>>,
     /// Originating message's guild ID.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     /// Originating message's ID.
     #[serde(skip_serializing_if = "Option::is_none")]

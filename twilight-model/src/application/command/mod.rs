@@ -68,6 +68,7 @@ pub struct Command {
     pub description_localizations: Option<HashMap<String, String>>,
     /// Guild ID of the command, if not global.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub id: Option<Id<CommandMarker>>,

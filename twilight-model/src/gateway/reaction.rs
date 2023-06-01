@@ -12,6 +12,7 @@ use serde::{Deserialize, Serialize};
 pub struct GatewayReaction {
     pub channel_id: Id<ChannelMarker>,
     pub emoji: ReactionType,
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     pub member: Option<Member>,
     pub message_id: Id<MessageMarker>,

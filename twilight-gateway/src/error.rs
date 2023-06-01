@@ -50,7 +50,13 @@ impl Display for ProcessError {
     fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
         match &self.kind {
             ProcessErrorType::Deserializing { event } => {
-                f.write_str("gateway event could not be deserialized: event=")?;
+                f.write_str("gateway event could not be deserialized: source=")?;
+                if let Some(source) = &self.source {
+                    Display::fmt(source, f)?;
+                } else {
+                    f.write_str("None")?;
+                }
+                f.write_str(", event=")?;
                 f.write_str(event)
             }
             ProcessErrorType::SendingMessage => {
@@ -161,7 +167,13 @@ impl Display for ReceiveMessageError {
                 f.write_str("binary message could not be decompressed")
             }
             ReceiveMessageErrorType::Deserializing { ref event } => {
-                f.write_str("gateway event could not be deserialized: event=")?;
+                f.write_str("gateway event could not be deserialized: source=")?;
+                if let Some(source) = &self.source {
+                    Display::fmt(source, f)?;
+                } else {
+                    f.write_str("None")?;
+                }
+                f.write_str(", event=")?;
                 f.write_str(event)
             }
             ReceiveMessageErrorType::FatallyClosed { close_code } => {

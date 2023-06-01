@@ -9,5 +9,6 @@ pub struct ReactionRemoveAll {
     pub channel_id: Id<ChannelMarker>,
     pub message_id: Id<MessageMarker>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
 }

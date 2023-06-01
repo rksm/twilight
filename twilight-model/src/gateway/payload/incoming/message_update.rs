@@ -43,6 +43,7 @@ pub struct MessageUpdate {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub embeds: Option<Vec<Embed>>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     pub id: Id<MessageMarker>,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]

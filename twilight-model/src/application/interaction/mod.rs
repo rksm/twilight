@@ -77,6 +77,7 @@ pub struct Interaction {
     pub data: Option<InteractionData>,
     /// ID of the guild the interaction was invoked in.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     /// Guild’s preferred locale.
     ///

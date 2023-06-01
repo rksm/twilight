@@ -22,6 +22,7 @@ pub struct AuditLogEntry {
     ///
     /// [`GuildAuditLogEntryCreate`]: crate::gateway::payload::incoming::GuildAuditLogEntryCreate
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     /// ID of the entire entry.
     pub id: Id<AuditLogEntryMarker>,

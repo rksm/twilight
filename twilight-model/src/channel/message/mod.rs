@@ -129,6 +129,7 @@ pub struct Message {
     ///
     /// [`Guild`]: crate::guild::Guild
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     /// Id of the message.
     pub id: Id<MessageMarker>,

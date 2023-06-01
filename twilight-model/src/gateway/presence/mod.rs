@@ -67,6 +67,7 @@ pub(crate) struct PresenceIntermediary {
     #[serde(default)]
     pub activities: Vec<Activity>,
     pub client_status: ClientStatus,
+    #[serde(default)]
     pub guild_id: Option<Id<GuildMarker>>,
     pub nick: Option<String>,
     pub status: Status,
