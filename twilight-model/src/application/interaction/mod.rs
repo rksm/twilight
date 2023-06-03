@@ -45,7 +45,8 @@ pub struct Interaction {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub app_permissions: Option<Permissions>,
     /// ID of the associated application.
-    pub application_id: Id<ApplicationMarker>,
+    #[serde(default)]
+    pub application_id: Option<Id<ApplicationMarker>>,
     /// The channel the interaction was invoked in.
     ///
     /// Present on all interactions types, except [`Ping`].
@@ -87,8 +88,8 @@ pub struct Interaction {
     /// ID of the interaction.
     pub id: Id<InteractionMarker>,
     /// Type of interaction.
-    #[serde(rename = "type")]
-    pub kind: InteractionType,
+    #[serde(rename = "type", default)]
+    pub kind: Option<InteractionType>,
     /// Selected language of the user who invoked the interaction.
     ///
     /// Present on all interactions types, except [`Ping`].
@@ -109,7 +110,8 @@ pub struct Interaction {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub message: Option<Message>,
     /// Token for responding to the interaction.
-    pub token: String,
+    #[serde(default)]
+    pub token: Option<String>,
     /// User that invoked the interaction.
     ///
     /// Present when the interaction is invoked in a direct message.
@@ -342,23 +344,21 @@ impl<'de> Visitor<'de> for InteractionVisitor {
             }
         }
 
-        let application_id =
-            application_id.ok_or_else(|| DeError::missing_field("application_id"))?;
         let id = id.ok_or_else(|| DeError::missing_field("id"))?;
-        let token = token.ok_or_else(|| DeError::missing_field("token"))?;
-        let kind = kind.ok_or_else(|| DeError::missing_field("kind"))?;
+        let kind = kind;
 
         tracing::trace!(
-            %application_id,
+            ?application_id,
             %id,
-            %token,
+            ?token,
             ?kind,
             "common fields of all variants exist"
         );
 
         let data = match kind {
-            InteractionType::Ping => None,
-            InteractionType::ApplicationCommand => {
+            None => None,
+            Some(InteractionType::Ping) => None,
+            Some(InteractionType::ApplicationCommand) => {
                 let data = data
                     .ok_or_else(|| DeError::missing_field("data"))?
                     .deserialize_into()
@@ -366,7 +366,7 @@ impl<'de> Visitor<'de> for InteractionVisitor {
 
                 Some(InteractionData::ApplicationCommand(data))
             }
-            InteractionType::MessageComponent => {
+            Some(InteractionType::MessageComponent) => {
                 let data = data
                     .ok_or_else(|| DeError::missing_field("data"))?
                     .deserialize_into()
@@ -374,7 +374,7 @@ impl<'de> Visitor<'de> for InteractionVisitor {
 
                 Some(InteractionData::MessageComponent(data))
             }
-            InteractionType::ApplicationCommandAutocomplete => {
+            Some(InteractionType::ApplicationCommandAutocomplete) => {
                 let data = data
                     .ok_or_else(|| DeError::missing_field("data"))?
                     .deserialize_into()
@@ -382,7 +382,7 @@ impl<'de> Visitor<'de> for InteractionVisitor {
 
                 Some(InteractionData::ApplicationCommand(data))
             }
-            InteractionType::ModalSubmit => {
+            Some(InteractionType::ModalSubmit) => {
                 let data = data
                     .ok_or_else(|| DeError::missing_field("data"))?
                     .deserialize_into()
@@ -461,7 +461,7 @@ mod tests {
 
         let value = Interaction {
             app_permissions: Some(Permissions::SEND_MESSAGES),
-            application_id: Id::new(100),
+            application_id: Some(Id::new(100)),
             channel: Some(Channel {
                 bitrate: None,
                 guild_id: None,
@@ -556,7 +556,7 @@ mod tests {
             guild_id: Some(Id::new(400)),
             guild_locale: Some("de".to_owned()),
             id: Id::new(500),
-            kind: InteractionType::ApplicationCommand,
+            kind: Some(InteractionType::ApplicationCommand),
             locale: Some("en-GB".to_owned()),
             member: Some(PartialMember {
                 avatar: None,
@@ -588,7 +588,7 @@ mod tests {
                 }),
             }),
             message: None,
-            token: "interaction token".into(),
+            token: Some("interaction token".into()),
             user: None,
         };
 
